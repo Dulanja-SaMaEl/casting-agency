@@ -67,6 +67,7 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
     <div
       id="Top"
       role="banner"
+      data-collapse="medium"
       className={`${isDark ? "navbar-style-two" : "navbar"} w-nav`}
       style={{ position: "relative", zIndex: 1000 }}
     >
@@ -77,27 +78,25 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
         style={{
           display: sidebarOpen ? "block" : "none",
           opacity: sidebarOpen ? 1 : 0,
-          transition: "opacity 0.45s ease",
+          transition: "opacity 0.35s ease",
           zIndex: 1001,
           cursor: "pointer",
         }}
       />
 
-      {/* Mobile Menu Backdrop */}
-      <div
-        onClick={() => setMobileMenuOpen(false)}
-        aria-hidden="true"
-        style={{
-          position: "fixed",
-          inset: 0,
-          backgroundColor: "rgba(0, 0, 0, 0.35)",
-          backdropFilter: "blur(3px)",
-          opacity: mobileMenuOpen ? 1 : 0,
-          pointerEvents: mobileMenuOpen ? "auto" : "none",
-          transition: "opacity 0.35s ease",
-          zIndex: 1002,
-        }}
-      />
+      {/* Lightweight Mobile Menu Tap-Outside Backdrop (No GPU-heavy blur) */}
+      {mobileMenuOpen && (
+        <div
+          onClick={() => setMobileMenuOpen(false)}
+          aria-hidden="true"
+          style={{
+            position: "fixed",
+            inset: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.18)",
+            zIndex: 1002,
+          }}
+        />
+      )}
 
       {/* Slide-over Sidebar Drawer */}
       <aside
@@ -109,7 +108,7 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
             ? "translate3d(0%, 0, 0)"
             : "translate3d(100%, 0, 0)",
           transition:
-            "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease",
+            "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease",
           zIndex: 1005,
           pointerEvents: sidebarOpen ? "auto" : "none",
           width: "min(400px, 90vw)",
@@ -247,7 +246,10 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
       </aside>
 
       {/* Main Navbar Container */}
-      <div className="container w-container" style={{ position: "relative", zIndex: 1004 }}>
+      <div
+        className="container w-container"
+        style={{ position: "relative", zIndex: 1004 }}
+      >
         <div
           className={
             isDark ? "navbar-style-2-main-wrapper" : "navbar-main-wrapper"
@@ -505,7 +507,10 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
             <button
               type="button"
               aria-label="Open Studio Drawer"
-              onClick={() => setSidebarOpen(true)}
+              onClick={() => {
+                setMobileMenuOpen(false);
+                setSidebarOpen(true);
+              }}
               onMouseEnter={() => setDotsHovered(true)}
               onMouseLeave={() => setDotsHovered(false)}
               className="nav-sidebar-logo-block"
@@ -528,7 +533,7 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
                   } one`}
                   style={{
                     backgroundColor: dotsHovered ? "transparent" : primaryColor,
-                    transition: "background-color 0.3s ease",
+                    transition: "background-color 0.25s ease",
                   }}
                 />
                 <div
@@ -537,7 +542,7 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
                   } two`}
                   style={{
                     backgroundColor: dotsHovered ? primaryColor : "transparent",
-                    transition: "background-color 0.5s ease",
+                    transition: "background-color 0.35s ease",
                   }}
                 />
                 <div
@@ -546,7 +551,7 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
                   } three`}
                   style={{
                     backgroundColor: dotsHovered ? primaryColor : "transparent",
-                    transition: "background-color 0.4s ease",
+                    transition: "background-color 0.3s ease",
                   }}
                 />
                 <div
@@ -555,7 +560,7 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
                   } four`}
                   style={{
                     backgroundColor: dotsHovered ? primaryColor : "transparent",
-                    transition: "background-color 0.4s ease",
+                    transition: "background-color 0.3s ease",
                   }}
                 />
                 <div
@@ -564,7 +569,7 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
                   } five`}
                   style={{
                     backgroundColor: dotsHovered ? primaryColor : "transparent",
-                    transition: "background-color 0.4s ease",
+                    transition: "background-color 0.3s ease",
                   }}
                 />
                 <div
@@ -573,7 +578,7 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
                   } six`}
                   style={{
                     backgroundColor: dotsHovered ? "transparent" : primaryColor,
-                    transition: "background-color 0.3s ease",
+                    transition: "background-color 0.25s ease",
                   }}
                 />
               </div>
@@ -584,7 +589,10 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
               type="button"
               aria-label={mobileMenuOpen ? "Close Menu" : "Open Menu"}
               aria-expanded={mobileMenuOpen}
-              onClick={() => setMobileMenuOpen((prev) => !prev)}
+              onClick={() => {
+                setSidebarOpen(false);
+                setMobileMenuOpen((prev) => !prev);
+              }}
               className={`dropdown-menu-button ${
                 isDark ? "style-two-menu-button" : ""
               } w-nav-button ${mobileMenuOpen ? "w--open" : ""}`}
@@ -615,8 +623,10 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
                   strokeLinecap="round"
                   style={{
                     transformOrigin: "11px 8px",
-                    transform: mobileMenuOpen ? "rotate(45deg)" : "rotate(0deg)",
-                    transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+                    transform: mobileMenuOpen
+                      ? "rotate(45deg)"
+                      : "rotate(0deg)",
+                    transition: "transform 0.22s ease",
                   }}
                 />
                 <line
@@ -629,7 +639,7 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
                   strokeLinecap="round"
                   style={{
                     opacity: mobileMenuOpen ? 0 : 1,
-                    transition: "opacity 0.2s ease",
+                    transition: "opacity 0.15s ease",
                   }}
                 />
                 <line
@@ -642,8 +652,10 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
                   strokeLinecap="round"
                   style={{
                     transformOrigin: "11px 8px",
-                    transform: mobileMenuOpen ? "rotate(-45deg)" : "rotate(0deg)",
-                    transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+                    transform: mobileMenuOpen
+                      ? "rotate(-45deg)"
+                      : "rotate(0deg)",
+                    transition: "transform 0.22s ease",
                   }}
                 />
               </svg>
@@ -652,45 +664,39 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
         </div>
       </div>
 
-      {/* Animated Mobile Menu Drawer */}
+      {/* Unclipped, Zero-Lag Mobile Menu Dropdown */}
       <div
-        className="w-nav-overlay mobile-nav-drawer-overlay"
+        className="mobile-nav-drawer-overlay"
         style={{
-          display: "block",
-          height: "auto",
           position: "absolute",
           top: "100%",
           left: 0,
           right: 0,
           zIndex: 1004,
-          padding: "10px 15px",
+          padding: "8px 15px 16px",
           pointerEvents: mobileMenuOpen ? "auto" : "none",
           opacity: mobileMenuOpen ? 1 : 0,
           transform: mobileMenuOpen
             ? "translate3d(0, 0px, 0)"
-            : "translate3d(0, -12px, 0)",
-          transition:
-            "opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
+            : "translate3d(0, -8px, 0)",
+          transition: "opacity 0.2s ease, transform 0.2s ease",
+          willChange: "transform, opacity",
         }}
       >
         <nav
           role="navigation"
           aria-label="Mobile Navigation"
-          data-nav-menu-open={mobileMenuOpen ? "" : undefined}
-          className={
-            isDark ? "navbarmenu-style-two-block" : "navbar-menu-block"
-          }
           style={{
             display: "flex",
             flexDirection: "column",
             alignItems: "stretch",
-            padding: "16px 20px",
+            padding: "12px 18px",
             backgroundColor: isDark ? "#0a0a0a" : "#ffffff",
             border: isDark
               ? "1px solid rgba(255, 255, 255, 0.22)"
               : "1px solid #000000",
-            borderRadius: "8px",
-            boxShadow: "0 24px 48px -12px rgba(0, 0, 0, 0.22)",
+            borderRadius: "6px",
+            boxShadow: "0 16px 36px -8px rgba(0, 0, 0, 0.18)",
           }}
         >
           {MOBILE_NAV_LINKS.map((item, idx) => {
@@ -709,11 +715,12 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
                 style={{
                   width: "100%",
                   textAlign: "left",
-                  minHeight: "46px",
+                  minHeight: "44px",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
-                  padding: "10px 8px",
+                  padding: "10px 6px",
+                  margin: 0,
                   borderBottom:
                     idx < MOBILE_NAV_LINKS.length - 1
                       ? isDark
@@ -721,11 +728,6 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
                         : "1px solid rgba(0,0,0,0.07)"
                       : "none",
                   fontWeight: isActive ? 700 : 500,
-                  opacity: mobileMenuOpen ? 1 : 0,
-                  transform: mobileMenuOpen
-                    ? "translate3d(0, 0, 0)"
-                    : "translate3d(-10px, 0, 0)",
-                  transition: `opacity 0.3s ease ${idx * 35}ms, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) ${idx * 35}ms`,
                 }}
               >
                 <span>{item.label}</span>
