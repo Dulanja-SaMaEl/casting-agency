@@ -1,0 +1,54 @@
+@import "tailwindcss";
+@import "./reflux-webflow.css";
+
+:root {
+  --white: #ffffff;
+  --dark: #000000;
+  --_color---dark: #000000;
+  --_color---white: #ffffff;
+  --_color---transparent: transparent;
+  --_color---grey-1: #999999;
+  --_color---grey-2: #cccccc;
+  --_color---service-color-1: #a7d8de;
+  --_color---service-color-2: #f5a3a3;
+  --_color---service-color-3: #f8c794;
+  --_color---service-color-4: #cbb7f6;
+  --_typography---border-radius: 5px;
+  --_typography---body-font: "Manrope", sans-serif;
+  --_typography---title-font: "Big Shoulders", "Big Shoulders Display", "Bigshoulders 18 Pt", sans-serif;
+  --_typography---title-font-2: "Bigshoulders 18 Pt", "Big Shoulders", "Big Shoulders Display", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--white);
+  font-family: var(--_typography---body-font);
+  color: var(--dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure crisp focus-visible states for WCAG AA keyboard accessibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--dark);
+  outline-offset: 3px;
+}
+
+/* Reduced motion accessibility fallback */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
