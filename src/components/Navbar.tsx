@@ -272,7 +272,7 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
             role="navigation"
             className={`${
               isDark ? "navbarmenu-style-two-block" : "navbar-menu-block"
-            } w-nav-menu`}
+            } w-nav-menu desktop-nav-menu`}
           >
             {/* HOME */}
             <div
@@ -492,7 +492,15 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
           </nav>
 
           {/* Right Action Controls (6-Dot Trigger + Mobile Menu Button) */}
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", justifySelf: "end" }}>
+          <div
+            className="navbar-right-controls"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "12px",
+              justifySelf: "end",
+            }}
+          >
             {/* 6-Dot Morphing Sidebar Trigger Button */}
             <button
               type="button"

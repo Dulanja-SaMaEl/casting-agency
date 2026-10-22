@@ -71,6 +71,34 @@ select:focus-visible {
     overflow-x: clip;
   }
 
+  /* Hide Desktop Navigation Bar on Tablet & Mobile */
+  .desktop-nav-menu {
+    display: none !important;
+  }
+
+  /* Single-row Header Layout: Logo on Left, Controls on Right */
+  .navbar-main-wrapper,
+  .navbar-style-2-main-wrapper {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100%;
+  }
+
+  .navbar-logo-link,
+  .nav-style-two-logo-link {
+    display: flex !important;
+    align-items: center !important;
+    padding-left: 0 !important;
+  }
+
+  .navbar-right-controls {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    margin-left: auto;
+  }
+
   /* Show both the 6-dot Studio Drawer trigger & Morphing Hamburger on tablet/mobile */
   .nav-sidebar-logo-block {
     display: inline-flex !important;
