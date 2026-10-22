@@ -38,7 +38,7 @@ export default function ServicePage() {
             y: 0,
             opacity: 1,
             duration: 0.7,
-            delay: (i % 3) * 0.1,
+            delay: (i % 3) * 0.08,
             ease: "power3.out",
             scrollTrigger: {
               trigger: item,
@@ -46,6 +46,24 @@ export default function ServicePage() {
             },
           }
         );
+
+        const img = item.querySelector(".service-image-inner");
+        if (img) {
+          gsap.fromTo(
+            img,
+            { scale: 1.08 },
+            {
+              scale: 1,
+              ease: "none",
+              scrollTrigger: {
+                trigger: item,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 0.4,
+              },
+            }
+          );
+        }
       });
     },
     { scope: containerRef }

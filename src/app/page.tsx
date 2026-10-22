@@ -313,6 +313,105 @@ export default function HomePage() {
           );
       });
 
+      // 3B. Tablet & Mobile Scroll Choreographies (<=991px)
+      mm.add("(max-width: 991px)", () => {
+        // Mobile Projects Letters 3D Unfold
+        gsap.fromTo(
+          ".projects-letter-3d",
+          { rotateY: 75, y: 30, opacity: 0 },
+          {
+            rotateY: 0,
+            y: 0,
+            opacity: 1,
+            duration: 0.65,
+            stagger: 0.05,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: ".projects-text-block",
+              start: "top 88%",
+            },
+          }
+        );
+
+        // Mobile Project Cards Staggered Reveal + Image Scale Parallax
+        const mobileProjectCards = gsap.utils.toArray<HTMLElement>(
+          ".projects-card-block"
+        );
+        mobileProjectCards.forEach((card) => {
+          gsap.fromTo(
+            card,
+            { y: 60, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.8,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 86%",
+              },
+            }
+          );
+
+          const img = card.querySelector(".projects-right-image");
+          if (img) {
+            gsap.fromTo(
+              img,
+              { scale: 1.1 },
+              {
+                scale: 1,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: card,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: 0.4,
+                },
+              }
+            );
+          }
+        });
+
+        // Mobile About Headline Reveal (since .text-overlay is hidden on mobile)
+        gsap.fromTo(
+          ".about-section-title",
+          { y: 40, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: ".about-section-title-block",
+              start: "top 86%",
+            },
+          }
+        );
+
+        // Mobile Testimonial Cards Scroll-In Stack
+        const mobileTestimonialCards = gsap.utils.toArray<HTMLElement>(
+          ".testimonial-inner-info-block"
+        );
+        mobileTestimonialCards.forEach((card, i) => {
+          gsap.fromTo(
+            card,
+            { y: 55, opacity: 0, scale: 0.96 },
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              duration: 0.75,
+              delay: (i % 2) * 0.08,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 88%",
+              },
+            }
+          );
+        });
+      });
+
       // 4. About Badge & Description Scroll-In Reveal
       gsap.fromTo(
         ".about-subtext-block",
@@ -538,13 +637,16 @@ export default function HomePage() {
                       onMouseEnter={() => setHoveredService(idx)}
                       onMouseLeave={() => setHoveredService(null)}
                       className={`service-box ${boxClasses[idx]}`}
-                      style={{
-                        transform: isHovered
-                          ? "translate3d(0, -50px, 0)"
-                          : "translate3d(0, 0px, 0)",
-                        transition:
-                          "transform 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955)",
-                      }}
+                      style={
+                        {
+                          "--service-accent": service.color,
+                          transform: isHovered
+                            ? "translate3d(0, -50px, 0)"
+                            : "translate3d(0, 0px, 0)",
+                          transition:
+                            "transform 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955)",
+                        } as React.CSSProperties
+                      }
                     >
                       <Link
                         href={`/service/${service.slug}`}

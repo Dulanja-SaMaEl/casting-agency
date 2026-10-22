@@ -21,6 +21,7 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -39,6 +40,315 @@ textarea:focus-visible,
 select:focus-visible {
   outline: 2px solid var(--dark);
   outline-offset: 3px;
+}
+
+/* Tactile active press feedback across interactive controls */
+.button-primary-link:active,
+.submit-button:active,
+.hero-icon-inner-block:active,
+.back-to-top:active,
+.dropdown-menu-button:active,
+.nav-sidebar-logo-block:active {
+  transform: scale3d(0.96, 0.96, 1);
+}
+
+/* Desktop-only visibility rules (keeps sticky scroll 100% untouched) */
+@media screen and (min-width: 992px) {
+  .dropdown-menu-button.w-nav-button,
+  .mobile-nav-drawer-overlay,
+  .team-mobile-avatar {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   TABLET & MOBILE RESPONSIVE OPTIMIZATION (<= 991px)
+   ========================================================================== */
+@media screen and (max-width: 991px) {
+  body,
+  .section,
+  .footer-section {
+    overflow-x: clip;
+  }
+
+  /* Show both the 6-dot Studio Drawer trigger & Morphing Hamburger on tablet/mobile */
+  .nav-sidebar-logo-block {
+    display: inline-flex !important;
+  }
+
+  .dropdown-menu-button.w-nav-button {
+    display: inline-flex !important;
+  }
+
+  /* Home Service Cards: Always reveal descriptions & subtle pastel tint on touch devices */
+  .service-box {
+    height: auto !important;
+    min-height: 290px;
+    padding: 32px 24px 28px !important;
+    transform: none !important;
+  }
+
+  .service-box-hover-bg-color {
+    background-color: var(--service-accent, #f4f4f5) !important;
+    opacity: 0.38;
+    transform: scale3d(1, 1, 1) !important;
+  }
+
+  .service-box-content-block {
+    max-height: 240px !important;
+  }
+
+  .service-box-description-block {
+    opacity: 1 !important;
+    margin-top: 10px !important;
+  }
+
+  /* Services Inner Page (/service): Always show card title & readable dark gradient on touch */
+  .service-inner-image-leyout {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.08) 0%,
+      rgba(0, 0, 0, 0.72) 100%
+    ) !important;
+  }
+
+  .service-inner-title-block {
+    transform: translate3d(0%, 0%, 0) scale3d(1, 1, 1) !important;
+    align-items: flex-end !important;
+    justify-content: flex-start !important;
+    padding: 24px !important;
+  }
+
+  .service-name-inner {
+    text-align: left;
+  }
+
+  /* About Us 2x3 Services Grid: Ensure all 6 services stay visible & show subtle image texture */
+  .service-info-main-block.last {
+    display: block !important;
+  }
+
+  .service-info-main-block .service-image {
+    height: 100% !important;
+    opacity: 0.16 !important;
+    transform: scale3d(1, 1, 1) !important;
+  }
+
+  .service-info-main-block .service-name {
+    transform: none !important;
+  }
+
+  /* About Us Team Pills: Show circular director portrait inside each pill on tablet/mobile */
+  .team-mobile-avatar {
+    display: block;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1.5px solid var(--dark);
+  }
+
+  .team-info-block {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 14px;
+    text-align: left;
+  }
+
+  .team-info-link-block {
+    padding: 14px 20px !important;
+  }
+
+  /* Projects vertical stack spacing on tablet/mobile */
+  .projects-info-inner-block {
+    gap: 36px !important;
+  }
+
+  .projects-card-block {
+    border-radius: 8px;
+    overflow: hidden !important;
+  }
+}
+
+/* ==========================================================================
+   MOBILE LANDSCAPE & LARGE PHONES (<= 767px)
+   ========================================================================== */
+@media screen and (max-width: 767px) {
+  .section {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  /* Fluid Hero Typography & Image Proportions */
+  .hero-title {
+    font-size: clamp(46px, 14.5vw, 90px) !important;
+    line-height: 1.05 !important;
+  }
+
+  .hero-image {
+    height: clamp(56px, 15vw, 96px) !important;
+    border-radius: 6px;
+    object-fit: cover;
+  }
+
+  .hero-grid-block,
+  .hero-grid-block.two {
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+
+  /* Fluid Section Headlines */
+  .section-title {
+    font-size: clamp(38px, 10.5vw, 58px) !important;
+    line-height: 1.12 !important;
+  }
+
+  .section-title.two {
+    font-size: clamp(34px, 9.5vw, 50px) !important;
+    line-height: 1.14 !important;
+  }
+
+  .breadcrumb-title,
+  .about-hero-title,
+  .testimonial-title {
+    font-size: clamp(42px, 12vw, 72px) !important;
+    line-height: 1.08 !important;
+  }
+
+  .projects-name {
+    font-size: clamp(38px, 11vw, 60px) !important;
+    line-height: 1.1 !important;
+  }
+
+  .horizontal-projects-titles {
+    font-size: clamp(30px, 8.5vw, 46px) !important;
+    line-height: 1.15 !important;
+  }
+
+  .footer-title {
+    font-size: clamp(38px, 11vw, 54px) !important;
+    line-height: 1.12 !important;
+  }
+
+  /* Single-column Testimonial Stack on phones for full readability */
+  .testimonial-info-block {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+
+  .testimonial-inner-info-block {
+    width: 100% !important;
+    padding: 24px 20px !important;
+    border-radius: 8px;
+  }
+
+  /* About Counters 2x2 Grid with balanced row/column gap */
+  .about-counter-grid {
+    grid-template-columns: 1fr 1fr !important;
+    grid-column-gap: 20px !important;
+    grid-row-gap: 24px !important;
+  }
+
+  /* About Us 2x3 Service Grid collapses cleanly to 1 column on phones */
+  .service-two-grid.one,
+  .service-two-grid.two {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .service-info-main-block {
+    border-right: none !important;
+    border-bottom: 1px solid var(--dark) !important;
+  }
+
+  /* Team Grid collapses to 1 column on phones */
+  .team-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  /* Prevent iOS Safari zoom on form inputs (must be >= 16px) */
+  .input-field,
+  .text-area {
+    font-size: 16px !important;
+  }
+
+  /* Ergonomic Back-to-Top button position on mobile */
+  .back-to-top {
+    right: 20px !important;
+    bottom: 24px !important;
+    width: 46px !important;
+    height: 46px !important;
+  }
+}
+
+/* ==========================================================================
+   SMALL MOBILE PORTRAIT (<= 479px)
+   ========================================================================== */
+@media screen and (max-width: 479px) {
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .hero-inner-info-block {
+    gap: 20px;
+  }
+
+  .service-grid {
+    gap: 18px !important;
+  }
+
+  .service-box {
+    min-height: 250px;
+    padding: 26px 20px 24px !important;
+  }
+
+  .projects-text-grid {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px 12px !important;
+  }
+
+  .about-section-title {
+    font-size: clamp(22px, 6.2vw, 28px) !important;
+    line-height: 1.35 !important;
+  }
+
+  .about-counter-inner-block {
+    height: 56px !important;
+  }
+
+  .about-count-number {
+    font-size: 46px !important;
+    line-height: 56px !important;
+  }
+
+  .concat-info-block {
+    width: 100% !important;
+    padding: 28px 20px !important;
+    border-radius: 8px;
+  }
+
+  .footer-page-link-inner-block {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 12px 20px !important;
+  }
+
+  .footer-more-info-link-block {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    justify-content: center;
+  }
 }
 
 /* Reduced motion accessibility fallback */

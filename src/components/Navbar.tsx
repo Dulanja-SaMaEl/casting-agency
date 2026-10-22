@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ASSETS } from "@/data/agencyData";
@@ -15,6 +15,18 @@ const DROPDOWN_LINKS = [
   { href: "/blog", label: "blog" },
   { href: "/terms-and-conditions", label: "terms & conditions" },
   { href: "/privacy-policy", label: "privacy policy" },
+];
+
+const MOBILE_NAV_LINKS = [
+  { href: "/", label: "Home" },
+  { href: "/about-us", label: "About Us" },
+  { href: "/service", label: "Services" },
+  { href: "/portfolio", label: "Portfolio" },
+  { href: "/team", label: "Casting Directors" },
+  { href: "/blog", label: "Editorial Blog" },
+  { href: "/contact-us", label: "Contact Us" },
+  { href: "/terms-and-conditions", label: "Terms & Conditions" },
+  { href: "/privacy-policy", label: "Privacy Policy" },
 ];
 
 export default function Navbar({ variant = "light" }: NavbarProps) {
@@ -32,6 +44,25 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
 
   const primaryColor = isDark ? "#ffffff" : "#000000";
 
+  // Close menus on route change or Escape key
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setSidebarOpen(false);
+    setDropdownOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileMenuOpen(false);
+        setSidebarOpen(false);
+        setDropdownOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   return (
     <div
       id="Top"
@@ -46,9 +77,25 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
         style={{
           display: sidebarOpen ? "block" : "none",
           opacity: sidebarOpen ? 1 : 0,
-          transition: "opacity 0.5s ease",
+          transition: "opacity 0.45s ease",
           zIndex: 1001,
           cursor: "pointer",
+        }}
+      />
+
+      {/* Mobile Menu Backdrop */}
+      <div
+        onClick={() => setMobileMenuOpen(false)}
+        aria-hidden="true"
+        style={{
+          position: "fixed",
+          inset: 0,
+          backgroundColor: "rgba(0, 0, 0, 0.35)",
+          backdropFilter: "blur(3px)",
+          opacity: mobileMenuOpen ? 1 : 0,
+          pointerEvents: mobileMenuOpen ? "auto" : "none",
+          transition: "opacity 0.35s ease",
+          zIndex: 1002,
         }}
       />
 
@@ -58,11 +105,15 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
         className={`sidebar-block ${isDark ? "sidebar-style-two" : ""}`}
         style={{
           opacity: sidebarOpen ? 1 : 0,
-          transform: sidebarOpen ? "translate3d(0%, 0, 0)" : "translate3d(100%, 0, 0)",
+          transform: sidebarOpen
+            ? "translate3d(0%, 0, 0)"
+            : "translate3d(100%, 0, 0)",
           transition:
-            "transform 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955), opacity 0.5s ease",
-          zIndex: 1002,
+            "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease",
+          zIndex: 1005,
           pointerEvents: sidebarOpen ? "auto" : "none",
+          width: "min(400px, 90vw)",
+          overflowY: "auto",
         }}
       >
         <button
@@ -70,7 +121,16 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
           onClick={() => setSidebarOpen(false)}
           aria-label="Close Sidebar"
           className="sidebar-close-button w-inline-block"
-          style={{ background: "transparent", border: "none", cursor: "pointer" }}
+          style={{
+            background: "transparent",
+            border: "none",
+            cursor: "pointer",
+            minWidth: "44px",
+            minHeight: "44px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
         >
           <img
             src={isDark ? ASSETS.closeIconDark : ASSETS.closeIconWhite}
@@ -124,7 +184,7 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
               href="tel:+18001234567890"
               className={`sidebar-contact-number ${isDark ? "text-dark" : ""}`}
             >
-              +1 8000 123 456 7890
+              +1 (212) 555-0199
             </a>
           </div>
           <div className="sidebar-social-block">
@@ -187,7 +247,7 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
       </aside>
 
       {/* Main Navbar Container */}
-      <div className="container w-container">
+      <div className="container w-container" style={{ position: "relative", zIndex: 1004 }}>
         <div
           className={
             isDark ? "navbar-style-2-main-wrapper" : "navbar-main-wrapper"
@@ -201,7 +261,7 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
           >
             <img
               src={isDark ? ASSETS.headerLogoWhite : ASSETS.headerLogoDark}
-              loading="lazy"
+              loading="eager"
               alt="Reflux Casting Logo"
               className={isDark ? "nav-style-two-logo" : "nav-logo"}
             />
@@ -431,142 +491,206 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
             </div>
           </nav>
 
-          {/* 6-Dot Morphing Sidebar Trigger Button */}
-          <button
-            type="button"
-            aria-label="Open Studio Drawer"
-            onClick={() => setSidebarOpen(true)}
-            onMouseEnter={() => setDotsHovered(true)}
-            onMouseLeave={() => setDotsHovered(false)}
-            className="nav-sidebar-logo-block"
-            style={{
-              background: "transparent",
-              border: "none",
-              cursor: "pointer",
-              padding: "8px",
-            }}
-          >
-            <div className="w-layout-grid nav-sidebar-logo-inner-block">
-              {/* Dot 1: Filled by default -> Hollow on hover */}
-              <div
-                className={`nav-sidebar-logo-dot ${
-                  isDark ? "bg-white" : ""
-                } one`}
-                style={{
-                  backgroundColor: dotsHovered ? "transparent" : primaryColor,
-                  transition: "background-color 0.3s ease",
-                }}
-              />
-              {/* Dot 2: Hollow by default -> Filled on hover */}
-              <div
-                className={`nav-sidebar-logo-dot ${
-                  isDark ? "bg-white" : ""
-                } two`}
-                style={{
-                  backgroundColor: dotsHovered ? primaryColor : "transparent",
-                  transition: "background-color 0.5s ease",
-                }}
-              />
-              {/* Dot 3: Hollow by default -> Filled on hover */}
-              <div
-                className={`nav-sidebar-logo-dot ${
-                  isDark ? "bg-white" : ""
-                } three`}
-                style={{
-                  backgroundColor: dotsHovered ? primaryColor : "transparent",
-                  transition: "background-color 0.4s ease",
-                }}
-              />
-              {/* Dot 4: Hollow by default -> Filled on hover */}
-              <div
-                className={`nav-sidebar-logo-dot ${
-                  isDark ? "bg-white" : ""
-                } four`}
-                style={{
-                  backgroundColor: dotsHovered ? primaryColor : "transparent",
-                  transition: "background-color 0.4s ease",
-                }}
-              />
-              {/* Dot 5: Hollow by default -> Filled on hover */}
-              <div
-                className={`nav-sidebar-logo-dot ${
-                  isDark ? "bg-white" : ""
-                } five`}
-                style={{
-                  backgroundColor: dotsHovered ? primaryColor : "transparent",
-                  transition: "background-color 0.4s ease",
-                }}
-              />
-              {/* Dot 6: Filled by default -> Hollow on hover */}
-              <div
-                className={`nav-sidebar-logo-dot ${
-                  isDark ? "bg-white" : ""
-                } six`}
-                style={{
-                  backgroundColor: dotsHovered ? "transparent" : primaryColor,
-                  transition: "background-color 0.3s ease",
-                }}
-              />
-            </div>
-          </button>
+          {/* Right Action Controls (6-Dot Trigger + Mobile Menu Button) */}
+          <div style={{ display: "flex", alignItems: "center", gap: "10px", justifySelf: "end" }}>
+            {/* 6-Dot Morphing Sidebar Trigger Button */}
+            <button
+              type="button"
+              aria-label="Open Studio Drawer"
+              onClick={() => setSidebarOpen(true)}
+              onMouseEnter={() => setDotsHovered(true)}
+              onMouseLeave={() => setDotsHovered(false)}
+              className="nav-sidebar-logo-block"
+              style={{
+                background: "transparent",
+                border: "none",
+                cursor: "pointer",
+                padding: "10px",
+                minWidth: "44px",
+                minHeight: "44px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <div className="w-layout-grid nav-sidebar-logo-inner-block">
+                <div
+                  className={`nav-sidebar-logo-dot ${
+                    isDark ? "bg-white" : ""
+                  } one`}
+                  style={{
+                    backgroundColor: dotsHovered ? "transparent" : primaryColor,
+                    transition: "background-color 0.3s ease",
+                  }}
+                />
+                <div
+                  className={`nav-sidebar-logo-dot ${
+                    isDark ? "bg-white" : ""
+                  } two`}
+                  style={{
+                    backgroundColor: dotsHovered ? primaryColor : "transparent",
+                    transition: "background-color 0.5s ease",
+                  }}
+                />
+                <div
+                  className={`nav-sidebar-logo-dot ${
+                    isDark ? "bg-white" : ""
+                  } three`}
+                  style={{
+                    backgroundColor: dotsHovered ? primaryColor : "transparent",
+                    transition: "background-color 0.4s ease",
+                  }}
+                />
+                <div
+                  className={`nav-sidebar-logo-dot ${
+                    isDark ? "bg-white" : ""
+                  } four`}
+                  style={{
+                    backgroundColor: dotsHovered ? primaryColor : "transparent",
+                    transition: "background-color 0.4s ease",
+                  }}
+                />
+                <div
+                  className={`nav-sidebar-logo-dot ${
+                    isDark ? "bg-white" : ""
+                  } five`}
+                  style={{
+                    backgroundColor: dotsHovered ? primaryColor : "transparent",
+                    transition: "background-color 0.4s ease",
+                  }}
+                />
+                <div
+                  className={`nav-sidebar-logo-dot ${
+                    isDark ? "bg-white" : ""
+                  } six`}
+                  style={{
+                    backgroundColor: dotsHovered ? "transparent" : primaryColor,
+                    transition: "background-color 0.3s ease",
+                  }}
+                />
+              </div>
+            </button>
 
-          {/* Mobile Hamburger Menu Button */}
-          <button
-            type="button"
-            aria-label="Toggle Menu"
-            onClick={() => setMobileMenuOpen((prev) => !prev)}
-            className={`dropdown-menu-button ${
-              isDark ? "style-two-menu-button" : ""
-            } w-nav-button ${mobileMenuOpen ? "w--open" : ""}`}
-            style={{ background: "transparent" }}
-          >
-            <div className="w-icon-nav-menu" />
-          </button>
+            {/* Mobile Hamburger Menu Button with Morphing SVG */}
+            <button
+              type="button"
+              aria-label={mobileMenuOpen ? "Close Menu" : "Open Menu"}
+              aria-expanded={mobileMenuOpen}
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+              className={`dropdown-menu-button ${
+                isDark ? "style-two-menu-button" : ""
+              } w-nav-button ${mobileMenuOpen ? "w--open" : ""}`}
+              style={{
+                background: "transparent",
+                minWidth: "46px",
+                minHeight: "46px",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "10px",
+              }}
+            >
+              <svg
+                width="22"
+                height="16"
+                viewBox="0 0 22 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <line
+                  x1="1"
+                  y1={mobileMenuOpen ? "8" : "2"}
+                  x2="21"
+                  y2={mobileMenuOpen ? "8" : "2"}
+                  stroke={primaryColor}
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  style={{
+                    transformOrigin: "11px 8px",
+                    transform: mobileMenuOpen ? "rotate(45deg)" : "rotate(0deg)",
+                    transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+                  }}
+                />
+                <line
+                  x1="1"
+                  y1="8"
+                  x2="21"
+                  y2="8"
+                  stroke={primaryColor}
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  style={{
+                    opacity: mobileMenuOpen ? 0 : 1,
+                    transition: "opacity 0.2s ease",
+                  }}
+                />
+                <line
+                  x1="1"
+                  y1={mobileMenuOpen ? "8" : "14"}
+                  x2="21"
+                  y2={mobileMenuOpen ? "8" : "14"}
+                  stroke={primaryColor}
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  style={{
+                    transformOrigin: "11px 8px",
+                    transform: mobileMenuOpen ? "rotate(-45deg)" : "rotate(0deg)",
+                    transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+                  }}
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
-      {mobileMenuOpen && (
-        <div
-          className="w-nav-overlay"
+      {/* Animated Mobile Menu Drawer */}
+      <div
+        className="w-nav-overlay mobile-nav-drawer-overlay"
+        style={{
+          display: "block",
+          height: "auto",
+          position: "absolute",
+          top: "100%",
+          left: 0,
+          right: 0,
+          zIndex: 1004,
+          padding: "10px 15px",
+          pointerEvents: mobileMenuOpen ? "auto" : "none",
+          opacity: mobileMenuOpen ? 1 : 0,
+          transform: mobileMenuOpen
+            ? "translate3d(0, 0px, 0)"
+            : "translate3d(0, -12px, 0)",
+          transition:
+            "opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
+        }}
+      >
+        <nav
+          role="navigation"
+          aria-label="Mobile Navigation"
+          data-nav-menu-open={mobileMenuOpen ? "" : undefined}
+          className={
+            isDark ? "navbarmenu-style-two-block" : "navbar-menu-block"
+          }
           style={{
-            display: "block",
-            height: "auto",
-            position: "absolute",
-            top: "100%",
-            left: 0,
-            right: 0,
-            zIndex: 1004,
-            padding: "10px 15px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "stretch",
+            padding: "16px 20px",
+            backgroundColor: isDark ? "#0a0a0a" : "#ffffff",
+            border: isDark
+              ? "1px solid rgba(255, 255, 255, 0.22)"
+              : "1px solid #000000",
+            borderRadius: "8px",
+            boxShadow: "0 24px 48px -12px rgba(0, 0, 0, 0.22)",
           }}
         >
-          <nav
-            role="navigation"
-            data-nav-menu-open
-            className={
-              isDark ? "navbarmenu-style-two-block" : "navbar-menu-block"
-            }
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-              padding: "20px",
-              backgroundColor: isDark ? "#000000" : "#ffffff",
-              border: isDark ? "1px solid #ffffff33" : "1px solid #000000",
-              borderRadius: "5px",
-            }}
-          >
-            {[
-              { href: "/", label: "Home" },
-              { href: "/about-us", label: "About Us" },
-              { href: "/service", label: "Service" },
-              { href: "/portfolio", label: "Portfolio" },
-              { href: "/team", label: "Team" },
-              { href: "/blog", label: "Blog" },
-              { href: "/contact-us", label: "Contact Us" },
-              { href: "/terms-and-conditions", label: "Terms & Conditions" },
-              { href: "/privacy-policy", label: "Privacy Policy" },
-            ].map((item) => (
+          {MOBILE_NAV_LINKS.map((item, idx) => {
+            const isActive =
+              item.href === "/"
+                ? pathname === "/"
+                : pathname.startsWith(item.href);
+            return (
               <Link
                 key={item.href}
                 href={item.href}
@@ -574,14 +698,45 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
                 className={`navbar-menu-link ${
                   isDark ? "nav-style-2-link" : ""
                 } w-nav-link`}
-                style={{ width: "100%", textAlign: "left" }}
+                style={{
+                  width: "100%",
+                  textAlign: "left",
+                  minHeight: "46px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  padding: "10px 8px",
+                  borderBottom:
+                    idx < MOBILE_NAV_LINKS.length - 1
+                      ? isDark
+                        ? "1px solid rgba(255,255,255,0.08)"
+                        : "1px solid rgba(0,0,0,0.07)"
+                      : "none",
+                  fontWeight: isActive ? 700 : 500,
+                  opacity: mobileMenuOpen ? 1 : 0,
+                  transform: mobileMenuOpen
+                    ? "translate3d(0, 0, 0)"
+                    : "translate3d(-10px, 0, 0)",
+                  transition: `opacity 0.3s ease ${idx * 35}ms, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) ${idx * 35}ms`,
+                }}
               >
-                {item.label}
+                <span>{item.label}</span>
+                {isActive && (
+                  <span
+                    style={{
+                      width: "7px",
+                      height: "7px",
+                      borderRadius: "50%",
+                      backgroundColor: primaryColor,
+                      display: "inline-block",
+                    }}
+                  />
+                )}
               </Link>
-            ))}
-          </nav>
-        </div>
-      )}
+            );
+          })}
+        </nav>
+      </div>
     </div>
   );
 }

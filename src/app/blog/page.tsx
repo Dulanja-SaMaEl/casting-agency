@@ -91,6 +91,28 @@ export default function BlogPage() {
         });
       });
 
+      mm.add("(max-width: 991px)", () => {
+        const mobileBlogImgs = gsap.utils.toArray<HTMLElement>(
+          ".blog-inner-image"
+        );
+        mobileBlogImgs.forEach((img) => {
+          gsap.fromTo(
+            img,
+            { scale: 1.08 },
+            {
+              scale: 1,
+              ease: "none",
+              scrollTrigger: {
+                trigger: img.parentElement,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 0.4,
+              },
+            }
+          );
+        });
+      });
+
       return () => mm.revert();
     },
     { scope: containerRef }

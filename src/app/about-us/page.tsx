@@ -120,6 +120,56 @@ export default function AboutUsPage() {
           );
       });
 
+      // 1B. Tablet & Mobile Hero Entrance + Spatial Parallax (<=991px)
+      mm.add("(max-width: 991px)", () => {
+        gsap.fromTo(
+          [".about-hero-subtitle", ".about-hero-title"],
+          { y: 45, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.85,
+            stagger: 0.14,
+            ease: "power3.out",
+          }
+        );
+
+        gsap.fromTo(
+          ".frame-item.two.responsive-image",
+          { scale: 0.85, opacity: 0 },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 0.9,
+            delay: 0.2,
+            stagger: 0.15,
+            ease: "power3.out",
+          }
+        );
+
+        gsap.to(".frame-item.two.responsive-image.one", {
+          yPercent: 18,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".about-hero-section",
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.4,
+          },
+        });
+
+        gsap.to(".frame-item.two.responsive-image.hero-responsive-image-two", {
+          yPercent: -18,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".about-hero-section",
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.4,
+          },
+        });
+      });
+
       // 2. Service Two Section Scroll-In Reveal
       gsap.fromTo(
         ".service-title-grid > div",
@@ -516,23 +566,31 @@ export default function AboutUsPage() {
                             }}
                           >
                             <div className="team-info-block">
-                              <h3
-                                className="team-members-name"
-                                style={{
-                                  color: isHovered ? "#ffffff" : "#000000",
-                                  transition: "color 0.3s ease",
-                                }}
-                              >
-                                {member.name}
-                              </h3>
-                              <div
-                                className="team-job-title"
-                                style={{
-                                  color: isHovered ? "#ffffff" : "#000000",
-                                  transition: "color 0.3s ease",
-                                }}
-                              >
-                                {member.role}
+                              <img
+                                src={member.image}
+                                loading="lazy"
+                                alt={member.name}
+                                className="team-mobile-avatar"
+                              />
+                              <div className="team-info-text-wrap">
+                                <h3
+                                  className="team-members-name"
+                                  style={{
+                                    color: isHovered ? "#ffffff" : "#000000",
+                                    transition: "color 0.3s ease",
+                                  }}
+                                >
+                                  {member.name}
+                                </h3>
+                                <div
+                                  className="team-job-title"
+                                  style={{
+                                    color: isHovered ? "#ffffff" : "#000000",
+                                    transition: "color 0.3s ease",
+                                  }}
+                                >
+                                  {member.role}
+                                </div>
                               </div>
                             </div>
                             <img

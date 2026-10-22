@@ -18,6 +18,18 @@ export default function TeamPage() {
 
   useGSAP(
     () => {
+      gsap.fromTo(
+        [".breadcrumb-title", ".breadcrumb-subtitle-block"],
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.85,
+          stagger: 0.14,
+          ease: "power3.out",
+        }
+      );
+
       const rows = gsap.utils.toArray<HTMLElement>(".team-row-reveal");
       rows.forEach((row) => {
         gsap.fromTo(
