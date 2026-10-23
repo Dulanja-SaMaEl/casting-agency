@@ -170,100 +170,108 @@ export default function AboutUsPage() {
         });
       });
 
-      // 2. Service Two Section Scroll-In Reveal
+      // 2. Service Two Section Smooth Scroll-In Reveal
       gsap.fromTo(
         ".service-title-grid > div",
-        { y: 50, opacity: 0 },
+        { y: 60, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.75,
-          stagger: 0.15,
-          ease: "power3.out",
+          duration: 1.0,
+          stagger: 0.14,
+          ease: "expo.out",
           scrollTrigger: {
             trigger: ".service-two-section",
             start: "top 82%",
+            toggleActions: "play none none reverse",
           },
         }
       );
 
       gsap.fromTo(
         ".service-info-main-block",
-        { y: 60, opacity: 0 },
+        { y: 65, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.7,
+          duration: 0.95,
           stagger: 0.1,
-          ease: "power3.out",
+          ease: "expo.out",
           scrollTrigger: {
             trigger: ".service-two-grid.one",
             start: "top 85%",
+            toggleActions: "play none none reverse",
           },
         }
       );
 
-      // 3. Team Pills Section Scroll-In Reveal
+      // 3. Team Pills Section Smooth Scroll-In Reveal
       gsap.fromTo(
         ".team-title-grid > div",
-        { y: 50, opacity: 0 },
+        { y: 60, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.75,
-          stagger: 0.15,
-          ease: "power3.out",
+          duration: 1.0,
+          stagger: 0.14,
+          ease: "expo.out",
           scrollTrigger: {
             trigger: ".team-section",
             start: "top 82%",
+            toggleActions: "play none none reverse",
           },
         }
       );
 
       gsap.fromTo(
         ".team-list-wrapper",
-        { y: 50, opacity: 0 },
+        { y: 55, opacity: 0, scale: 0.96 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.65,
-          stagger: 0.12,
-          ease: "power3.out",
+          scale: 1,
+          duration: 0.9,
+          stagger: 0.1,
+          ease: "expo.out",
           scrollTrigger: {
             trigger: ".team-grid",
             start: "top 85%",
+            toggleActions: "play none none reverse",
           },
         }
       );
 
-      // 4. Dark Blog Cards growIn on Scroll
+      // 4. Dark Blog Cards Smooth Curtain Reveal on Scroll
       gsap.fromTo(
         ".blog-section .section-title-inner-block",
-        { y: 50, opacity: 0 },
+        { y: 60, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.75,
-          ease: "power3.out",
+          duration: 1.0,
+          ease: "expo.out",
           scrollTrigger: {
             trigger: ".blog-section",
             start: "top 82%",
+            toggleActions: "play none none reverse",
           },
         }
       );
 
       gsap.fromTo(
         ".about-blog-card",
-        { scale: 0.75, opacity: 0 },
+        { y: 70, scale: 0.92, opacity: 0 },
         {
+          y: 0,
           scale: 1,
           opacity: 1,
-          duration: 0.65,
-          stagger: 0.15,
-          ease: "power2.out",
+          duration: 1.05,
+          stagger: 0.14,
+          ease: "expo.out",
           scrollTrigger: {
             trigger: ".blog-list",
-            start: "top 82%",
+            start: "top 84%",
+            toggleActions: "play none none reverse",
           },
         }
       );

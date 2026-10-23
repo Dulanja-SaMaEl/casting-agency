@@ -73,6 +73,25 @@ export interface TestimonialItem {
   rotation: number;
 }
 
+export interface TalentCompCard {
+  id: string;
+  index: string;
+  name: string;
+  division: "SCREEN LEADS" | "COUTURE RUNWAY" | "NEW FACES";
+  bureau: string;
+  latestBooking: string;
+  accentColor: string;
+  primaryImage: string;
+  secondaryImage: string;
+  stats: {
+    height: string;
+    eyes: string;
+    hair: string;
+    specialty: string;
+  };
+  projectSlug: string;
+}
+
 export const ASSETS = {
   backToTopIcon: "https://cdn.prod.website-files.com/6889a6303ae9dc8c21421ef8/6891f3ea9daf4fb3b1af2c2b_back%20to%20top%20icon.svg",
   closeIconWhite: "https://cdn.prod.website-files.com/6889a6303ae9dc8c21421ef8/6889e77438579d2253583018_close%20icon.svg",
@@ -768,3 +787,127 @@ export const TESTIMONIALS: TestimonialItem[] = [
     rotation: -10,
   },
 ];
+
+export const TALENT_BOARD: TalentCompCard[] = [
+  {
+    id: "talent-1",
+    index: "01",
+    name: "Inès Valentin",
+    division: "SCREEN LEADS",
+    bureau: "Paris / New York",
+    latestBooking: "Velvet Nocturne (Cannes '25)",
+    accentColor: "#a7d8de",
+    primaryImage:
+      "https://cdn.prod.website-files.com/68905204603e93d7e41692c4/6891a20e87bc1144dfab1088_Portfolio%20Grid%20Image%20(1).webp",
+    secondaryImage:
+      "https://cdn.prod.website-files.com/6889a6303ae9dc8c21421ef8/688b119f599071a306072ac2_Portfolio%20Image%20One.png",
+    stats: {
+      height: "178 CM / 5'10\"",
+      eyes: "Hazel Green",
+      hair: "Chestnut",
+      specialty: "Bilingual FR/EN Lead",
+    },
+    projectSlug: "velvet-nocturne",
+  },
+  {
+    id: "talent-2",
+    index: "02",
+    name: "Kairo Vance",
+    division: "COUTURE RUNWAY",
+    bureau: "London / Milan",
+    latestBooking: "Maison Solaris AW25 Exclusives",
+    accentColor: "#f5a3a3",
+    primaryImage:
+      "https://cdn.prod.website-files.com/68905204603e93d7e41692c4/6891a23bf15693d9dd25e1e4_Portfolio%20Grid%20Image%20(2).webp",
+    secondaryImage:
+      "https://cdn.prod.website-files.com/6889a6303ae9dc8c21421ef8/688b119f5c288ecbde7adb14_Portfolio%20Image%20Two.png",
+    stats: {
+      height: "188 CM / 6'2\"",
+      eyes: "Dark Espresso",
+      hair: "Black",
+      specialty: "Architectural Runway",
+    },
+    projectSlug: "maison-solaris-aw25",
+  },
+  {
+    id: "talent-3",
+    index: "03",
+    name: "Noémi Lindberg",
+    division: "NEW FACES",
+    bureau: "Stockholm / Paris",
+    latestBooking: "Aether Eau de Parfum Global Film",
+    accentColor: "#f8c794",
+    primaryImage:
+      "https://cdn.prod.website-files.com/68905204603e93d7e41692c4/6891a25b7e026e2bc2861ca5_Portfolio%20Grid%20Image%20(3).webp",
+    secondaryImage:
+      "https://cdn.prod.website-files.com/6889a6303ae9dc8c21421ef8/688b119f61963c9e919529ff_Portfolio%20Image%20Three.png",
+    stats: {
+      height: "180 CM / 5'11\"",
+      eyes: "Ice Blue",
+      hair: "Platinum",
+      specialty: "Editorial & Movement",
+    },
+    projectSlug: "aether-parfum-campaign",
+  },
+  {
+    id: "talent-4",
+    index: "04",
+    name: "Solène Rousseau",
+    division: "SCREEN LEADS",
+    bureau: "New York / Los Angeles",
+    latestBooking: "Glass Meridian (HBO / A24)",
+    accentColor: "#cbb7f6",
+    primaryImage:
+      "https://cdn.prod.website-files.com/68905204603e93d7e41692c4/6891a271190df5a4f4098664_Portfolio%20Grid%20Image%20(4).webp",
+    secondaryImage:
+      "https://cdn.prod.website-files.com/6889a6303ae9dc8c21421ef8/688b119f4ff813b1dd225e1e_Portfolio%20Image%20Four.png",
+    stats: {
+      height: "175 CM / 5'9\"",
+      eyes: "Amber",
+      hair: "Raven",
+      specialty: "Classical & Method Drama",
+    },
+    projectSlug: "glass-meridian-series",
+  },
+  {
+    id: "talent-5",
+    index: "05",
+    name: "Taj Bennett",
+    division: "COUTURE RUNWAY",
+    bureau: "Tokyo / London",
+    latestBooking: "Kinetix GT World Premiere",
+    accentColor: "#a7d8de",
+    primaryImage:
+      "https://cdn.prod.website-files.com/68905204603e93d7e41692c4/6891a288b031411420975304_Portfolio%20Grid%20Image%20(5).webp",
+    secondaryImage:
+      "https://cdn.prod.website-files.com/68905204603e93d7e41692c4/6890a01c30df6df4e888eb4a_blog%20images%20(9).webp",
+    stats: {
+      height: "186 CM / 6'1\"",
+      eyes: "Obsidian",
+      hair: "Close Crop",
+      specialty: "Precision Stunt & Walk",
+    },
+    projectSlug: "kinetix-gt-launch",
+  },
+  {
+    id: "talent-6",
+    index: "06",
+    name: "Mira Kovács",
+    division: "NEW FACES",
+    bureau: "Budapest / Milan",
+    latestBooking: "Orpheus Contemporary Opera",
+    accentColor: "#f5a3a3",
+    primaryImage:
+      "https://cdn.prod.website-files.com/68905204603e93d7e41692c4/6891a2a2eb6865bd9e8389ae_Portfolio%20Grid%20Image%20(6).webp",
+    secondaryImage:
+      "https://cdn.prod.website-files.com/68905204603e93d7e41692c4/6890a03a3519089260f5b583_blog%20images%20(10).webp",
+    stats: {
+      height: "177 CM / 5'9.5\"",
+      eyes: "Grey Green",
+      hair: "Auburn",
+      specialty: "Contemporary Dance & Film",
+    },
+    projectSlug: "orpheus-underground",
+  },
+];
+

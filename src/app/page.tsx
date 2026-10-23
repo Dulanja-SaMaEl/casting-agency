@@ -11,6 +11,7 @@ import {
   ASSETS,
   PROJECTS,
   SERVICES,
+  TALENT_BOARD,
   TESTIMONIALS,
 } from "@/data/agencyData";
 
@@ -36,62 +37,127 @@ const COUNTERS = [
   {
     id: "counter-1",
     label: "years of experience",
+    accent: "#a7d8de",
     col1: ["3", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
     col2: ["9", "2", "3", "4", "5", "6", "7", "8", "9", "9"],
   },
   {
     id: "counter-2",
     label: "casting awards earned",
+    accent: "#f5a3a3",
     col1: ["6", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
     col2: ["8", "2", "3", "4", "5", "6", "7", "8", "9", "8"],
   },
   {
     id: "counter-3",
     label: "global productions cast",
+    accent: "#f8c794",
     col1: ["2", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
     col2: ["7", "2", "3", "4", "5", "6", "7", "8", "9", "7"],
   },
   {
     id: "counter-4",
     label: "studios served globally",
+    accent: "#cbb7f6",
     col1: ["9", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
     col2: ["4", "2", "3", "4", "5", "6", "7", "8", "9", "4"],
   },
+];
+
+const DIVISION_FILTERS = [
+  { key: "ALL", label: "All Divisions", count: "06", color: "#a7d8de" },
+  { key: "SCREEN LEADS", label: "Screen Leads", count: "02", color: "#f5a3a3" },
+  {
+    key: "COUTURE RUNWAY",
+    label: "Couture Runway",
+    count: "02",
+    color: "#f8c794",
+  },
+  { key: "NEW FACES", label: "New Faces", count: "02", color: "#cbb7f6" },
+] as const;
+
+const MARQUEE_ITEMS = [
+  { text: "THE SOCIETY OF SCREEN & RUNWAY", color: "#a7d8de" },
+  { text: "NEW YORK · PARIS · LONDON · TOKYO", color: "#f5a3a3" },
+  { text: "PRINCIPAL FILM CASTING", color: "#f8c794" },
+  { text: "HAUTE COUTURE WALKERS", color: "#cbb7f6" },
+  { text: "STREET CASTING & NEW FACES", color: "#a7d8de" },
+  { text: "AUTUMN / WINTER ROSTER OPEN", color: "#f5a3a3" },
 ];
 
 export default function HomePage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoveredService, setHoveredService] = useState<number | null>(null);
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+  const [activeDivision, setActiveDivision] = useState<string>("ALL");
+  const [hoveredTalent, setHoveredTalent] = useState<string | null>(null);
+
+  const filteredTalent =
+    activeDivision === "ALL"
+      ? TALENT_BOARD
+      : TALENT_BOARD.filter((t) => t.division === activeDivision);
+
+  const handleDivisionChange = (divKey: string) => {
+    if (divKey === activeDivision) return;
+    setActiveDivision(divKey);
+    requestAnimationFrame(() => {
+      gsap.fromTo(
+        ".society-comp-card",
+        { y: 40, opacity: 0, scale: 0.97 },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.75,
+          stagger: 0.08,
+          ease: "expo.out",
+          overwrite: "auto",
+        }
+      );
+    });
+  };
 
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
 
-      // 1. Hero Entrance Animation (a-11)
+      // 1. Hero Masthead & Editorial Cover Reveal
       gsap.fromTo(
-        ".hero-title",
-        { y: 80, opacity: 0 },
+        ".editorial-masthead-bar",
+        { y: -24, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
-          ease: "power3.out",
-          stagger: 0.1,
+          duration: 0.9,
+          ease: "expo.out",
+        }
+      );
+
+      gsap.fromTo(
+        ".hero-title",
+        { y: 95, rotateX: -22, opacity: 0 },
+        {
+          y: 0,
+          rotateX: 0,
+          opacity: 1,
+          duration: 1.15,
+          ease: "expo.out",
+          stagger: 0.12,
         }
       );
 
       gsap.fromTo(
         ".hero-badge-anim",
-        { y: 130, rotate: -15, opacity: 0 },
+        { y: 110, rotate: -15, opacity: 0, scale: 0.88 },
         {
           y: 0,
           rotate: -15,
           opacity: 1,
-          duration: 0.6,
+          scale: 1,
+          duration: 0.95,
           delay: 0.25,
-          ease: "power3.out",
-          stagger: 0.1,
+          ease: "expo.out",
+          stagger: 0.12,
         }
       );
 
@@ -100,58 +166,130 @@ export default function HomePage() {
         { width: "0%" },
         {
           width: "100%",
-          duration: 1.0,
-          delay: 0.6,
-          ease: "power3.inOut",
-          stagger: 0.12,
+          duration: 1.25,
+          delay: 0.35,
+          ease: "expo.inOut",
+          stagger: 0.15,
+        }
+      );
+
+      gsap.fromTo(
+        ".hero-image",
+        { scale: 1.22 },
+        {
+          scale: 1,
+          duration: 1.5,
+          delay: 0.35,
+          ease: "expo.out",
+          stagger: 0.15,
         }
       );
 
       gsap.fromTo(
         ".hero-inner-info-block",
-        { y: 40, opacity: 0 },
+        { y: 45, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
-          delay: 0.85,
-          ease: "power3.out",
+          duration: 1.0,
+          delay: 0.75,
+          ease: "expo.out",
         }
       );
 
-      // 2. Service Section Scroll-In Reveal
+      // 2. Service Section Smooth Scroll-In Choreography
       gsap.fromTo(
         ".service-section .section-title-inner-block",
-        { y: 60, opacity: 0 },
+        { y: 65, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
-          ease: "power3.out",
+          duration: 1.05,
+          ease: "expo.out",
           scrollTrigger: {
             trigger: ".service-section",
             start: "top 82%",
+            toggleActions: "play none none reverse",
           },
         }
       );
 
       gsap.fromTo(
         ".service-card-entrance",
-        { y: 80, opacity: 0 },
+        { y: 85, opacity: 0, scale: 0.96 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.75,
+          scale: 1,
+          duration: 1.0,
           stagger: 0.12,
-          ease: "power3.out",
+          ease: "expo.out",
           scrollTrigger: {
             trigger: ".service-grid",
-            start: "top 85%",
+            start: "top 84%",
+            toggleActions: "play none none reverse",
           },
         }
       );
 
-      // 3. Desktop-Only Sticky Scroll Choreographies (>=992px)
+      // 3. The Representation Board (Society-Inspired Roster) Smooth Scroll-In
+      gsap.fromTo(
+        ".society-board-header-reveal",
+        { y: 60, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.05,
+          stagger: 0.12,
+          ease: "expo.out",
+          scrollTrigger: {
+            trigger: ".society-board-section",
+            start: "top 82%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+
+      const compCards = gsap.utils.toArray<HTMLElement>(".society-comp-card");
+      compCards.forEach((card, i) => {
+        gsap.fromTo(
+          card,
+          { y: 80, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1.1,
+            delay: (i % 3) * 0.1,
+            ease: "expo.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 88%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+
+        const mediaWrap = card.querySelector(".society-card-media-mask");
+        if (mediaWrap) {
+          gsap.fromTo(
+            mediaWrap,
+            { clipPath: "inset(12% 0% 12% 0%)" },
+            {
+              clipPath: "inset(0% 0% 0% 0%)",
+              duration: 1.2,
+              delay: (i % 3) * 0.1,
+              ease: "expo.out",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 88%",
+                toggleActions: "play none none reverse",
+              },
+            }
+          );
+        }
+      });
+
+      // 4. Desktop-Only Sticky Scroll Choreographies (>=992px)
       mm.add("(min-width: 992px)", () => {
         // A. Horizontal Scroll Projects Section (a-23)
         gsap.set(".projects-horizontal-bg-block.one", { opacity: 1 });
@@ -164,11 +302,11 @@ export default function HomePage() {
             trigger: ".projects-section",
             start: "top top",
             end: "bottom bottom",
-            scrub: 0.5,
+            scrub: 0.6,
           },
         });
 
-        // 20% -> 25%: Letters rotateY(0deg -> 90deg)
+        // 18% -> 24%: Letters rotateY(0deg -> 90deg)
         projectsTl.fromTo(
           ".projects-letter-3d",
           { rotateY: 0 },
@@ -242,7 +380,7 @@ export default function HomePage() {
             trigger: ".about-section-title-block",
             start: "top 85%",
             end: "bottom 25%",
-            scrub: 0.5,
+            scrub: 0.6,
           },
         });
 
@@ -286,7 +424,7 @@ export default function HomePage() {
             trigger: ".testimonial-section",
             start: "top top",
             end: "bottom bottom",
-            scrub: 0.5,
+            scrub: 0.6,
           },
         });
 
@@ -313,9 +451,8 @@ export default function HomePage() {
           );
       });
 
-      // 3B. Tablet & Mobile Scroll Choreographies (<=991px)
+      // 4B. Tablet & Mobile Scroll Choreographies (<=991px)
       mm.add("(max-width: 991px)", () => {
-        // Mobile Projects Letters 3D Unfold
         gsap.fromTo(
           ".projects-letter-3d",
           { rotateY: 75, y: 30, opacity: 0 },
@@ -323,32 +460,33 @@ export default function HomePage() {
             rotateY: 0,
             y: 0,
             opacity: 1,
-            duration: 0.65,
+            duration: 0.85,
             stagger: 0.05,
-            ease: "power3.out",
+            ease: "expo.out",
             scrollTrigger: {
               trigger: ".projects-text-block",
               start: "top 88%",
+              toggleActions: "play none none reverse",
             },
           }
         );
 
-        // Mobile Project Cards Staggered Reveal + Image Scale Parallax
         const mobileProjectCards = gsap.utils.toArray<HTMLElement>(
           ".projects-card-block"
         );
         mobileProjectCards.forEach((card) => {
           gsap.fromTo(
             card,
-            { y: 60, opacity: 0 },
+            { y: 65, opacity: 0 },
             {
               y: 0,
               opacity: 1,
-              duration: 0.8,
-              ease: "power3.out",
+              duration: 0.95,
+              ease: "expo.out",
               scrollTrigger: {
                 trigger: card,
                 start: "top 86%",
+                toggleActions: "play none none reverse",
               },
             }
           );
@@ -357,7 +495,7 @@ export default function HomePage() {
           if (img) {
             gsap.fromTo(
               img,
-              { scale: 1.1 },
+              { scale: 1.12 },
               {
                 scale: 1,
                 ease: "none",
@@ -372,23 +510,22 @@ export default function HomePage() {
           }
         });
 
-        // Mobile About Headline Reveal (since .text-overlay is hidden on mobile)
         gsap.fromTo(
           ".about-section-title",
-          { y: 40, opacity: 0 },
+          { y: 45, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 0.8,
-            ease: "power3.out",
+            duration: 0.95,
+            ease: "expo.out",
             scrollTrigger: {
               trigger: ".about-section-title-block",
               start: "top 86%",
+              toggleActions: "play none none reverse",
             },
           }
         );
 
-        // Mobile Testimonial Cards Scroll-In Stack
         const mobileTestimonialCards = gsap.utils.toArray<HTMLElement>(
           ".testimonial-inner-info-block"
         );
@@ -400,50 +537,53 @@ export default function HomePage() {
               y: 0,
               opacity: 1,
               scale: 1,
-              duration: 0.75,
+              duration: 0.9,
               delay: (i % 2) * 0.08,
-              ease: "power3.out",
+              ease: "expo.out",
               scrollTrigger: {
                 trigger: card,
                 start: "top 88%",
+                toggleActions: "play none none reverse",
               },
             }
           );
         });
       });
 
-      // 4. About Badge & Description Scroll-In Reveal
+      // 5. About Badge & Description Smooth Scroll-In Reveal
       gsap.fromTo(
         ".about-subtext-block",
-        { y: 50, opacity: 0 },
+        { y: 55, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.7,
-          ease: "power3.out",
+          duration: 0.95,
+          ease: "expo.out",
           scrollTrigger: {
             trigger: ".about-title-grid",
             start: "top 85%",
+            toggleActions: "play none none reverse",
           },
         }
       );
 
       gsap.fromTo(
         ".about-desc-reveal",
-        { y: 60, opacity: 0 },
+        { y: 65, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
-          ease: "power3.out",
+          duration: 1.05,
+          ease: "expo.out",
           scrollTrigger: {
             trigger: ".about-info-grid-two",
             start: "top 85%",
+            toggleActions: "play none none reverse",
           },
         }
       );
 
-      // 5. Slot-Machine Odometer Counters (a-25)
+      // 6. Slot-Machine Odometer Counters (a-25)
       gsap.set(".about-counter-frist-number-block", { yPercent: -90 });
       gsap.set(".about-counter-secend-number-block", { yPercent: 0 });
 
@@ -453,70 +593,75 @@ export default function HomePage() {
         onEnter: () => {
           gsap.fromTo(
             ".about-counter-box",
-            { y: 40, opacity: 0 },
+            { y: 50, opacity: 0 },
             {
               y: 0,
               opacity: 1,
-              duration: 0.6,
+              duration: 0.85,
               stagger: 0.1,
-              ease: "power2.out",
+              ease: "expo.out",
             }
           );
           gsap.to(".about-counter-frist-number-block", {
             yPercent: 0,
-            duration: 2.0,
-            ease: "power2.inOut",
+            duration: 2.1,
+            ease: "power3.inOut",
           });
           gsap.to(".about-counter-secend-number-block", {
             yPercent: -90,
-            duration: 2.0,
-            ease: "power2.inOut",
+            duration: 2.1,
+            ease: "power3.inOut",
           });
         },
       });
 
-      // 6. Video & Contact Section Scroll-In Reveal
+      // 7. Video, Testimonial Header & Contact Section Smooth Reveal
       gsap.fromTo(
         ".video-section",
-        { scale: 0.96, opacity: 0.5 },
+        { clipPath: "inset(6% 4% 6% 4%)", scale: 0.97, opacity: 0.6 },
         {
+          clipPath: "inset(0% 0% 0% 0%)",
           scale: 1,
           opacity: 1,
-          duration: 0.9,
-          ease: "power2.out",
+          duration: 1.15,
+          ease: "expo.out",
           scrollTrigger: {
             trigger: ".video-section",
-            start: "top 85%",
+            start: "top 84%",
+            toggleActions: "play none none reverse",
           },
         }
       );
 
       gsap.fromTo(
         ".testimonial-inner-block",
-        { y: 60, opacity: 0 },
+        { y: 65, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
-          ease: "power3.out",
+          duration: 1.05,
+          ease: "expo.out",
           scrollTrigger: {
             trigger: ".testimonial-section",
             start: "top 80%",
+            toggleActions: "play none none reverse",
           },
         }
       );
 
       gsap.fromTo(
         ".concat-info-block",
-        { y: 60, opacity: 0 },
+        { y: 70, opacity: 0, scale: 0.96 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
-          ease: "power3.out",
+          scale: 1,
+          duration: 1.05,
+          ease: "expo.out",
           scrollTrigger: {
             trigger: ".contact-info-section",
             start: "top 80%",
+            toggleActions: "play none none reverse",
           },
         }
       );
@@ -532,12 +677,36 @@ export default function HomePage() {
   const boxClasses = ["box-1", "box-2", "box-3", "box-4"];
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} className="editorial-page-shell">
+      {/* Subtle Print-Magazine Grain Overlay (Zero GPU Blur Cost) */}
+      <div className="editorial-grain-overlay" aria-hidden="true" />
+
       <Navbar variant="light" />
 
-      {/* HERO SECTION */}
-      <section className="section hero-section">
+      {/* HERO SECTION (Reflux × The Society Cover Issue) */}
+      <section className="section hero-section" style={{ position: "relative" }}>
         <div className="w-layout-blockcontainer container w-container">
+          {/* Editorial Magazine Masthead Metadata Bar */}
+          <div className="editorial-masthead-bar">
+            <div className="editorial-masthead-item">
+              <span
+                className="editorial-color-dot"
+                style={{ backgroundColor: "#a7d8de" }}
+              />
+              <span>ISSUE Nº 04 — THE CASTING SOCIETY</span>
+            </div>
+            <div className="editorial-masthead-item editorial-masthead-center">
+              <span>BUREAUS: NEW YORK · PARIS · LONDON · TOKYO</span>
+            </div>
+            <div className="editorial-masthead-item">
+              <span
+                className="editorial-color-dot"
+                style={{ backgroundColor: "#f5a3a3" }}
+              />
+              <span>SEASON AW25 / DIRECT BOOKING OPEN</span>
+            </div>
+          </div>
+
           <div className="hero-main-block">
             <div className="hero-inner-block">
               {/* Row 1: RE + Image 1 + CREATE */}
@@ -548,13 +717,22 @@ export default function HomePage() {
                     <h2 className="hero-small-text">casting</h2>
                   </div>
                 </div>
-                <div className="hero-centar-block" style={{ overflow: "hidden" }}>
+                <div
+                  className="hero-centar-block"
+                  style={{ overflow: "hidden", position: "relative" }}
+                >
                   <img
                     src={ASSETS.heroImage1}
                     loading="eager"
                     alt="Principal Talent Portrait"
                     className="hero-image"
                   />
+                  <span
+                    className="editorial-frame-tag"
+                    style={{ backgroundColor: "#a7d8de" }}
+                  >
+                    FIG. 01
+                  </span>
                 </div>
                 <div className="hero-text-right-block">
                   <h1 className="hero-title">create</h1>
@@ -569,13 +747,22 @@ export default function HomePage() {
                     <h2 className="hero-small-text">talent</h2>
                   </div>
                 </div>
-                <div className="hero-centar-block" style={{ overflow: "hidden" }}>
+                <div
+                  className="hero-centar-block"
+                  style={{ overflow: "hidden", position: "relative" }}
+                >
                   <img
                     src={ASSETS.heroImage2}
                     loading="eager"
                     alt="Editorial Runway Casting"
                     className="hero-image"
                   />
+                  <span
+                    className="editorial-frame-tag"
+                    style={{ backgroundColor: "#f8c794" }}
+                  >
+                    FIG. 02
+                  </span>
                 </div>
               </div>
             </div>
@@ -602,13 +789,37 @@ export default function HomePage() {
                     className="hero-button-icon"
                   />
                 </Link>
-                <div className="hero-side-icon-block" />
-                <div className="hero-side-icon-block two" />
+                <div
+                  className="hero-side-icon-block"
+                  style={{ backgroundColor: "#f5a3a3" }}
+                />
+                <div
+                  className="hero-side-icon-block two"
+                  style={{ backgroundColor: "#cbb7f6" }}
+                />
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* KINETIC EDITORIAL RUNWAY TICKER STRIP */}
+      <div className="editorial-marquee-strip" aria-label="Agency Divisions Ticker">
+        <div className="editorial-marquee-track">
+          {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, idx) => (
+            <div key={idx} className="editorial-marquee-item">
+              <span
+                className="editorial-marquee-pill"
+                style={{ backgroundColor: item.color }}
+              >
+                0{(idx % 6) + 1}
+              </span>
+              <span className="editorial-marquee-text">{item.text}</span>
+              <span className="editorial-marquee-sep">✦</span>
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* SERVICES SECTION */}
       <section className="section service-section">
@@ -644,7 +855,7 @@ export default function HomePage() {
                             ? "translate3d(0, -50px, 0)"
                             : "translate3d(0, 0px, 0)",
                           transition:
-                            "transform 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955)",
+                            "transform 0.55s cubic-bezier(0.16, 1, 0.3, 1)",
                         } as React.CSSProperties
                       }
                     >
@@ -664,23 +875,42 @@ export default function HomePage() {
                             ? "scale3d(0.95, 0.95, 1)"
                             : "scale3d(1, 1, 1)",
                           transition:
-                            "background-color 0.4s ease, transform 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955)",
+                            "background-color 0.45s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1)",
                         }}
                       />
-                      <div className="service-icon-box">
-                        <img
-                          src={service.icon}
-                          loading="lazy"
-                          alt={service.title}
-                          className="service-icon"
-                        />
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "flex-start",
+                          justifyContent: "space-between",
+                          width: "100%",
+                          position: "relative",
+                          zIndex: 1,
+                        }}
+                      >
+                        <div className="service-icon-box">
+                          <img
+                            src={service.icon}
+                            loading="lazy"
+                            alt={service.title}
+                            className="service-icon"
+                          />
+                        </div>
+                        <span
+                          className="editorial-card-index"
+                          style={{
+                            backgroundColor: service.color,
+                          }}
+                        >
+                          0{idx + 1} / 04
+                        </span>
                       </div>
                       <div
                         className="service-box-content-block"
                         style={{
                           maxHeight: isHovered ? "160px" : "40px",
                           transition:
-                            "max-height 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955)",
+                            "max-height 0.55s cubic-bezier(0.16, 1, 0.3, 1)",
                         }}
                       >
                         <div className="service-box-title-block">
@@ -692,7 +922,7 @@ export default function HomePage() {
                           className="service-box-description-block"
                           style={{
                             opacity: isHovered ? 1 : 0,
-                            transition: "opacity 0.4s ease",
+                            transition: "opacity 0.45s ease",
                           }}
                         >
                           <p className="service-box-description">
@@ -705,6 +935,184 @@ export default function HomePage() {
                 );
               })}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* THE SOCIETY MANAGEMENT INSPIRED SECTION: THE REPRESENTATION BOARD (COLORFUL ARTISTIC COMP-CARDS) */}
+      <section className="section society-board-section">
+        <div className="w-layout-blockcontainer container w-container">
+          <div className="society-board-header">
+            <div className="society-board-title-wrap society-board-header-reveal">
+              <div className="society-eyebrow-row">
+                <span
+                  className="society-eyebrow-pill"
+                  style={{ backgroundColor: "#f8c794" }}
+                >
+                  REPRESENTATION ARCHIVE
+                </span>
+                <span className="society-eyebrow-code">
+                  DIRECT BOOKING BOARD — AW25
+                </span>
+              </div>
+              <h2 className="section-title" style={{ marginTop: "10px" }}>
+                faces that command the frame
+              </h2>
+            </div>
+
+            {/* Interactive Division Switcher Pills */}
+            <div
+              className="society-division-tabs society-board-header-reveal"
+              role="tablist"
+              aria-label="Talent Divisions"
+            >
+              {DIVISION_FILTERS.map((tab) => {
+                const isActive = activeDivision === tab.key;
+                return (
+                  <button
+                    key={tab.key}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    onClick={() => handleDivisionChange(tab.key)}
+                    className={`society-division-tab ${
+                      isActive ? "is-active" : ""
+                    }`}
+                    style={
+                      {
+                        "--tab-color": tab.color,
+                        backgroundColor: isActive ? tab.color : "#ffffff",
+                      } as React.CSSProperties
+                    }
+                  >
+                    <span className="society-tab-label">{tab.label}</span>
+                    <span className="society-tab-count">{tab.count}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Editorial Tear-Sheet / Comp-Card Grid */}
+          <div className="society-comp-grid">
+            {filteredTalent.map((talent, idx) => {
+              const isCardHovered = hoveredTalent === talent.id;
+              const offsetClass =
+                idx % 3 === 1
+                  ? "society-card-offset-mid"
+                  : idx % 3 === 2
+                  ? "society-card-offset-right"
+                  : "";
+              return (
+                <article
+                  key={talent.id}
+                  onMouseEnter={() => setHoveredTalent(talent.id)}
+                  onMouseLeave={() => setHoveredTalent(null)}
+                  className={`society-comp-card ${offsetClass}`}
+                  style={
+                    {
+                      "--card-accent": talent.accentColor,
+                    } as React.CSSProperties
+                  }
+                >
+                  <Link
+                    href={`/portfolio/${talent.projectSlug}`}
+                    className="society-comp-card-link"
+                  >
+                    {/* Top Tear-Sheet Metadata Header */}
+                    <div
+                      className="society-card-topbar"
+                      style={{ backgroundColor: talent.accentColor }}
+                    >
+                      <span className="society-card-serial">
+                        FOLIO Nº {talent.index}
+                      </span>
+                      <span className="society-card-division-tag">
+                        {talent.division}
+                      </span>
+                      <span className="society-card-bureau">
+                        {talent.bureau}
+                      </span>
+                    </div>
+
+                    {/* Dual-Image Lookbook Viewport (Polaroid <-> Campaign Crossfade) */}
+                    <div className="society-card-media-mask">
+                      <img
+                        src={talent.primaryImage}
+                        loading="lazy"
+                        alt={`${talent.name} — ${talent.division}`}
+                        className="society-card-img primary"
+                        style={{
+                          transform: isCardHovered
+                            ? "scale3d(1.07, 1.07, 1)"
+                            : "scale3d(1, 1, 1)",
+                          opacity: isCardHovered ? 0 : 1,
+                        }}
+                      />
+                      <img
+                        src={talent.secondaryImage}
+                        loading="lazy"
+                        alt={`${talent.name} Campaign Look`}
+                        className="society-card-img secondary"
+                        style={{
+                          transform: isCardHovered
+                            ? "scale3d(1.03, 1.03, 1)"
+                            : "scale3d(1.12, 1.12, 1)",
+                          opacity: isCardHovered ? 1 : 0,
+                        }}
+                      />
+
+                      {/* Floating Booking Pill */}
+                      <div className="society-card-booking-chip">
+                        <span
+                          className="editorial-color-dot"
+                          style={{ backgroundColor: talent.accentColor }}
+                        />
+                        <span>{talent.latestBooking}</span>
+                      </div>
+                    </div>
+
+                    {/* Bottom Comp-Card Typography & Measurements */}
+                    <div className="society-card-footer">
+                      <div className="society-card-name-row">
+                        <h3 className="society-card-name">{talent.name}</h3>
+                        <span
+                          className="society-card-arrow"
+                          style={{
+                            backgroundColor: isCardHovered
+                              ? talent.accentColor
+                              : "transparent",
+                          }}
+                        >
+                          ↗
+                        </span>
+                      </div>
+
+                      <div className="society-card-specs-grid">
+                        <div className="society-spec-cell">
+                          <span className="society-spec-key">HEIGHT</span>
+                          <span className="society-spec-val">
+                            {talent.stats.height}
+                          </span>
+                        </div>
+                        <div className="society-spec-cell">
+                          <span className="society-spec-key">EYES / HAIR</span>
+                          <span className="society-spec-val">
+                            {talent.stats.eyes} · {talent.stats.hair}
+                          </span>
+                        </div>
+                        <div className="society-spec-cell">
+                          <span className="society-spec-key">DISCIPLINE</span>
+                          <span className="society-spec-val">
+                            {talent.stats.specialty}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -774,6 +1182,12 @@ export default function HomePage() {
                       ? "three"
                       : "four";
                   const isProjHovered = hoveredProject === idx;
+                  const projectColors = [
+                    "#a7d8de",
+                    "#f5a3a3",
+                    "#f8c794",
+                    "#cbb7f6",
+                  ];
                   return (
                     <div
                       key={project.id}
@@ -787,7 +1201,7 @@ export default function HomePage() {
                       >
                         <div
                           className="projects-right-image-block"
-                          style={{ overflow: "hidden" }}
+                          style={{ overflow: "hidden", position: "relative" }}
                         >
                           <img
                             src={project.image}
@@ -796,12 +1210,18 @@ export default function HomePage() {
                             className="projects-right-image"
                             style={{
                               transform: isProjHovered
-                                ? "scale3d(0.9, 0.9, 1)"
+                                ? "scale3d(0.92, 0.92, 1)"
                                 : "scale3d(1, 1, 1)",
                               transition:
-                                "transform 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955)",
+                                "transform 0.55s cubic-bezier(0.16, 1, 0.3, 1)",
                             }}
                           />
+                          <span
+                            className="editorial-frame-tag"
+                            style={{ backgroundColor: projectColors[idx] }}
+                          >
+                            ARCHIVE 0{idx + 1} — {project.year}
+                          </span>
                         </div>
                         <div className="projects-side-info-block">
                           <h2 className="horizontal-projects-titles">
@@ -870,8 +1290,28 @@ export default function HomePage() {
             <div className="about-counter-block">
               <div className="w-layout-grid about-counter-grid">
                 {COUNTERS.map((counter) => (
-                  <div key={counter.id} className="about-counter-box">
-                    <div className="about-counter-text">{counter.label}</div>
+                  <div
+                    key={counter.id}
+                    className="about-counter-box editorial-counter-card"
+                    style={
+                      {
+                        "--counter-accent": counter.accent,
+                      } as React.CSSProperties
+                    }
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "8px",
+                      }}
+                    >
+                      <span
+                        className="editorial-color-dot"
+                        style={{ backgroundColor: counter.accent }}
+                      />
+                      <div className="about-counter-text">{counter.label}</div>
+                    </div>
                     <div className="about-counter-inner-block">
                       <div className="about-counter-frist-number-block">
                         {counter.col1.map((digit, i) => (
@@ -898,7 +1338,7 @@ export default function HomePage() {
       </section>
 
       {/* VIDEO SECTION */}
-      <section className="section video-section">
+      <section className="section video-section" style={{ position: "relative" }}>
         <div className="background-video-block w-background-video w-background-video-atom">
           <video
             autoPlay
@@ -912,6 +1352,25 @@ export default function HomePage() {
             <source src={ASSETS.videoMp4} />
             <source src={ASSETS.videoWebm} />
           </video>
+
+          {/* Editorial Film Strip Caption Bar */}
+          <div className="editorial-video-caption-bar">
+            <div className="editorial-video-pill-group">
+              <span
+                className="society-eyebrow-pill"
+                style={{ backgroundColor: "#a7d8de", color: "#000000" }}
+              >
+                SHOWREEL 2025
+              </span>
+              <span className="editorial-video-meta">
+                CASTING ARCHIVE — CANNES · PARIS · VENICE · NEW YORK
+              </span>
+            </div>
+            <Link href="/portfolio" className="editorial-video-cta">
+              <span>EXPLORE FULL ARCHIVE</span>
+              <span>↗</span>
+            </Link>
+          </div>
         </div>
       </section>
 

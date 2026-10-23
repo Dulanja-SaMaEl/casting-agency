@@ -48,8 +48,483 @@ select:focus-visible {
 .hero-icon-inner-block:active,
 .back-to-top:active,
 .dropdown-menu-button:active,
-.nav-sidebar-logo-block:active {
+.nav-sidebar-logo-block:active,
+.society-division-tab:active {
   transform: scale3d(0.96, 0.96, 1);
+}
+
+/* ==========================================================================
+   THE SOCIETY × REFLUX COLORFUL EDITORIAL SYSTEM
+   ========================================================================== */
+
+/* Fixed Print-Magazine Grain Overlay (Zero GPU Blur Overhead) */
+.editorial-grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 990;
+  pointer-events: none;
+  opacity: 0.024;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Hero Cover Masthead Metadata Strip */
+.editorial-masthead-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 18px;
+  margin-bottom: 36px;
+  border: 1px solid var(--dark);
+  border-radius: var(--_typography---border-radius);
+  background-color: #faf9f6;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.editorial-masthead-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.editorial-color-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1px solid var(--dark);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* Floating Architectural Frame Tags */
+.editorial-frame-tag {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 3;
+  padding: 4px 10px;
+  border: 1px solid var(--dark);
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dark);
+  line-height: 1.3;
+  pointer-events: none;
+}
+
+.editorial-card-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 12px;
+  border: 1px solid var(--dark);
+  border-radius: 999px;
+  font-family: var(--_typography---title-font);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--dark);
+  line-height: 1;
+}
+
+/* Kinetic Editorial Runway Marquee Strip */
+.editorial-marquee-strip {
+  width: 100%;
+  overflow: hidden;
+  border-top: 1px solid var(--dark);
+  border-bottom: 1px solid var(--dark);
+  background-color: #faf9f6;
+  padding: 16px 0;
+  margin-bottom: 110px;
+}
+
+.editorial-marquee-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: editorialMarquee 32s linear infinite;
+}
+
+.editorial-marquee-strip:hover .editorial-marquee-track {
+  animation-play-state: paused;
+}
+
+.editorial-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding-right: 28px;
+}
+
+.editorial-marquee-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 10px;
+  border: 1px solid var(--dark);
+  border-radius: 999px;
+  font-family: var(--_typography---title-font);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--dark);
+}
+
+.editorial-marquee-text {
+  font-family: var(--_typography---title-font);
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dark);
+}
+
+.editorial-marquee-sep {
+  font-size: 14px;
+  color: var(--dark);
+  opacity: 0.45;
+  padding-left: 8px;
+}
+
+@keyframes editorialMarquee {
+  0% {
+    transform: translate3d(0%, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* The Representation Board (Society-Inspired Roster & Comp-Cards) */
+.society-board-section {
+  padding-top: 20px;
+  padding-bottom: 160px;
+  position: relative;
+}
+
+.society-board-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px;
+  margin-bottom: 64px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--dark);
+}
+
+.society-eyebrow-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.society-eyebrow-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border: 1px solid var(--dark);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dark);
+}
+
+.society-eyebrow-code {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #555555;
+}
+
+.society-division-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.society-division-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 20px;
+  border: 1px solid var(--dark);
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--_typography---body-font);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dark);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.society-division-tab:hover {
+  background-color: var(--tab-color) !important;
+  transform: translate3d(0, -2px, 0);
+  box-shadow: 0 6px 0 0 var(--dark);
+}
+
+.society-division-tab.is-active {
+  box-shadow: 0 4px 0 0 var(--dark);
+}
+
+.society-tab-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 22px;
+  padding: 0 6px;
+  border: 1px solid var(--dark);
+  border-radius: 999px;
+  background-color: var(--white);
+  font-family: var(--_typography---title-font);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Asymmetrical 3-Column Magazine Comp-Card Grid */
+.society-comp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 36px 30px;
+  align-items: start;
+}
+
+@media screen and (min-width: 992px) {
+  .society-card-offset-mid {
+    margin-top: 48px;
+  }
+  .society-card-offset-right {
+    margin-top: 20px;
+  }
+}
+
+.society-comp-card {
+  border: 1px solid var(--dark);
+  border-radius: var(--_typography---border-radius);
+  background-color: var(--white);
+  overflow: hidden;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.society-comp-card:hover {
+  transform: translate3d(0, -8px, 0);
+  box-shadow: 0 14px 0 0 var(--card-accent, #a7d8de), 0 14px 0 1px var(--dark);
+}
+
+.society-comp-card-link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--dark);
+}
+
+.society-card-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--dark);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.society-card-serial {
+  font-family: var(--_typography---title-font);
+  font-size: 15px;
+  letter-spacing: 0.08em;
+}
+
+.society-card-division-tag {
+  padding: 2px 8px;
+  background-color: var(--white);
+  border: 1px solid var(--dark);
+  border-radius: 999px;
+  font-size: 10px;
+}
+
+.society-card-bureau {
+  opacity: 0.85;
+  font-size: 10px;
+}
+
+.society-card-media-mask {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+  background-color: #f3f2ee;
+  border-bottom: 1px solid var(--dark);
+}
+
+.society-card-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.society-card-booking-chip {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background-color: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--dark);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.society-card-footer {
+  padding: 20px 18px 18px;
+  background-color: var(--white);
+}
+
+.society-card-name-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.society-card-name {
+  font-family: var(--_typography---title-font);
+  font-size: 38px;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.society-card-arrow {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--dark);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  font-weight: 600;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.35s ease;
+}
+
+.society-comp-card:hover .society-card-arrow {
+  transform: rotate(45deg);
+}
+
+.society-card-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(0, 0, 0, 0.14);
+}
+
+.society-spec-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.society-spec-key {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #666666;
+}
+
+.society-spec-val {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Video Section Editorial Film Strip Bar */
+.editorial-video-caption-bar {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 20px;
+  background-color: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--dark);
+  border-radius: var(--_typography---border-radius);
+}
+
+.editorial-video-pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.editorial-video-meta {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dark);
+}
+
+.editorial-video-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: var(--dark);
+  color: var(--white);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.editorial-video-cta:hover {
+  transform: translate3d(0, -2px, 0);
 }
 
 /* Desktop-only visibility rules (keeps sticky scroll 100% untouched) */
@@ -106,6 +581,27 @@ select:focus-visible {
 
   .dropdown-menu-button.w-nav-button {
     display: inline-flex !important;
+  }
+
+  .editorial-masthead-center {
+    display: none;
+  }
+
+  .editorial-marquee-strip {
+    margin-bottom: 64px;
+  }
+
+  .society-board-section {
+    padding-bottom: 90px;
+  }
+
+  .society-comp-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .society-card-media-mask {
+    height: 380px;
   }
 
   /* Home Service Cards: Always reveal descriptions & subtle pastel tint on touch devices */
@@ -209,6 +705,15 @@ select:focus-visible {
     padding-bottom: 64px;
   }
 
+  .editorial-masthead-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 10px 14px;
+    margin-bottom: 24px;
+    font-size: 10px;
+  }
+
   /* Fluid Hero Typography & Image Proportions */
   .hero-title {
     font-size: clamp(46px, 14.5vw, 90px) !important;
@@ -219,6 +724,10 @@ select:focus-visible {
     height: clamp(56px, 15vw, 96px) !important;
     border-radius: 6px;
     object-fit: cover;
+  }
+
+  .editorial-frame-tag {
+    display: none;
   }
 
   .hero-grid-block,
@@ -260,6 +769,28 @@ select:focus-visible {
   .footer-title {
     font-size: clamp(38px, 11vw, 54px) !important;
     line-height: 1.12 !important;
+  }
+
+  /* Single-column Comp-Card Grid on phones */
+  .society-board-header {
+    margin-bottom: 36px;
+    padding-bottom: 20px;
+  }
+
+  .society-comp-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .society-card-media-mask {
+    height: 360px;
+  }
+
+  .editorial-video-caption-bar {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    padding: 12px 14px;
   }
 
   /* Single-column Testimonial Stack on phones for full readability */
@@ -336,6 +867,21 @@ select:focus-visible {
   .service-box {
     min-height: 250px;
     padding: 26px 20px 24px !important;
+  }
+
+  .society-division-tabs {
+    width: 100%;
+  }
+
+  .society-division-tab {
+    flex: 1 1 calc(50% - 8px);
+    justify-content: space-between;
+    padding: 10px 14px;
+    font-size: 11px;
+  }
+
+  .society-card-specs-grid {
+    grid-template-columns: 1fr 1fr;
   }
 
   .projects-text-grid {

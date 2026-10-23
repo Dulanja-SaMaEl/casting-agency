@@ -21,23 +21,23 @@ export default function BlogPage() {
       // Breadcrumb header entrance
       gsap.fromTo(
         ".breadcrumb-title",
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" }
+        { y: 60, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1.0, ease: "expo.out" }
       );
 
-      // Individual blog cards entrance on scroll
+      // Individual blog cards entrance + curtain reveal on scroll
       const blogCards = gsap.utils.toArray<HTMLElement>(
         ".portfolio-inner-blog-main-block"
       );
       blogCards.forEach((card) => {
         gsap.fromTo(
           card,
-          { y: 70, opacity: 0 },
+          { y: 75, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 0.9,
-            ease: "power3.out",
+            duration: 1.05,
+            ease: "expo.out",
             scrollTrigger: {
               trigger: card,
               start: "top 88%",
@@ -45,6 +45,24 @@ export default function BlogPage() {
             },
           }
         );
+
+        const imgMainBlock = card.querySelector(".blog-inner-image-main-block");
+        if (imgMainBlock) {
+          gsap.fromTo(
+            imgMainBlock,
+            { clipPath: "inset(10% 0% 10% 0%)" },
+            {
+              clipPath: "inset(0% 0% 0% 0%)",
+              duration: 1.15,
+              ease: "expo.out",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 88%",
+                toggleActions: "play none none reverse",
+              },
+            }
+          );
+        }
       });
 
       const mm = gsap.matchMedia();

@@ -34,18 +34,37 @@ export default function TeamPage() {
       rows.forEach((row) => {
         gsap.fromTo(
           row,
-          { y: 65, opacity: 0 },
+          { y: 75, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 0.75,
-            ease: "power3.out",
+            duration: 1.05,
+            ease: "expo.out",
             scrollTrigger: {
               trigger: row,
-              start: "top 85%",
+              start: "top 86%",
+              toggleActions: "play none none reverse",
             },
           }
         );
+
+        const imgBlock = row.querySelector(".team-image-block");
+        if (imgBlock) {
+          gsap.fromTo(
+            imgBlock,
+            { clipPath: "inset(10% 0% 10% 0%)" },
+            {
+              clipPath: "inset(0% 0% 0% 0%)",
+              duration: 1.15,
+              ease: "expo.out",
+              scrollTrigger: {
+                trigger: row,
+                start: "top 86%",
+                toggleActions: "play none none reverse",
+              },
+            }
+          );
+        }
       });
     },
     { scope: containerRef }
