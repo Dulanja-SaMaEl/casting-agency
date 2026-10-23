@@ -32,15 +32,16 @@ export default function ContactUsPage() {
 
       gsap.fromTo(
         ".contact-left-block .section-title-inner-block",
-        { y: 28, opacity: 0 },
+        { y: 20, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.7,
-          ease: "power3.out",
+          duration: 0.55,
+          ease: "power2.out",
+          clearProps: "transform",
           scrollTrigger: {
             trigger: ".contact-info-section-one",
-            start: "top 95%",
+            start: "top 88%",
             toggleActions: "play none none none",
           },
         }
@@ -48,16 +49,17 @@ export default function ContactUsPage() {
 
       gsap.fromTo(
         ".contact-content-inner-block",
-        { y: 28, opacity: 0 },
+        { y: 20, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.68,
-          stagger: 0.06,
-          ease: "power3.out",
+          duration: 0.55,
+          stagger: 0.05,
+          ease: "power2.out",
+          clearProps: "transform",
           scrollTrigger: {
             trigger: ".contact-content-grid",
-            start: "top 95%",
+            start: "top 88%",
             toggleActions: "play none none none",
           },
         }
@@ -65,15 +67,16 @@ export default function ContactUsPage() {
 
       gsap.fromTo(
         ".contact-form-main-block",
-        { y: 32, opacity: 0 },
+        { y: 22, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.72,
-          ease: "power3.out",
+          duration: 0.58,
+          ease: "power2.out",
+          clearProps: "transform",
           scrollTrigger: {
             trigger: ".contact-right-block",
-            start: "top 95%",
+            start: "top 88%",
             toggleActions: "play none none none",
           },
         }
@@ -81,15 +84,16 @@ export default function ContactUsPage() {
 
       gsap.fromTo(
         ".contact-map-block",
-        { y: 30, opacity: 0 },
+        { y: 22, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.72,
-          ease: "power3.out",
+          duration: 0.58,
+          ease: "power2.out",
+          clearProps: "transform",
           scrollTrigger: {
             trigger: ".contact-map-block",
-            start: "top 95%",
+            start: "top 88%",
             toggleActions: "play none none none",
           },
         }

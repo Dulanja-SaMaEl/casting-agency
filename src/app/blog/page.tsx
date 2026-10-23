@@ -32,15 +32,16 @@ export default function BlogPage() {
       blogCards.forEach((card) => {
         gsap.fromTo(
           card,
-          { y: 32, opacity: 0 },
+          { y: 22, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 0.72,
-            ease: "power3.out",
+            duration: 0.58,
+            ease: "power2.out",
+            clearProps: "transform",
             scrollTrigger: {
               trigger: card,
-              start: "top 95%",
+              start: "top 88%",
               toggleActions: "play none none none",
             },
           }

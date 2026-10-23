@@ -34,15 +34,16 @@ export default function TeamPage() {
       rows.forEach((row) => {
         gsap.fromTo(
           row,
-          { y: 32, opacity: 0 },
+          { y: 20, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 0.72,
-            ease: "power3.out",
+            duration: 0.55,
+            ease: "power2.out",
+            clearProps: "transform",
             scrollTrigger: {
               trigger: row,
-              start: "top 95%",
+              start: "top 88%",
               toggleActions: "play none none none",
             },
           }

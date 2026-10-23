@@ -33,16 +33,17 @@ export default function ServicePage() {
       items.forEach((item, i) => {
         gsap.fromTo(
           item,
-          { y: 32, opacity: 0 },
+          { y: 22, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 0.7,
+            duration: 0.58,
             delay: (i % 3) * 0.04,
-            ease: "power3.out",
+            ease: "power2.out",
+            clearProps: "transform",
             scrollTrigger: {
               trigger: item,
-              start: "top 96%",
+              start: "top 88%",
               toggleActions: "play none none none",
             },
           }

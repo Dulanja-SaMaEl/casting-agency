@@ -173,16 +173,17 @@ export default function AboutUsPage() {
       // 2. Creative Editorial Divisions Matrix Smooth Scroll-In Reveal
       gsap.fromTo(
         ".service-title-grid > div",
-        { y: 28, opacity: 0 },
+        { y: 20, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.72,
-          stagger: 0.08,
-          ease: "power3.out",
+          duration: 0.55,
+          stagger: 0.06,
+          ease: "power2.out",
+          clearProps: "transform",
           scrollTrigger: {
             trigger: ".service-two-section",
-            start: "top 95%",
+            start: "top 88%",
             toggleActions: "play none none none",
           },
         }
@@ -194,17 +195,18 @@ export default function AboutUsPage() {
       divisionCards.forEach((card, i) => {
         gsap.fromTo(
           card,
-          { y: 38, opacity: 0, scale: 0.97 },
+          { y: 22, opacity: 0, scale: 0.98 },
           {
             y: 0,
             opacity: 1,
             scale: 1,
-            duration: 0.75,
-            delay: (i % 3) * 0.06,
-            ease: "power3.out",
+            duration: 0.58,
+            delay: (i % 3) * 0.05,
+            ease: "power2.out",
+            clearProps: "transform,scale",
             scrollTrigger: {
               trigger: card,
-              start: "top 95%",
+              start: "top 88%",
               toggleActions: "play none none none",
             },
           }
@@ -214,15 +216,15 @@ export default function AboutUsPage() {
         if (lookbookFrame) {
           gsap.fromTo(
             lookbookFrame,
-            { clipPath: "inset(12% 6% 12% 6%)" },
+            { clipPath: "inset(8% 4% 8% 4%)" },
             {
               clipPath: "inset(0% 0% 0% 0%)",
-              duration: 0.85,
-              delay: (i % 3) * 0.06,
-              ease: "expo.out",
+              duration: 0.65,
+              delay: (i % 3) * 0.05,
+              ease: "power2.out",
               scrollTrigger: {
                 trigger: card,
-                start: "top 95%",
+                start: "top 88%",
                 toggleActions: "play none none none",
               },
             }
@@ -233,16 +235,17 @@ export default function AboutUsPage() {
       // 3. Team Pills Section Early & Smooth Scroll-In Reveal
       gsap.fromTo(
         ".team-title-grid > div",
-        { y: 28, opacity: 0 },
+        { y: 20, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.7,
-          stagger: 0.06,
-          ease: "power3.out",
+          duration: 0.55,
+          stagger: 0.05,
+          ease: "power2.out",
+          clearProps: "transform",
           scrollTrigger: {
             trigger: ".team-section",
-            start: "top 95%",
+            start: "top 88%",
             toggleActions: "play none none none",
           },
         }
@@ -250,16 +253,17 @@ export default function AboutUsPage() {
 
       gsap.fromTo(
         ".team-list-wrapper",
-        { y: 28, opacity: 0 },
+        { y: 20, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.68,
-          stagger: 0.05,
-          ease: "power3.out",
+          duration: 0.55,
+          stagger: 0.04,
+          ease: "power2.out",
+          clearProps: "transform",
           scrollTrigger: {
             trigger: ".team-grid",
-            start: "top 95%",
+            start: "top 88%",
             toggleActions: "play none none none",
           },
         }
@@ -268,15 +272,16 @@ export default function AboutUsPage() {
       // 4. Dark Blog Cards Early & Smooth Reveal on Scroll
       gsap.fromTo(
         ".blog-section .section-title-inner-block",
-        { y: 28, opacity: 0 },
+        { y: 20, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.7,
-          ease: "power3.out",
+          duration: 0.55,
+          ease: "power2.out",
+          clearProps: "transform",
           scrollTrigger: {
             trigger: ".blog-section",
-            start: "top 95%",
+            start: "top 88%",
             toggleActions: "play none none none",
           },
         }
@@ -284,22 +289,29 @@ export default function AboutUsPage() {
 
       gsap.fromTo(
         ".about-blog-card",
-        { y: 32, opacity: 0 },
+        { y: 22, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.72,
-          stagger: 0.06,
-          ease: "power3.out",
+          duration: 0.58,
+          stagger: 0.05,
+          ease: "power2.out",
+          clearProps: "transform",
           scrollTrigger: {
             trigger: ".blog-list",
-            start: "top 95%",
+            start: "top 88%",
             toggleActions: "play none none none",
           },
         }
       );
 
-      return () => mm.revert();
+      const handleLoad = () => ScrollTrigger.refresh();
+      window.addEventListener("load", handleLoad);
+
+      return () => {
+        window.removeEventListener("load", handleLoad);
+        mm.revert();
+      };
     },
     { scope: containerRef }
   );

@@ -139,6 +139,12 @@ select:focus-visible {
 }
 
 /* Service Cards in Dark Theme */
+.service-card-entrance {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
 .service-box {
   background-color: #0a0a0a !important;
   border: 1px solid rgba(255, 255, 255, 0.14) !important;
@@ -986,11 +992,9 @@ select:focus-visible {
 .society-comp-card {
   background-color: transparent;
   overflow: hidden;
-  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.society-comp-card:hover {
-  transform: translate3d(0, -6px, 0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .society-comp-card-link {
@@ -998,6 +1002,12 @@ select:focus-visible {
   flex-direction: column;
   text-decoration: none;
   color: #ffffff;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.society-comp-card:hover .society-comp-card-link {
+  transform: translate3d(0, -6px, 0);
 }
 
 .society-card-media-mask {
@@ -1115,6 +1125,9 @@ select:focus-visible {
   text-decoration: none;
   color: #ffffff;
   transition: flex 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .society-runway-panel:last-child {
@@ -1389,12 +1402,13 @@ select:focus-visible {
   border: 1px solid rgba(255, 255, 255, 0.16);
   background-color: #0a0a0a;
   overflow: hidden;
-  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.4s ease;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: border-color 0.4s ease;
 }
 
 .creative-division-card:hover {
-  transform: translate3d(0, -8px, 0);
   border-color: rgba(255, 255, 255, 0.45);
 }
 
@@ -1409,6 +1423,12 @@ select:focus-visible {
   text-decoration: none;
   color: #ffffff;
   z-index: 2;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.creative-division-card:hover .creative-division-link {
+  transform: translate3d(0, -8px, 0);
 }
 
 .division-card-backdrop {
