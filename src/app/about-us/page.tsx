@@ -534,7 +534,7 @@ export default function AboutUsPage() {
         <div className="about-image-single-block" />
       </section>
 
-      {/* INTERACTIVE TEAM PILLS SECTION */}
+      {/* DIRECTORS & SCOUTING LEADERSHIP SECTION */}
       <section className="section team-section">
         <div className="w-layout-blockcontainer container w-container">
           <div className="team-mein-block">
@@ -544,7 +544,7 @@ export default function AboutUsPage() {
                 className="section-title-main-block"
               >
                 <div className="section-title-inner-block title-left">
-                  <h2 className="section-title">wonderful directors</h2>
+                  <h2 className="section-title">DIRECTORS &amp; SCOUTING LEADERSHIP</h2>
                 </div>
               </div>
               <div
@@ -552,7 +552,7 @@ export default function AboutUsPage() {
                 className="secrvice-subtext-right-block"
               >
                 <div className="section-title-subtext-inner-block bg-dark">
-                  <h3 className="section-subtext">teammates</h3>
+                  <h3 className="section-subtext">EXECUTIVE BOARD</h3>
                 </div>
               </div>
             </div>
@@ -577,15 +577,12 @@ export default function AboutUsPage() {
                         <div className="team-info-main-block">
                           <Link
                             href={`/team/${member.slug}`}
-                            className="team-info-link-block w-inline-block"
-                            style={{
-                              backgroundColor: isHovered
-                                ? "#000000"
-                                : "transparent",
-                              transition: "background-color 0.3s ease",
-                            }}
+                            className={`team-info-link-block w-inline-block ${
+                              isHovered ? "is-hovered" : ""
+                            }`}
                           >
                             <div className="team-info-block">
+                              <span className="team-index-kicker">0{idx + 1}</span>
                               <img
                                 src={member.image}
                                 loading="lazy"
@@ -593,22 +590,10 @@ export default function AboutUsPage() {
                                 className="team-mobile-avatar"
                               />
                               <div className="team-info-text-wrap">
-                                <h3
-                                  className="team-members-name"
-                                  style={{
-                                    color: isHovered ? "#ffffff" : "#000000",
-                                    transition: "color 0.3s ease",
-                                  }}
-                                >
+                                <h3 className="team-members-name">
                                   {member.name}
                                 </h3>
-                                <div
-                                  className="team-job-title"
-                                  style={{
-                                    color: isHovered ? "#ffffff" : "#000000",
-                                    transition: "color 0.3s ease",
-                                  }}
-                                >
+                                <div className="team-job-title">
                                   {member.role}
                                 </div>
                               </div>

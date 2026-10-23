@@ -206,15 +206,134 @@ select:focus-visible {
 }
 
 /* Inner Pages (Team, Blog, Portfolio, Contact Forms) Dark Theme */
+.team-section {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.team-grid {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  width: 100% !important;
+  justify-content: stretch !important;
+  place-items: stretch !important;
+}
+
+@media screen and (max-width: 1200px) {
+  .team-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .team-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+}
+
+.team-list-wrapper {
+  width: 100% !important;
+}
+
+.team-info-main-block {
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
 .team-info-link-block {
-  background-color: #0a0a0a !important;
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-color: #0d0d0d !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 4px !important; /* Sharp architectural edge, never an AI pill capsule */
+  padding: 24px 22px !important;
+  text-align: left !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  text-decoration: none !important;
+  position: relative !important;
+  overflow: visible !important;
+  transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease !important;
+}
+
+.team-info-link-block:hover,
+.team-info-link-block.is-hovered {
+  background-color: #171717 !important;
+  border-color: rgba(255, 255, 255, 0.45) !important;
+  transform: translateY(-2px);
+}
+
+.team-info-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.team-index-kicker {
+  font-family: var(--_typography---title-font);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.4);
+  display: inline-block;
+  margin-bottom: 2px;
+}
+
+.team-members-name {
+  font-family: var(--_typography---title-font) !important;
+  font-size: 24px !important;
+  line-height: 1.15 !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.03em !important;
+  color: #ffffff !important; /* Stark crisp white text */
+  margin: 0 !important;
+  transition: color 0.25s ease;
+}
+
+.team-job-title,
+.team-member-jobtitle,
+.team-member-jobtitle-one {
+  font-family: var(--_typography---body-font) !important;
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+  font-weight: 500 !important;
+  color: #999999 !important; /* Refined muted grey */
+  letter-spacing: 0.04em !important;
+  text-transform: capitalize !important;
+  margin: 0 !important;
+  transition: color 0.25s ease;
+}
+
+.team-info-link-block:hover .team-job-title {
   color: #ffffff !important;
 }
 
-.team-info-link-block:hover {
-  background-color: #161616 !important;
-  border-color: rgba(255, 255, 255, 0.45) !important;
+.team-image {
+  position: absolute;
+  width: 220px;
+  height: 280px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85);
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 30;
+  bottom: -220px;
+  left: 10%;
 }
 
 .team-Dot,
@@ -1562,27 +1681,28 @@ select:focus-visible {
     gap: 20px;
   }
 
-  /* About Us Team Pills: Show circular director portrait inside each pill on tablet/mobile */
+  /* About Us Directors: Circular director portrait inside card on tablet/mobile */
   .team-mobile-avatar {
     display: block;
-    width: 52px;
-    height: 52px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     object-fit: cover;
     flex-shrink: 0;
-    border: 1.5px solid var(--dark);
+    border: 1px solid rgba(255, 255, 255, 0.25);
   }
 
   .team-info-block {
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
     gap: 14px;
     text-align: left;
   }
 
   .team-info-link-block {
-    padding: 14px 20px !important;
+    padding: 18px 20px !important;
   }
 
   /* Projects vertical stack spacing & responsive card proportions on tablet/mobile */
