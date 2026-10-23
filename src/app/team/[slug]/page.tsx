@@ -23,7 +23,7 @@ export default async function TeamSinglePage({
 
   return (
     <div>
-      <Navbar variant="light" />
+      <Navbar variant="dark" />
 
       <section className="section team-single-section">
         <div className="w-layout-blockcontainer container-small w-container">

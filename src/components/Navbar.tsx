@@ -29,9 +29,9 @@ const MOBILE_NAV_LINKS = [
   { href: "/privacy-policy", label: "Privacy Policy" },
 ];
 
-export default function Navbar({ variant = "light" }: NavbarProps) {
+export default function Navbar({ variant = "dark" }: NavbarProps) {
   const pathname = usePathname();
-  const isDark = variant === "dark";
+  const isDark = variant !== "light" || true;
 
   const [hoveredNav, setHoveredNav] = useState<string | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -98,10 +98,10 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
         />
       )}
 
-      {/* Slide-over Sidebar Drawer */}
+      {/* Slide-over Sidebar Drawer (Dark Theme) */}
       <aside
         aria-label="Agency Information Drawer"
-        className={`sidebar-block ${isDark ? "sidebar-style-two" : ""}`}
+        className="sidebar-block"
         style={{
           opacity: sidebarOpen ? 1 : 0,
           transform: sidebarOpen
@@ -113,6 +113,8 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
           pointerEvents: sidebarOpen ? "auto" : "none",
           width: "min(400px, 90vw)",
           overflowY: "auto",
+          backgroundColor: "#0a0a0a",
+          borderLeft: "1px solid rgba(255, 255, 255, 0.14)",
         }}
       >
         <button
@@ -132,7 +134,7 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
           }}
         >
           <img
-            src={isDark ? ASSETS.closeIconDark : ASSETS.closeIconWhite}
+            src={ASSETS.closeIconWhite}
             loading="lazy"
             width="21"
             alt="Sidebar Close Icon"
@@ -147,14 +149,14 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
             className="sidebar-logo-link w-inline-block"
           >
             <img
-              src={isDark ? ASSETS.sidebarLogoDark : ASSETS.sidebarLogoWhite}
+              src={ASSETS.sidebarLogoWhite}
               loading="lazy"
               alt="Reflux Sidebar Logo"
               className="sidebar-logo"
             />
           </Link>
           <div className="sidebar-description-block">
-            <p className={`sidebar-description ${isDark ? "text-dark" : ""}`}>
+            <p className="sidebar-description">
               Shaping cinema, couture runway, and global campaigns with iconic
               talent that moves, inspires, and disrupts.
             </p>
@@ -168,21 +170,16 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
             />
           </div>
           <div className="sidebar-cntact-info-block">
-            <div
-              className={`sidebar-address-text ${isDark ? "text-dark" : ""}`}
-            >
+            <div className="sidebar-address-text">
               321 Mercer Street, Suite 456, SoHo, NY.
             </div>
             <a
               href="mailto:casting@refluxstudio.com"
-              className={`sidebar-cotact-email ${isDark ? "text-dark" : ""}`}
+              className="sidebar-cotact-email"
             >
               casting@refluxstudio.com
             </a>
-            <a
-              href="tel:+18001234567890"
-              className={`sidebar-contact-number ${isDark ? "text-dark" : ""}`}
-            >
+            <a href="tel:+18001234567890" className="sidebar-contact-number">
               +1 (212) 555-0199
             </a>
           </div>
@@ -195,11 +192,7 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
               className="sidebar-social-link-block w-inline-block"
             >
               <img
-                src={
-                  isDark
-                    ? ASSETS.socialDark.dribbble
-                    : ASSETS.socialWhite.dribbble
-                }
+                src={ASSETS.socialWhite.dribbble}
                 loading="lazy"
                 alt="Dribbble"
                 className="sidebar-social-icon"
@@ -213,11 +206,7 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
               className="sidebar-social-link-block w-inline-block"
             >
               <img
-                src={
-                  isDark
-                    ? ASSETS.socialDark.behance
-                    : ASSETS.socialWhite.behance
-                }
+                src={ASSETS.socialWhite.behance}
                 loading="lazy"
                 alt="Behance"
                 className="sidebar-social-icon"
@@ -231,11 +220,7 @@ export default function Navbar({ variant = "light" }: NavbarProps) {
               className="sidebar-social-link-block w-inline-block"
             >
               <img
-                src={
-                  isDark
-                    ? ASSETS.socialDark.instagram
-                    : ASSETS.socialWhite.instagram
-                }
+                src={ASSETS.socialWhite.instagram}
                 loading="lazy"
                 alt="Instagram"
                 className="sidebar-social-icon"

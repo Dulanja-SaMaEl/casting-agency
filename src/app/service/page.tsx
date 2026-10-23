@@ -82,7 +82,7 @@ export default function ServicePage() {
 
   return (
     <div ref={containerRef}>
-      <Navbar variant="light" />
+      <Navbar variant="dark" />
 
       {/* BREADCRUMB HERO SECTION */}
       <section className="section breadcrumb-two-section">

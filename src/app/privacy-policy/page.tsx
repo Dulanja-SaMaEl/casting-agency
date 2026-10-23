@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 export default function PrivacyPolicyPage() {
   return (
     <div>
-      <Navbar variant="light" />
+      <Navbar variant="dark" />
 
       <section className="section breadcrumb-two-section">
         <div className="w-layout-blockcontainer container w-container">

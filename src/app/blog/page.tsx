@@ -123,7 +123,7 @@ export default function BlogPage() {
 
   return (
     <div ref={containerRef}>
-      <Navbar variant="light" />
+      <Navbar variant="dark" />
 
       {/* BREADCRUMB HERO */}
       <section className="section breadcrumb-two-section">

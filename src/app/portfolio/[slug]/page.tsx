@@ -25,7 +25,7 @@ export default async function PortfolioSinglePage({
 
   return (
     <div>
-      <Navbar variant="light" />
+      <Navbar variant="dark" />
 
       <section className="section portfolio-single-section">
         <div className="w-layout-blockcontainer container-small w-container">

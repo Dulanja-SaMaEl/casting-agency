@@ -470,17 +470,14 @@ export default function AboutUsPage() {
                         <div className="division-card-backdrop-scrim" />
                       </div>
 
-                      {/* Top Metadata Header Bar */}
+                      {/* Top Minimalist Index Header */}
                       <div className="division-card-top">
-                        <span
-                          className="division-card-index-pill"
-                          style={{ backgroundColor: service.color }}
-                        >
-                          DIVISION 0{i + 1} · DEMO
+                        <span className="division-card-index-pill">
+                          0{i + 1} / DIVISION
                         </span>
                         {primaryStat && (
                           <span className="division-card-stat-pill">
-                            <strong>{primaryStat.value}</strong>{" "}
+                            {primaryStat.value}{" "}
                             {primaryStat.label.replace(" (Demo)", "")}
                           </span>
                         )}
@@ -500,12 +497,6 @@ export default function AboutUsPage() {
                           alt={`${service.title} Campaign`}
                           className="division-card-lookbook-img secondary"
                         />
-                        <span
-                          className="division-card-lookbook-tag"
-                          style={{ backgroundColor: service.color }}
-                        >
-                          LOOKBOOK 0{i + 1} (DEMO)
-                        </span>
                       </div>
 
                       {/* Bottom Typography, Deliverables & Magnetic Arrow */}
@@ -514,16 +505,7 @@ export default function AboutUsPage() {
                           <h3 className="division-card-title">
                             {service.shortTitle}
                           </h3>
-                          <span
-                            className="division-card-arrow"
-                            style={{
-                              backgroundColor: isHovered
-                                ? service.color
-                                : "#ffffff",
-                            }}
-                          >
-                            ↗
-                          </span>
+                          <span className="division-card-arrow">↗</span>
                         </div>
 
                         <p className="division-card-desc">

@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 export default function NotFound() {
   return (
     <div>
-      <Navbar variant="light" />
+      <Navbar variant="dark" />
       <div className="utility-page-wrap">
         <div className="utility-page-content">
           <h1 className="_404-title">404</h1>

@@ -323,29 +323,15 @@ export default function HomePage() {
         }
       );
 
+      // C. Line-Masked .paragraph-hero Reveal (t-17bd54a9)
       gsap.fromTo(
-        [".fractal-hero-kicker", ".fractal-hero-subpill", ".fractal-hero-topbar"],
-        { opacity: 0, y: 16 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.75,
-          delay: 0.2,
-          stagger: 0.06,
-          ease: "power3.out",
-        }
-      );
-
-      // C. Line-Masked .paragraph-hero & Bottom Dossier Bar Reveal (t-17bd54a9)
-      gsap.fromTo(
-        [".paragraph-hero", ".fractal-bottom-left"],
+        ".paragraph-hero",
         { yPercent: 110, opacity: 0 },
         {
           yPercent: 0,
           opacity: 1,
           duration: 0.8,
           delay: 0.45,
-          stagger: 0.07,
           ease: "power3.out",
         }
       );
@@ -902,13 +888,10 @@ export default function HomePage() {
 
   return (
     <div ref={containerRef} className="editorial-page-shell">
-      {/* Subtle Print-Magazine Grain Overlay */}
-      <div className="editorial-grain-overlay" aria-hidden="true" />
-
-      <Navbar variant="light" />
+      <Navbar variant="dark" />
 
       {/* =====================================================================
-          HERO SECTION (KITPRO FRACTAL × THE SOCIETY MINIMALIST CONSTELLATION HERO)
+          HERO SECTION (KITPRO FRACTAL PURE MINIMALIST DARK CONSTELLATION HERO)
          ===================================================================== */}
       <section
         id="hero-section"
@@ -916,65 +899,10 @@ export default function HomePage() {
         onMouseLeave={handleHeroMouseLeave}
         className="section hero fractal-hero-section"
       >
-        {/* Subtle Architectural Grid Columns & Artistic Color Aura */}
-        <div className="fractal-grid-backdrop" aria-hidden="true">
-          <div className="fractal-grid-col" />
-          <div className="fractal-grid-col" />
-          <div className="fractal-grid-col" />
-          <div className="fractal-grid-col" />
-        </div>
-        <div className="fractal-ambient-aura" aria-hidden="true" />
-
-        {/* 4 Minimalist Viewport Corner Ticks (.corner._1 - ._4) */}
-        <div className="fractal-viewport-corner _1" aria-hidden="true" />
-        <div className="fractal-viewport-corner _2" aria-hidden="true" />
-        <div className="fractal-viewport-corner _3" aria-hidden="true" />
-        <div className="fractal-viewport-corner _4" aria-hidden="true" />
-
         <div className="wrapper-hero">
-          {/* Top Minimalist Architectural Status Bar */}
-          <div className="fractal-hero-topbar">
-            <div className="fractal-bracket-tag">
-              <span className="fractal-bracket-char">[</span>
-              <span>01 · THE CASTING SOCIETY — AW25 / SS26</span>
-              <span className="fractal-bracket-char">]</span>
-            </div>
-
-            <div className="fractal-status-pills">
-              <span
-                className="fractal-status-pill"
-                style={{ backgroundColor: "#a7d8de" }}
-              >
-                <span
-                  className="editorial-color-dot"
-                  style={{ backgroundColor: "#ffffff" }}
-                />
-                08 DEMO MODELS LIVE
-              </span>
-              <span
-                className="fractal-status-pill"
-                style={{ backgroundColor: "#f5a3a3" }}
-              >
-                PARIS · MILAN · NY · LONDON
-              </span>
-            </div>
-          </div>
-
           {/* Center Giant Minimalist Display Typography (.wrapper-conotent-one -> .text-hero) */}
           <div className="wrapper-conotent-one">
             <div className="inner-content-text-hero">
-              <div className="fractal-hero-kicker">
-                <span
-                  className="editorial-color-dot"
-                  style={{ backgroundColor: "#f8c794" }}
-                />
-                <span>
-                  {hoveredHeroPolaroid
-                    ? `${hoveredHeroPolaroid.division} · ${hoveredHeroPolaroid.bureau}`
-                    : "GLOBAL MODEL MANAGEMENT & CASTING BUREAU (DEMO)"}
-                </span>
-              </div>
-
               <h1 className="text-hero" aria-label="SOCIETY">
                 {"SOCIETY".split("").map((char, idx) => (
                   <span key={idx} className="fractal-hero-char">
@@ -982,29 +910,21 @@ export default function HomePage() {
                   </span>
                 ))}
               </h1>
-
-              <div
-                className="fractal-hero-subpill"
-                style={{
-                  backgroundColor: hoveredHeroPolaroid
-                    ? hoveredHeroPolaroid.accentColor
-                    : "#ffffff",
-                }}
-              >
-                <span className="fractal-bracket-char">[</span>
-                <span>
-                  {hoveredHeroPolaroid
-                    ? `${hoveredHeroPolaroid.name} — ${hoveredHeroPolaroid.stats.height} · BUST ${hoveredHeroPolaroid.stats.bust} · WAIST ${hoveredHeroPolaroid.stats.waist} · HIPS ${hoveredHeroPolaroid.stats.hips}`
-                    : "HOVER ANY MODEL FRAME FOR SPECS · CLICK FOR DIGITAL COMP CARD (DEMO)"}
-                </span>
-                <span className="fractal-bracket-char">]</span>
-              </div>
             </div>
           </div>
 
-          {/* 8 Radial Floating Model & Runway Frames (.wrapper-masking-hero -> .outer-masking-hero -> .inner-masking-hero) */}
+          {/* Bottom-Right Minimalist Statement (.wrapper-content-two -> .paragraph-hero) */}
+          <div className="wrapper-content-two">
+            <div className="wrapper-paragraph-herp fractal-paragraph-mask">
+              <p className="paragraph-hero">
+                Curating iconic faces and haute couture runway exclusives across
+                Paris, Milan, New York &amp; London.
+              </p>
+            </div>
+          </div>
+
+          {/* 8 Radial Frameless Floating Model Portraits (.wrapper-masking-hero) */}
           <div className="wrapper-masking-hero">
-            {/* Horizontal Architectural Framing Lines (.outer-lline-hero -> .line-hero.left / .right) */}
             <div className="outer-lline-hero" aria-hidden="true">
               <div className="line-hero left" />
               <div className="line-hero right" />
@@ -1012,11 +932,10 @@ export default function HomePage() {
 
             <div className="outer-masking-hero">
               <div ref={innerMaskingRef} className="inner-masking-hero">
-                {FRACTAL_HERO_FRAMES.map((frame, idx) => {
-                  const model = TALENT_BOARD[frame.modelIndex] || TALENT_BOARD[0];
+                {FRACTAL_HERO_FRAMES.map((frame) => {
+                  const model =
+                    TALENT_BOARD[frame.modelIndex] || TALENT_BOARD[0];
                   const isHovered = hoveredHeroPolaroid?.id === model.id;
-                  const shortMetric =
-                    model.stats.height.split("/")[1]?.trim() || "179CM";
 
                   return (
                     <div
@@ -1027,24 +946,7 @@ export default function HomePage() {
                       className={`wrapper-main-hero ${frame.slot} ${
                         frame.depthLayer ? "is-depth-layer" : ""
                       } ${isHovered ? "is-hovered" : ""}`}
-                      style={
-                        {
-                          "--frame-accent": model.accentColor,
-                        } as React.CSSProperties
-                      }
                     >
-                      {/* Pastel Top Accent Strip */}
-                      <div
-                        className="fractal-frame-accent-bar"
-                        style={{ backgroundColor: model.accentColor }}
-                      />
-
-                      {/* 4 Minimalist Fractal Corner Ticks */}
-                      <div className="fractal-frame-corner _1" />
-                      <div className="fractal-frame-corner _2" />
-                      <div className="fractal-frame-corner _3" />
-                      <div className="fractal-frame-corner _4" />
-
                       <div className="fractal-frame-media fractal-frame-float-inner">
                         {frame.hasVideo ? (
                           <video
@@ -1060,29 +962,14 @@ export default function HomePage() {
                         ) : null}
                         <img
                           src={model.primaryImage}
-                          alt={`${model.name} — Demo Model`}
+                          alt={model.name}
                           className="image-hero primary"
                         />
                         <img
                           src={model.secondaryImage}
-                          alt={`${model.name} — Lookbook`}
+                          alt={`${model.name} Lookbook`}
                           className="image-hero secondary"
                         />
-                        <span
-                          className="fractal-frame-badge"
-                          style={{ backgroundColor: model.accentColor }}
-                        >
-                          0{idx + 1} · DEMO
-                        </span>
-                      </div>
-
-                      <div className="fractal-frame-caption">
-                        <span className="fractal-frame-name">
-                          {model.name.split(" ")[0]}
-                        </span>
-                        <span className="fractal-frame-metric">
-                          {shortMetric} ↗
-                        </span>
                       </div>
                     </div>
                   );
@@ -1090,142 +977,21 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-
-          {/* Bottom Architectural Bar (.wrapper-content-two -> Division Nav + .paragraph-hero) */}
-          <div className="wrapper-content-two">
-            <div className="fractal-bottom-left">
-              <div
-                className="fractal-live-dossier-strip"
-                style={{
-                  backgroundColor: hoveredHeroPolaroid
-                    ? hoveredHeroPolaroid.accentColor
-                    : "#ffffff",
-                }}
-              >
-                <span
-                  className="editorial-color-dot"
-                  style={{
-                    backgroundColor: hoveredHeroPolaroid
-                      ? "#ffffff"
-                      : "#a7d8de",
-                  }}
-                />
-                <span>
-                  {hoveredHeroPolaroid
-                    ? `SPOTLIGHT: ${hoveredHeroPolaroid.name} (DEMO) · ${hoveredHeroPolaroid.latestBooking} — CLICK FRAME FOR COMP CARD`
-                    : "SELECT A DIVISION OR CLICK ANY FLOATING MODEL FRAME TO OPEN DIGITAL COMP CARD (DEMO)"}
-                </span>
-              </div>
-
-              <div
-                className="fractal-division-nav"
-                role="navigation"
-                aria-label="Model Agency Divisions"
-              >
-                <button
-                  type="button"
-                  onClick={() => handleDivisionChange("SOCIETY WOMEN", true)}
-                  className="fractal-division-btn"
-                  style={{ backgroundColor: "#a7d8de" }}
-                >
-                  <span className="fractal-bracket-char">[</span>
-                  SOCIETY WOMEN
-                  <span className="fractal-bracket-char">]</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleDivisionChange("SOCIETY MEN", true)}
-                  className="fractal-division-btn"
-                  style={{ backgroundColor: "#f5a3a3" }}
-                >
-                  <span className="fractal-bracket-char">[</span>
-                  SOCIETY MEN
-                  <span className="fractal-bracket-char">]</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleDivisionChange("DEVELOPMENT", true)}
-                  className="fractal-division-btn"
-                  style={{ backgroundColor: "#f8c794" }}
-                >
-                  <span className="fractal-bracket-char">[</span>
-                  DEVELOPMENT
-                  <span className="fractal-bracket-char">]</span>
-                </button>
-                <a
-                  href="#runway-shows"
-                  className="fractal-division-btn"
-                  style={{ backgroundColor: "#cbb7f6" }}
-                >
-                  <span className="fractal-bracket-char">[</span>
-                  RUNWAY SHOWS
-                  <span className="fractal-bracket-char">]</span>
-                </a>
-              </div>
-            </div>
-
-            <div className="fractal-bottom-right">
-              <div className="fractal-paragraph-mask">
-                <p className="paragraph-hero">
-                  Curating iconic faces, haute couture runway exclusives, and
-                  colorful editorial campaigns across Paris, Milan, New York &
-                  London. (Demo)
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* KINETIC EDITORIAL RUNWAY TICKER STRIP */}
-      <div
-        className="editorial-marquee-strip"
-        aria-label="Model Casting Divisions Ticker"
-      >
-        <div className="editorial-marquee-track">
-          {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, idx) => (
-            <div key={idx} className="editorial-marquee-item">
-              <span
-                className="editorial-marquee-pill"
-                style={{ backgroundColor: item.color }}
-              >
-                0{(idx % 6) + 1}
-              </span>
-              <span className="editorial-marquee-text">{item.text}</span>
-              <span className="editorial-marquee-sep">✦</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* =====================================================================
-          THE SOCIETY MODEL BOARD (8 DEMO MODELS WITH DOUBLE-IMAGE HOVER & COMP CARDS)
+          THE SOCIETY MODEL BOARD (MINIMALIST DARK ROSTER)
          ===================================================================== */}
-      <section
-        id="model-board"
-        className="section society-board-section"
-        style={{ paddingTop: "20px" }}
-      >
+      <section id="model-board" className="section society-board-section">
         <div className="w-layout-blockcontainer container w-container">
           <div className="society-board-header">
             <div className="society-board-title-wrap society-board-header-reveal">
-              <div className="society-eyebrow-row">
-                <span
-                  className="society-eyebrow-pill"
-                  style={{ backgroundColor: "#f5a3a3" }}
-                >
-                  DEMO MODEL ROSTER — AW25 / SS26
-                </span>
-                <span className="society-eyebrow-code">
-                  HOVER TO SWAP LOOKBOOK · CLICK FOR DIGITAL COMP CARD (DEMO)
-                </span>
-              </div>
-              <h2 className="section-title" style={{ marginTop: "10px" }}>
-                the society model board
-              </h2>
+              <div className="section-subtitle">model board · demo</div>
+              <h2 className="section-title">the society roster</h2>
             </div>
 
-            {/* Interactive Division Switcher Pills */}
+            {/* Minimalist Architectural Division Switcher */}
             <div
               className="society-division-tabs society-board-header-reveal"
               role="tablist"
@@ -1243,22 +1009,16 @@ export default function HomePage() {
                     className={`society-division-tab ${
                       isActive ? "is-active" : ""
                     }`}
-                    style={
-                      {
-                        "--tab-color": tab.color,
-                        backgroundColor: isActive ? tab.color : "#ffffff",
-                      } as React.CSSProperties
-                    }
                   >
                     <span className="society-tab-label">{tab.label}</span>
-                    <span className="society-tab-count">{tab.count}</span>
+                    <span className="society-tab-count">[{tab.count}]</span>
                   </button>
                 );
               })}
             </div>
           </div>
 
-          {/* 4-Column High-Fashion Model Comp-Card Grid */}
+          {/* 4-Column Frameless Dark-Theme Model Comp-Card Grid */}
           <div className="society-comp-grid">
             {filteredTalent.map((talent, idx) => {
               const isCardHovered = hoveredTalent === talent.id;
@@ -1275,27 +1035,9 @@ export default function HomePage() {
                   onMouseLeave={() => setHoveredTalent(null)}
                   onClick={() => setSelectedModel(talent)}
                   className={`society-comp-card ${offsetClass}`}
-                  style={
-                    {
-                      "--card-accent": talent.accentColor,
-                      cursor: "pointer",
-                    } as React.CSSProperties
-                  }
+                  style={{ cursor: "pointer" }}
                 >
                   <div className="society-comp-card-link">
-                    {/* Top Tear-Sheet Metadata Header with Explicit DEMO Badge */}
-                    <div
-                      className="society-card-topbar"
-                      style={{ backgroundColor: talent.accentColor }}
-                    >
-                      <span className="society-card-serial">
-                        DEMO MODEL · {talent.index}
-                      </span>
-                      <span className="society-card-division-tag">
-                        {talent.division}
-                      </span>
-                    </div>
-
                     {/* Dual-Image Lookbook Viewport (Portrait <-> Runway/Campaign Crossfade) */}
                     <div className="society-card-media-mask">
                       <img
@@ -1305,7 +1047,7 @@ export default function HomePage() {
                         className="society-card-img primary"
                         style={{
                           transform: isCardHovered
-                            ? "scale3d(1.07, 1.07, 1)"
+                            ? "scale3d(1.06, 1.06, 1)"
                             : "scale3d(1, 1, 1)",
                           opacity: isCardHovered ? 0 : 1,
                         }}
@@ -1317,54 +1059,25 @@ export default function HomePage() {
                         className="society-card-img secondary"
                         style={{
                           transform: isCardHovered
-                            ? "scale3d(1.02, 1.02, 1)"
-                            : "scale3d(1.1, 1.1, 1)",
+                            ? "scale3d(1.01, 1.01, 1)"
+                            : "scale3d(1.08, 1.08, 1)",
                           opacity: isCardHovered ? 1 : 0,
                         }}
                       />
-
-                      {/* Top-Left Bureau & Instagram Reach Tag */}
-                      <div className="society-card-top-overlay">
-                        <span className="society-card-ig-badge">
-                          {talent.instagramHandle} · {talent.followers} (DEMO)
-                        </span>
-                      </div>
-
-                      {/* Floating Booking Pill */}
-                      <div className="society-card-booking-chip">
-                        <span
-                          className="editorial-color-dot"
-                          style={{ backgroundColor: talent.accentColor }}
-                        />
-                        <span>{talent.latestBooking}</span>
-                      </div>
                     </div>
 
-                    {/* Bottom Comp-Card Typography & Full Model Measurements */}
+                    {/* Minimalist Dark-Mode Comp-Card Typography & Measurements */}
                     <div className="society-card-footer">
                       <div className="society-card-name-row">
                         <div>
                           <h3 className="society-card-name">{talent.name}</h3>
                           <div className="society-card-sub-bureau">
-                            {talent.bureau} ·{" "}
-                            <span style={{ textDecoration: "underline" }}>
-                              OPEN COMP CARD (DEMO)
-                            </span>
+                            {talent.division} · {talent.bureau} · DEMO
                           </div>
                         </div>
-                        <span
-                          className="society-card-arrow"
-                          style={{
-                            backgroundColor: isCardHovered
-                              ? talent.accentColor
-                              : "transparent",
-                          }}
-                        >
-                          ↗
-                        </span>
+                        <span className="society-card-arrow">↗</span>
                       </div>
 
-                      {/* Authentic 6-Stat Model Agency Measurements Strip */}
                       <div className="society-card-specs-grid">
                         <div className="society-spec-cell">
                           <span className="society-spec-key">HEIGHT</span>
@@ -1413,7 +1126,7 @@ export default function HomePage() {
       </section>
 
       {/* =====================================================================
-          THE SOCIETY 4-PANEL RUNWAY SHOWS STRIP (INSPIRED BY THESOCIETYMANAGEMENT.COM)
+          THE SOCIETY 4-PANEL RUNWAY SHOWS STRIP
          ===================================================================== */}
       <section
         id="runway-shows"
@@ -1423,30 +1136,13 @@ export default function HomePage() {
         <div className="w-layout-blockcontainer container w-container">
           <div className="society-board-header society-runway-header-reveal">
             <div className="society-board-title-wrap">
-              <div className="society-eyebrow-row">
-                <span
-                  className="society-eyebrow-pill"
-                  style={{ backgroundColor: "#f8c794" }}
-                >
-                  SHOWS ARCHIVE — DEMO CATWALK STRIP
-                </span>
-                <span className="society-eyebrow-code">
-                  PARIS · MILAN · NEW YORK · LONDON FASHION WEEKS (DEMO)
-                </span>
+              <div className="section-subtitle">
+                paris · milan · new york · london (demo)
               </div>
-              <h2 className="section-title" style={{ marginTop: "10px" }}>
-                season runway shows
-              </h2>
+              <h2 className="section-title">season runway shows</h2>
             </div>
-            <Link
-              href="/portfolio"
-              className="society-division-tab"
-              style={{
-                backgroundColor: "#a7d8de",
-                textDecoration: "none",
-              }}
-            >
-              <span>View All 09 Demo Campaigns</span>
+            <Link href="/portfolio" className="society-division-tab">
+              <span>View Archive</span>
               <span>↗</span>
             </Link>
           </div>
@@ -1464,11 +1160,6 @@ export default function HomePage() {
                   className={`society-runway-panel ${
                     isHovered ? "is-expanded" : ""
                   }`}
-                  style={
-                    {
-                      "--runway-accent": look.accentColor,
-                    } as React.CSSProperties
-                  }
                 >
                   <img
                     src={look.image}
@@ -1478,10 +1169,7 @@ export default function HomePage() {
                   />
                   <div className="society-runway-overlay">
                     <div className="society-runway-top">
-                      <span
-                        className="society-runway-tag"
-                        style={{ backgroundColor: look.accentColor }}
-                      >
+                      <span className="society-runway-tag">
                         {look.lookNumber}
                       </span>
                       <span className="society-runway-city">{look.city}</span>
@@ -1503,7 +1191,7 @@ export default function HomePage() {
       </section>
 
       {/* =====================================================================
-          MODEL CASTING DIVISIONS SECTION (Reflux 4-Card Interactive Grid)
+          MODEL CASTING DIVISIONS SECTION
          ===================================================================== */}
       <section className="section service-section">
         <div className="w-layout-blockcontainer container w-container">
@@ -1530,9 +1218,8 @@ export default function HomePage() {
                       className={`service-box ${boxClasses[idx]}`}
                       style={
                         {
-                          "--service-accent": service.color,
                           transform: isHovered
-                            ? "translate3d(0, -50px, 0)"
+                            ? "translate3d(0, -32px, 0)"
                             : "translate3d(0, 0px, 0)",
                           transition:
                             "transform 0.55s cubic-bezier(0.16, 1, 0.3, 1)",
@@ -1549,10 +1236,10 @@ export default function HomePage() {
                         className={`service-box-hover-bg-color ${bgClasses[idx]}`}
                         style={{
                           backgroundColor: isHovered
-                            ? service.color
+                            ? "#1a1a1a"
                             : "transparent",
                           transform: isHovered
-                            ? "scale3d(0.95, 0.95, 1)"
+                            ? "scale3d(0.97, 0.97, 1)"
                             : "scale3d(1, 1, 1)",
                           transition:
                             "background-color 0.45s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1)",
@@ -1576,13 +1263,8 @@ export default function HomePage() {
                             className="service-icon"
                           />
                         </div>
-                        <span
-                          className="editorial-card-index"
-                          style={{
-                            backgroundColor: service.color,
-                          }}
-                        >
-                          DEMO 0{idx + 1}
+                        <span className="editorial-card-index">
+                          0{idx + 1}
                         </span>
                       </div>
                       <div
@@ -1686,12 +1368,6 @@ export default function HomePage() {
                       ? "three"
                       : "four";
                   const isProjHovered = hoveredProject === idx;
-                  const projectColors = [
-                    "#a7d8de",
-                    "#f5a3a3",
-                    "#f8c794",
-                    "#cbb7f6",
-                  ];
                   return (
                     <div
                       key={project.id}
@@ -1714,18 +1390,12 @@ export default function HomePage() {
                             className="projects-right-image"
                             style={{
                               transform: isProjHovered
-                                ? "scale3d(0.92, 0.92, 1)"
+                                ? "scale3d(0.94, 0.94, 1)"
                                 : "scale3d(1, 1, 1)",
                               transition:
                                 "transform 0.55s cubic-bezier(0.16, 1, 0.3, 1)",
                             }}
                           />
-                          <span
-                            className="editorial-frame-tag"
-                            style={{ backgroundColor: projectColors[idx] }}
-                          >
-                            DEMO CAMPAIGN 0{idx + 1} — {project.year}
-                          </span>
                         </div>
                         <div className="projects-side-info-block">
                           <h2 className="horizontal-projects-titles">
@@ -1799,25 +1469,8 @@ export default function HomePage() {
                   <div
                     key={counter.id}
                     className="about-counter-box editorial-counter-card"
-                    style={
-                      {
-                        "--counter-accent": counter.accent,
-                      } as React.CSSProperties
-                    }
                   >
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "8px",
-                      }}
-                    >
-                      <span
-                        className="editorial-color-dot"
-                        style={{ backgroundColor: counter.accent }}
-                      />
-                      <div className="about-counter-text">{counter.label}</div>
-                    </div>
+                    <div className="about-counter-text">{counter.label}</div>
                     <div className="about-counter-inner-block">
                       <div className="about-counter-frist-number-block">
                         {counter.col1.map((digit, i) => (
@@ -1860,26 +1513,6 @@ export default function HomePage() {
             <source src={ASSETS.videoMp4} />
             <source src={ASSETS.videoWebm} />
           </video>
-
-          {/* Editorial Film Strip Caption Bar */}
-          <div className="editorial-video-caption-bar">
-            <div className="editorial-video-pill-group">
-              <span
-                className="society-eyebrow-pill"
-                style={{ backgroundColor: "#a7d8de", color: "#000000" }}
-              >
-                DEMO SHOWREEL 2025
-              </span>
-              <span className="editorial-video-meta">
-                THE SOCIETY MODEL &amp; RUNWAY ARCHIVE (DEMO VIDEO) — PARIS ·
-                MILAN · NEW YORK
-              </span>
-            </div>
-            <Link href="/portfolio" className="editorial-video-cta">
-              <span>EXPLORE DEMO ARCHIVE</span>
-              <span>↗</span>
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -1980,7 +1613,7 @@ export default function HomePage() {
       </section>
 
       {/* =====================================================================
-          INTERACTIVE DIGITAL COMP-CARD & RUNWAY VIDEO MODAL (FOR MORNING MEETING DEMO)
+          INTERACTIVE DIGITAL COMP-CARD & RUNWAY VIDEO MODAL (DARK MINIMALIST)
          ===================================================================== */}
       {selectedModel && (
         <div
@@ -1995,16 +1628,10 @@ export default function HomePage() {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Top Header */}
-            <div
-              className="comp-modal-topbar"
-              style={{ backgroundColor: selectedModel.accentColor }}
-            >
+            <div className="comp-modal-topbar">
               <div className="comp-modal-topbar-left">
-                <span className="comp-modal-demo-badge">
-                  OFFICIAL DIGITAL COMP CARD — DEMO DATA
-                </span>
                 <span className="comp-modal-division">
-                  {selectedModel.division} · BUREAUS: {selectedModel.bureau}
+                  {selectedModel.division} · {selectedModel.bureau} · DEMO
                 </span>
               </div>
               <button
@@ -2027,9 +1654,6 @@ export default function HomePage() {
                     alt={`${selectedModel.name} Studio Polaroid`}
                     className="comp-modal-img"
                   />
-                  <span className="comp-modal-media-tag">
-                    PORTRAIT 01 (DEMO)
-                  </span>
                 </div>
                 <div className="comp-modal-media-cell">
                   <img
@@ -2037,9 +1661,6 @@ export default function HomePage() {
                     alt={`${selectedModel.name} Editorial Look`}
                     className="comp-modal-img"
                   />
-                  <span className="comp-modal-media-tag">
-                    CAMPAIGN 02 (DEMO)
-                  </span>
                 </div>
                 <div className="comp-modal-media-cell">
                   <video
@@ -2055,12 +1676,6 @@ export default function HomePage() {
                       type="video/mp4"
                     />
                   </video>
-                  <span
-                    className="comp-modal-media-tag"
-                    style={{ backgroundColor: selectedModel.accentColor }}
-                  >
-                    MOTION REEL (DEMO)
-                  </span>
                 </div>
               </div>
 
@@ -2072,9 +1687,9 @@ export default function HomePage() {
                     Latest Campaign: <strong>{selectedModel.latestBooking}</strong>
                   </p>
                   <p className="comp-modal-ig">
-                    Instagram Reach:{" "}
+                    Instagram:{" "}
                     <strong>{selectedModel.instagramHandle}</strong> (
-                    {selectedModel.followers} Followers — Demo Metric)
+                    {selectedModel.followers})
                   </p>
                 </div>
 
@@ -2123,7 +1738,6 @@ export default function HomePage() {
                 <Link
                   href="/contact-us"
                   className="comp-modal-btn primary"
-                  style={{ backgroundColor: selectedModel.accentColor }}
                 >
                   Place Casting Option / Hold (Demo) ↗
                 </Link>

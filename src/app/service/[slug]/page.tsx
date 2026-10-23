@@ -25,7 +25,7 @@ export default async function ServiceSinglePage({
 
   return (
     <div>
-      <Navbar variant="light" />
+      <Navbar variant="dark" />
 
       <section className="section service-single-section">
         <div className="w-layout-blockcontainer container-small w-container">

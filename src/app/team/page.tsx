@@ -61,7 +61,7 @@ export default function TeamPage() {
 
   return (
     <div ref={containerRef}>
-      <Navbar variant="light" />
+      <Navbar variant="dark" />
 
       {/* BREADCRUMB HERO */}
       <section className="section breadcrumb-section">
