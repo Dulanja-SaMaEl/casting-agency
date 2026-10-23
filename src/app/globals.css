@@ -49,12 +49,26 @@ select:focus-visible {
 .back-to-top:active,
 .dropdown-menu-button:active,
 .nav-sidebar-logo-block:active,
-.society-division-tab:active {
+.society-division-tab:active,
+.hero-division-chip:active {
   transform: scale3d(0.96, 0.96, 1);
 }
 
+/* Override old generic Webflow template banner backgrounds with high-fashion model photography */
+.contact-info-section {
+  background-image: url("https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=2000&q=85") !important;
+  background-position: 50% 28% !important;
+  background-size: cover !important;
+}
+
+.about-image-single-block {
+  background-image: url("https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=2000&q=85") !important;
+  background-position: 50% 30% !important;
+  background-size: cover !important;
+}
+
 /* ==========================================================================
-   THE SOCIETY × REFLUX COLORFUL EDITORIAL SYSTEM
+   THE SOCIETY × REFLUX COLORFUL MODEL CASTING SYSTEM
    ========================================================================== */
 
 /* Fixed Print-Magazine Grain Overlay (Zero GPU Blur Overhead) */
@@ -63,31 +77,8 @@ select:focus-visible {
   inset: 0;
   z-index: 990;
   pointer-events: none;
-  opacity: 0.024;
+  opacity: 0.022;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-
-/* Hero Cover Masthead Metadata Strip */
-.editorial-masthead-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 12px 18px;
-  margin-bottom: 36px;
-  border: 1px solid var(--dark);
-  border-radius: var(--_typography---border-radius);
-  background-color: #faf9f6;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.editorial-masthead-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
 }
 
 .editorial-color-dot {
@@ -97,6 +88,46 @@ select:focus-visible {
   border: 1px solid var(--dark);
   display: inline-block;
   flex-shrink: 0;
+}
+
+/* Hero Demo Pill & Division Quick-Jump Bar */
+.hero-demo-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-division-quickbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.hero-division-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 15px;
+  border: 1px solid var(--dark);
+  border-radius: 999px;
+  background-color: var(--chip-bg, #a7d8de);
+  color: var(--dark);
+  font-family: var(--_typography---body-font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease;
+}
+
+.hero-division-chip:hover {
+  transform: translate3d(0, -2px, 0);
+  box-shadow: 0 4px 0 0 var(--dark);
 }
 
 /* Floating Architectural Frame Tags */
@@ -140,7 +171,7 @@ select:focus-visible {
   border-bottom: 1px solid var(--dark);
   background-color: #faf9f6;
   padding: 16px 0;
-  margin-bottom: 110px;
+  margin-bottom: 90px;
 }
 
 .editorial-marquee-track {
@@ -200,10 +231,12 @@ select:focus-visible {
   }
 }
 
-/* The Representation Board (Society-Inspired Roster & Comp-Cards) */
+/* ==========================================================================
+   THE SOCIETY MODEL BOARD (8 DEMO MODELS & COMP CARDS)
+   ========================================================================== */
 .society-board-section {
   padding-top: 20px;
-  padding-bottom: 160px;
+  padding-bottom: 130px;
   position: relative;
 }
 
@@ -212,9 +245,9 @@ select:focus-visible {
   flex-wrap: wrap;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 28px;
-  margin-bottom: 64px;
-  padding-bottom: 28px;
+  gap: 24px;
+  margin-bottom: 52px;
+  padding-bottom: 26px;
   border-bottom: 1px solid var(--dark);
 }
 
@@ -233,17 +266,17 @@ select:focus-visible {
   border-radius: 999px;
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--dark);
 }
 
 .society-eyebrow-code {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
-  color: #555555;
+  color: #444444;
 }
 
 .society-division-tabs {
@@ -256,14 +289,14 @@ select:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 11px 20px;
+  padding: 11px 18px;
   border: 1px solid var(--dark);
   border-radius: 999px;
   cursor: pointer;
   font-family: var(--_typography---body-font);
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
   color: var(--dark);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
@@ -271,9 +304,9 @@ select:focus-visible {
 }
 
 .society-division-tab:hover {
-  background-color: var(--tab-color) !important;
+  background-color: var(--tab-color, #a7d8de) !important;
   transform: translate3d(0, -2px, 0);
-  box-shadow: 0 6px 0 0 var(--dark);
+  box-shadow: 0 5px 0 0 var(--dark);
 }
 
 .society-division-tab.is-active {
@@ -295,20 +328,20 @@ select:focus-visible {
   font-weight: 700;
 }
 
-/* Asymmetrical 3-Column Magazine Comp-Card Grid */
+/* 4-Column High-Fashion Model Roster Grid (Inspired by The Society Management) */
 .society-comp-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 36px 30px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px 24px;
   align-items: start;
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 1200px) {
   .society-card-offset-mid {
-    margin-top: 48px;
+    margin-top: 32px;
   }
   .society-card-offset-right {
-    margin-top: 20px;
+    margin-top: 16px;
   }
 }
 
@@ -323,7 +356,7 @@ select:focus-visible {
 
 .society-comp-card:hover {
   transform: translate3d(0, -8px, 0);
-  box-shadow: 0 14px 0 0 var(--card-accent, #a7d8de), 0 14px 0 1px var(--dark);
+  box-shadow: 0 12px 0 0 var(--card-accent, #a7d8de), 0 12px 0 1px var(--dark);
 }
 
 .society-comp-card-link {
@@ -338,9 +371,9 @@ select:focus-visible {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  padding: 10px 16px;
+  padding: 9px 14px;
   border-bottom: 1px solid var(--dark);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -348,7 +381,8 @@ select:focus-visible {
 
 .society-card-serial {
   font-family: var(--_typography---title-font);
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: 700;
   letter-spacing: 0.08em;
 }
 
@@ -357,18 +391,14 @@ select:focus-visible {
   background-color: var(--white);
   border: 1px solid var(--dark);
   border-radius: 999px;
-  font-size: 10px;
-}
-
-.society-card-bureau {
-  opacity: 0.85;
-  font-size: 10px;
+  font-size: 9px;
+  font-weight: 700;
 }
 
 .society-card-media-mask {
   position: relative;
   width: 100%;
-  height: 450px;
+  height: 410px;
   overflow: hidden;
   background-color: #f3f2ee;
   border-bottom: 1px solid var(--dark);
@@ -380,44 +410,68 @@ select:focus-visible {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
   transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.society-card-top-overlay {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 3;
+}
+
+.society-card-ig-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  background-color: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--dark);
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--dark);
 }
 
 .society-card-booking-chip {
   position: absolute;
-  left: 14px;
-  bottom: 14px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
   z-index: 3;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  background-color: rgba(255, 255, 255, 0.94);
+  gap: 7px;
+  padding: 6px 11px;
+  background-color: rgba(255, 255, 255, 0.95);
   border: 1px solid var(--dark);
   border-radius: 999px;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .society-card-footer {
-  padding: 20px 18px 18px;
+  padding: 16px 14px 14px;
   background-color: var(--white);
 }
 
 .society-card-name-row {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: 10px;
+  margin-bottom: 14px;
 }
 
 .society-card-name {
   font-family: var(--_typography---title-font);
-  font-size: 38px;
+  font-size: 32px;
   line-height: 1;
   font-weight: 600;
   letter-spacing: 0.03em;
@@ -425,16 +479,26 @@ select:focus-visible {
   margin: 0;
 }
 
+.society-card-sub-bureau {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #555555;
+  margin-top: 5px;
+}
+
 .society-card-arrow {
-  width: 38px;
-  height: 38px;
+  width: 34px;
+  height: 34px;
   border: 1px solid var(--dark);
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 600;
+  flex-shrink: 0;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
     background-color 0.35s ease;
 }
@@ -446,32 +510,334 @@ select:focus-visible {
 .society-card-specs-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  padding-top: 14px;
-  border-top: 1px solid rgba(0, 0, 0, 0.14);
+  gap: 8px 10px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .society-spec-cell {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
 }
 
 .society-spec-key {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
   color: #666666;
 }
 
 .society-spec-val {
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 700;
   color: var(--dark);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* ==========================================================================
+   THE SOCIETY 4-PANEL RUNWAY SHOWS STRIP (INSPIRED BY THESOCIETYMANAGEMENT.COM)
+   ========================================================================== */
+.society-runway-strip {
+  display: flex;
+  width: 100%;
+  height: 560px;
+  border: 1px solid var(--dark);
+  border-radius: var(--_typography---border-radius);
+  overflow: hidden;
+  background-color: var(--dark);
+}
+
+.society-runway-panel {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+  border-right: 1px solid var(--dark);
+  text-decoration: none;
+  color: var(--white);
+  transition: flex 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.society-runway-panel:last-child {
+  border-right: none;
+}
+
+.society-runway-panel.is-expanded,
+.society-runway-panel:hover {
+  flex: 1.65;
+}
+
+.society-runway-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.society-runway-panel:hover .society-runway-img {
+  transform: scale3d(1.06, 1.06, 1);
+}
+
+.society-runway-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.28) 0%,
+    rgba(0, 0, 0, 0) 40%,
+    rgba(0, 0, 0, 0.82) 100%
+  );
+}
+
+.society-runway-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.society-runway-tag {
+  padding: 5px 12px;
+  border: 1px solid var(--dark);
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--dark);
+}
+
+.society-runway-city {
+  padding: 4px 10px;
+  background-color: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--dark);
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--dark);
+}
+
+.society-runway-bottom {
+  transform: translate3d(0, 0, 0);
+}
+
+.society-runway-walker {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--runway-accent, #a7d8de);
+  margin-bottom: 4px;
+}
+
+.society-runway-designer {
+  font-family: var(--_typography---title-font);
+  font-size: 32px;
+  line-height: 1.05;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin: 0;
+}
+
+/* ==========================================================================
+   INTERACTIVE DIGITAL COMP-CARD & RUNWAY VIDEO MODAL (MORNING MEETING DEMO)
+   ========================================================================== */
+.comp-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background-color: rgba(0, 0, 0, 0.68);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.comp-modal-sheet {
+  width: min(1040px, 96vw);
+  max-height: 92vh;
+  overflow-y: auto;
+  background-color: var(--white);
+  border: 2px solid var(--dark);
+  border-radius: var(--_typography---border-radius);
+  box-shadow: 0 20px 0 0 var(--dark);
+}
+
+.comp-modal-topbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 22px;
+  border-bottom: 1px solid var(--dark);
+}
+
+.comp-modal-topbar-left {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.comp-modal-demo-badge {
+  padding: 4px 12px;
+  background-color: var(--white);
+  border: 1px solid var(--dark);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.comp-modal-division {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.comp-modal-close {
+  padding: 7px 16px;
+  background-color: var(--dark);
+  color: var(--white);
+  border: 1px solid var(--dark);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  cursor: pointer;
+}
+
+.comp-modal-body {
+  padding: 24px;
+}
+
+.comp-modal-media-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.comp-modal-media-cell {
+  position: relative;
+  height: 360px;
+  border: 1px solid var(--dark);
+  border-radius: var(--_typography---border-radius);
+  overflow: hidden;
+  background-color: #f3f2ee;
+}
+
+.comp-modal-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.comp-modal-media-tag {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  padding: 4px 10px;
+  background-color: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--dark);
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.comp-modal-details-row {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 24px;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid var(--dark);
+  border-radius: var(--_typography---border-radius);
+  background-color: #faf9f6;
+  margin-bottom: 22px;
+}
+
+.comp-modal-name {
+  font-family: var(--_typography---title-font);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+}
+
+.comp-modal-booking,
+.comp-modal-ig {
+  font-size: 13px;
+  margin: 4px 0;
+  color: #333333;
+}
+
+.comp-modal-stats-table {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.comp-modal-stat-box {
+  padding: 10px 12px;
+  background-color: var(--white);
+  border: 1px solid var(--dark);
+  border-radius: var(--_typography---border-radius);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.comp-modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.comp-modal-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 24px;
+  border: 1px solid var(--dark);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--dark);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.comp-modal-btn.secondary {
+  background-color: var(--white);
+}
+
+.comp-modal-btn:hover {
+  transform: translate3d(0, -2px, 0);
+  box-shadow: 0 5px 0 0 var(--dark);
 }
 
 /* Video Section Editorial Film Strip Bar */
@@ -536,6 +902,13 @@ select:focus-visible {
   }
 }
 
+/* Medium Desktop (992px - 1199px): 2x4 Comp-Card Grid */
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  .society-comp-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 /* ==========================================================================
    TABLET & MOBILE RESPONSIVE OPTIMIZATION (<= 991px)
    ========================================================================== */
@@ -574,17 +947,12 @@ select:focus-visible {
     margin-left: auto;
   }
 
-  /* Show both the 6-dot Studio Drawer trigger & Morphing Hamburger on tablet/mobile */
   .nav-sidebar-logo-block {
     display: inline-flex !important;
   }
 
   .dropdown-menu-button.w-nav-button {
     display: inline-flex !important;
-  }
-
-  .editorial-masthead-center {
-    display: none;
   }
 
   .editorial-marquee-strip {
@@ -602,6 +970,25 @@ select:focus-visible {
 
   .society-card-media-mask {
     height: 380px;
+  }
+
+  .society-runway-strip {
+    flex-wrap: wrap;
+    height: auto;
+  }
+
+  .society-runway-panel {
+    flex: 1 1 50%;
+    height: 360px;
+    border-bottom: 1px solid var(--dark);
+  }
+
+  .comp-modal-media-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .comp-modal-details-row {
+    grid-template-columns: 1fr;
   }
 
   /* Home Service Cards: Always reveal descriptions & subtle pastel tint on touch devices */
@@ -705,15 +1092,6 @@ select:focus-visible {
     padding-bottom: 64px;
   }
 
-  .editorial-masthead-bar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-    padding: 10px 14px;
-    margin-bottom: 24px;
-    font-size: 10px;
-  }
-
   /* Fluid Hero Typography & Image Proportions */
   .hero-title {
     font-size: clamp(46px, 14.5vw, 90px) !important;
@@ -783,7 +1161,20 @@ select:focus-visible {
   }
 
   .society-card-media-mask {
-    height: 360px;
+    height: 390px;
+  }
+
+  .society-runway-panel {
+    flex: 1 1 100%;
+    height: 340px;
+  }
+
+  .comp-modal-media-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .comp-modal-stats-table {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .editorial-video-caption-bar {

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -10,8 +10,10 @@ import Footer from "@/components/Footer";
 import {
   ASSETS,
   PROJECTS,
+  RUNWAY_SHOW_STRIP,
   SERVICES,
   TALENT_BOARD,
+  TalentCompCard,
   TESTIMONIALS,
 } from "@/data/agencyData";
 
@@ -36,28 +38,28 @@ const TESTIMONIAL_QUOTE_ICONS = [
 const COUNTERS = [
   {
     id: "counter-1",
-    label: "years of experience",
+    label: "years of model management (demo)",
     accent: "#a7d8de",
     col1: ["3", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
     col2: ["9", "2", "3", "4", "5", "6", "7", "8", "9", "9"],
   },
   {
     id: "counter-2",
-    label: "casting awards earned",
+    label: "vogue & Harper's covers (demo)",
     accent: "#f5a3a3",
     col1: ["6", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
     col2: ["8", "2", "3", "4", "5", "6", "7", "8", "9", "8"],
   },
   {
     id: "counter-3",
-    label: "global productions cast",
+    label: "global runway exclusives (demo)",
     accent: "#f8c794",
     col1: ["2", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
     col2: ["7", "2", "3", "4", "5", "6", "7", "8", "9", "7"],
   },
   {
     id: "counter-4",
-    label: "studios served globally",
+    label: "luxury fashion houses cast (demo)",
     accent: "#cbb7f6",
     col1: ["9", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
     col2: ["4", "2", "3", "4", "5", "6", "7", "8", "9", "4"],
@@ -65,24 +67,24 @@ const COUNTERS = [
 ];
 
 const DIVISION_FILTERS = [
-  { key: "ALL", label: "All Divisions", count: "06", color: "#a7d8de" },
-  { key: "SCREEN LEADS", label: "Screen Leads", count: "02", color: "#f5a3a3" },
+  { key: "ALL", label: "All Models (Demo)", count: "08", color: "#a7d8de" },
   {
-    key: "COUTURE RUNWAY",
-    label: "Couture Runway",
-    count: "02",
-    color: "#f8c794",
+    key: "SOCIETY WOMEN",
+    label: "Society Women",
+    count: "04",
+    color: "#f5a3a3",
   },
-  { key: "NEW FACES", label: "New Faces", count: "02", color: "#cbb7f6" },
+  { key: "SOCIETY MEN", label: "Society Men", count: "02", color: "#f8c794" },
+  { key: "DEVELOPMENT", label: "Development", count: "02", color: "#cbb7f6" },
 ] as const;
 
 const MARQUEE_ITEMS = [
-  { text: "THE SOCIETY OF SCREEN & RUNWAY", color: "#a7d8de" },
-  { text: "NEW YORK · PARIS · LONDON · TOKYO", color: "#f5a3a3" },
-  { text: "PRINCIPAL FILM CASTING", color: "#f8c794" },
-  { text: "HAUTE COUTURE WALKERS", color: "#cbb7f6" },
-  { text: "STREET CASTING & NEW FACES", color: "#a7d8de" },
-  { text: "AUTUMN / WINTER ROSTER OPEN", color: "#f5a3a3" },
+  { text: "SOCIETY WOMEN — DEMO ROSTER", color: "#a7d8de" },
+  { text: "SOCIETY MEN — DEMO ROSTER", color: "#f5a3a3" },
+  { text: "NEW FACES & DEVELOPMENT (DEMO)", color: "#f8c794" },
+  { text: "PARIS · MILAN · NEW YORK · LONDON", color: "#cbb7f6" },
+  { text: "HAUTE COUTURE RUNWAY CASTING (DEMO)", color: "#a7d8de" },
+  { text: "DIGITAL COMP CARDS & POLAROIDS (DEMO)", color: "#f5a3a3" },
 ];
 
 export default function HomePage() {
@@ -91,15 +93,35 @@ export default function HomePage() {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const [activeDivision, setActiveDivision] = useState<string>("ALL");
   const [hoveredTalent, setHoveredTalent] = useState<string | null>(null);
+  const [hoveredRunway, setHoveredRunway] = useState<string | null>(null);
+  const [selectedModel, setSelectedModel] = useState<TalentCompCard | null>(
+    null
+  );
 
   const filteredTalent =
     activeDivision === "ALL"
       ? TALENT_BOARD
       : TALENT_BOARD.filter((t) => t.division === activeDivision);
 
-  const handleDivisionChange = (divKey: string) => {
-    if (divKey === activeDivision) return;
+  // Close Comp-Card Modal on Escape key
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setSelectedModel(null);
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
+  const handleDivisionChange = (divKey: string, scrollToBoard = false) => {
     setActiveDivision(divKey);
+    if (scrollToBoard && typeof window !== "undefined") {
+      const boardEl = document.getElementById("model-board");
+      if (boardEl) {
+        boardEl.scrollIntoView({ behavior: "smooth" });
+      }
+    }
     requestAnimationFrame(() => {
       gsap.fromTo(
         ".society-comp-card",
@@ -109,7 +131,7 @@ export default function HomePage() {
           opacity: 1,
           scale: 1,
           duration: 0.75,
-          stagger: 0.08,
+          stagger: 0.07,
           ease: "expo.out",
           overwrite: "auto",
         }
@@ -121,18 +143,7 @@ export default function HomePage() {
     () => {
       const mm = gsap.matchMedia();
 
-      // 1. Hero Masthead & Editorial Cover Reveal
-      gsap.fromTo(
-        ".editorial-masthead-bar",
-        { y: -24, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.9,
-          ease: "expo.out",
-        }
-      );
-
+      // 1. Hero Editorial Model Casting Reveal
       gsap.fromTo(
         ".hero-title",
         { y: 95, rotateX: -22, opacity: 0 },
@@ -167,7 +178,7 @@ export default function HomePage() {
         {
           width: "100%",
           duration: 1.25,
-          delay: 0.35,
+          delay: 0.3,
           ease: "expo.inOut",
           stagger: 0.15,
         }
@@ -179,7 +190,7 @@ export default function HomePage() {
         {
           scale: 1,
           duration: 1.5,
-          delay: 0.35,
+          delay: 0.3,
           ease: "expo.out",
           stagger: 0.15,
         }
@@ -192,12 +203,104 @@ export default function HomePage() {
           y: 0,
           opacity: 1,
           duration: 1.0,
-          delay: 0.75,
+          delay: 0.65,
           ease: "expo.out",
         }
       );
 
-      // 2. Service Section Smooth Scroll-In Choreography
+      // 2. The Society Model Board (Demo Roster) Smooth Scroll-In
+      gsap.fromTo(
+        ".society-board-header-reveal",
+        { y: 60, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.05,
+          stagger: 0.12,
+          ease: "expo.out",
+          scrollTrigger: {
+            trigger: ".society-board-section",
+            start: "top 82%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+
+      const compCards = gsap.utils.toArray<HTMLElement>(".society-comp-card");
+      compCards.forEach((card, i) => {
+        gsap.fromTo(
+          card,
+          { y: 75, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1.05,
+            delay: (i % 4) * 0.08,
+            ease: "expo.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 88%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+
+        const mediaWrap = card.querySelector(".society-card-media-mask");
+        if (mediaWrap) {
+          gsap.fromTo(
+            mediaWrap,
+            { clipPath: "inset(10% 0% 10% 0%)" },
+            {
+              clipPath: "inset(0% 0% 0% 0%)",
+              duration: 1.15,
+              delay: (i % 4) * 0.08,
+              ease: "expo.out",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 88%",
+                toggleActions: "play none none reverse",
+              },
+            }
+          );
+        }
+      });
+
+      // 3. The Society 4-Panel Runway Shows Strip Reveal
+      gsap.fromTo(
+        ".society-runway-header-reveal",
+        { y: 55, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.0,
+          ease: "expo.out",
+          scrollTrigger: {
+            trigger: ".society-runway-section",
+            start: "top 82%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+
+      gsap.fromTo(
+        ".society-runway-panel",
+        { y: 80, opacity: 0, scale: 0.97 },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 1.1,
+          stagger: 0.1,
+          ease: "expo.out",
+          scrollTrigger: {
+            trigger: ".society-runway-strip",
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+
+      // 4. Service Section Smooth Scroll-In Choreography
       gsap.fromTo(
         ".service-section .section-title-inner-block",
         { y: 65, opacity: 0 },
@@ -232,64 +335,7 @@ export default function HomePage() {
         }
       );
 
-      // 3. The Representation Board (Society-Inspired Roster) Smooth Scroll-In
-      gsap.fromTo(
-        ".society-board-header-reveal",
-        { y: 60, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.05,
-          stagger: 0.12,
-          ease: "expo.out",
-          scrollTrigger: {
-            trigger: ".society-board-section",
-            start: "top 82%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-
-      const compCards = gsap.utils.toArray<HTMLElement>(".society-comp-card");
-      compCards.forEach((card, i) => {
-        gsap.fromTo(
-          card,
-          { y: 80, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1.1,
-            delay: (i % 3) * 0.1,
-            ease: "expo.out",
-            scrollTrigger: {
-              trigger: card,
-              start: "top 88%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-
-        const mediaWrap = card.querySelector(".society-card-media-mask");
-        if (mediaWrap) {
-          gsap.fromTo(
-            mediaWrap,
-            { clipPath: "inset(12% 0% 12% 0%)" },
-            {
-              clipPath: "inset(0% 0% 0% 0%)",
-              duration: 1.2,
-              delay: (i % 3) * 0.1,
-              ease: "expo.out",
-              scrollTrigger: {
-                trigger: card,
-                start: "top 88%",
-                toggleActions: "play none none reverse",
-              },
-            }
-          );
-        }
-      });
-
-      // 4. Desktop-Only Sticky Scroll Choreographies (>=992px)
+      // 5. Desktop-Only Sticky Scroll Choreographies (>=992px)
       mm.add("(min-width: 992px)", () => {
         // A. Horizontal Scroll Projects Section (a-23)
         gsap.set(".projects-horizontal-bg-block.one", { opacity: 1 });
@@ -306,7 +352,6 @@ export default function HomePage() {
           },
         });
 
-        // 18% -> 24%: Letters rotateY(0deg -> 90deg)
         projectsTl.fromTo(
           ".projects-letter-3d",
           { rotateY: 0 },
@@ -314,7 +359,6 @@ export default function HomePage() {
           0.18
         );
 
-        // 20% -> 40%: Track moves 0% -> -20%, bg 1 -> bg 2
         projectsTl
           .fromTo(
             ".projects-info-inner-block",
@@ -332,7 +376,6 @@ export default function HomePage() {
             { opacity: 1, duration: 0.15, ease: "none" },
             0.25
           )
-          // 40% -> 60%: Track moves -20% -> -42%, bg 2 -> bg 3
           .to(
             ".projects-info-inner-block",
             { xPercent: -42, duration: 0.2, ease: "none" },
@@ -348,7 +391,6 @@ export default function HomePage() {
             { opacity: 1, duration: 0.15, ease: "none" },
             0.45
           )
-          // 60% -> 80%: Track moves -42% -> -70%, bg 3 -> bg 4
           .to(
             ".projects-info-inner-block",
             { xPercent: -70, duration: 0.25, ease: "none" },
@@ -451,7 +493,7 @@ export default function HomePage() {
           );
       });
 
-      // 4B. Tablet & Mobile Scroll Choreographies (<=991px)
+      // 5B. Tablet & Mobile Scroll Choreographies (<=991px)
       mm.add("(max-width: 991px)", () => {
         gsap.fromTo(
           ".projects-letter-3d",
@@ -550,7 +592,7 @@ export default function HomePage() {
         });
       });
 
-      // 5. About Badge & Description Smooth Scroll-In Reveal
+      // 6. About Badge & Description Smooth Scroll-In Reveal
       gsap.fromTo(
         ".about-subtext-block",
         { y: 55, opacity: 0 },
@@ -583,7 +625,7 @@ export default function HomePage() {
         }
       );
 
-      // 6. Slot-Machine Odometer Counters (a-25)
+      // 7. Slot-Machine Odometer Counters (a-25)
       gsap.set(".about-counter-frist-number-block", { yPercent: -90 });
       gsap.set(".about-counter-secend-number-block", { yPercent: 0 });
 
@@ -615,7 +657,7 @@ export default function HomePage() {
         },
       });
 
-      // 7. Video, Testimonial Header & Contact Section Smooth Reveal
+      // 8. Video, Testimonial Header & Contact Section Smooth Reveal
       gsap.fromTo(
         ".video-section",
         { clipPath: "inset(6% 4% 6% 4%)", scale: 0.97, opacity: 0.6 },
@@ -678,60 +720,51 @@ export default function HomePage() {
 
   return (
     <div ref={containerRef} className="editorial-page-shell">
-      {/* Subtle Print-Magazine Grain Overlay (Zero GPU Blur Cost) */}
+      {/* Subtle Print-Magazine Grain Overlay */}
       <div className="editorial-grain-overlay" aria-hidden="true" />
 
       <Navbar variant="light" />
 
-      {/* HERO SECTION (Reflux × The Society Cover Issue) */}
+      {/* =====================================================================
+          HERO SECTION (Reflux × The Society Management Model Casting Cover)
+         ===================================================================== */}
       <section className="section hero-section" style={{ position: "relative" }}>
         <div className="w-layout-blockcontainer container w-container">
-          {/* Editorial Magazine Masthead Metadata Bar */}
-          <div className="editorial-masthead-bar">
-            <div className="editorial-masthead-item">
-              <span
-                className="editorial-color-dot"
-                style={{ backgroundColor: "#a7d8de" }}
-              />
-              <span>ISSUE Nº 04 — THE CASTING SOCIETY</span>
-            </div>
-            <div className="editorial-masthead-item editorial-masthead-center">
-              <span>BUREAUS: NEW YORK · PARIS · LONDON · TOKYO</span>
-            </div>
-            <div className="editorial-masthead-item">
-              <span
-                className="editorial-color-dot"
-                style={{ backgroundColor: "#f5a3a3" }}
-              />
-              <span>SEASON AW25 / DIRECT BOOKING OPEN</span>
-            </div>
-          </div>
-
           <div className="hero-main-block">
             <div className="hero-inner-block">
-              {/* Row 1: RE + Image 1 + CREATE */}
+              {/* Row 1: THE + High-Fashion Model Video/Portrait Window 1 + SOCIETY */}
               <div className="w-layout-grid hero-grid-block">
                 <div className="hero-text-left-block">
                   <h1 className="hero-title">re</h1>
                   <div className="hero-text-small-text-block hero-badge-anim">
-                    <h2 className="hero-small-text">casting</h2>
+                    <h2 className="hero-small-text">models</h2>
                   </div>
                 </div>
                 <div
                   className="hero-centar-block"
                   style={{ overflow: "hidden", position: "relative" }}
                 >
-                  <img
-                    src={ASSETS.heroImage1}
-                    loading="eager"
-                    alt="Principal Talent Portrait"
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    poster={ASSETS.heroImage1}
                     className="hero-image"
-                  />
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      display: "block",
+                    }}
+                  >
+                    <source src={ASSETS.heroVideo1} type="video/mp4" />
+                  </video>
                   <span
                     className="editorial-frame-tag"
                     style={{ backgroundColor: "#a7d8de" }}
                   >
-                    FIG. 01
+                    DEMO MODEL REEL 01
                   </span>
                 </div>
                 <div className="hero-text-right-block">
@@ -739,47 +772,104 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Row 2: IDENTITIES + Image 2 */}
+              {/* Row 2: CASTING + High-Fashion Runway Video/Portrait Window 2 */}
               <div className="w-layout-grid hero-grid-block two">
                 <div className="hero-text-right-block">
                   <h1 className="hero-title">identities</h1>
                   <div className="hero-text-small-text-block two hero-badge-anim">
-                    <h2 className="hero-small-text">talent</h2>
+                    <h2 className="hero-small-text">casting</h2>
                   </div>
                 </div>
                 <div
                   className="hero-centar-block"
                   style={{ overflow: "hidden", position: "relative" }}
                 >
-                  <img
-                    src={ASSETS.heroImage2}
-                    loading="eager"
-                    alt="Editorial Runway Casting"
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    poster={ASSETS.heroImage2}
                     className="hero-image"
-                  />
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      display: "block",
+                    }}
+                  >
+                    <source src={ASSETS.heroVideo2} type="video/mp4" />
+                  </video>
                   <span
                     className="editorial-frame-tag"
                     style={{ backgroundColor: "#f8c794" }}
                   >
-                    FIG. 02
+                    DEMO RUNWAY REEL 02
                   </span>
                 </div>
               </div>
             </div>
 
-            {/* Hero Bottom Bar */}
+            {/* Hero Bottom Bar + Society Division Quick-Jump Pills */}
             <div className="hero-inner-info-block">
               <div className="hero-description-block">
-                <p className="hero-description">
-                  Your production deserves more than a standard roster—it needs a
-                  pulse. We cast magnetic screen leads, sculptural runway walkers,
-                  and authentic faces that stay unforgettable.
+                <div className="hero-demo-pill-row">
+                  <span
+                    className="society-eyebrow-pill"
+                    style={{ backgroundColor: "#a7d8de" }}
+                  >
+                    LIVE DEMO — MODEL CASTING &amp; MANAGEMENT
+                  </span>
+                  <span className="society-eyebrow-code">
+                    NEW YORK · PARIS · MILAN · LONDON
+                  </span>
+                </div>
+                <p className="hero-description" style={{ marginTop: "12px" }}>
+                  Representing high-fashion runway walkers, magazine cover
+                  faces, and emerging new talent. Explore our interactive{" "}
+                  <strong>Demo Model Roster</strong>, digital comp cards, and
+                  runway show strips prepared for today&apos;s presentation.
                 </p>
+                {/* Quick Division Jump Buttons */}
+                <div className="hero-division-quickbar">
+                  <button
+                    type="button"
+                    onClick={() => handleDivisionChange("SOCIETY WOMEN", true)}
+                    className="hero-division-chip"
+                    style={{ "--chip-bg": "#f5a3a3" } as React.CSSProperties}
+                  >
+                    Society Women (Demo) ↘
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleDivisionChange("SOCIETY MEN", true)}
+                    className="hero-division-chip"
+                    style={{ "--chip-bg": "#f8c794" } as React.CSSProperties}
+                  >
+                    Society Men (Demo) ↘
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleDivisionChange("DEVELOPMENT", true)}
+                    className="hero-division-chip"
+                    style={{ "--chip-bg": "#cbb7f6" } as React.CSSProperties}
+                  >
+                    Development (Demo) ↘
+                  </button>
+                  <a
+                    href="#runway-shows"
+                    className="hero-division-chip"
+                    style={{ "--chip-bg": "#a7d8de" } as React.CSSProperties}
+                  >
+                    Runway Shows (Demo) ↘
+                  </a>
+                </div>
               </div>
+
               <div className="hero-icon-block">
-                <Link
-                  href="/contact-us"
-                  aria-label="Start a Casting Inquiry"
+                <a
+                  href="#model-board"
+                  aria-label="Explore Model Roster"
                   className="hero-icon-inner-block w-inline-block"
                 >
                   <img
@@ -788,7 +878,7 @@ export default function HomePage() {
                     alt="Arrow Icon"
                     className="hero-button-icon"
                   />
-                </Link>
+                </a>
                 <div
                   className="hero-side-icon-block"
                   style={{ backgroundColor: "#f5a3a3" }}
@@ -804,7 +894,10 @@ export default function HomePage() {
       </section>
 
       {/* KINETIC EDITORIAL RUNWAY TICKER STRIP */}
-      <div className="editorial-marquee-strip" aria-label="Agency Divisions Ticker">
+      <div
+        className="editorial-marquee-strip"
+        aria-label="Model Casting Divisions Ticker"
+      >
         <div className="editorial-marquee-track">
           {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, idx) => (
             <div key={idx} className="editorial-marquee-item">
@@ -821,17 +914,323 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* SERVICES SECTION */}
+      {/* =====================================================================
+          THE SOCIETY MODEL BOARD (8 DEMO MODELS WITH DOUBLE-IMAGE HOVER & COMP CARDS)
+         ===================================================================== */}
+      <section
+        id="model-board"
+        className="section society-board-section"
+        style={{ paddingTop: "20px" }}
+      >
+        <div className="w-layout-blockcontainer container w-container">
+          <div className="society-board-header">
+            <div className="society-board-title-wrap society-board-header-reveal">
+              <div className="society-eyebrow-row">
+                <span
+                  className="society-eyebrow-pill"
+                  style={{ backgroundColor: "#f5a3a3" }}
+                >
+                  DEMO MODEL ROSTER — AW25 / SS26
+                </span>
+                <span className="society-eyebrow-code">
+                  HOVER TO SWAP LOOKBOOK · CLICK FOR DIGITAL COMP CARD (DEMO)
+                </span>
+              </div>
+              <h2 className="section-title" style={{ marginTop: "10px" }}>
+                the society model board
+              </h2>
+            </div>
+
+            {/* Interactive Division Switcher Pills */}
+            <div
+              className="society-division-tabs society-board-header-reveal"
+              role="tablist"
+              aria-label="Model Divisions"
+            >
+              {DIVISION_FILTERS.map((tab) => {
+                const isActive = activeDivision === tab.key;
+                return (
+                  <button
+                    key={tab.key}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    onClick={() => handleDivisionChange(tab.key)}
+                    className={`society-division-tab ${
+                      isActive ? "is-active" : ""
+                    }`}
+                    style={
+                      {
+                        "--tab-color": tab.color,
+                        backgroundColor: isActive ? tab.color : "#ffffff",
+                      } as React.CSSProperties
+                    }
+                  >
+                    <span className="society-tab-label">{tab.label}</span>
+                    <span className="society-tab-count">{tab.count}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* 4-Column High-Fashion Model Comp-Card Grid */}
+          <div className="society-comp-grid">
+            {filteredTalent.map((talent, idx) => {
+              const isCardHovered = hoveredTalent === talent.id;
+              const offsetClass =
+                idx % 4 === 1
+                  ? "society-card-offset-mid"
+                  : idx % 4 === 3
+                  ? "society-card-offset-right"
+                  : "";
+              return (
+                <article
+                  key={talent.id}
+                  onMouseEnter={() => setHoveredTalent(talent.id)}
+                  onMouseLeave={() => setHoveredTalent(null)}
+                  onClick={() => setSelectedModel(talent)}
+                  className={`society-comp-card ${offsetClass}`}
+                  style={
+                    {
+                      "--card-accent": talent.accentColor,
+                      cursor: "pointer",
+                    } as React.CSSProperties
+                  }
+                >
+                  <div className="society-comp-card-link">
+                    {/* Top Tear-Sheet Metadata Header with Explicit DEMO Badge */}
+                    <div
+                      className="society-card-topbar"
+                      style={{ backgroundColor: talent.accentColor }}
+                    >
+                      <span className="society-card-serial">
+                        DEMO MODEL · {talent.index}
+                      </span>
+                      <span className="society-card-division-tag">
+                        {talent.division}
+                      </span>
+                    </div>
+
+                    {/* Dual-Image Lookbook Viewport (Portrait <-> Runway/Campaign Crossfade) */}
+                    <div className="society-card-media-mask">
+                      <img
+                        src={talent.primaryImage}
+                        loading="lazy"
+                        alt={`${talent.name} — ${talent.division}`}
+                        className="society-card-img primary"
+                        style={{
+                          transform: isCardHovered
+                            ? "scale3d(1.07, 1.07, 1)"
+                            : "scale3d(1, 1, 1)",
+                          opacity: isCardHovered ? 0 : 1,
+                        }}
+                      />
+                      <img
+                        src={talent.secondaryImage}
+                        loading="lazy"
+                        alt={`${talent.name} Campaign Look`}
+                        className="society-card-img secondary"
+                        style={{
+                          transform: isCardHovered
+                            ? "scale3d(1.02, 1.02, 1)"
+                            : "scale3d(1.1, 1.1, 1)",
+                          opacity: isCardHovered ? 1 : 0,
+                        }}
+                      />
+
+                      {/* Top-Left Bureau & Instagram Reach Tag */}
+                      <div className="society-card-top-overlay">
+                        <span className="society-card-ig-badge">
+                          {talent.instagramHandle} · {talent.followers} (DEMO)
+                        </span>
+                      </div>
+
+                      {/* Floating Booking Pill */}
+                      <div className="society-card-booking-chip">
+                        <span
+                          className="editorial-color-dot"
+                          style={{ backgroundColor: talent.accentColor }}
+                        />
+                        <span>{talent.latestBooking}</span>
+                      </div>
+                    </div>
+
+                    {/* Bottom Comp-Card Typography & Full Model Measurements */}
+                    <div className="society-card-footer">
+                      <div className="society-card-name-row">
+                        <div>
+                          <h3 className="society-card-name">{talent.name}</h3>
+                          <div className="society-card-sub-bureau">
+                            {talent.bureau} ·{" "}
+                            <span style={{ textDecoration: "underline" }}>
+                              OPEN COMP CARD (DEMO)
+                            </span>
+                          </div>
+                        </div>
+                        <span
+                          className="society-card-arrow"
+                          style={{
+                            backgroundColor: isCardHovered
+                              ? talent.accentColor
+                              : "transparent",
+                          }}
+                        >
+                          ↗
+                        </span>
+                      </div>
+
+                      {/* Authentic 6-Stat Model Agency Measurements Strip */}
+                      <div className="society-card-specs-grid">
+                        <div className="society-spec-cell">
+                          <span className="society-spec-key">HEIGHT</span>
+                          <span className="society-spec-val">
+                            {talent.stats.height}
+                          </span>
+                        </div>
+                        <div className="society-spec-cell">
+                          <span className="society-spec-key">BUST / CHEST</span>
+                          <span className="society-spec-val">
+                            {talent.stats.bust}
+                          </span>
+                        </div>
+                        <div className="society-spec-cell">
+                          <span className="society-spec-key">WAIST</span>
+                          <span className="society-spec-val">
+                            {talent.stats.waist}
+                          </span>
+                        </div>
+                        <div className="society-spec-cell">
+                          <span className="society-spec-key">HIPS</span>
+                          <span className="society-spec-val">
+                            {talent.stats.hips}
+                          </span>
+                        </div>
+                        <div className="society-spec-cell">
+                          <span className="society-spec-key">SHOE</span>
+                          <span className="society-spec-val">
+                            {talent.stats.shoe}
+                          </span>
+                        </div>
+                        <div className="society-spec-cell">
+                          <span className="society-spec-key">EYES / HAIR</span>
+                          <span className="society-spec-val">
+                            {talent.stats.eyes} · {talent.stats.hair}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          THE SOCIETY 4-PANEL RUNWAY SHOWS STRIP (INSPIRED BY THESOCIETYMANAGEMENT.COM)
+         ===================================================================== */}
+      <section
+        id="runway-shows"
+        className="section society-runway-section"
+        style={{ paddingTop: "10px", paddingBottom: "140px" }}
+      >
+        <div className="w-layout-blockcontainer container w-container">
+          <div className="society-board-header society-runway-header-reveal">
+            <div className="society-board-title-wrap">
+              <div className="society-eyebrow-row">
+                <span
+                  className="society-eyebrow-pill"
+                  style={{ backgroundColor: "#f8c794" }}
+                >
+                  SHOWS ARCHIVE — DEMO CATWALK STRIP
+                </span>
+                <span className="society-eyebrow-code">
+                  PARIS · MILAN · NEW YORK · LONDON FASHION WEEKS (DEMO)
+                </span>
+              </div>
+              <h2 className="section-title" style={{ marginTop: "10px" }}>
+                season runway shows
+              </h2>
+            </div>
+            <Link
+              href="/portfolio"
+              className="society-division-tab"
+              style={{
+                backgroundColor: "#a7d8de",
+                textDecoration: "none",
+              }}
+            >
+              <span>View All 09 Demo Campaigns</span>
+              <span>↗</span>
+            </Link>
+          </div>
+
+          {/* 4-Panel Expanding Catwalk Strip */}
+          <div className="society-runway-strip">
+            {RUNWAY_SHOW_STRIP.map((look) => {
+              const isHovered = hoveredRunway === look.id;
+              return (
+                <Link
+                  key={look.id}
+                  href="/portfolio"
+                  onMouseEnter={() => setHoveredRunway(look.id)}
+                  onMouseLeave={() => setHoveredRunway(null)}
+                  className={`society-runway-panel ${
+                    isHovered ? "is-expanded" : ""
+                  }`}
+                  style={
+                    {
+                      "--runway-accent": look.accentColor,
+                    } as React.CSSProperties
+                  }
+                >
+                  <img
+                    src={look.image}
+                    loading="lazy"
+                    alt={look.designer}
+                    className="society-runway-img"
+                  />
+                  <div className="society-runway-overlay">
+                    <div className="society-runway-top">
+                      <span
+                        className="society-runway-tag"
+                        style={{ backgroundColor: look.accentColor }}
+                      >
+                        {look.lookNumber}
+                      </span>
+                      <span className="society-runway-city">{look.city}</span>
+                    </div>
+                    <div className="society-runway-bottom">
+                      <div className="society-runway-walker">
+                        {look.modelName}
+                      </div>
+                      <h3 className="society-runway-designer">
+                        {look.designer}
+                      </h3>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          MODEL CASTING DIVISIONS SECTION (Reflux 4-Card Interactive Grid)
+         ===================================================================== */}
       <section className="section service-section">
         <div className="w-layout-blockcontainer container w-container">
           <div className="service-main-block">
             <div className="section-title-main-block">
               <div className="section-title-inner-block">
                 <div className="section-subtitle">
-                  fearless minds build
+                  representation &amp; casting divisions (demo)
                 </div>
                 <h2 className="section-title">
-                  talent reshapes the screen
+                  models that define the season
                 </h2>
               </div>
             </div>
@@ -840,10 +1239,7 @@ export default function HomePage() {
               {homeServices.map((service, idx) => {
                 const isHovered = hoveredService === idx;
                 return (
-                  <div
-                    key={service.id}
-                    className="service-card-entrance"
-                  >
+                  <div key={service.id} className="service-card-entrance">
                     <div
                       onMouseEnter={() => setHoveredService(idx)}
                       onMouseLeave={() => setHoveredService(null)}
@@ -902,7 +1298,7 @@ export default function HomePage() {
                             backgroundColor: service.color,
                           }}
                         >
-                          0{idx + 1} / 04
+                          DEMO 0{idx + 1}
                         </span>
                       </div>
                       <div
@@ -939,190 +1335,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* THE SOCIETY MANAGEMENT INSPIRED SECTION: THE REPRESENTATION BOARD (COLORFUL ARTISTIC COMP-CARDS) */}
-      <section className="section society-board-section">
-        <div className="w-layout-blockcontainer container w-container">
-          <div className="society-board-header">
-            <div className="society-board-title-wrap society-board-header-reveal">
-              <div className="society-eyebrow-row">
-                <span
-                  className="society-eyebrow-pill"
-                  style={{ backgroundColor: "#f8c794" }}
-                >
-                  REPRESENTATION ARCHIVE
-                </span>
-                <span className="society-eyebrow-code">
-                  DIRECT BOOKING BOARD — AW25
-                </span>
-              </div>
-              <h2 className="section-title" style={{ marginTop: "10px" }}>
-                faces that command the frame
-              </h2>
-            </div>
-
-            {/* Interactive Division Switcher Pills */}
-            <div
-              className="society-division-tabs society-board-header-reveal"
-              role="tablist"
-              aria-label="Talent Divisions"
-            >
-              {DIVISION_FILTERS.map((tab) => {
-                const isActive = activeDivision === tab.key;
-                return (
-                  <button
-                    key={tab.key}
-                    type="button"
-                    role="tab"
-                    aria-selected={isActive}
-                    onClick={() => handleDivisionChange(tab.key)}
-                    className={`society-division-tab ${
-                      isActive ? "is-active" : ""
-                    }`}
-                    style={
-                      {
-                        "--tab-color": tab.color,
-                        backgroundColor: isActive ? tab.color : "#ffffff",
-                      } as React.CSSProperties
-                    }
-                  >
-                    <span className="society-tab-label">{tab.label}</span>
-                    <span className="society-tab-count">{tab.count}</span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Editorial Tear-Sheet / Comp-Card Grid */}
-          <div className="society-comp-grid">
-            {filteredTalent.map((talent, idx) => {
-              const isCardHovered = hoveredTalent === talent.id;
-              const offsetClass =
-                idx % 3 === 1
-                  ? "society-card-offset-mid"
-                  : idx % 3 === 2
-                  ? "society-card-offset-right"
-                  : "";
-              return (
-                <article
-                  key={talent.id}
-                  onMouseEnter={() => setHoveredTalent(talent.id)}
-                  onMouseLeave={() => setHoveredTalent(null)}
-                  className={`society-comp-card ${offsetClass}`}
-                  style={
-                    {
-                      "--card-accent": talent.accentColor,
-                    } as React.CSSProperties
-                  }
-                >
-                  <Link
-                    href={`/portfolio/${talent.projectSlug}`}
-                    className="society-comp-card-link"
-                  >
-                    {/* Top Tear-Sheet Metadata Header */}
-                    <div
-                      className="society-card-topbar"
-                      style={{ backgroundColor: talent.accentColor }}
-                    >
-                      <span className="society-card-serial">
-                        FOLIO Nº {talent.index}
-                      </span>
-                      <span className="society-card-division-tag">
-                        {talent.division}
-                      </span>
-                      <span className="society-card-bureau">
-                        {talent.bureau}
-                      </span>
-                    </div>
-
-                    {/* Dual-Image Lookbook Viewport (Polaroid <-> Campaign Crossfade) */}
-                    <div className="society-card-media-mask">
-                      <img
-                        src={talent.primaryImage}
-                        loading="lazy"
-                        alt={`${talent.name} — ${talent.division}`}
-                        className="society-card-img primary"
-                        style={{
-                          transform: isCardHovered
-                            ? "scale3d(1.07, 1.07, 1)"
-                            : "scale3d(1, 1, 1)",
-                          opacity: isCardHovered ? 0 : 1,
-                        }}
-                      />
-                      <img
-                        src={talent.secondaryImage}
-                        loading="lazy"
-                        alt={`${talent.name} Campaign Look`}
-                        className="society-card-img secondary"
-                        style={{
-                          transform: isCardHovered
-                            ? "scale3d(1.03, 1.03, 1)"
-                            : "scale3d(1.12, 1.12, 1)",
-                          opacity: isCardHovered ? 1 : 0,
-                        }}
-                      />
-
-                      {/* Floating Booking Pill */}
-                      <div className="society-card-booking-chip">
-                        <span
-                          className="editorial-color-dot"
-                          style={{ backgroundColor: talent.accentColor }}
-                        />
-                        <span>{talent.latestBooking}</span>
-                      </div>
-                    </div>
-
-                    {/* Bottom Comp-Card Typography & Measurements */}
-                    <div className="society-card-footer">
-                      <div className="society-card-name-row">
-                        <h3 className="society-card-name">{talent.name}</h3>
-                        <span
-                          className="society-card-arrow"
-                          style={{
-                            backgroundColor: isCardHovered
-                              ? talent.accentColor
-                              : "transparent",
-                          }}
-                        >
-                          ↗
-                        </span>
-                      </div>
-
-                      <div className="society-card-specs-grid">
-                        <div className="society-spec-cell">
-                          <span className="society-spec-key">HEIGHT</span>
-                          <span className="society-spec-val">
-                            {talent.stats.height}
-                          </span>
-                        </div>
-                        <div className="society-spec-cell">
-                          <span className="society-spec-key">EYES / HAIR</span>
-                          <span className="society-spec-val">
-                            {talent.stats.eyes} · {talent.stats.hair}
-                          </span>
-                        </div>
-                        <div className="society-spec-cell">
-                          <span className="society-spec-key">DISCIPLINE</span>
-                          <span className="society-spec-val">
-                            {talent.stats.specialty}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* HORIZONTAL SCROLL PROJECTS SECTION */}
+      {/* =====================================================================
+          HORIZONTAL SCROLL CAMPAIGNS & COVERS SECTION
+         ===================================================================== */}
       <section className="section projects-section">
         <div className="portfolio-stikcy-block">
           <div className="projects-horizontal-main">
             <div className="projects-horizontal-main-wrapper">
-              {/* 4 Crossfading Full-Bleed Backgrounds */}
+              {/* 4 Crossfading Full-Bleed High-Fashion Model Backgrounds */}
               <div className="projects-horizontal-bg-block one">
                 <img
                   src={homeProjects[0].bgImage}
@@ -1220,7 +1440,7 @@ export default function HomePage() {
                             className="editorial-frame-tag"
                             style={{ backgroundColor: projectColors[idx] }}
                           >
-                            ARCHIVE 0{idx + 1} — {project.year}
+                            DEMO CAMPAIGN 0{idx + 1} — {project.year}
                           </span>
                         </div>
                         <div className="projects-side-info-block">
@@ -1253,15 +1473,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ABOUT SECTION */}
+      {/* =====================================================================
+          ABOUT SECTION & SLOT-MACHINE COUNTERS
+         ===================================================================== */}
       <section className="section about-section">
         <div className="w-layout-blockcontainer container w-container">
           <div className="about-main-block">
             <div className="w-layout-grid about-title-grid">
               <div className="about-section-title-block">
                 <h2 className="about-section-title">
-                  We bring screenplays and luxury campaigns to life through
-                  fearless casting that speaks with clarity and emotion.
+                  We represent iconic runway walkers and new editorial faces that
+                  command global fashion weeks and luxury campaigns.
                 </h2>
                 <div className="text-overlay row-one" />
                 <div className="text-overlay row-two" />
@@ -1269,7 +1491,7 @@ export default function HomePage() {
               </div>
               <div className="about-subtext-block">
                 <div className="section-title-subtext-inner-block">
-                  <h2 className="section-subtext">about us</h2>
+                  <h2 className="section-subtext">the agency</h2>
                 </div>
               </div>
             </div>
@@ -1278,11 +1500,11 @@ export default function HomePage() {
               <div className="about-left-block" />
               <div className="about-right-block about-desc-reveal">
                 <p className="about-description-two">
-                  Operating across New York, Paris, London, and Tokyo, Reflux
-                  is a full-service casting and talent direction studio. Whether
-                  discovering raw street-cast newcomers for an A24 feature or
-                  choreographing a 60-look Paris couture runway, we turn
-                  auditions into culturally defining moments.
+                  Operating across New York, Paris, Milan, and London, our model
+                  management and casting bureau scouts, develops, and books
+                  extraordinary talent. From exclusive Paris Haute Couture
+                  openings to global fragrance and cover campaigns, every face on
+                  our board tells an unforgettable story.
                 </p>
               </div>
             </div>
@@ -1337,7 +1559,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* VIDEO SECTION */}
+      {/* =====================================================================
+          HIGH-FASHION RUNWAY VIDEO SECTION
+         ===================================================================== */}
       <section className="section video-section" style={{ position: "relative" }}>
         <div className="background-video-block w-background-video w-background-video-atom">
           <video
@@ -1360,21 +1584,24 @@ export default function HomePage() {
                 className="society-eyebrow-pill"
                 style={{ backgroundColor: "#a7d8de", color: "#000000" }}
               >
-                SHOWREEL 2025
+                DEMO SHOWREEL 2025
               </span>
               <span className="editorial-video-meta">
-                CASTING ARCHIVE — CANNES · PARIS · VENICE · NEW YORK
+                THE SOCIETY MODEL &amp; RUNWAY ARCHIVE (DEMO VIDEO) — PARIS ·
+                MILAN · NEW YORK
               </span>
             </div>
             <Link href="/portfolio" className="editorial-video-cta">
-              <span>EXPLORE FULL ARCHIVE</span>
+              <span>EXPLORE DEMO ARCHIVE</span>
               <span>↗</span>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* TESTIMONIAL STICKY STACK SECTION */}
+      {/* =====================================================================
+          TESTIMONIAL STICKY STACK SECTION
+         ===================================================================== */}
       <section className="section testimonial-section">
         <div className="testimonial-stciky-block">
           <div className="w-layout-blockcontainer container w-container">
@@ -1382,7 +1609,7 @@ export default function HomePage() {
               <div className="testimonial-inner-block">
                 <h1 className="testimonial-title">word of love</h1>
                 <div className="testimonial-subtext-block">
-                  <h2 className="testimonial-subtext">testimonial</h2>
+                  <h2 className="testimonial-subtext">fashion houses</h2>
                 </div>
               </div>
 
@@ -1434,7 +1661,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CONTACT INFO STICKY BANNER SECTION */}
+      {/* =====================================================================
+          CONTACT INFO STICKY BANNER SECTION
+         ===================================================================== */}
       <section className="section contact-info-section">
         <div className="w-layout-blockcontainer container w-container">
           <div className="contact-main-block">
@@ -1445,17 +1674,18 @@ export default function HomePage() {
                 className="concat-info-block"
               >
                 <div className="contact-inner-info-block">
-                  <h2 className="contact-title">start project</h2>
+                  <h2 className="contact-title">book models</h2>
                   <p className="contact-description">
-                    Send us your script breakdown, lookbook brief, or campaign
-                    schedule to book an audition studio session.
+                    Request digital comp-card packages, option holds, or
+                    go-see casting sessions for your upcoming runway show or
+                    campaign shoot.
                   </p>
                   <div className="primary-button-style">
                     <Link
                       href="/contact-us"
                       className="button-primary-link w-button"
                     >
-                      contact us
+                      booking desk (demo)
                     </Link>
                   </div>
                 </div>
@@ -1464,6 +1694,166 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* =====================================================================
+          INTERACTIVE DIGITAL COMP-CARD & RUNWAY VIDEO MODAL (FOR MORNING MEETING DEMO)
+         ===================================================================== */}
+      {selectedModel && (
+        <div
+          className="comp-modal-backdrop"
+          onClick={() => setSelectedModel(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${selectedModel.name} Digital Comp Card (Demo)`}
+        >
+          <div
+            className="comp-modal-sheet"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Top Header */}
+            <div
+              className="comp-modal-topbar"
+              style={{ backgroundColor: selectedModel.accentColor }}
+            >
+              <div className="comp-modal-topbar-left">
+                <span className="comp-modal-demo-badge">
+                  OFFICIAL DIGITAL COMP CARD — DEMO DATA
+                </span>
+                <span className="comp-modal-division">
+                  {selectedModel.division} · BUREAUS: {selectedModel.bureau}
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSelectedModel(null)}
+                className="comp-modal-close"
+                aria-label="Close Digital Comp Card"
+              >
+                ✕ CLOSE
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="comp-modal-body">
+              {/* 3-Column Media Strip: Portrait 1 + Portrait 2 + Runway Motion Video */}
+              <div className="comp-modal-media-grid">
+                <div className="comp-modal-media-cell">
+                  <img
+                    src={selectedModel.primaryImage}
+                    alt={`${selectedModel.name} Studio Polaroid`}
+                    className="comp-modal-img"
+                  />
+                  <span className="comp-modal-media-tag">
+                    PORTRAIT 01 (DEMO)
+                  </span>
+                </div>
+                <div className="comp-modal-media-cell">
+                  <img
+                    src={selectedModel.secondaryImage}
+                    alt={`${selectedModel.name} Editorial Look`}
+                    className="comp-modal-img"
+                  />
+                  <span className="comp-modal-media-tag">
+                    CAMPAIGN 02 (DEMO)
+                  </span>
+                </div>
+                <div className="comp-modal-media-cell">
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    poster={selectedModel.primaryImage}
+                    className="comp-modal-img"
+                  >
+                    <source
+                      src={selectedModel.videoPreview || ASSETS.heroVideo1}
+                      type="video/mp4"
+                    />
+                  </video>
+                  <span
+                    className="comp-modal-media-tag"
+                    style={{ backgroundColor: selectedModel.accentColor }}
+                  >
+                    MOTION REEL (DEMO)
+                  </span>
+                </div>
+              </div>
+
+              {/* Model Info & Full Measurements Table */}
+              <div className="comp-modal-details-row">
+                <div className="comp-modal-title-col">
+                  <h2 className="comp-modal-name">{selectedModel.name}</h2>
+                  <p className="comp-modal-booking">
+                    Latest Campaign: <strong>{selectedModel.latestBooking}</strong>
+                  </p>
+                  <p className="comp-modal-ig">
+                    Instagram Reach:{" "}
+                    <strong>{selectedModel.instagramHandle}</strong> (
+                    {selectedModel.followers} Followers — Demo Metric)
+                  </p>
+                </div>
+
+                <div className="comp-modal-stats-table">
+                  <div className="comp-modal-stat-box">
+                    <span className="society-spec-key">HEIGHT</span>
+                    <span className="society-spec-val">
+                      {selectedModel.stats.height}
+                    </span>
+                  </div>
+                  <div className="comp-modal-stat-box">
+                    <span className="society-spec-key">BUST / CHEST</span>
+                    <span className="society-spec-val">
+                      {selectedModel.stats.bust}
+                    </span>
+                  </div>
+                  <div className="comp-modal-stat-box">
+                    <span className="society-spec-key">WAIST</span>
+                    <span className="society-spec-val">
+                      {selectedModel.stats.waist}
+                    </span>
+                  </div>
+                  <div className="comp-modal-stat-box">
+                    <span className="society-spec-key">HIPS</span>
+                    <span className="society-spec-val">
+                      {selectedModel.stats.hips}
+                    </span>
+                  </div>
+                  <div className="comp-modal-stat-box">
+                    <span className="society-spec-key">SHOE</span>
+                    <span className="society-spec-val">
+                      {selectedModel.stats.shoe}
+                    </span>
+                  </div>
+                  <div className="comp-modal-stat-box">
+                    <span className="society-spec-key">HAIR / EYES</span>
+                    <span className="society-spec-val">
+                      {selectedModel.stats.hair} · {selectedModel.stats.eyes}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Modal Footer CTA Buttons */}
+              <div className="comp-modal-actions">
+                <Link
+                  href="/contact-us"
+                  className="comp-modal-btn primary"
+                  style={{ backgroundColor: selectedModel.accentColor }}
+                >
+                  Place Casting Option / Hold (Demo) ↗
+                </Link>
+                <Link
+                  href={`/portfolio/${selectedModel.projectSlug}`}
+                  className="comp-modal-btn secondary"
+                >
+                  View Campaign Portfolio (Demo) ↗
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </div>

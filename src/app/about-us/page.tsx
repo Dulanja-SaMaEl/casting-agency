@@ -7,7 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { BLOG_POSTS, SERVICES, TEAM_MEMBERS } from "@/data/agencyData";
+import { BLOG_POSTS, SERVICES, TALENT_BOARD, TEAM_MEMBERS } from "@/data/agencyData";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -305,22 +305,22 @@ export default function AboutUsPage() {
           <div className="about-frame-wrapper">
             <div className="about-hero-title-block">
               <div className="about-hero-subtitle">
-                provide talent direction
+                global model management (demo)
               </div>
-              <h1 className="about-hero-title">about our casting studio</h1>
+              <h1 className="about-hero-title">about our model agency</h1>
               <div className="frame-item two responsive-image one">
                 <img
-                  src="https://cdn.prod.website-files.com/6889a6303ae9dc8c21421ef8/688b119f5c288ecbde7adb14_Portfolio%20Image%20Two.png"
+                  src={TALENT_BOARD[0].primaryImage}
                   loading="lazy"
-                  alt="About Hero"
+                  alt={TALENT_BOARD[0].name}
                   className="about-hero-image"
                 />
               </div>
               <div className="frame-item two responsive-image hero-responsive-image-two">
                 <img
-                  src="https://cdn.prod.website-files.com/6889a6303ae9dc8c21421ef8/688b119f5c288ecbde7adb14_Portfolio%20Image%20Two.png"
+                  src={TALENT_BOARD[2].primaryImage}
                   loading="lazy"
-                  alt="About Hero"
+                  alt={TALENT_BOARD[2].name}
                   className="about-hero-image"
                 />
               </div>
@@ -329,49 +329,49 @@ export default function AboutUsPage() {
             <div className="about-wrapper">
               <div className="frame-item seven">
                 <img
-                  src="https://cdn.prod.website-files.com/6889a6303ae9dc8c21421ef8/688ddcba2ce52119112f38b3_about%20hero%20image%20(2).webp"
+                  src={TALENT_BOARD[5].primaryImage}
                   loading="lazy"
-                  alt="Casting Tunnel Frame 7"
+                  alt={TALENT_BOARD[5].name}
                   className="about-hero-image"
                 />
               </div>
               <div className="frame-item six">
                 <img
-                  src="https://cdn.prod.website-files.com/6889a6303ae9dc8c21421ef8/688ddcba4a5b551e662869e8_about%20hero%20image%20(1).webp"
+                  src={TALENT_BOARD[4].primaryImage}
                   loading="lazy"
-                  alt="Casting Tunnel Frame 6"
+                  alt={TALENT_BOARD[4].name}
                   className="about-hero-image"
                 />
               </div>
               <div className="frame-item four">
                 <img
-                  src="https://cdn.prod.website-files.com/6889a6303ae9dc8c21421ef8/688b119f5c288ecbde7adb14_Portfolio%20Image%20Two.png"
+                  src={TALENT_BOARD[3].primaryImage}
                   loading="lazy"
-                  alt="Casting Tunnel Frame 4"
+                  alt={TALENT_BOARD[3].name}
                   className="about-hero-image"
                 />
               </div>
               <div className="frame-item three">
                 <img
-                  src="https://cdn.prod.website-files.com/6889a6303ae9dc8c21421ef8/688b119f5c288ecbde7adb14_Portfolio%20Image%20Two.png"
+                  src={TALENT_BOARD[2].primaryImage}
                   loading="lazy"
-                  alt="Casting Tunnel Frame 3"
+                  alt={TALENT_BOARD[2].name}
                   className="about-hero-image"
                 />
               </div>
               <div className="frame-item five">
                 <img
-                  src="https://cdn.prod.website-files.com/6889a6303ae9dc8c21421ef8/688ddcba4a5b551e662869e8_about%20hero%20image%20(1).webp"
+                  src={TALENT_BOARD[1].primaryImage}
                   loading="lazy"
-                  alt="Casting Tunnel Frame 5"
+                  alt={TALENT_BOARD[1].name}
                   className="about-hero-image"
                 />
               </div>
               <div className="frame-item two">
                 <img
-                  src="https://cdn.prod.website-files.com/6889a6303ae9dc8c21421ef8/688ddcba2ce52119112f38b3_about%20hero%20image%20(2).webp"
+                  src={TALENT_BOARD[0].primaryImage}
                   loading="lazy"
-                  alt="Casting Tunnel Frame 2"
+                  alt={TALENT_BOARD[0].name}
                   className="about-hero-image"
                 />
               </div>
