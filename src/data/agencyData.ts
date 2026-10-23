@@ -462,13 +462,13 @@ export const SERVICES: ServiceItem[] = [
     title: "Runway & Haute Couture Casting (Demo)",
     shortTitle: "Runway Casting",
     color: "#a7d8de",
-    icon: "https://cdn.prod.website-files.com/68905204603e93d7e41692c4/689060eb64b7b55e59425db0_service%20icon%20(1).svg",
+    icon: "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1000&q=85",
     shortDesc:
       "[Demo Service] Full-lineup model casting and catwalk choreography for Paris, Milan, London, and New York Fashion Weeks.",
     fullDesc:
       "[Demo Data for Presentation] Our Runway & Haute Couture division curates 40-to-80 look show lineups for premier luxury houses. We manage global model options, exclusive holds, walk callbacks, and fitting schedules across New York, Paris, Milan, and London.",
     image:
-      "https://booker-media.elitemodelmanagement.com/Library/1/20250307_YouO3fnJH90cWw.jpg",
+      "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1000&q=85",
     altImage:
       "https://booker-media.elitemodelmanagement.com/Library/1/20250428_IxCs0E79oOLdXM.jpg",
     deliverables: [
@@ -488,13 +488,13 @@ export const SERVICES: ServiceItem[] = [
     title: "Editorial & Magazine Covers (Demo)",
     shortTitle: "Editorial Covers",
     color: "#f5a3a3",
-    icon: "https://cdn.prod.website-files.com/68905204603e93d7e41692c4/689061cf7c9c2971b6844aa2_service%20icon%20(2).svg",
+    icon: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1000&q=85",
     shortDesc:
       "[Demo Service] High-fashion cover talent, supermodels, and rising faces for Vogue, Dazed, i-D, and Harper's Bazaar.",
     fullDesc:
       "[Demo Data for Presentation] Collaborating with the world's leading fashion photographers, stylists, and creative directors, we book iconic cover stars and striking new-face models for print and digital editorial stories.",
     image:
-      "https://booker-media.elitemodelmanagement.com/Library/9630/vDj40Z0bYh5Sux-4ltSc.jpg",
+      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1000&q=85",
     altImage:
       "https://booker-media.elitemodelmanagement.com/Library/9630/20230306_f05bsCpXheCgj3.jpg",
     deliverables: [
@@ -514,13 +514,13 @@ export const SERVICES: ServiceItem[] = [
     title: "Luxury Fragrance & Brand Campaigns (Demo)",
     shortTitle: "Luxury Campaigns",
     color: "#f8c794",
-    icon: "https://cdn.prod.website-files.com/68905204603e93d7e41692c4/689061fe0e55704a7d6d56f3_service%20icon%20(3).svg",
+    icon: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1000&q=85",
     shortDesc:
       "[Demo Service] Global ambassadors and campaign faces for haute horology, fine jewelry, beauty, and luxury fashion houses.",
     fullDesc:
       "[Demo Data for Presentation] We match luxury maisons with unforgettable campaign faces—structuring multi-year global ambassadorships, cinema commercial spots, and worldwide billboard buyouts.",
     image:
-      "https://booker-media.elitemodelmanagement.com/Library/12381/20260905_gOcBTP9tqMcHPU.jpg",
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1000&q=85",
     altImage:
       "https://booker-media.elitemodelmanagement.com/Library/12381/20260428_-7eAuAT5wneC3C.jpg",
     deliverables: [
@@ -540,13 +540,13 @@ export const SERVICES: ServiceItem[] = [
     title: "New Faces & Development Scouting (Demo)",
     shortTitle: "New Faces Board",
     color: "#cbb7f6",
-    icon: "https://cdn.prod.website-files.com/68905204603e93d7e41692c4/689062247c9c2971b6847bc4_service%20icon%20(4).svg",
+    icon: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=85",
     shortDesc:
       "[Demo Service] Worldwide street scouting, open casting calls, and runway development for the next generation of icons.",
     fullDesc:
       "[Demo Data for Presentation] Our Development board discovers raw, magnetic talent across six continents—guiding new faces from their first studio digitals and walk coaching to exclusive debuts on the Paris and Milan runways.",
     image:
-      "https://booker-media.elitemodelmanagement.com/Library/10898/20260423_4kMyUYH7pXp8i4.jpg",
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=85",
     altImage:
       "https://booker-media.elitemodelmanagement.com/Library/10898/20251023_xJBUsLc1rrLz5H.jpg",
     deliverables: [

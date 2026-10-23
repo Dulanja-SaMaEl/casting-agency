@@ -1253,26 +1253,41 @@ export default function HomePage() {
                           width: "100%",
                           position: "relative",
                           zIndex: 1,
+                          marginBottom: "14px",
                         }}
                       >
-                        <div className="service-icon-box">
-                          <img
-                            src={service.icon}
-                            loading="lazy"
-                            alt={service.title}
-                            className="service-icon"
-                          />
-                        </div>
+                        <span className="service-card-kicker">
+                          {idx === 0
+                            ? "CATWALK EXCLUSIVES"
+                            : idx === 1
+                            ? "MAGAZINE COVERS"
+                            : idx === 2
+                            ? "LUXURY CAMPAIGNS"
+                            : "NEW FACES SCOUTING"}
+                        </span>
                         <span className="editorial-card-index">
                           0{idx + 1}
                         </span>
                       </div>
+
+                      {/* Matching High-Fashion Demo Image Window */}
+                      <div className="service-card-image-box">
+                        <img
+                          src={service.image}
+                          loading="lazy"
+                          alt={service.title}
+                          className="service-card-image"
+                        />
+                      </div>
+
                       <div
                         className="service-box-content-block"
                         style={{
-                          maxHeight: isHovered ? "160px" : "40px",
+                          maxHeight: isHovered ? "170px" : "46px",
                           transition:
                             "max-height 0.55s cubic-bezier(0.16, 1, 0.3, 1)",
+                          position: "relative",
+                          zIndex: 1,
                         }}
                       >
                         <div className="service-box-title-block">
@@ -1465,12 +1480,12 @@ export default function HomePage() {
 
             <div className="about-counter-block">
               <div className="w-layout-grid about-counter-grid">
-                {COUNTERS.map((counter) => (
+                {COUNTERS.map((counter, idx) => (
                   <div
                     key={counter.id}
                     className="about-counter-box editorial-counter-card"
                   >
-                    <div className="about-counter-text">{counter.label}</div>
+                    <span className="about-counter-kicker">0{idx + 1}</span>
                     <div className="about-counter-inner-block">
                       <div className="about-counter-frist-number-block">
                         {counter.col1.map((digit, i) => (
@@ -1488,6 +1503,7 @@ export default function HomePage() {
                       </div>
                       <h2 className="about-count-number">+</h2>
                     </div>
+                    <div className="about-counter-text">{counter.label}</div>
                   </div>
                 ))}
               </div>
