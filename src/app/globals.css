@@ -616,6 +616,48 @@ select:focus-visible {
   align-items: stretch;
 }
 
+/* Ambient Monochrome Fluid/Smoke Video Background (Layer 0) */
+.fractal-hero-ambient-video-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.fractal-hero-ambient-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%) scale(1.08);
+  object-fit: cover;
+  opacity: 0.36;
+  filter: grayscale(100%) contrast(125%) brightness(0.85);
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+}
+
+.fractal-hero-video-vignette {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(0, 0, 0, 0.65) 65%,
+    #000000 95%
+  );
+  pointer-events: none;
+}
+
 /* Center Giant Minimalist Display Typography (.wrapper-conotent-one -> .text-hero) */
 .wrapper-conotent-one {
   position: absolute;

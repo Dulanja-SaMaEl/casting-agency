@@ -900,6 +900,24 @@ export default function HomePage() {
         className="section hero fractal-hero-section"
       >
         <div className="wrapper-hero">
+          {/* Ambient Monochrome Fluid/Smoke Video Background (Layer 0) */}
+          <div className="fractal-hero-ambient-video-layer" aria-hidden="true">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              className="fractal-hero-ambient-video"
+            >
+              <source
+                src="https://raw.githubusercontent.com/thundercoding07/Smoke-Effect-on-Your-Name-CSS-Animation/master/smoke.mp4"
+                type="video/mp4"
+              />
+            </video>
+            <div className="fractal-hero-video-vignette" />
+          </div>
+
           {/* Center Giant Minimalist Display Typography (.wrapper-conotent-one -> .text-hero) */}
           <div className="wrapper-conotent-one">
             <div className="inner-content-text-hero">
