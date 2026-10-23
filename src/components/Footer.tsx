@@ -89,23 +89,25 @@ export default function Footer() {
                 <Link
                   href="/"
                   className="footer-logo-link-block w-inline-block"
+                  aria-label="VISAGE Home"
+                  style={{ textDecoration: "none" }}
                 >
-                  <img
-                    src={ASSETS.footerLogoIcon}
-                    loading="lazy"
-                    alt="Reflux Casting Studio Logo"
-                    className="footer-logo"
-                  />
+                  <span
+                    className="visage-brand-logo-text"
+                    style={{ fontSize: "32px", letterSpacing: "0.2em" }}
+                  >
+                    VISAGE
+                  </span>
                 </Link>
                 <div className="footer-contact-info-block">
                   <a href="tel:+12125550189" className="footer-number">
                     (00) 123 456 789
                   </a>
                   <a
-                    href="mailto:casting@refluxstudio.com"
+                    href="mailto:casting@visagestudio.com"
                     className="footer-email"
                   >
-                    casting@refluxstudio.com
+                    casting@visagestudio.com
                   </a>
                 </div>
               </div>
@@ -138,9 +140,9 @@ export default function Footer() {
                 <div className="copyright-text">
                   © Copyright -{" "}
                   <Link href="/" className="copyright-link">
-                    Reflux Casting
+                    VISAGE Casting
                   </Link>{" "}
-                  | Talent &amp; Production Studio -{" "}
+                  | Haute Couture &amp; Model Management -{" "}
                   <Link href="/terms-and-conditions" className="copyright-link">
                     Licensing
                   </Link>{" "}

@@ -69,18 +69,18 @@ const COUNTERS = [
 const DIVISION_FILTERS = [
   { key: "ALL", label: "All Models (Demo)", count: "08", color: "#a7d8de" },
   {
-    key: "SOCIETY WOMEN",
-    label: "Society Women",
+    key: "VISAGE WOMEN",
+    label: "Visage Women",
     count: "04",
     color: "#f5a3a3",
   },
-  { key: "SOCIETY MEN", label: "Society Men", count: "02", color: "#f8c794" },
+  { key: "VISAGE MEN", label: "Visage Men", count: "02", color: "#f8c794" },
   { key: "DEVELOPMENT", label: "Development", count: "02", color: "#cbb7f6" },
 ] as const;
 
 const MARQUEE_ITEMS = [
-  { text: "SOCIETY WOMEN — DEMO ROSTER", color: "#a7d8de" },
-  { text: "SOCIETY MEN — DEMO ROSTER", color: "#f5a3a3" },
+  { text: "VISAGE WOMEN — DEMO ROSTER", color: "#a7d8de" },
+  { text: "VISAGE MEN — DEMO ROSTER", color: "#f5a3a3" },
   { text: "NEW FACES & DEVELOPMENT (DEMO)", color: "#f8c794" },
   { text: "PARIS · MILAN · NEW YORK · LONDON", color: "#cbb7f6" },
   { text: "HAUTE COUTURE RUNWAY CASTING (DEMO)", color: "#a7d8de" },
@@ -945,8 +945,8 @@ export default function HomePage() {
           {/* Center Giant Minimalist Display Typography (.wrapper-conotent-one -> .text-hero) */}
           <div className="wrapper-conotent-one">
             <div className="inner-content-text-hero">
-              <h1 className="text-hero" aria-label="SOCIETY">
-                {"SOCIETY".split("").map((char, idx) => (
+              <h1 className="text-hero" aria-label="VISAGE">
+                {"VISAGE".split("").map((char, idx) => (
                   <span key={idx} className="fractal-hero-char">
                     {char}
                   </span>
@@ -1020,7 +1020,7 @@ export default function HomePage() {
           <div className="society-board-header">
             <div className="society-board-title-wrap society-board-header-reveal">
               <div className="section-subtitle">model board · demo</div>
-              <h2 className="section-title">the society roster</h2>
+              <h2 className="section-title">the visage roster</h2>
             </div>
 
             {/* Minimalist Architectural Division Switcher */}

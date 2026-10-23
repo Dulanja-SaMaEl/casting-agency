@@ -3,9 +3,9 @@ import "./globals.css";
 import BackToTop from "@/components/BackToTop";
 
 export const metadata: Metadata = {
-  title: "Reflux — Global Casting & Talent Agency Studio",
+  title: "VISAGE — Global Model Management & Haute Couture Casting Studio",
   description:
-    "Reflux is a premier international casting and talent direction studio specializing in feature film, haute couture runway, commercial campaigns, and motion capture.",
+    "VISAGE is a premier international casting and model management direction studio specializing in haute couture runway exclusives, luxury brand campaigns, and editorial representation.",
 };
 
 export default function RootLayout({

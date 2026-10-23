@@ -77,7 +77,7 @@ export interface TalentCompCard {
   id: string;
   index: string;
   name: string;
-  division: "SOCIETY WOMEN" | "SOCIETY MEN" | "DEVELOPMENT";
+  division: "VISAGE WOMEN" | "VISAGE MEN" | "DEVELOPMENT";
   bureau: string;
   latestBooking: string;
   instagramHandle: string;
@@ -244,7 +244,7 @@ export const TALENT_BOARD: TalentCompCard[] = [
     id: "talent-1",
     index: "01",
     name: "Adriana Lima",
-    division: "SOCIETY WOMEN",
+    division: "VISAGE WOMEN",
     bureau: "New York / Paris",
     latestBooking: "Vogue Italia Cover (Demo Data)",
     instagramHandle: "@adrianalima",
@@ -272,7 +272,7 @@ export const TALENT_BOARD: TalentCompCard[] = [
     id: "talent-2",
     index: "02",
     name: "Alton Mason",
-    division: "SOCIETY MEN",
+    division: "VISAGE MEN",
     bureau: "New York / Milan",
     latestBooking: "Paris Haute Couture Opening (Demo)",
     instagramHandle: "@altonmason",
@@ -299,7 +299,7 @@ export const TALENT_BOARD: TalentCompCard[] = [
     id: "talent-3",
     index: "03",
     name: "Amber Valletta",
-    division: "SOCIETY WOMEN",
+    division: "VISAGE WOMEN",
     bureau: "Los Angeles / Paris",
     latestBooking: "Aether Parfum Global Film (Demo)",
     instagramHandle: "@ambervalletta",
@@ -353,7 +353,7 @@ export const TALENT_BOARD: TalentCompCard[] = [
     id: "talent-5",
     index: "05",
     name: "Alexandre Cunha",
-    division: "SOCIETY MEN",
+    division: "VISAGE MEN",
     bureau: "Paris / New York",
     latestBooking: "Kinetix GT World Campaign (Demo)",
     instagramHandle: "@alexandrecunha",
@@ -379,7 +379,7 @@ export const TALENT_BOARD: TalentCompCard[] = [
     id: "talent-6",
     index: "06",
     name: "Alecia Morais",
-    division: "SOCIETY WOMEN",
+    division: "VISAGE WOMEN",
     bureau: "New York / London",
     latestBooking: "Paris Couture Lookbook (Demo)",
     instagramHandle: "@aleciamorais",
@@ -431,7 +431,7 @@ export const TALENT_BOARD: TalentCompCard[] = [
     id: "talent-8",
     index: "08",
     name: "Archie Cranch",
-    division: "SOCIETY MEN",
+    division: "VISAGE MEN",
     bureau: "London / Milan",
     latestBooking: "Prada Menswear Exclusive (Demo)",
     instagramHandle: "@archiecranch",
@@ -697,7 +697,7 @@ export const PROJECTS: ProjectItem[] = [
     id: "proj-1",
     slug: "velvet-nocturne",
     title: "Vogue Italia — Adriana Lima (Demo)",
-    categories: ["Cover Story", "Society Women", "Demo Data"],
+    categories: ["Cover Story", "Visage Women", "Demo Data"],
     image:
       "https://booker-media.elitemodelmanagement.com/Library/1/20250307_YouO3fnJH90cWw.jpg",
     bgImage:
@@ -805,7 +805,7 @@ export const PROJECTS: ProjectItem[] = [
     id: "proj-5",
     slug: "kinetix-gt-launch",
     title: "Atelier Menswear — Alexandre (Demo)",
-    categories: ["Society Men", "Editorial", "Demo Data"],
+    categories: ["Visage Men", "Editorial", "Demo Data"],
     image:
       "https://booker-media.elitemodelmanagement.com/Library/3148/20260204_1iSlf7Z50wKUE3.jpg",
     bgImage:
@@ -821,7 +821,7 @@ export const PROJECTS: ProjectItem[] = [
     challenge:
       "Combining sharp architectural menswear tailoring with kinetic outdoor cinematography.",
     execution:
-      "Cast lead models from our Society Men board and shot on location across Paris and Zurich.",
+      "Cast lead models from our Visage Men board and shot on location across Paris and Zurich.",
     gallery: [
       "https://booker-media.elitemodelmanagement.com/Library/3148/20260204_1iSlf7Z50wKUE3.jpg",
       "https://booker-media.elitemodelmanagement.com/Library/3148/20250925_YHEwoUIpkK0BfN.jpg",
@@ -832,7 +832,7 @@ export const PROJECTS: ProjectItem[] = [
     id: "proj-6",
     slug: "orpheus-underground",
     title: "Haute Couture — Alecia Morais (Demo)",
-    categories: ["Couture Lookbook", "Society Women", "Demo Data"],
+    categories: ["Couture Lookbook", "Visage Women", "Demo Data"],
     image:
       "https://booker-media.elitemodelmanagement.com/Library/170/VsIGfx-iT-KBNW5gVya2.jpg",
     bgImage:
@@ -885,7 +885,7 @@ export const PROJECTS: ProjectItem[] = [
     id: "proj-8",
     slug: "solstice-luxury-resort",
     title: "Resort Capsule — Archie Cranch (Demo)",
-    categories: ["Society Men", "Resort 2025", "Demo Data"],
+    categories: ["Visage Men", "Resort 2025", "Demo Data"],
     image:
       "https://booker-media.elitemodelmanagement.com/Library/12319/20260602_uUaROABOXshWr5.jpg",
     bgImage:
@@ -941,12 +941,12 @@ export const TEAM_MEMBERS: TeamMember[] = [
     slug: "elena-vance",
     name: "Elena Vance (Demo)",
     role: "Head of Women's Board — NY & Paris",
-    bio: "[Demo Profile] Directs runway exclusives and cover bookings for our Society Women division.",
+    bio: "[Demo Profile] Directs runway exclusives and cover bookings for our Visage Women division.",
     extendedBio:
       "[Demo Data for Presentation] With 16 years at the helm of international model management in New York and Paris, Elena oversees career strategy, luxury fragrance ambassadorships, and Fashion Week exclusives for our Women's board.",
     image:
       "https://booker-media.elitemodelmanagement.com/Library/102/85ndlIjFawKYvIQB7bbY.jpg",
-    specialty: "Society Women & Haute Couture Exclusives (Demo)",
+    specialty: "Visage Women & Haute Couture Exclusives (Demo)",
     experience: "16 Years",
     credits: [
       "Paris Fashion Week — 45+ Exclusive Placements (Demo)",
@@ -965,12 +965,12 @@ export const TEAM_MEMBERS: TeamMember[] = [
     slug: "marcus-sterling",
     name: "Marcus Sterling (Demo)",
     role: "Director of Men's Division",
-    bio: "[Demo Profile] Leads global runway, tailoring campaigns, and crossover cinema bookings for Society Men.",
+    bio: "[Demo Profile] Leads global runway, tailoring campaigns, and crossover cinema bookings for Visage Men.",
     extendedBio:
       "[Demo Data for Presentation] Marcus built our Men's division across Milan, London, and New York—discovering and managing top male runway walkers and luxury campaign faces.",
     image:
       "https://booker-media.elitemodelmanagement.com/Library/9392/WbBy1FZKHGbpaBBoF4LM.jpg",
-    specialty: "Society Men & Milan/Paris Menswear (Demo)",
+    specialty: "Visage Men & Milan/Paris Menswear (Demo)",
     experience: "14 Years",
     credits: [
       "Milan & Paris Menswear AW25 Show Casting (Demo)",
@@ -1200,7 +1200,7 @@ export const TESTIMONIALS: TestimonialItem[] = [
   {
     id: "test-1",
     quote:
-      "“[Demo Client Quote] Reflux & Society Board cast our entire 60-look Paris Couture show in record time. Their New Faces and Women's board brought an unforgettable electricity to the runway.”",
+      "“[Demo Client Quote] VISAGE cast our entire 60-look Paris Couture show in record time. Their New Faces and Women's board brought an unforgettable electricity to the runway.”",
     author: "Céline Moreau (Demo)",
     role: "Creative Director, Maison Solaris Paris",
     rotation: 10,

@@ -147,13 +147,15 @@ export default function Navbar({ variant = "dark" }: NavbarProps) {
             href="/"
             onClick={() => setSidebarOpen(false)}
             className="sidebar-logo-link w-inline-block"
+            aria-label="VISAGE Home"
+            style={{ textDecoration: "none" }}
           >
-            <img
-              src={ASSETS.sidebarLogoWhite}
-              loading="lazy"
-              alt="Reflux Sidebar Logo"
-              className="sidebar-logo"
-            />
+            <span
+              className="visage-brand-logo-text"
+              style={{ fontSize: "34px", letterSpacing: "0.2em" }}
+            >
+              VISAGE
+            </span>
           </Link>
           <div className="sidebar-description-block">
             <p className="sidebar-description">
@@ -174,10 +176,10 @@ export default function Navbar({ variant = "dark" }: NavbarProps) {
               321 Mercer Street, Suite 456, SoHo, NY.
             </div>
             <a
-              href="mailto:casting@refluxstudio.com"
+              href="mailto:casting@visagestudio.com"
               className="sidebar-cotact-email"
             >
-              casting@refluxstudio.com
+              casting@visagestudio.com
             </a>
             <a href="tel:+18001234567890" className="sidebar-contact-number">
               +1 (212) 555-0199
@@ -245,13 +247,10 @@ export default function Navbar({ variant = "dark" }: NavbarProps) {
             className={`${
               isDark ? "nav-style-two-logo-link" : "navbar-logo-link"
             } w-nav-brand`}
+            aria-label="VISAGE Home"
+            style={{ textDecoration: "none" }}
           >
-            <img
-              src={isDark ? ASSETS.headerLogoWhite : ASSETS.headerLogoDark}
-              loading="eager"
-              alt="Reflux Casting Logo"
-              className={isDark ? "nav-style-two-logo" : "nav-logo"}
-            />
+            <span className="visage-brand-logo-text">VISAGE</span>
           </Link>
 
           {/* Desktop Navigation */}

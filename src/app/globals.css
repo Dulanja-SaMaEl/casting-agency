@@ -119,6 +119,25 @@ select:focus-visible {
   color: #999999 !important;
 }
 
+/* VISAGE High-Fashion Editorial Brand Wordmark */
+.visage-brand-logo-text {
+  font-family: var(--_typography---title-font);
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #ffffff;
+  text-transform: uppercase;
+  line-height: 1;
+  display: inline-block;
+  text-decoration: none;
+  transition: opacity 0.3s ease, letter-spacing 0.3s ease;
+}
+
+.visage-brand-logo-text:hover {
+  opacity: 0.82;
+  letter-spacing: 0.22em;
+}
+
 /* Section Subtitle Outline Box in Dark Theme */
 .section-title-subtext-inner-block,
 .testimonial-subtext-block {
