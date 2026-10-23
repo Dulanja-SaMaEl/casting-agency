@@ -90,382 +90,642 @@ select:focus-visible {
 }
 
 /* ==========================================================================
-   CONCEPT 3 HERO: KINETIC RUNWAY PORTAL & FLOATING POLAROID DECK
+   KITPRO FRACTAL × THE SOCIETY MINIMALIST CONSTELLATION HERO (#hero-section)
    ========================================================================== */
-.concept3-hero-section {
+.fractal-hero-section {
   position: relative;
+  width: 100%;
+  height: calc(100vh - 86px);
+  min-height: 650px;
+  max-height: 960px;
   padding-top: 0 !important;
-  padding-bottom: 56px !important;
+  padding-bottom: 0 !important;
   background-color: #faf9f6;
   border-top: 1px solid var(--dark);
+  border-bottom: 1px solid var(--dark);
   overflow: hidden;
+  user-select: none;
 }
 
-/* Architectural Background Grid Lines */
-.concept3-grid-backdrop {
+/* Subtle Architectural Crosshair Grid Backdrop */
+.fractal-grid-backdrop {
   position: absolute;
   inset: 0;
   z-index: 0;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  max-width: 1360px;
+  max-width: 1440px;
   margin: 0 auto;
   pointer-events: none;
 }
 
-.concept3-grid-col {
-  border-left: 1px solid rgba(0, 0, 0, 0.08);
+.fractal-grid-col {
+  border-left: 1px solid rgba(0, 0, 0, 0.055);
   height: 100%;
 }
 
-.concept3-grid-col:last-child {
-  border-right: 1px solid rgba(0, 0, 0, 0.08);
+.fractal-grid-col:last-child {
+  border-right: 1px solid rgba(0, 0, 0, 0.055);
 }
 
-/* Top Full-Width Display Headline Banner */
-.concept3-headline-banner {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  border-bottom: 1px solid var(--dark);
-  background-color: rgba(250, 249, 246, 0.92);
-  padding: 18px 0 14px;
-}
-
-.concept3-headline-inner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.concept3-headline-text {
-  font-family: var(--_typography---title-font);
-  font-size: clamp(46px, 8.3vw, 134px);
-  line-height: 0.96;
-  font-weight: 700;
-  letter-spacing: 0.015em;
-  text-transform: uppercase;
-  color: var(--dark);
-  margin: 0;
-  white-space: nowrap;
-}
-
-.concept3-headline-slash {
-  display: inline-block;
-  font-weight: 400;
-  padding: 0 0.08em;
-}
-
-/* Center Stage: 4 Tilted Pastel Polaroids + Central Runway Cinema Portal */
-.concept3-stage {
-  position: relative;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: clamp(420px, 54vh, 540px);
-  padding: 36px 0 28px;
-}
-
-/* Center Runway Cinema Portal */
-.concept3-runway-portal {
-  position: relative;
-  z-index: 8;
-  width: clamp(260px, 25vw, 355px);
-  height: clamp(350px, 47vh, 470px);
-  padding: 10px;
-  background-color: var(--white);
-  border: 1.5px solid var(--dark);
-  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.16);
-  cursor: pointer;
-  flex-shrink: 0;
-  transform: translate3d(var(--px, 0px), var(--py, 0px), 0);
-  transition: transform 0.25s ease-out, box-shadow 0.35s ease;
-}
-
-.concept3-runway-portal:hover {
-  box-shadow: 0 26px 52px rgba(0, 0, 0, 0.24), 0 0 0 1px var(--dark);
-}
-
-.concept3-runway-portal-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border: 1px solid var(--dark);
-  overflow: hidden;
-  background-color: var(--dark);
-}
-
-.concept3-runway-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  display: block;
-}
-
-.concept3-portal-spotlight-img {
+/* Soft Artistic Ambient Color Aura Behind Center Typography (Non-AI, Subtle Editorial) */
+.fractal-ambient-aura {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  opacity: 0;
-  transform: scale3d(1.06, 1.06, 1);
-  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 22% 28%, rgba(167, 216, 222, 0.22) 0%, transparent 38%),
+    radial-gradient(circle at 78% 26%, rgba(245, 163, 163, 0.2) 0%, transparent 38%),
+    radial-gradient(circle at 28% 76%, rgba(203, 183, 246, 0.2) 0%, transparent 38%),
+    radial-gradient(circle at 75% 74%, rgba(248, 199, 148, 0.22) 0%, transparent 38%);
+}
+
+/* 4 Outer Viewport Architectural Corner Ticks (.corner._1 - ._4) */
+.fractal-viewport-corner {
+  position: absolute;
+  z-index: 22;
+  width: 12px;
+  height: 12px;
+  border-color: var(--dark);
   pointer-events: none;
 }
 
-.concept3-portal-spotlight-img.is-active {
-  opacity: 1;
-  transform: scale3d(1, 1, 1);
+.fractal-viewport-corner._1 {
+  top: 18px;
+  right: 24px;
+  border-top: 1.5px solid var(--dark);
+  border-right: 1.5px solid var(--dark);
 }
 
-.concept3-portal-top-bar {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  z-index: 4;
+.fractal-viewport-corner._2 {
+  bottom: 18px;
+  right: 24px;
+  border-bottom: 1.5px solid var(--dark);
+  border-right: 1.5px solid var(--dark);
+}
+
+.fractal-viewport-corner._3 {
+  bottom: 18px;
+  left: 24px;
+  border-bottom: 1.5px solid var(--dark);
+  border-left: 1.5px solid var(--dark);
+}
+
+.fractal-viewport-corner._4 {
+  top: 18px;
+  left: 24px;
+  border-top: 1.5px solid var(--dark);
+  border-left: 1.5px solid var(--dark);
+}
+
+/* Main Hero Wrapper (.wrapper-hero) */
+.wrapper-hero {
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
 }
 
-.concept3-portal-badge {
-  padding: 4px 12px;
+/* Top Minimalist Architectural Status Bar */
+.fractal-hero-topbar {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 3.8vw 0;
+  pointer-events: auto;
+}
+
+.fractal-bracket-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--_typography---body-font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dark);
+}
+
+.fractal-bracket-char {
+  font-weight: 400;
+  opacity: 0.55;
+}
+
+.fractal-status-pills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.fractal-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 11px;
   border: 1px solid var(--dark);
   border-radius: 999px;
-  font-size: 9.5px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--dark);
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  background-color: var(--white);
 }
 
-.concept3-portal-bottom-bar {
+/* Center Giant Minimalist Display Typography (.wrapper-conotent-one -> .text-hero) */
+.wrapper-conotent-one {
   position: absolute;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
-  z-index: 4;
+  inset: 0 0 10vh 0;
+  z-index: 15;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 7px 11px;
-  background-color: rgba(255, 255, 255, 0.94);
+  pointer-events: none;
+}
+
+.inner-content-text-hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.fractal-hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 14px;
+  margin-bottom: 10px;
+  background-color: rgba(255, 255, 255, 0.92);
   border: 1px solid var(--dark);
   border-radius: 999px;
-}
-
-.concept3-portal-caption {
-  font-size: 9.5px;
+  font-size: 10.5px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--dark);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
 }
 
-.concept3-portal-arrow {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background-color: var(--dark);
-  color: var(--white);
+.text-hero {
+  font-family: var(--_typography---title-font);
+  font-size: clamp(84px, 15.2vw, 235px);
+  line-height: 0.88;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--dark);
+  margin: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
-  flex-shrink: 0;
+  perspective: 1000px;
 }
 
-/* 4 Flanking Tilted Pastel Polaroid Comp-Cards */
-.concept3-polaroid-card {
+.fractal-hero-char {
+  display: inline-block;
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+}
+
+/* Dynamic Spotlight Subtitle Pill below Giant Wordmark */
+.fractal-hero-subpill {
+  margin-top: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px;
+  border: 1px solid var(--dark);
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dark);
+  background-color: var(--white);
+  box-shadow: 0 4px 0 0 var(--dark);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Horizontal Architectural Framing Lines (.outer-lline-hero -> .line-hero.left / .right) */
+.wrapper-masking-hero {
+  position: absolute;
+  inset: 0 0 8vh 0;
+  z-index: 12;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.outer-lline-hero {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  width: 100%;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.line-hero {
   position: relative;
-  width: clamp(195px, 18.2vw, 258px);
-  padding: 12px 12px 16px;
-  border: 1.5px solid var(--dark);
-  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.15);
-  cursor: pointer;
-  flex-shrink: 0;
-  user-select: none;
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 50%;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.28);
+  will-change: transform, opacity;
 }
 
-.concept3-polaroid-card.polaroid-left-outer {
-  z-index: 4;
-  margin-right: -32px;
-  margin-top: 52px;
-  transform: translate3d(var(--px, 0px), var(--py, 0px), 0) rotate(-11.5deg);
+.line-hero.left::after,
+.line-hero.right::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  width: 7px;
+  height: 7px;
+  border: 1px solid var(--dark);
+  border-radius: 50%;
 }
 
-.concept3-polaroid-card.polaroid-left-inner {
-  z-index: 9;
-  margin-right: -24px;
-  margin-top: -18px;
-  transform: translate3d(var(--px, 0px), var(--py, 0px), 0) rotate(-6.5deg);
+.line-hero.left::after {
+  right: 0;
+  background-color: #a7d8de;
 }
 
-.concept3-polaroid-card.polaroid-right-inner {
-  z-index: 9;
-  margin-left: -24px;
-  margin-top: -18px;
-  transform: translate3d(var(--px, 0px), var(--py, 0px), 0) rotate(6.5deg);
+.line-hero.right::before {
+  left: 0;
+  background-color: #f5a3a3;
 }
 
-.concept3-polaroid-card.polaroid-right-outer {
-  z-index: 5;
-  margin-left: -32px;
-  margin-top: 52px;
-  transform: translate3d(var(--px, 0px), var(--py, 0px), 0) rotate(11.5deg);
-}
-
-.concept3-polaroid-card:hover,
-.concept3-polaroid-card.is-hovered {
-  z-index: 25 !important;
-  transform: translate3d(0, -16px, 0) scale3d(1.06, 1.06, 1) rotate(0deg) !important;
-  box-shadow: 10px 10px 0 0 var(--dark), 0 24px 48px rgba(0, 0, 0, 0.22);
-}
-
-.concept3-polaroid-photo-wrap {
+/* 8 Radial Floating Model Constellation Stage (.outer-masking-hero -> .inner-masking-hero) */
+.outer-masking-hero {
   position: relative;
   width: 100%;
-  height: clamp(205px, 25vh, 265px);
-  border: 1px solid var(--dark);
-  overflow: hidden;
-  background-color: #f0eee9;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.concept3-polaroid-img {
+.inner-masking-hero {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+}
+
+/* Individual Floating Model Frame (.wrapper-main-hero._1 through ._8) */
+.wrapper-main-hero {
+  position: absolute;
+  backface-visibility: visible;
+  transform-origin: center center;
+  background-color: var(--white);
+  border: 1px solid var(--dark);
+  padding: 5px 5px 22px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  pointer-events: auto;
+  will-change: transform, opacity, filter;
+  transition: box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s ease;
+}
+
+/* Exact Kitpro Fractal Radial Constellation Sizes & Z-Layers */
+.wrapper-main-hero._1 {
+  z-index: 14;
+  width: clamp(145px, 12.2vw, 195px);
+  height: clamp(110px, 9.2vw, 148px);
+}
+
+.wrapper-main-hero._2 {
+  z-index: 13;
+  width: clamp(140px, 11.8vw, 188px);
+  height: clamp(150px, 12.6vw, 200px);
+}
+
+.wrapper-main-hero._3 {
+  z-index: 16;
+  width: clamp(155px, 13vw, 208px);
+  height: clamp(175px, 14.8vw, 236px);
+}
+
+.wrapper-main-hero._4 {
+  z-index: 17;
+  width: clamp(125px, 10.2vw, 164px);
+  height: clamp(160px, 13.4vw, 214px);
+}
+
+.wrapper-main-hero._5 {
+  z-index: 12;
+  width: clamp(130px, 10.6vw, 170px);
+  height: clamp(130px, 10.6vw, 170px);
+}
+
+.wrapper-main-hero._6 {
+  z-index: 13;
+  width: clamp(142px, 11.8vw, 188px);
+  height: clamp(148px, 12.2vw, 194px);
+}
+
+.wrapper-main-hero._7 {
+  z-index: 12;
+  width: clamp(112px, 9vw, 144px);
+  height: clamp(122px, 9.8vw, 156px);
+}
+
+.wrapper-main-hero._8 {
+  z-index: 14;
+  width: clamp(108px, 8.6vw, 138px);
+  height: clamp(116px, 9.2vw, 148px);
+}
+
+.wrapper-main-hero:hover,
+.wrapper-main-hero.is-hovered {
+  z-index: 30 !important;
+  filter: blur(0px) !important;
+  box-shadow: 7px 7px 0 0 var(--frame-accent, #a7d8de),
+    7px 7px 0 1px var(--dark),
+    0 22px 44px rgba(0, 0, 0, 0.2);
+}
+
+/* Pastel Top Accent Strip on Each Fractal Frame */
+.fractal-frame-accent-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-bottom: 1px solid var(--dark);
+  z-index: 4;
+}
+
+/* 4 Minimalist Corner Ticks Inside Each Frame (.corner._1 - ._4) */
+.fractal-frame-corner {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: var(--white);
+  border: 1px solid var(--dark);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.fractal-frame-corner._1 {
+  top: 7px;
+  right: 7px;
+}
+
+.fractal-frame-corner._2 {
+  bottom: 24px;
+  right: 7px;
+}
+
+.fractal-frame-corner._3 {
+  bottom: 24px;
+  left: 7px;
+}
+
+.fractal-frame-corner._4 {
+  top: 7px;
+  left: 7px;
+}
+
+.fractal-frame-media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--dark);
+  background-color: #efede8;
+}
+
+.image-hero {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 16%;
+  object-position: center 18%;
   transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
     opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.concept3-polaroid-img.primary {
+.image-hero.primary {
   opacity: 1;
   transform: scale3d(1, 1, 1);
 }
 
-.concept3-polaroid-img.secondary {
+.image-hero.secondary {
   opacity: 0;
   transform: scale3d(1.08, 1.08, 1);
 }
 
-.concept3-polaroid-card:hover .concept3-polaroid-img.primary {
+.wrapper-main-hero:hover .image-hero.primary {
   opacity: 0;
   transform: scale3d(1.05, 1.05, 1);
 }
 
-.concept3-polaroid-card:hover .concept3-polaroid-img.secondary {
+.wrapper-main-hero:hover .image-hero.secondary {
   opacity: 1;
   transform: scale3d(1, 1, 1);
 }
 
-.concept3-polaroid-index {
+.fractal-frame-video {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  z-index: 3;
-  padding: 2px 8px;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 2;
+  opacity: 0.92;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wrapper-main-hero:hover .fractal-frame-video {
+  transform: scale3d(1.06, 1.06, 1);
+}
+
+.fractal-frame-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  z-index: 4;
+  padding: 1.5px 6px;
   background-color: rgba(255, 255, 255, 0.92);
   border: 1px solid var(--dark);
-  border-radius: 999px;
-  font-size: 9px;
+  font-size: 8.5px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--dark);
 }
 
-.concept3-polaroid-caption {
-  padding-top: 12px;
-  text-align: center;
+/* Minimalist Micro-Caption Bar at Foot of Each Frame */
+.fractal-frame-caption {
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  bottom: 3px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--dark);
 }
 
-.concept3-polaroid-title {
-  font-family: var(--_typography---title-font);
-  font-size: clamp(24px, 2.3vw, 32px);
-  line-height: 1;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-}
-
-.concept3-polaroid-stats {
-  margin-top: 4px;
-  font-size: 9.5px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--dark);
+.fractal-frame-name {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* Bottom Oval Division Pill Dock (Matching Concept 3 UI Mockup) */
-.concept3-division-dock-wrap {
-  position: relative;
-  z-index: 12;
-  display: flex;
-  justify-content: center;
-  margin-top: 22px;
-}
-
-.concept3-division-dock {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 8px 12px;
-  background-color: var(--white);
-  border: 1.5px solid var(--dark);
-  border-radius: 999px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
-}
-
-.concept3-dock-pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 28px;
-  border: 1.5px solid var(--dark);
-  border-radius: 999px;
-  font-family: var(--_typography---body-font);
-  font-size: 13px;
+.fractal-frame-metric {
+  font-family: var(--_typography---title-font);
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  flex-shrink: 0;
+}
+
+/* Bottom Architectural Bar (.wrapper-content-two -> Live Dossier + .paragraph-hero) */
+.wrapper-content-two {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 14px 3.8vw 20px;
+  background: linear-gradient(
+    180deg,
+    rgba(250, 249, 246, 0) 0%,
+    rgba(250, 249, 246, 0.94) 45%,
+    rgba(250, 249, 246, 0.99) 100%
+  );
+  pointer-events: auto;
+}
+
+.fractal-bottom-left {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 680px;
+}
+
+.fractal-live-dossier-strip {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 6px 12px;
+  background-color: var(--white);
+  border: 1px solid var(--dark);
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
   color: var(--dark);
-  text-decoration: none;
-  cursor: pointer;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.3s ease;
+  box-shadow: 0 3px 0 0 var(--dark);
 }
 
-.concept3-dock-pill:hover {
+.fractal-division-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.fractal-division-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1px solid var(--dark);
+  border-radius: 999px;
+  font-family: var(--_typography---body-font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--dark);
+  background-color: var(--white);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.28s ease, background-color 0.28s ease;
+}
+
+.fractal-division-btn:hover {
   transform: translate3d(0, -2px, 0);
   box-shadow: 0 4px 0 0 var(--dark);
 }
 
-.concept3-dock-pill:active {
-  transform: scale3d(0.96, 0.96, 1);
+.fractal-bottom-right {
+  max-width: 430px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.fractal-paragraph-mask {
+  overflow: hidden;
+}
+
+.paragraph-hero {
+  font-size: clamp(13px, 1.05vw, 15.5px);
+  line-height: 1.48;
+  font-weight: 500;
+  color: #222222;
+  margin: 0;
+  will-change: transform, opacity;
+}
+
+/* Kitpro Fractal Minimalist Section Brackets & Draw-In Lines */
+.fractal-section-bracket {
+  font-family: var(--_typography---title-font);
+  font-weight: 300;
+  opacity: 0.45;
+  padding: 0 4px;
+}
+
+.fractal-draw-line {
+  width: 100%;
+  height: 1px;
+  background-color: var(--dark);
+  transform-origin: left center;
+  will-change: transform;
 }
 
 /* Floating Architectural Frame Tags */
@@ -1873,56 +2133,77 @@ select:focus-visible {
     height: 14px !important;
   }
 
-  /* Concept 3 Hero Responsive Layout on Tablet & Mobile (<= 991px) */
-  .concept3-headline-text {
-    white-space: normal;
-    font-size: clamp(42px, 9.5vw, 80px);
-    line-height: 1.02;
+  /* Kitpro Fractal × Society Hero Responsive Layout on Tablet & Mobile (<= 991px) */
+  .fractal-hero-section {
+    height: auto;
+    min-height: 680px;
+    max-height: none;
   }
 
-  .concept3-stage {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
-    min-height: auto;
-    padding: 28px 0 20px;
+  .wrapper-hero {
+    min-height: 680px;
   }
 
-  .concept3-runway-portal {
-    grid-column: 1 / -1;
-    order: -1;
-    width: 100%;
+  .wrapper-conotent-one {
+    inset: 54px 0 210px 0;
+  }
+
+  .wrapper-masking-hero {
+    inset: 54px 0 210px 0;
+  }
+
+  .wrapper-content-two {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+    gap: 14px;
+    padding: 18px 20px 22px;
+  }
+
+  .fractal-bottom-left {
+    align-items: center;
+    max-width: 100%;
+  }
+
+  .fractal-division-nav {
+    justify-content: center;
+  }
+
+  .fractal-bottom-right {
+    align-items: center;
+    text-align: center;
     max-width: 520px;
-    height: 390px;
-    margin: 0 auto 10px;
-    transform: none !important;
   }
 
-  .concept3-polaroid-card {
-    width: 100%;
-    margin: 0 !important;
+  .wrapper-main-hero._1 {
+    width: 120px;
+    height: 92px;
   }
-
-  .concept3-polaroid-card.polaroid-left-outer,
-  .concept3-polaroid-card.polaroid-right-inner {
-    transform: rotate(-2.5deg) !important;
+  .wrapper-main-hero._2 {
+    width: 112px;
+    height: 124px;
   }
-
-  .concept3-polaroid-card.polaroid-left-inner,
-  .concept3-polaroid-card.polaroid-right-outer {
-    transform: rotate(2.5deg) !important;
+  .wrapper-main-hero._3 {
+    width: 124px;
+    height: 142px;
   }
-
-  .concept3-division-dock {
-    border-radius: 22px;
-    padding: 10px;
-    gap: 8px;
+  .wrapper-main-hero._4 {
+    width: 104px;
+    height: 132px;
   }
-
-  .concept3-dock-pill {
-    flex: 1 1 calc(50% - 8px);
-    padding: 10px 16px;
-    font-size: 11.5px;
+  .wrapper-main-hero._5 {
+    width: 102px;
+    height: 102px;
+  }
+  .wrapper-main-hero._6 {
+    width: 112px;
+    height: 116px;
+  }
+  .wrapper-main-hero._7,
+  .wrapper-main-hero._8 {
+    width: 92px;
+    height: 98px;
   }
 }
 
@@ -1936,6 +2217,33 @@ select:focus-visible {
   }
 
   /* Fluid Hero Typography & Image Proportions */
+  .fractal-hero-topbar {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 16px 0;
+  }
+
+  .text-hero {
+    font-size: clamp(64px, 19vw, 110px) !important;
+  }
+
+  .wrapper-main-hero._7,
+  .wrapper-main-hero._8 {
+    display: none;
+  }
+
+  .wrapper-main-hero._1,
+  .wrapper-main-hero._2,
+  .wrapper-main-hero._3,
+  .wrapper-main-hero._4,
+  .wrapper-main-hero._5,
+  .wrapper-main-hero._6 {
+    width: 86px;
+    height: 98px;
+    padding: 4px 4px 18px;
+  }
+
   .hero-title {
     font-size: clamp(46px, 14.5vw, 90px) !important;
     line-height: 1.05 !important;

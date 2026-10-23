@@ -87,8 +87,100 @@ const MARQUEE_ITEMS = [
   { text: "DIGITAL COMP CARDS & POLAROIDS (DEMO)", color: "#f5a3a3" },
 ];
 
+const FRACTAL_HERO_FRAMES = [
+  {
+    slot: "_1",
+    modelIndex: 0,
+    desktopX: "31vw",
+    desktopY: "7.5vw",
+    mobileX: "31vw",
+    mobileY: "11vw",
+    delay: 0.36,
+    hasVideo: true,
+    depthLayer: false,
+  },
+  {
+    slot: "_2",
+    modelIndex: 1,
+    desktopX: "-22vw",
+    desktopY: "10.5vw",
+    mobileX: "-25vw",
+    mobileY: "16vw",
+    delay: 0.48,
+    hasVideo: false,
+    depthLayer: true,
+  },
+  {
+    slot: "_3",
+    modelIndex: 2,
+    desktopX: "9.5vw",
+    desktopY: "15.5vw",
+    mobileX: "12vw",
+    mobileY: "21vw",
+    delay: 0.58,
+    hasVideo: false,
+    depthLayer: false,
+  },
+  {
+    slot: "_4",
+    modelIndex: 3,
+    desktopX: "-13vw",
+    desktopY: "-15.5vw",
+    mobileX: "-18vw",
+    mobileY: "-18vw",
+    delay: 0.38,
+    hasVideo: false,
+    depthLayer: false,
+  },
+  {
+    slot: "_5",
+    modelIndex: 4,
+    desktopX: "37vw",
+    desktopY: "-15.5vw",
+    mobileX: "32vw",
+    mobileY: "-16vw",
+    delay: 0.5,
+    hasVideo: false,
+    depthLayer: true,
+  },
+  {
+    slot: "_6",
+    modelIndex: 5,
+    desktopX: "20vw",
+    desktopY: "-13.5vw",
+    mobileX: "15vw",
+    mobileY: "-19vw",
+    delay: 0.62,
+    hasVideo: true,
+    depthLayer: false,
+  },
+  {
+    slot: "_7",
+    modelIndex: 6,
+    desktopX: "-36vw",
+    desktopY: "-13.5vw",
+    mobileX: "-34vw",
+    mobileY: "-12vw",
+    delay: 0.72,
+    hasVideo: false,
+    depthLayer: true,
+  },
+  {
+    slot: "_8",
+    modelIndex: 7,
+    desktopX: "-39vw",
+    desktopY: "5.5vw",
+    mobileX: "-35vw",
+    mobileY: "10vw",
+    delay: 0.68,
+    hasVideo: false,
+    depthLayer: false,
+  },
+] as const;
+
 export default function HomePage() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const innerMaskingRef = useRef<HTMLDivElement>(null);
   const [hoveredService, setHoveredService] = useState<number | null>(null);
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const [activeDivision, setActiveDivision] = useState<string>("ALL");
@@ -96,23 +188,50 @@ export default function HomePage() {
   const [hoveredRunway, setHoveredRunway] = useState<string | null>(null);
   const [hoveredHeroPolaroid, setHoveredHeroPolaroid] =
     useState<TalentCompCard | null>(null);
-  const [heroParallax, setHeroParallax] = useState<{ x: number; y: number }>({
-    x: 0,
-    y: 0,
-  });
   const [selectedModel, setSelectedModel] = useState<TalentCompCard | null>(
     null
   );
 
-  const heroPolaroids = TALENT_BOARD.slice(0, 4);
-
+  // 60fps Kitpro Fractal Mouse Parallax + Dynamic Optical Depth-of-Field Blur (a-18 / a-52)
   const handleHeroMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (!innerMaskingRef.current) return;
     const rect = e.currentTarget.getBoundingClientRect();
-    const relX = (e.clientX - rect.left) / rect.width - 0.5;
-    const relY = (e.clientY - rect.top) / rect.height - 0.5;
-    setHeroParallax({
-      x: relX * 22,
-      y: relY * 16,
+    const normX = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to +0.5
+    const normY = (e.clientY - rect.top) / rect.height - 0.5; // -0.5 to +0.5
+
+    gsap.to(innerMaskingRef.current, {
+      x: -normX * 52,
+      y: -normY * 38,
+      duration: 0.55,
+      ease: "power2.out",
+      overwrite: "auto",
+    });
+
+    const blurAmount = Math.min(3.2, Math.hypot(normX, normY) * 4.2);
+    gsap.to(".wrapper-main-hero.is-depth-layer:not(:hover)", {
+      filter: `blur(${blurAmount.toFixed(2)}px)`,
+      duration: 0.45,
+      ease: "power2.out",
+      overwrite: "auto",
+    });
+  };
+
+  const handleHeroMouseLeave = () => {
+    setHoveredHeroPolaroid(null);
+    if (innerMaskingRef.current) {
+      gsap.to(innerMaskingRef.current, {
+        x: 0,
+        y: 0,
+        duration: 0.7,
+        ease: "power3.out",
+        overwrite: "auto",
+      });
+    }
+    gsap.to(".wrapper-main-hero.is-depth-layer", {
+      filter: "blur(0px)",
+      duration: 0.5,
+      ease: "power2.out",
+      overwrite: "auto",
     });
   };
 
@@ -165,58 +284,120 @@ export default function HomePage() {
     () => {
       const mm = gsap.matchMedia();
 
-      // 1. Concept 3 Hero: Kinetic Runway Portal & Floating Polaroid Deck Entrance
+      // 1. Kitpro Fractal Hero Load Choreography (t-ed5e411c + t-17bd54a9)
+      // A. Horizontal Architectural Framing Lines (.line-hero.left & .line-hero.right)
       gsap.fromTo(
-        ".concept3-headline-text",
-        { y: 55, rotateX: -14, opacity: 0 },
+        ".line-hero.left",
+        { opacity: 0, xPercent: 0 },
         {
-          y: 0,
-          rotateX: 0,
           opacity: 1,
+          xPercent: -60,
           duration: 0.85,
           ease: "power3.out",
-          stagger: 0.08,
         }
       );
-
       gsap.fromTo(
-        ".concept3-runway-portal",
-        { y: 40, scale: 0.92, opacity: 0 },
+        ".line-hero.right",
+        { opacity: 0, xPercent: 0 },
         {
-          y: 0,
-          scale: 1,
           opacity: 1,
-          duration: 0.9,
-          delay: 0.08,
-          ease: "expo.out",
-        }
-      );
-
-      gsap.fromTo(
-        ".concept3-polaroid-card",
-        { y: 65, scale: 0.86, opacity: 0 },
-        {
-          y: 0,
-          scale: 1,
-          opacity: 1,
-          duration: 0.95,
-          delay: 0.14,
-          stagger: 0.07,
-          ease: "expo.out",
-        }
-      );
-
-      gsap.fromTo(
-        ".concept3-division-dock",
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.75,
-          delay: 0.28,
+          xPercent: 60,
+          duration: 0.85,
           ease: "power3.out",
         }
       );
+
+      // B. Center Giant Wordmark 3D Character Flip (.text-hero -> .fractal-hero-char)
+      gsap.fromTo(
+        ".fractal-hero-char",
+        { opacity: 0, rotateY: 360, rotateX: 0, y: 18 },
+        {
+          opacity: 1,
+          rotateY: 0,
+          rotateX: 0,
+          y: 0,
+          duration: 0.85,
+          delay: 0.25,
+          stagger: 0.05,
+          ease: "back.out(1.35)",
+        }
+      );
+
+      gsap.fromTo(
+        [".fractal-hero-kicker", ".fractal-hero-subpill", ".fractal-hero-topbar"],
+        { opacity: 0, y: 16 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.75,
+          delay: 0.2,
+          stagger: 0.06,
+          ease: "power3.out",
+        }
+      );
+
+      // C. Line-Masked .paragraph-hero & Bottom Dossier Bar Reveal (t-17bd54a9)
+      gsap.fromTo(
+        [".paragraph-hero", ".fractal-bottom-left"],
+        { yPercent: 110, opacity: 0 },
+        {
+          yPercent: 0,
+          opacity: 1,
+          duration: 0.8,
+          delay: 0.45,
+          stagger: 0.07,
+          ease: "power3.out",
+        }
+      );
+
+      // D. 8 Radial Floating Model Frames Burst Outward from Center (Desktop vs Tablet/Mobile)
+      mm.add("(min-width: 992px)", () => {
+        FRACTAL_HERO_FRAMES.forEach((frame) => {
+          gsap.fromTo(
+            `.wrapper-main-hero.${frame.slot}`,
+            { opacity: 0, x: "0vw", y: "0vw", scale: 0 },
+            {
+              opacity: 1,
+              x: frame.desktopX,
+              y: frame.desktopY,
+              scale: 1,
+              duration: 1.05,
+              delay: frame.delay,
+              ease: "expo.out",
+            }
+          );
+        });
+      });
+
+      mm.add("(max-width: 991px)", () => {
+        FRACTAL_HERO_FRAMES.forEach((frame) => {
+          gsap.fromTo(
+            `.wrapper-main-hero.${frame.slot}`,
+            { opacity: 0, x: "0vw", y: "0vw", scale: 0 },
+            {
+              opacity: 1,
+              x: frame.mobileX,
+              y: frame.mobileY,
+              scale: 1,
+              duration: 1,
+              delay: frame.delay,
+              ease: "expo.out",
+            }
+          );
+        });
+      });
+
+      // E. Continuous Weightless Yoyo Float on Frame Inner Media (t-17bd54a9)
+      gsap.to(".fractal-frame-float-inner", {
+        y: -5,
+        duration: 1.7,
+        repeat: -1,
+        yoyo: true,
+        stagger: {
+          each: 0.2,
+        },
+        ease: "sine.inOut",
+      });
 
       // 2. The Society Model Board (Demo Roster) Early & Smooth Scroll-In
       gsap.fromTo(
@@ -727,246 +908,270 @@ export default function HomePage() {
       <Navbar variant="light" />
 
       {/* =====================================================================
-          HERO SECTION (CONCEPT 3: KINETIC RUNWAY PORTAL & FLOATING POLAROID DECK)
+          HERO SECTION (KITPRO FRACTAL × THE SOCIETY MINIMALIST CONSTELLATION HERO)
          ===================================================================== */}
       <section
+        id="hero-section"
         onMouseMove={handleHeroMouseMove}
-        onMouseLeave={() => {
-          setHeroParallax({ x: 0, y: 0 });
-          setHoveredHeroPolaroid(null);
-        }}
-        className="section concept3-hero-section"
+        onMouseLeave={handleHeroMouseLeave}
+        className="section hero fractal-hero-section"
       >
-        {/* Subtle Architectural Grid Lines (Matching Concept 3 UI Mockup) */}
-        <div className="concept3-grid-backdrop" aria-hidden="true">
-          <div className="concept3-grid-col" />
-          <div className="concept3-grid-col" />
-          <div className="concept3-grid-col" />
-          <div className="concept3-grid-col" />
+        {/* Subtle Architectural Grid Columns & Artistic Color Aura */}
+        <div className="fractal-grid-backdrop" aria-hidden="true">
+          <div className="fractal-grid-col" />
+          <div className="fractal-grid-col" />
+          <div className="fractal-grid-col" />
+          <div className="fractal-grid-col" />
         </div>
+        <div className="fractal-ambient-aura" aria-hidden="true" />
 
-        {/* Full-Width Top Display Headline Banner */}
-        <div className="concept3-headline-banner">
-          <div className="w-layout-blockcontainer container w-container">
-            <div className="concept3-headline-inner">
-              <h1 className="concept3-headline-text">
-                ICONIC FACES{" "}
-                <span className="concept3-headline-slash">/</span> GLOBAL RUNWAY
-              </h1>
+        {/* 4 Minimalist Viewport Corner Ticks (.corner._1 - ._4) */}
+        <div className="fractal-viewport-corner _1" aria-hidden="true" />
+        <div className="fractal-viewport-corner _2" aria-hidden="true" />
+        <div className="fractal-viewport-corner _3" aria-hidden="true" />
+        <div className="fractal-viewport-corner _4" aria-hidden="true" />
+
+        <div className="wrapper-hero">
+          {/* Top Minimalist Architectural Status Bar */}
+          <div className="fractal-hero-topbar">
+            <div className="fractal-bracket-tag">
+              <span className="fractal-bracket-char">[</span>
+              <span>01 · THE CASTING SOCIETY — AW25 / SS26</span>
+              <span className="fractal-bracket-char">]</span>
+            </div>
+
+            <div className="fractal-status-pills">
+              <span
+                className="fractal-status-pill"
+                style={{ backgroundColor: "#a7d8de" }}
+              >
+                <span
+                  className="editorial-color-dot"
+                  style={{ backgroundColor: "#ffffff" }}
+                />
+                08 DEMO MODELS LIVE
+              </span>
+              <span
+                className="fractal-status-pill"
+                style={{ backgroundColor: "#f5a3a3" }}
+              >
+                PARIS · MILAN · NY · LONDON
+              </span>
             </div>
           </div>
-        </div>
 
-        {/* Center Stage: 4 Tilted Pastel Polaroid Comp-Cards + Central Runway Cinema Portal */}
-        <div className="w-layout-blockcontainer container w-container">
-          <div className="concept3-stage">
-            {/* LEFT 2 FLOATING PASTEL POLAROID COMP-CARDS */}
-            {[heroPolaroids[0], heroPolaroids[1]].map((model, idx) => {
-              const isHovered = hoveredHeroPolaroid?.id === model.id;
-              const posClass =
-                idx === 0 ? "polaroid-left-outer" : "polaroid-left-inner";
-              const depthFactor = idx === 0 ? -1.1 : -0.65;
-              const shortMetric = model.stats.height.split("/")[1]?.trim() || "179CM";
-              return (
-                <div
-                  key={model.id}
-                  onMouseEnter={() => setHoveredHeroPolaroid(model)}
-                  onMouseLeave={() => setHoveredHeroPolaroid(null)}
-                  onClick={() => setSelectedModel(model)}
-                  className={`concept3-polaroid-card ${posClass} ${
-                    isHovered ? "is-hovered" : ""
-                  }`}
-                  style={
-                    {
-                      backgroundColor: model.accentColor,
-                      "--px": `${heroParallax.x * depthFactor}px`,
-                      "--py": `${heroParallax.y * depthFactor}px`,
-                    } as React.CSSProperties
-                  }
-                >
-                  <div className="concept3-polaroid-photo-wrap">
-                    <img
-                      src={model.primaryImage}
-                      alt={model.name}
-                      className="concept3-polaroid-img primary"
-                    />
-                    <img
-                      src={model.secondaryImage}
-                      alt={`${model.name} Campaign`}
-                      className="concept3-polaroid-img secondary"
-                    />
-                    <span className="concept3-polaroid-index">
-                      0{idx + 1} · {model.name.split(" ")[0]}
-                    </span>
-                  </div>
-                  <div className="concept3-polaroid-caption">
-                    <div className="concept3-polaroid-title">DEMO MODEL</div>
-                    <div className="concept3-polaroid-stats">
-                      {shortMetric.toUpperCase()} • EYES:{" "}
-                      {model.stats.eyes.toUpperCase()} • HAIR:{" "}
-                      {model.stats.hair.toUpperCase()}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-
-            {/* CENTER HIGH-FASHION RUNWAY CINEMA PORTAL */}
-            <div
-              onClick={() =>
-                setSelectedModel(hoveredHeroPolaroid || heroPolaroids[0])
-              }
-              className="concept3-runway-portal"
-              style={
-                {
-                  "--px": `${heroParallax.x * 0.35}px`,
-                  "--py": `${heroParallax.y * 0.35}px`,
-                } as React.CSSProperties
-              }
-            >
-              <div className="concept3-runway-portal-inner">
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  poster={ASSETS.heroImage1}
-                  className="concept3-runway-video"
-                >
-                  <source src={ASSETS.videoMp4} type="video/mp4" />
-                </video>
-
-                {/* Dynamic Model Spotlight Crossfade when Hovering any Polaroid */}
-                <img
-                  src={
-                    hoveredHeroPolaroid
-                      ? hoveredHeroPolaroid.secondaryImage
-                      : heroPolaroids[0].secondaryImage
-                  }
-                  alt="Runway Spotlight"
-                  className={`concept3-portal-spotlight-img ${
-                    hoveredHeroPolaroid ? "is-active" : ""
-                  }`}
+          {/* Center Giant Minimalist Display Typography (.wrapper-conotent-one -> .text-hero) */}
+          <div className="wrapper-conotent-one">
+            <div className="inner-content-text-hero">
+              <div className="fractal-hero-kicker">
+                <span
+                  className="editorial-color-dot"
+                  style={{ backgroundColor: "#f8c794" }}
                 />
+                <span>
+                  {hoveredHeroPolaroid
+                    ? `${hoveredHeroPolaroid.division} · ${hoveredHeroPolaroid.bureau}`
+                    : "GLOBAL MODEL MANAGEMENT & CASTING BUREAU (DEMO)"}
+                </span>
+              </div>
 
-                {/* Top Portal Live Badge */}
-                <div className="concept3-portal-top-bar">
-                  <span
-                    className="concept3-portal-badge"
-                    style={{
-                      backgroundColor: hoveredHeroPolaroid
-                        ? hoveredHeroPolaroid.accentColor
-                        : "#a7d8de",
-                    }}
-                  >
-                    {hoveredHeroPolaroid
-                      ? `SPOTLIGHT: ${hoveredHeroPolaroid.name}`
-                      : "PARIS / MILAN / NY CATWALK (DEMO)"}
+              <h1 className="text-hero" aria-label="SOCIETY">
+                {"SOCIETY".split("").map((char, idx) => (
+                  <span key={idx} className="fractal-hero-char">
+                    {char}
                   </span>
-                </div>
+                ))}
+              </h1>
 
-                {/* Bottom Portal Action Bar */}
-                <div className="concept3-portal-bottom-bar">
-                  <span className="concept3-portal-caption">
-                    {hoveredHeroPolaroid
-                      ? `${hoveredHeroPolaroid.latestBooking} — Click for Comp Card`
-                      : "Click Any Polaroid or Portal to Open Digital Comp Card (Demo)"}
-                  </span>
-                  <span className="concept3-portal-arrow">↗</span>
-                </div>
+              <div
+                className="fractal-hero-subpill"
+                style={{
+                  backgroundColor: hoveredHeroPolaroid
+                    ? hoveredHeroPolaroid.accentColor
+                    : "#ffffff",
+                }}
+              >
+                <span className="fractal-bracket-char">[</span>
+                <span>
+                  {hoveredHeroPolaroid
+                    ? `${hoveredHeroPolaroid.name} — ${hoveredHeroPolaroid.stats.height} · BUST ${hoveredHeroPolaroid.stats.bust} · WAIST ${hoveredHeroPolaroid.stats.waist} · HIPS ${hoveredHeroPolaroid.stats.hips}`
+                    : "HOVER ANY MODEL FRAME FOR SPECS · CLICK FOR DIGITAL COMP CARD (DEMO)"}
+                </span>
+                <span className="fractal-bracket-char">]</span>
+              </div>
+            </div>
+          </div>
+
+          {/* 8 Radial Floating Model & Runway Frames (.wrapper-masking-hero -> .outer-masking-hero -> .inner-masking-hero) */}
+          <div className="wrapper-masking-hero">
+            {/* Horizontal Architectural Framing Lines (.outer-lline-hero -> .line-hero.left / .right) */}
+            <div className="outer-lline-hero" aria-hidden="true">
+              <div className="line-hero left" />
+              <div className="line-hero right" />
+            </div>
+
+            <div className="outer-masking-hero">
+              <div ref={innerMaskingRef} className="inner-masking-hero">
+                {FRACTAL_HERO_FRAMES.map((frame, idx) => {
+                  const model = TALENT_BOARD[frame.modelIndex] || TALENT_BOARD[0];
+                  const isHovered = hoveredHeroPolaroid?.id === model.id;
+                  const shortMetric =
+                    model.stats.height.split("/")[1]?.trim() || "179CM";
+
+                  return (
+                    <div
+                      key={frame.slot}
+                      onMouseEnter={() => setHoveredHeroPolaroid(model)}
+                      onMouseLeave={() => setHoveredHeroPolaroid(null)}
+                      onClick={() => setSelectedModel(model)}
+                      className={`wrapper-main-hero ${frame.slot} ${
+                        frame.depthLayer ? "is-depth-layer" : ""
+                      } ${isHovered ? "is-hovered" : ""}`}
+                      style={
+                        {
+                          "--frame-accent": model.accentColor,
+                        } as React.CSSProperties
+                      }
+                    >
+                      {/* Pastel Top Accent Strip */}
+                      <div
+                        className="fractal-frame-accent-bar"
+                        style={{ backgroundColor: model.accentColor }}
+                      />
+
+                      {/* 4 Minimalist Fractal Corner Ticks */}
+                      <div className="fractal-frame-corner _1" />
+                      <div className="fractal-frame-corner _2" />
+                      <div className="fractal-frame-corner _3" />
+                      <div className="fractal-frame-corner _4" />
+
+                      <div className="fractal-frame-media fractal-frame-float-inner">
+                        {frame.hasVideo ? (
+                          <video
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            poster={model.primaryImage}
+                            className="fractal-frame-video"
+                          >
+                            <source src={ASSETS.videoMp4} type="video/mp4" />
+                          </video>
+                        ) : null}
+                        <img
+                          src={model.primaryImage}
+                          alt={`${model.name} — Demo Model`}
+                          className="image-hero primary"
+                        />
+                        <img
+                          src={model.secondaryImage}
+                          alt={`${model.name} — Lookbook`}
+                          className="image-hero secondary"
+                        />
+                        <span
+                          className="fractal-frame-badge"
+                          style={{ backgroundColor: model.accentColor }}
+                        >
+                          0{idx + 1} · DEMO
+                        </span>
+                      </div>
+
+                      <div className="fractal-frame-caption">
+                        <span className="fractal-frame-name">
+                          {model.name.split(" ")[0]}
+                        </span>
+                        <span className="fractal-frame-metric">
+                          {shortMetric} ↗
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Architectural Bar (.wrapper-content-two -> Division Nav + .paragraph-hero) */}
+          <div className="wrapper-content-two">
+            <div className="fractal-bottom-left">
+              <div
+                className="fractal-live-dossier-strip"
+                style={{
+                  backgroundColor: hoveredHeroPolaroid
+                    ? hoveredHeroPolaroid.accentColor
+                    : "#ffffff",
+                }}
+              >
+                <span
+                  className="editorial-color-dot"
+                  style={{
+                    backgroundColor: hoveredHeroPolaroid
+                      ? "#ffffff"
+                      : "#a7d8de",
+                  }}
+                />
+                <span>
+                  {hoveredHeroPolaroid
+                    ? `SPOTLIGHT: ${hoveredHeroPolaroid.name} (DEMO) · ${hoveredHeroPolaroid.latestBooking} — CLICK FRAME FOR COMP CARD`
+                    : "SELECT A DIVISION OR CLICK ANY FLOATING MODEL FRAME TO OPEN DIGITAL COMP CARD (DEMO)"}
+                </span>
+              </div>
+
+              <div
+                className="fractal-division-nav"
+                role="navigation"
+                aria-label="Model Agency Divisions"
+              >
+                <button
+                  type="button"
+                  onClick={() => handleDivisionChange("SOCIETY WOMEN", true)}
+                  className="fractal-division-btn"
+                  style={{ backgroundColor: "#a7d8de" }}
+                >
+                  <span className="fractal-bracket-char">[</span>
+                  SOCIETY WOMEN
+                  <span className="fractal-bracket-char">]</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleDivisionChange("SOCIETY MEN", true)}
+                  className="fractal-division-btn"
+                  style={{ backgroundColor: "#f5a3a3" }}
+                >
+                  <span className="fractal-bracket-char">[</span>
+                  SOCIETY MEN
+                  <span className="fractal-bracket-char">]</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleDivisionChange("DEVELOPMENT", true)}
+                  className="fractal-division-btn"
+                  style={{ backgroundColor: "#f8c794" }}
+                >
+                  <span className="fractal-bracket-char">[</span>
+                  DEVELOPMENT
+                  <span className="fractal-bracket-char">]</span>
+                </button>
+                <a
+                  href="#runway-shows"
+                  className="fractal-division-btn"
+                  style={{ backgroundColor: "#cbb7f6" }}
+                >
+                  <span className="fractal-bracket-char">[</span>
+                  RUNWAY SHOWS
+                  <span className="fractal-bracket-char">]</span>
+                </a>
               </div>
             </div>
 
-            {/* RIGHT 2 FLOATING PASTEL POLAROID COMP-CARDS */}
-            {[heroPolaroids[2], heroPolaroids[3]].map((model, idx) => {
-              const isHovered = hoveredHeroPolaroid?.id === model.id;
-              const posClass =
-                idx === 0 ? "polaroid-right-inner" : "polaroid-right-outer";
-              const depthFactor = idx === 0 ? 0.65 : 1.1;
-              const shortMetric = model.stats.height.split("/")[1]?.trim() || "178CM";
-              return (
-                <div
-                  key={model.id}
-                  onMouseEnter={() => setHoveredHeroPolaroid(model)}
-                  onMouseLeave={() => setHoveredHeroPolaroid(null)}
-                  onClick={() => setSelectedModel(model)}
-                  className={`concept3-polaroid-card ${posClass} ${
-                    isHovered ? "is-hovered" : ""
-                  }`}
-                  style={
-                    {
-                      backgroundColor: model.accentColor,
-                      "--px": `${heroParallax.x * depthFactor}px`,
-                      "--py": `${heroParallax.y * depthFactor}px`,
-                    } as React.CSSProperties
-                  }
-                >
-                  <div className="concept3-polaroid-photo-wrap">
-                    <img
-                      src={model.primaryImage}
-                      alt={model.name}
-                      className="concept3-polaroid-img primary"
-                    />
-                    <img
-                      src={model.secondaryImage}
-                      alt={`${model.name} Campaign`}
-                      className="concept3-polaroid-img secondary"
-                    />
-                    <span className="concept3-polaroid-index">
-                      0{idx + 3} · {model.name.split(" ")[0]}
-                    </span>
-                  </div>
-                  <div className="concept3-polaroid-caption">
-                    <div className="concept3-polaroid-title">DEMO MODEL</div>
-                    <div className="concept3-polaroid-stats">
-                      {shortMetric.toUpperCase()} • EYES:{" "}
-                      {model.stats.eyes.toUpperCase()} • HAIR:{" "}
-                      {model.stats.hair.toUpperCase()}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* BOTTOM INTERACTIVE DIVISION PILL DOCK (Exact Match to Concept 3 UI Mockup) */}
-          <div className="concept3-division-dock-wrap">
-            <div
-              className="concept3-division-dock"
-              role="navigation"
-              aria-label="Model Agency Divisions"
-            >
-              <button
-                type="button"
-                onClick={() => handleDivisionChange("SOCIETY WOMEN", true)}
-                className="concept3-dock-pill"
-                style={{ backgroundColor: "#a7d8de" }}
-              >
-                SOCIETY WOMEN
-              </button>
-              <button
-                type="button"
-                onClick={() => handleDivisionChange("SOCIETY MEN", true)}
-                className="concept3-dock-pill"
-                style={{ backgroundColor: "#f5a3a3" }}
-              >
-                SOCIETY MEN
-              </button>
-              <button
-                type="button"
-                onClick={() => handleDivisionChange("DEVELOPMENT", true)}
-                className="concept3-dock-pill"
-                style={{ backgroundColor: "#f8c794" }}
-              >
-                DEVELOPMENT
-              </button>
-              <a
-                href="#runway-shows"
-                className="concept3-dock-pill"
-                style={{ backgroundColor: "#cbb7f6" }}
-              >
-                RUNWAY SHOWS
-              </a>
+            <div className="fractal-bottom-right">
+              <div className="fractal-paragraph-mask">
+                <p className="paragraph-hero">
+                  Curating iconic faces, haute couture runway exclusives, and
+                  colorful editorial campaigns across Paris, Milan, New York &
+                  London. (Demo)
+                </p>
+              </div>
             </div>
           </div>
         </div>
