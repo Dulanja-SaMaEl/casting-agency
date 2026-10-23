@@ -20,12 +20,12 @@ export default function TeamPage() {
     () => {
       gsap.fromTo(
         [".breadcrumb-title", ".breadcrumb-subtitle-block"],
-        { y: 50, opacity: 0 },
+        { y: 34, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.85,
-          stagger: 0.14,
+          duration: 0.75,
+          stagger: 0.08,
           ease: "power3.out",
         }
       );
@@ -34,37 +34,19 @@ export default function TeamPage() {
       rows.forEach((row) => {
         gsap.fromTo(
           row,
-          { y: 75, opacity: 0 },
+          { y: 32, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 1.05,
-            ease: "expo.out",
+            duration: 0.72,
+            ease: "power3.out",
             scrollTrigger: {
               trigger: row,
-              start: "top 86%",
-              toggleActions: "play none none reverse",
+              start: "top 95%",
+              toggleActions: "play none none none",
             },
           }
         );
-
-        const imgBlock = row.querySelector(".team-image-block");
-        if (imgBlock) {
-          gsap.fromTo(
-            imgBlock,
-            { clipPath: "inset(10% 0% 10% 0%)" },
-            {
-              clipPath: "inset(0% 0% 0% 0%)",
-              duration: 1.15,
-              ease: "expo.out",
-              scrollTrigger: {
-                trigger: row,
-                start: "top 86%",
-                toggleActions: "play none none reverse",
-              },
-            }
-          );
-        }
       });
     },
     { scope: containerRef }

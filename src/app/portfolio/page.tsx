@@ -21,53 +21,34 @@ export default function PortfolioPage() {
     () => {
       gsap.fromTo(
         ".breadcrumb-title",
-        { y: 65, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.0, ease: "expo.out" }
+        { y: 36, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.75, ease: "power3.out" }
       );
 
       const items = gsap.utils.toArray<HTMLElement>(".portfolio-grid-item");
       items.forEach((item, i) => {
         gsap.fromTo(
           item,
-          { y: 75, opacity: 0 },
+          { y: 32, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 1.05,
-            delay: (i % 3) * 0.08,
-            ease: "expo.out",
+            duration: 0.7,
+            delay: (i % 3) * 0.04,
+            ease: "power3.out",
             scrollTrigger: {
               trigger: item,
-              start: "top 88%",
-              toggleActions: "play none none reverse",
+              start: "top 96%",
+              toggleActions: "play none none none",
             },
           }
         );
-
-        const imgBlock = item.querySelector(".portfolio-inner-info-image-block");
-        if (imgBlock) {
-          gsap.fromTo(
-            imgBlock,
-            { clipPath: "inset(10% 0% 10% 0%)" },
-            {
-              clipPath: "inset(0% 0% 0% 0%)",
-              duration: 1.15,
-              delay: (i % 3) * 0.08,
-              ease: "expo.out",
-              scrollTrigger: {
-                trigger: item,
-                start: "top 88%",
-                toggleActions: "play none none reverse",
-              },
-            }
-          );
-        }
 
         const img = item.querySelector(".portfolio-inner-info-image");
         if (img) {
           gsap.fromTo(
             img,
-            { scale: 1.12 },
+            { scale: 1.08 },
             {
               scale: 1,
               ease: "none",
@@ -75,7 +56,7 @@ export default function PortfolioPage() {
                 trigger: item,
                 start: "top bottom",
                 end: "bottom top",
-                scrub: 0.5,
+                scrub: 0.25,
               },
             }
           );

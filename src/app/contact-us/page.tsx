@@ -32,65 +32,65 @@ export default function ContactUsPage() {
 
       gsap.fromTo(
         ".contact-left-block .section-title-inner-block",
-        { y: 50, opacity: 0 },
+        { y: 28, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.85,
+          duration: 0.7,
           ease: "power3.out",
           scrollTrigger: {
             trigger: ".contact-info-section-one",
-            start: "top 82%",
-            toggleActions: "play none none reverse",
+            start: "top 95%",
+            toggleActions: "play none none none",
           },
         }
       );
 
       gsap.fromTo(
         ".contact-content-inner-block",
-        { y: 45, opacity: 0 },
+        { y: 28, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
-          stagger: 0.12,
+          duration: 0.68,
+          stagger: 0.06,
           ease: "power3.out",
           scrollTrigger: {
             trigger: ".contact-content-grid",
-            start: "top 85%",
-            toggleActions: "play none none reverse",
+            start: "top 95%",
+            toggleActions: "play none none none",
           },
         }
       );
 
       gsap.fromTo(
         ".contact-form-main-block",
-        { y: 60, opacity: 0 },
+        { y: 32, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.9,
+          duration: 0.72,
           ease: "power3.out",
           scrollTrigger: {
             trigger: ".contact-right-block",
-            start: "top 82%",
-            toggleActions: "play none none reverse",
+            start: "top 95%",
+            toggleActions: "play none none none",
           },
         }
       );
 
       gsap.fromTo(
         ".contact-map-block",
-        { y: 50, opacity: 0 },
+        { y: 30, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.9,
+          duration: 0.72,
           ease: "power3.out",
           scrollTrigger: {
             trigger: ".contact-map-block",
-            start: "top 88%",
-            toggleActions: "play none none reverse",
+            start: "top 95%",
+            toggleActions: "play none none none",
           },
         }
       );

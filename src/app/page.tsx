@@ -125,17 +125,21 @@ export default function HomePage() {
     requestAnimationFrame(() => {
       gsap.fromTo(
         ".society-comp-card",
-        { y: 40, opacity: 0, scale: 0.97 },
+        { y: 24, opacity: 0, scale: 0.98 },
         {
           y: 0,
           opacity: 1,
           scale: 1,
-          duration: 0.75,
-          stagger: 0.07,
-          ease: "expo.out",
+          duration: 0.55,
+          stagger: 0.04,
+          ease: "power3.out",
           overwrite: "auto",
+          onComplete: () => {
+            ScrollTrigger.refresh();
+          },
         }
       );
+      ScrollTrigger.refresh();
     });
   };
 
@@ -143,32 +147,32 @@ export default function HomePage() {
     () => {
       const mm = gsap.matchMedia();
 
-      // 1. Hero Editorial Model Casting Reveal
+      // 1. Hero Editorial Model Casting Reveal (Fast, Immediate Entrance)
       gsap.fromTo(
         ".hero-title",
-        { y: 95, rotateX: -22, opacity: 0 },
+        { y: 55, rotateX: -14, opacity: 0 },
         {
           y: 0,
           rotateX: 0,
           opacity: 1,
-          duration: 1.15,
-          ease: "expo.out",
-          stagger: 0.12,
+          duration: 0.85,
+          ease: "power3.out",
+          stagger: 0.08,
         }
       );
 
       gsap.fromTo(
         ".hero-badge-anim",
-        { y: 110, rotate: -15, opacity: 0, scale: 0.88 },
+        { y: 60, rotate: -15, opacity: 0, scale: 0.92 },
         {
           y: 0,
           rotate: -15,
           opacity: 1,
           scale: 1,
-          duration: 0.95,
-          delay: 0.25,
-          ease: "expo.out",
-          stagger: 0.12,
+          duration: 0.75,
+          delay: 0.1,
+          ease: "power3.out",
+          stagger: 0.08,
         }
       );
 
@@ -177,51 +181,51 @@ export default function HomePage() {
         { width: "0%" },
         {
           width: "100%",
-          duration: 1.25,
-          delay: 0.3,
-          ease: "expo.inOut",
-          stagger: 0.15,
+          duration: 0.95,
+          delay: 0.12,
+          ease: "expo.out",
+          stagger: 0.1,
         }
       );
 
       gsap.fromTo(
         ".hero-image",
-        { scale: 1.22 },
+        { scale: 1.14 },
         {
           scale: 1,
-          duration: 1.5,
-          delay: 0.3,
-          ease: "expo.out",
-          stagger: 0.15,
+          duration: 1.1,
+          delay: 0.12,
+          ease: "power3.out",
+          stagger: 0.1,
         }
       );
 
       gsap.fromTo(
         ".hero-inner-info-block",
-        { y: 45, opacity: 0 },
+        { y: 28, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1.0,
-          delay: 0.65,
-          ease: "expo.out",
+          duration: 0.75,
+          delay: 0.25,
+          ease: "power3.out",
         }
       );
 
-      // 2. The Society Model Board (Demo Roster) Smooth Scroll-In
+      // 2. The Society Model Board (Demo Roster) Early & Smooth Scroll-In
       gsap.fromTo(
         ".society-board-header-reveal",
-        { y: 60, opacity: 0 },
+        { y: 28, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1.05,
-          stagger: 0.12,
-          ease: "expo.out",
+          duration: 0.7,
+          stagger: 0.06,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: ".society-board-section",
-            start: "top 82%",
-            toggleActions: "play none none reverse",
+            start: "top 95%",
+            toggleActions: "play none none none",
           },
         }
       );
@@ -230,114 +234,93 @@ export default function HomePage() {
       compCards.forEach((card, i) => {
         gsap.fromTo(
           card,
-          { y: 75, opacity: 0 },
+          { y: 32, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 1.05,
-            delay: (i % 4) * 0.08,
-            ease: "expo.out",
+            duration: 0.7,
+            delay: (i % 4) * 0.04,
+            ease: "power3.out",
             scrollTrigger: {
               trigger: card,
-              start: "top 88%",
-              toggleActions: "play none none reverse",
+              start: "top 96%",
+              toggleActions: "play none none none",
             },
           }
         );
-
-        const mediaWrap = card.querySelector(".society-card-media-mask");
-        if (mediaWrap) {
-          gsap.fromTo(
-            mediaWrap,
-            { clipPath: "inset(10% 0% 10% 0%)" },
-            {
-              clipPath: "inset(0% 0% 0% 0%)",
-              duration: 1.15,
-              delay: (i % 4) * 0.08,
-              ease: "expo.out",
-              scrollTrigger: {
-                trigger: card,
-                start: "top 88%",
-                toggleActions: "play none none reverse",
-              },
-            }
-          );
-        }
       });
 
-      // 3. The Society 4-Panel Runway Shows Strip Reveal
+      // 3. The Society 4-Panel Runway Shows Strip Early & Smooth Reveal
       gsap.fromTo(
         ".society-runway-header-reveal",
-        { y: 55, opacity: 0 },
+        { y: 28, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1.0,
-          ease: "expo.out",
+          duration: 0.7,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: ".society-runway-section",
-            start: "top 82%",
-            toggleActions: "play none none reverse",
+            start: "top 95%",
+            toggleActions: "play none none none",
           },
         }
       );
 
       gsap.fromTo(
         ".society-runway-panel",
-        { y: 80, opacity: 0, scale: 0.97 },
+        { y: 36, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          scale: 1,
-          duration: 1.1,
-          stagger: 0.1,
-          ease: "expo.out",
+          duration: 0.75,
+          stagger: 0.06,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: ".society-runway-strip",
-            start: "top 85%",
-            toggleActions: "play none none reverse",
+            start: "top 95%",
+            toggleActions: "play none none none",
           },
         }
       );
 
-      // 4. Service Section Smooth Scroll-In Choreography
+      // 4. Service Section Early & Smooth Scroll-In Choreography
       gsap.fromTo(
         ".service-section .section-title-inner-block",
-        { y: 65, opacity: 0 },
+        { y: 28, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1.05,
-          ease: "expo.out",
+          duration: 0.7,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: ".service-section",
-            start: "top 82%",
-            toggleActions: "play none none reverse",
+            start: "top 95%",
+            toggleActions: "play none none none",
           },
         }
       );
 
       gsap.fromTo(
         ".service-card-entrance",
-        { y: 85, opacity: 0, scale: 0.96 },
+        { y: 34, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          scale: 1,
-          duration: 1.0,
-          stagger: 0.12,
-          ease: "expo.out",
+          duration: 0.72,
+          stagger: 0.06,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: ".service-grid",
-            start: "top 84%",
-            toggleActions: "play none none reverse",
+            start: "top 95%",
+            toggleActions: "play none none none",
           },
         }
       );
 
       // 5. Desktop-Only Sticky Scroll Choreographies (>=992px)
       mm.add("(min-width: 992px)", () => {
-        // A. Horizontal Scroll Projects Section (a-23)
+        // A. Horizontal Scroll Projects Section (Immediate 1:1 Response, Zero Dead Zone)
         gsap.set(".projects-horizontal-bg-block.one", { opacity: 1 });
         gsap.set(".projects-horizontal-bg-block.two", { opacity: 0 });
         gsap.set(".projects-horizontal-bg-block.three", { opacity: 0 });
@@ -348,63 +331,64 @@ export default function HomePage() {
             trigger: ".projects-section",
             start: "top top",
             end: "bottom bottom",
-            scrub: 0.6,
+            scrub: 0.2,
+            invalidateOnRefresh: true,
           },
         });
 
         projectsTl.fromTo(
           ".projects-letter-3d",
           { rotateY: 0 },
-          { rotateY: 90, duration: 0.06, ease: "none", stagger: 0.004 },
-          0.18
+          { rotateY: 90, duration: 0.08, ease: "none", stagger: 0.004 },
+          0.02
         );
 
         projectsTl
           .fromTo(
             ".projects-info-inner-block",
             { xPercent: 0 },
-            { xPercent: -20, duration: 0.2, ease: "none" },
-            0.2
+            { xPercent: -22, duration: 0.28, ease: "none" },
+            0.04
           )
           .to(
             ".projects-horizontal-bg-block.one",
-            { opacity: 0, duration: 0.15, ease: "none" },
-            0.25
+            { opacity: 0, duration: 0.18, ease: "none" },
+            0.14
           )
           .to(
             ".projects-horizontal-bg-block.two",
-            { opacity: 1, duration: 0.15, ease: "none" },
-            0.25
+            { opacity: 1, duration: 0.18, ease: "none" },
+            0.14
           )
           .to(
             ".projects-info-inner-block",
-            { xPercent: -42, duration: 0.2, ease: "none" },
-            0.4
+            { xPercent: -46, duration: 0.3, ease: "none" },
+            0.32
           )
           .to(
             ".projects-horizontal-bg-block.two",
-            { opacity: 0, duration: 0.15, ease: "none" },
-            0.45
+            { opacity: 0, duration: 0.18, ease: "none" },
+            0.44
           )
           .to(
             ".projects-horizontal-bg-block.three",
-            { opacity: 1, duration: 0.15, ease: "none" },
-            0.45
+            { opacity: 1, duration: 0.18, ease: "none" },
+            0.44
           )
           .to(
             ".projects-info-inner-block",
-            { xPercent: -70, duration: 0.25, ease: "none" },
-            0.6
+            { xPercent: -70, duration: 0.32, ease: "none" },
+            0.62
           )
           .to(
             ".projects-horizontal-bg-block.three",
-            { opacity: 0, duration: 0.15, ease: "none" },
-            0.65
+            { opacity: 0, duration: 0.18, ease: "none" },
+            0.72
           )
           .to(
             ".projects-horizontal-bg-block.four",
-            { opacity: 1, duration: 0.15, ease: "none" },
-            0.65
+            { opacity: 1, duration: 0.18, ease: "none" },
+            0.72
           );
 
         // B. About Section 3-Line Text Unmask (a-24)
@@ -420,9 +404,10 @@ export default function HomePage() {
         const unmaskTl = gsap.timeline({
           scrollTrigger: {
             trigger: ".about-section-title-block",
-            start: "top 85%",
-            end: "bottom 25%",
-            scrub: 0.6,
+            start: "top 92%",
+            end: "bottom 42%",
+            scrub: 0.2,
+            invalidateOnRefresh: true,
           },
         });
 
@@ -443,7 +428,7 @@ export default function HomePage() {
             ease: "none",
           });
 
-        // C. Sticky Testimonial Stack (a-26)
+        // C. Sticky Testimonial Stack (Immediate Start on Pin)
         gsap.set(".testimonial-inner-info-block.one", {
           yPercent: 270,
           rotate: 10,
@@ -466,30 +451,31 @@ export default function HomePage() {
             trigger: ".testimonial-section",
             start: "top top",
             end: "bottom bottom",
-            scrub: 0.6,
+            scrub: 0.2,
+            invalidateOnRefresh: true,
           },
         });
 
         testTl
           .to(
             ".testimonial-inner-info-block.one",
-            { yPercent: 0, rotate: 10, duration: 0.18, ease: "none" },
-            0.12
+            { yPercent: 0, rotate: 10, duration: 0.2, ease: "none" },
+            0.03
           )
           .to(
             ".testimonial-inner-info-block.two",
-            { yPercent: 0, rotate: -10, duration: 0.18, ease: "none" },
-            0.32
+            { yPercent: 0, rotate: -10, duration: 0.2, ease: "none" },
+            0.27
           )
           .to(
             ".testimonial-inner-info-block.three",
             { yPercent: 0, rotate: 10, duration: 0.2, ease: "none" },
-            0.52
+            0.51
           )
           .to(
             ".testimonial-inner-info-block.four",
             { yPercent: 0, rotate: -10, duration: 0.2, ease: "none" },
-            0.72
+            0.75
           );
       });
 
@@ -497,18 +483,18 @@ export default function HomePage() {
       mm.add("(max-width: 991px)", () => {
         gsap.fromTo(
           ".projects-letter-3d",
-          { rotateY: 75, y: 30, opacity: 0 },
+          { rotateY: 55, y: 20, opacity: 0 },
           {
             rotateY: 0,
             y: 0,
             opacity: 1,
-            duration: 0.85,
-            stagger: 0.05,
-            ease: "expo.out",
+            duration: 0.65,
+            stagger: 0.04,
+            ease: "power3.out",
             scrollTrigger: {
               trigger: ".projects-text-block",
-              start: "top 88%",
-              toggleActions: "play none none reverse",
+              start: "top 95%",
+              toggleActions: "play none none none",
             },
           }
         );
@@ -519,16 +505,16 @@ export default function HomePage() {
         mobileProjectCards.forEach((card) => {
           gsap.fromTo(
             card,
-            { y: 65, opacity: 0 },
+            { y: 32, opacity: 0 },
             {
               y: 0,
               opacity: 1,
-              duration: 0.95,
-              ease: "expo.out",
+              duration: 0.7,
+              ease: "power3.out",
               scrollTrigger: {
                 trigger: card,
-                start: "top 86%",
-                toggleActions: "play none none reverse",
+                start: "top 95%",
+                toggleActions: "play none none none",
               },
             }
           );
@@ -537,7 +523,7 @@ export default function HomePage() {
           if (img) {
             gsap.fromTo(
               img,
-              { scale: 1.12 },
+              { scale: 1.08 },
               {
                 scale: 1,
                 ease: "none",
@@ -545,7 +531,7 @@ export default function HomePage() {
                   trigger: card,
                   start: "top bottom",
                   end: "bottom top",
-                  scrub: 0.4,
+                  scrub: 0.25,
                 },
               }
             );
@@ -554,16 +540,16 @@ export default function HomePage() {
 
         gsap.fromTo(
           ".about-section-title",
-          { y: 45, opacity: 0 },
+          { y: 28, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 0.95,
-            ease: "expo.out",
+            duration: 0.7,
+            ease: "power3.out",
             scrollTrigger: {
               trigger: ".about-section-title-block",
-              start: "top 86%",
-              toggleActions: "play none none reverse",
+              start: "top 95%",
+              toggleActions: "play none none none",
             },
           }
         );
@@ -574,53 +560,52 @@ export default function HomePage() {
         mobileTestimonialCards.forEach((card, i) => {
           gsap.fromTo(
             card,
-            { y: 55, opacity: 0, scale: 0.96 },
+            { y: 30, opacity: 0 },
             {
               y: 0,
               opacity: 1,
-              scale: 1,
-              duration: 0.9,
-              delay: (i % 2) * 0.08,
-              ease: "expo.out",
+              duration: 0.68,
+              delay: (i % 2) * 0.05,
+              ease: "power3.out",
               scrollTrigger: {
                 trigger: card,
-                start: "top 88%",
-                toggleActions: "play none none reverse",
+                start: "top 95%",
+                toggleActions: "play none none none",
               },
             }
           );
         });
       });
 
-      // 6. About Badge & Description Smooth Scroll-In Reveal
+      // 6. About Badge & Description Early & Smooth Scroll-In Reveal
       gsap.fromTo(
         ".about-subtext-block",
-        { y: 55, opacity: 0 },
+        { y: 26, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.95,
-          ease: "expo.out",
+          duration: 0.68,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: ".about-title-grid",
-            start: "top 85%",
-            toggleActions: "play none none reverse",
+            start: "top 95%",
+            toggleActions: "play none none none",
           },
         }
       );
 
       gsap.fromTo(
         ".about-desc-reveal",
-        { y: 65, opacity: 0 },
+        { y: 28, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1.05,
-          ease: "expo.out",
+          duration: 0.72,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: ".about-info-grid-two",
-            start: "top 85%",
-            toggleActions: "play none none reverse",
+            start: "top 95%",
+            toggleActions: "play none none none",
           },
         }
       );
@@ -631,84 +616,94 @@ export default function HomePage() {
 
       ScrollTrigger.create({
         trigger: ".about-counter-grid",
-        start: "top 85%",
+        start: "top 94%",
         onEnter: () => {
           gsap.fromTo(
             ".about-counter-box",
-            { y: 50, opacity: 0 },
+            { y: 26, opacity: 0 },
             {
               y: 0,
               opacity: 1,
-              duration: 0.85,
-              stagger: 0.1,
-              ease: "expo.out",
+              duration: 0.65,
+              stagger: 0.06,
+              ease: "power3.out",
             }
           );
           gsap.to(".about-counter-frist-number-block", {
             yPercent: 0,
-            duration: 2.1,
+            duration: 1.65,
             ease: "power3.inOut",
           });
           gsap.to(".about-counter-secend-number-block", {
             yPercent: -90,
-            duration: 2.1,
+            duration: 1.65,
             ease: "power3.inOut",
           });
         },
       });
 
-      // 8. Video, Testimonial Header & Contact Section Smooth Reveal
+      // 8. Video, Testimonial Header & Contact Section Early & Smooth Reveal
       gsap.fromTo(
         ".video-section",
-        { clipPath: "inset(6% 4% 6% 4%)", scale: 0.97, opacity: 0.6 },
+        { y: 28, opacity: 0.85 },
         {
-          clipPath: "inset(0% 0% 0% 0%)",
-          scale: 1,
+          y: 0,
           opacity: 1,
-          duration: 1.15,
-          ease: "expo.out",
+          duration: 0.75,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: ".video-section",
-            start: "top 84%",
-            toggleActions: "play none none reverse",
+            start: "top 95%",
+            toggleActions: "play none none none",
           },
         }
       );
 
       gsap.fromTo(
         ".testimonial-inner-block",
-        { y: 65, opacity: 0 },
+        { y: 28, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1.05,
-          ease: "expo.out",
+          duration: 0.7,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: ".testimonial-section",
-            start: "top 80%",
-            toggleActions: "play none none reverse",
+            start: "top 95%",
+            toggleActions: "play none none none",
           },
         }
       );
 
       gsap.fromTo(
         ".concat-info-block",
-        { y: 70, opacity: 0, scale: 0.96 },
+        { y: 32, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          scale: 1,
-          duration: 1.05,
-          ease: "expo.out",
+          duration: 0.72,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: ".contact-info-section",
-            start: "top 80%",
-            toggleActions: "play none none reverse",
+            start: "top 95%",
+            toggleActions: "play none none none",
           },
         }
       );
 
-      return () => mm.revert();
+      // Keep ScrollTrigger positions 100% synced as images/videos settle
+      const refreshTimer = window.setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 350);
+
+      const handleLoad = () => ScrollTrigger.refresh();
+      window.addEventListener("load", handleLoad);
+
+      return () => {
+        window.clearTimeout(refreshTimer);
+        window.removeEventListener("load", handleLoad);
+        mm.revert();
+      };
     },
     { scope: containerRef }
   );

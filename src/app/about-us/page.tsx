@@ -170,108 +170,106 @@ export default function AboutUsPage() {
         });
       });
 
-      // 2. Service Two Section Smooth Scroll-In Reveal
+      // 2. Service Two Section Early & Smooth Scroll-In Reveal
       gsap.fromTo(
         ".service-title-grid > div",
-        { y: 60, opacity: 0 },
+        { y: 28, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1.0,
-          stagger: 0.14,
-          ease: "expo.out",
+          duration: 0.7,
+          stagger: 0.06,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: ".service-two-section",
-            start: "top 82%",
-            toggleActions: "play none none reverse",
+            start: "top 95%",
+            toggleActions: "play none none none",
           },
         }
       );
 
       gsap.fromTo(
         ".service-info-main-block",
-        { y: 65, opacity: 0 },
+        { y: 30, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.95,
-          stagger: 0.1,
-          ease: "expo.out",
+          duration: 0.7,
+          stagger: 0.05,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: ".service-two-grid.one",
-            start: "top 85%",
-            toggleActions: "play none none reverse",
+            start: "top 95%",
+            toggleActions: "play none none none",
           },
         }
       );
 
-      // 3. Team Pills Section Smooth Scroll-In Reveal
+      // 3. Team Pills Section Early & Smooth Scroll-In Reveal
       gsap.fromTo(
         ".team-title-grid > div",
-        { y: 60, opacity: 0 },
+        { y: 28, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1.0,
-          stagger: 0.14,
-          ease: "expo.out",
+          duration: 0.7,
+          stagger: 0.06,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: ".team-section",
-            start: "top 82%",
-            toggleActions: "play none none reverse",
+            start: "top 95%",
+            toggleActions: "play none none none",
           },
         }
       );
 
       gsap.fromTo(
         ".team-list-wrapper",
-        { y: 55, opacity: 0, scale: 0.96 },
+        { y: 28, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          scale: 1,
-          duration: 0.9,
-          stagger: 0.1,
-          ease: "expo.out",
+          duration: 0.68,
+          stagger: 0.05,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: ".team-grid",
-            start: "top 85%",
-            toggleActions: "play none none reverse",
+            start: "top 95%",
+            toggleActions: "play none none none",
           },
         }
       );
 
-      // 4. Dark Blog Cards Smooth Curtain Reveal on Scroll
+      // 4. Dark Blog Cards Early & Smooth Reveal on Scroll
       gsap.fromTo(
         ".blog-section .section-title-inner-block",
-        { y: 60, opacity: 0 },
+        { y: 28, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1.0,
-          ease: "expo.out",
+          duration: 0.7,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: ".blog-section",
-            start: "top 82%",
-            toggleActions: "play none none reverse",
+            start: "top 95%",
+            toggleActions: "play none none none",
           },
         }
       );
 
       gsap.fromTo(
         ".about-blog-card",
-        { y: 70, scale: 0.92, opacity: 0 },
+        { y: 32, opacity: 0 },
         {
           y: 0,
-          scale: 1,
           opacity: 1,
-          duration: 1.05,
-          stagger: 0.14,
-          ease: "expo.out",
+          duration: 0.72,
+          stagger: 0.06,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: ".blog-list",
-            start: "top 84%",
-            toggleActions: "play none none reverse",
+            start: "top 95%",
+            toggleActions: "play none none none",
           },
         }
       );
