@@ -94,9 +94,27 @@ export default function HomePage() {
   const [activeDivision, setActiveDivision] = useState<string>("ALL");
   const [hoveredTalent, setHoveredTalent] = useState<string | null>(null);
   const [hoveredRunway, setHoveredRunway] = useState<string | null>(null);
+  const [hoveredHeroPolaroid, setHoveredHeroPolaroid] =
+    useState<TalentCompCard | null>(null);
+  const [heroParallax, setHeroParallax] = useState<{ x: number; y: number }>({
+    x: 0,
+    y: 0,
+  });
   const [selectedModel, setSelectedModel] = useState<TalentCompCard | null>(
     null
   );
+
+  const heroPolaroids = TALENT_BOARD.slice(0, 4);
+
+  const handleHeroMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const relX = (e.clientX - rect.left) / rect.width - 0.5;
+    const relY = (e.clientY - rect.top) / rect.height - 0.5;
+    setHeroParallax({
+      x: relX * 22,
+      y: relY * 16,
+    });
+  };
 
   const filteredTalent =
     activeDivision === "ALL"
@@ -147,9 +165,9 @@ export default function HomePage() {
     () => {
       const mm = gsap.matchMedia();
 
-      // 1. Hero Editorial Model Casting Reveal (Fast, Immediate Entrance)
+      // 1. Concept 3 Hero: Kinetic Runway Portal & Floating Polaroid Deck Entrance
       gsap.fromTo(
-        ".hero-title",
+        ".concept3-headline-text",
         { y: 55, rotateX: -14, opacity: 0 },
         {
           y: 0,
@@ -162,52 +180,40 @@ export default function HomePage() {
       );
 
       gsap.fromTo(
-        ".hero-badge-anim",
-        { y: 60, rotate: -15, opacity: 0, scale: 0.92 },
+        ".concept3-runway-portal",
+        { y: 40, scale: 0.92, opacity: 0 },
         {
           y: 0,
-          rotate: -15,
-          opacity: 1,
           scale: 1,
-          duration: 0.75,
-          delay: 0.1,
-          ease: "power3.out",
-          stagger: 0.08,
-        }
-      );
-
-      gsap.fromTo(
-        ".hero-centar-block",
-        { width: "0%" },
-        {
-          width: "100%",
-          duration: 0.95,
-          delay: 0.12,
+          opacity: 1,
+          duration: 0.9,
+          delay: 0.08,
           ease: "expo.out",
-          stagger: 0.1,
         }
       );
 
       gsap.fromTo(
-        ".hero-image",
-        { scale: 1.14 },
+        ".concept3-polaroid-card",
+        { y: 65, scale: 0.86, opacity: 0 },
         {
+          y: 0,
           scale: 1,
-          duration: 1.1,
-          delay: 0.12,
-          ease: "power3.out",
-          stagger: 0.1,
+          opacity: 1,
+          duration: 0.95,
+          delay: 0.14,
+          stagger: 0.07,
+          ease: "expo.out",
         }
       );
 
       gsap.fromTo(
-        ".hero-inner-info-block",
-        { y: 28, opacity: 0 },
+        ".concept3-division-dock",
+        { y: 30, opacity: 0 },
         {
           y: 0,
           opacity: 1,
           duration: 0.75,
-          delay: 0.25,
+          delay: 0.28,
           ease: "power3.out",
         }
       );
@@ -721,156 +727,246 @@ export default function HomePage() {
       <Navbar variant="light" />
 
       {/* =====================================================================
-          HERO SECTION (Reflux × The Society Management Model Casting Cover)
+          HERO SECTION (CONCEPT 3: KINETIC RUNWAY PORTAL & FLOATING POLAROID DECK)
          ===================================================================== */}
-      <section className="section hero-section" style={{ position: "relative" }}>
-        <div className="w-layout-blockcontainer container w-container">
-          <div className="hero-main-block">
-            <div className="hero-inner-block">
-              {/* Row 1: THE + High-Fashion Model Video/Portrait Window 1 + SOCIETY */}
-              <div className="w-layout-grid hero-grid-block">
-                <div className="hero-text-left-block">
-                  <h1 className="hero-title">re</h1>
-                  <div className="hero-text-small-text-block hero-badge-anim">
-                    <h2 className="hero-small-text">models</h2>
-                  </div>
-                </div>
-                <div
-                  className="hero-centar-block"
-                  style={{ overflow: "hidden", position: "relative" }}
-                >
-                  <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    poster={ASSETS.heroImage1}
-                    className="hero-image"
-                  >
-                    <source src={ASSETS.heroVideo1} type="video/mp4" />
-                  </video>
-                  <span
-                    className="editorial-frame-tag"
-                    style={{ backgroundColor: "#a7d8de" }}
-                  >
-                    DEMO MODEL REEL 01
-                  </span>
-                </div>
-                <div className="hero-text-right-block">
-                  <h1 className="hero-title">create</h1>
-                </div>
-              </div>
+      <section
+        onMouseMove={handleHeroMouseMove}
+        onMouseLeave={() => {
+          setHeroParallax({ x: 0, y: 0 });
+          setHoveredHeroPolaroid(null);
+        }}
+        className="section concept3-hero-section"
+      >
+        {/* Subtle Architectural Grid Lines (Matching Concept 3 UI Mockup) */}
+        <div className="concept3-grid-backdrop" aria-hidden="true">
+          <div className="concept3-grid-col" />
+          <div className="concept3-grid-col" />
+          <div className="concept3-grid-col" />
+          <div className="concept3-grid-col" />
+        </div>
 
-              {/* Row 2: CASTING + High-Fashion Runway Video/Portrait Window 2 */}
-              <div className="w-layout-grid hero-grid-block two">
-                <div className="hero-text-right-block">
-                  <h1 className="hero-title">identities</h1>
-                  <div className="hero-text-small-text-block two hero-badge-anim">
-                    <h2 className="hero-small-text">casting</h2>
+        {/* Full-Width Top Display Headline Banner */}
+        <div className="concept3-headline-banner">
+          <div className="w-layout-blockcontainer container w-container">
+            <div className="concept3-headline-inner">
+              <h1 className="concept3-headline-text">
+                ICONIC FACES{" "}
+                <span className="concept3-headline-slash">/</span> GLOBAL RUNWAY
+              </h1>
+            </div>
+          </div>
+        </div>
+
+        {/* Center Stage: 4 Tilted Pastel Polaroid Comp-Cards + Central Runway Cinema Portal */}
+        <div className="w-layout-blockcontainer container w-container">
+          <div className="concept3-stage">
+            {/* LEFT 2 FLOATING PASTEL POLAROID COMP-CARDS */}
+            {[heroPolaroids[0], heroPolaroids[1]].map((model, idx) => {
+              const isHovered = hoveredHeroPolaroid?.id === model.id;
+              const posClass =
+                idx === 0 ? "polaroid-left-outer" : "polaroid-left-inner";
+              const depthFactor = idx === 0 ? -1.1 : -0.65;
+              const shortMetric = model.stats.height.split("/")[1]?.trim() || "179CM";
+              return (
+                <div
+                  key={model.id}
+                  onMouseEnter={() => setHoveredHeroPolaroid(model)}
+                  onMouseLeave={() => setHoveredHeroPolaroid(null)}
+                  onClick={() => setSelectedModel(model)}
+                  className={`concept3-polaroid-card ${posClass} ${
+                    isHovered ? "is-hovered" : ""
+                  }`}
+                  style={
+                    {
+                      backgroundColor: model.accentColor,
+                      "--px": `${heroParallax.x * depthFactor}px`,
+                      "--py": `${heroParallax.y * depthFactor}px`,
+                    } as React.CSSProperties
+                  }
+                >
+                  <div className="concept3-polaroid-photo-wrap">
+                    <img
+                      src={model.primaryImage}
+                      alt={model.name}
+                      className="concept3-polaroid-img primary"
+                    />
+                    <img
+                      src={model.secondaryImage}
+                      alt={`${model.name} Campaign`}
+                      className="concept3-polaroid-img secondary"
+                    />
+                    <span className="concept3-polaroid-index">
+                      0{idx + 1} · {model.name.split(" ")[0]}
+                    </span>
+                  </div>
+                  <div className="concept3-polaroid-caption">
+                    <div className="concept3-polaroid-title">DEMO MODEL</div>
+                    <div className="concept3-polaroid-stats">
+                      {shortMetric.toUpperCase()} • EYES:{" "}
+                      {model.stats.eyes.toUpperCase()} • HAIR:{" "}
+                      {model.stats.hair.toUpperCase()}
+                    </div>
                   </div>
                 </div>
-                <div
-                  className="hero-centar-block"
-                  style={{ overflow: "hidden", position: "relative" }}
+              );
+            })}
+
+            {/* CENTER HIGH-FASHION RUNWAY CINEMA PORTAL */}
+            <div
+              onClick={() =>
+                setSelectedModel(hoveredHeroPolaroid || heroPolaroids[0])
+              }
+              className="concept3-runway-portal"
+              style={
+                {
+                  "--px": `${heroParallax.x * 0.35}px`,
+                  "--py": `${heroParallax.y * 0.35}px`,
+                } as React.CSSProperties
+              }
+            >
+              <div className="concept3-runway-portal-inner">
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  poster={ASSETS.heroImage1}
+                  className="concept3-runway-video"
                 >
-                  <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    poster={ASSETS.heroImage2}
-                    className="hero-image"
-                  >
-                    <source src={ASSETS.heroVideo2} type="video/mp4" />
-                  </video>
+                  <source src={ASSETS.videoMp4} type="video/mp4" />
+                </video>
+
+                {/* Dynamic Model Spotlight Crossfade when Hovering any Polaroid */}
+                <img
+                  src={
+                    hoveredHeroPolaroid
+                      ? hoveredHeroPolaroid.secondaryImage
+                      : heroPolaroids[0].secondaryImage
+                  }
+                  alt="Runway Spotlight"
+                  className={`concept3-portal-spotlight-img ${
+                    hoveredHeroPolaroid ? "is-active" : ""
+                  }`}
+                />
+
+                {/* Top Portal Live Badge */}
+                <div className="concept3-portal-top-bar">
                   <span
-                    className="editorial-frame-tag"
-                    style={{ backgroundColor: "#f8c794" }}
+                    className="concept3-portal-badge"
+                    style={{
+                      backgroundColor: hoveredHeroPolaroid
+                        ? hoveredHeroPolaroid.accentColor
+                        : "#a7d8de",
+                    }}
                   >
-                    DEMO RUNWAY REEL 02
+                    {hoveredHeroPolaroid
+                      ? `SPOTLIGHT: ${hoveredHeroPolaroid.name}`
+                      : "PARIS / MILAN / NY CATWALK (DEMO)"}
                   </span>
+                </div>
+
+                {/* Bottom Portal Action Bar */}
+                <div className="concept3-portal-bottom-bar">
+                  <span className="concept3-portal-caption">
+                    {hoveredHeroPolaroid
+                      ? `${hoveredHeroPolaroid.latestBooking} — Click for Comp Card`
+                      : "Click Any Polaroid or Portal to Open Digital Comp Card (Demo)"}
+                  </span>
+                  <span className="concept3-portal-arrow">↗</span>
                 </div>
               </div>
             </div>
 
-            {/* Hero Bottom Bar + Society Division Quick-Jump Pills */}
-            <div className="hero-inner-info-block">
-              <div className="hero-description-block">
-                <div className="hero-demo-pill-row">
-                  <span
-                    className="society-eyebrow-pill"
-                    style={{ backgroundColor: "#a7d8de" }}
-                  >
-                    LIVE DEMO — MODEL CASTING &amp; MANAGEMENT
-                  </span>
-                  <span className="society-eyebrow-code">
-                    NEW YORK · PARIS · MILAN · LONDON
-                  </span>
-                </div>
-                <p className="hero-description" style={{ marginTop: "12px" }}>
-                  Representing high-fashion runway walkers, magazine cover
-                  faces, and emerging new talent. Explore our interactive{" "}
-                  <strong>Demo Model Roster</strong>, digital comp cards, and
-                  runway show strips prepared for today&apos;s presentation.
-                </p>
-                {/* Quick Division Jump Buttons */}
-                <div className="hero-division-quickbar">
-                  <button
-                    type="button"
-                    onClick={() => handleDivisionChange("SOCIETY WOMEN", true)}
-                    className="hero-division-chip"
-                    style={{ "--chip-bg": "#f5a3a3" } as React.CSSProperties}
-                  >
-                    Society Women (Demo) ↘
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleDivisionChange("SOCIETY MEN", true)}
-                    className="hero-division-chip"
-                    style={{ "--chip-bg": "#f8c794" } as React.CSSProperties}
-                  >
-                    Society Men (Demo) ↘
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleDivisionChange("DEVELOPMENT", true)}
-                    className="hero-division-chip"
-                    style={{ "--chip-bg": "#cbb7f6" } as React.CSSProperties}
-                  >
-                    Development (Demo) ↘
-                  </button>
-                  <a
-                    href="#runway-shows"
-                    className="hero-division-chip"
-                    style={{ "--chip-bg": "#a7d8de" } as React.CSSProperties}
-                  >
-                    Runway Shows (Demo) ↘
-                  </a>
-                </div>
-              </div>
-
-              <div className="hero-icon-block">
-                <a
-                  href="#model-board"
-                  aria-label="Explore Model Roster"
-                  className="hero-icon-inner-block w-inline-block"
+            {/* RIGHT 2 FLOATING PASTEL POLAROID COMP-CARDS */}
+            {[heroPolaroids[2], heroPolaroids[3]].map((model, idx) => {
+              const isHovered = hoveredHeroPolaroid?.id === model.id;
+              const posClass =
+                idx === 0 ? "polaroid-right-inner" : "polaroid-right-outer";
+              const depthFactor = idx === 0 ? 0.65 : 1.1;
+              const shortMetric = model.stats.height.split("/")[1]?.trim() || "178CM";
+              return (
+                <div
+                  key={model.id}
+                  onMouseEnter={() => setHoveredHeroPolaroid(model)}
+                  onMouseLeave={() => setHoveredHeroPolaroid(null)}
+                  onClick={() => setSelectedModel(model)}
+                  className={`concept3-polaroid-card ${posClass} ${
+                    isHovered ? "is-hovered" : ""
+                  }`}
+                  style={
+                    {
+                      backgroundColor: model.accentColor,
+                      "--px": `${heroParallax.x * depthFactor}px`,
+                      "--py": `${heroParallax.y * depthFactor}px`,
+                    } as React.CSSProperties
+                  }
                 >
-                  <img
-                    src={ASSETS.heroButtonIcon}
-                    loading="lazy"
-                    alt="Arrow Icon"
-                    className="hero-button-icon"
-                  />
-                </a>
-                <div
-                  className="hero-side-icon-block"
-                  style={{ backgroundColor: "#f5a3a3" }}
-                />
-                <div
-                  className="hero-side-icon-block two"
-                  style={{ backgroundColor: "#cbb7f6" }}
-                />
-              </div>
+                  <div className="concept3-polaroid-photo-wrap">
+                    <img
+                      src={model.primaryImage}
+                      alt={model.name}
+                      className="concept3-polaroid-img primary"
+                    />
+                    <img
+                      src={model.secondaryImage}
+                      alt={`${model.name} Campaign`}
+                      className="concept3-polaroid-img secondary"
+                    />
+                    <span className="concept3-polaroid-index">
+                      0{idx + 3} · {model.name.split(" ")[0]}
+                    </span>
+                  </div>
+                  <div className="concept3-polaroid-caption">
+                    <div className="concept3-polaroid-title">DEMO MODEL</div>
+                    <div className="concept3-polaroid-stats">
+                      {shortMetric.toUpperCase()} • EYES:{" "}
+                      {model.stats.eyes.toUpperCase()} • HAIR:{" "}
+                      {model.stats.hair.toUpperCase()}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* BOTTOM INTERACTIVE DIVISION PILL DOCK (Exact Match to Concept 3 UI Mockup) */}
+          <div className="concept3-division-dock-wrap">
+            <div
+              className="concept3-division-dock"
+              role="navigation"
+              aria-label="Model Agency Divisions"
+            >
+              <button
+                type="button"
+                onClick={() => handleDivisionChange("SOCIETY WOMEN", true)}
+                className="concept3-dock-pill"
+                style={{ backgroundColor: "#a7d8de" }}
+              >
+                SOCIETY WOMEN
+              </button>
+              <button
+                type="button"
+                onClick={() => handleDivisionChange("SOCIETY MEN", true)}
+                className="concept3-dock-pill"
+                style={{ backgroundColor: "#f5a3a3" }}
+              >
+                SOCIETY MEN
+              </button>
+              <button
+                type="button"
+                onClick={() => handleDivisionChange("DEVELOPMENT", true)}
+                className="concept3-dock-pill"
+                style={{ backgroundColor: "#f8c794" }}
+              >
+                DEVELOPMENT
+              </button>
+              <a
+                href="#runway-shows"
+                className="concept3-dock-pill"
+                style={{ backgroundColor: "#cbb7f6" }}
+              >
+                RUNWAY SHOWS
+              </a>
             </div>
           </div>
         </div>

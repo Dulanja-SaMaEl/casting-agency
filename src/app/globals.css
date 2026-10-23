@@ -89,44 +89,383 @@ select:focus-visible {
   flex-shrink: 0;
 }
 
-/* Hero Demo Pill & Division Quick-Jump Bar */
-.hero-demo-pill-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
+/* ==========================================================================
+   CONCEPT 3 HERO: KINETIC RUNWAY PORTAL & FLOATING POLAROID DECK
+   ========================================================================== */
+.concept3-hero-section {
+  position: relative;
+  padding-top: 0 !important;
+  padding-bottom: 56px !important;
+  background-color: #faf9f6;
+  border-top: 1px solid var(--dark);
+  overflow: hidden;
 }
 
-.hero-division-quickbar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 18px;
+/* Architectural Background Grid Lines */
+.concept3-grid-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 1360px;
+  margin: 0 auto;
+  pointer-events: none;
 }
 
-.hero-division-chip {
-  display: inline-flex;
+.concept3-grid-col {
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+  height: 100%;
+}
+
+.concept3-grid-col:last-child {
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Top Full-Width Display Headline Banner */
+.concept3-headline-banner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  border-bottom: 1px solid var(--dark);
+  background-color: rgba(250, 249, 246, 0.92);
+  padding: 18px 0 14px;
+}
+
+.concept3-headline-inner {
+  display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 15px;
+  justify-content: center;
+  text-align: center;
+}
+
+.concept3-headline-text {
+  font-family: var(--_typography---title-font);
+  font-size: clamp(46px, 8.3vw, 134px);
+  line-height: 0.96;
+  font-weight: 700;
+  letter-spacing: 0.015em;
+  text-transform: uppercase;
+  color: var(--dark);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.concept3-headline-slash {
+  display: inline-block;
+  font-weight: 400;
+  padding: 0 0.08em;
+}
+
+/* Center Stage: 4 Tilted Pastel Polaroids + Central Runway Cinema Portal */
+.concept3-stage {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(420px, 54vh, 540px);
+  padding: 36px 0 28px;
+}
+
+/* Center Runway Cinema Portal */
+.concept3-runway-portal {
+  position: relative;
+  z-index: 8;
+  width: clamp(260px, 25vw, 355px);
+  height: clamp(350px, 47vh, 470px);
+  padding: 10px;
+  background-color: var(--white);
+  border: 1.5px solid var(--dark);
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+  flex-shrink: 0;
+  transform: translate3d(var(--px, 0px), var(--py, 0px), 0);
+  transition: transform 0.25s ease-out, box-shadow 0.35s ease;
+}
+
+.concept3-runway-portal:hover {
+  box-shadow: 0 26px 52px rgba(0, 0, 0, 0.24), 0 0 0 1px var(--dark);
+}
+
+.concept3-runway-portal-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--dark);
+  overflow: hidden;
+  background-color: var(--dark);
+}
+
+.concept3-runway-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.concept3-portal-spotlight-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  opacity: 0;
+  transform: scale3d(1.06, 1.06, 1);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.concept3-portal-spotlight-img.is-active {
+  opacity: 1;
+  transform: scale3d(1, 1, 1);
+}
+
+.concept3-portal-top-bar {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+}
+
+.concept3-portal-badge {
+  padding: 4px 12px;
   border: 1px solid var(--dark);
   border-radius: 999px;
-  background-color: var(--chip-bg, #a7d8de);
-  color: var(--dark);
-  font-family: var(--_typography---body-font);
-  font-size: 11px;
+  font-size: 9.5px;
   font-weight: 700;
-  letter-spacing: 0.11em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
+  color: var(--dark);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.concept3-portal-bottom-bar {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 11px;
+  background-color: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--dark);
+  border-radius: 999px;
+}
+
+.concept3-portal-caption {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.concept3-portal-arrow {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: var(--dark);
+  color: var(--white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+/* 4 Flanking Tilted Pastel Polaroid Comp-Cards */
+.concept3-polaroid-card {
+  position: relative;
+  width: clamp(195px, 18.2vw, 258px);
+  padding: 12px 12px 16px;
+  border: 1.5px solid var(--dark);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  flex-shrink: 0;
+  user-select: none;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.concept3-polaroid-card.polaroid-left-outer {
+  z-index: 4;
+  margin-right: -32px;
+  margin-top: 52px;
+  transform: translate3d(var(--px, 0px), var(--py, 0px), 0) rotate(-11.5deg);
+}
+
+.concept3-polaroid-card.polaroid-left-inner {
+  z-index: 9;
+  margin-right: -24px;
+  margin-top: -18px;
+  transform: translate3d(var(--px, 0px), var(--py, 0px), 0) rotate(-6.5deg);
+}
+
+.concept3-polaroid-card.polaroid-right-inner {
+  z-index: 9;
+  margin-left: -24px;
+  margin-top: -18px;
+  transform: translate3d(var(--px, 0px), var(--py, 0px), 0) rotate(6.5deg);
+}
+
+.concept3-polaroid-card.polaroid-right-outer {
+  z-index: 5;
+  margin-left: -32px;
+  margin-top: 52px;
+  transform: translate3d(var(--px, 0px), var(--py, 0px), 0) rotate(11.5deg);
+}
+
+.concept3-polaroid-card:hover,
+.concept3-polaroid-card.is-hovered {
+  z-index: 25 !important;
+  transform: translate3d(0, -16px, 0) scale3d(1.06, 1.06, 1) rotate(0deg) !important;
+  box-shadow: 10px 10px 0 0 var(--dark), 0 24px 48px rgba(0, 0, 0, 0.22);
+}
+
+.concept3-polaroid-photo-wrap {
+  position: relative;
+  width: 100%;
+  height: clamp(205px, 25vh, 265px);
+  border: 1px solid var(--dark);
+  overflow: hidden;
+  background-color: #f0eee9;
+}
+
+.concept3-polaroid-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 16%;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.concept3-polaroid-img.primary {
+  opacity: 1;
+  transform: scale3d(1, 1, 1);
+}
+
+.concept3-polaroid-img.secondary {
+  opacity: 0;
+  transform: scale3d(1.08, 1.08, 1);
+}
+
+.concept3-polaroid-card:hover .concept3-polaroid-img.primary {
+  opacity: 0;
+  transform: scale3d(1.05, 1.05, 1);
+}
+
+.concept3-polaroid-card:hover .concept3-polaroid-img.secondary {
+  opacity: 1;
+  transform: scale3d(1, 1, 1);
+}
+
+.concept3-polaroid-index {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 3;
+  padding: 2px 8px;
+  background-color: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--dark);
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dark);
+}
+
+.concept3-polaroid-caption {
+  padding-top: 12px;
+  text-align: center;
+  color: var(--dark);
+}
+
+.concept3-polaroid-title {
+  font-family: var(--_typography---title-font);
+  font-size: clamp(24px, 2.3vw, 32px);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.concept3-polaroid-stats {
+  margin-top: 4px;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Bottom Oval Division Pill Dock (Matching Concept 3 UI Mockup) */
+.concept3-division-dock-wrap {
+  position: relative;
+  z-index: 12;
+  display: flex;
+  justify-content: center;
+  margin-top: 22px;
+}
+
+.concept3-division-dock {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background-color: var(--white);
+  border: 1.5px solid var(--dark);
+  border-radius: 999px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+}
+
+.concept3-dock-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  border: 1.5px solid var(--dark);
+  border-radius: 999px;
+  font-family: var(--_typography---body-font);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dark);
   text-decoration: none;
   cursor: pointer;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.3s ease;
 }
 
-.hero-division-chip:hover {
+.concept3-dock-pill:hover {
   transform: translate3d(0, -2px, 0);
   box-shadow: 0 4px 0 0 var(--dark);
+}
+
+.concept3-dock-pill:active {
+  transform: scale3d(0.96, 0.96, 1);
 }
 
 /* Floating Architectural Frame Tags */
@@ -1534,18 +1873,56 @@ select:focus-visible {
     height: 14px !important;
   }
 
-  /* Hero Video/Image Window on Tablet (<= 991px) */
-  .hero-centar-block {
-    flex: 1 1 0% !important;
-    height: clamp(84px, 12vw, 120px) !important;
-    border-radius: 6px;
+  /* Concept 3 Hero Responsive Layout on Tablet & Mobile (<= 991px) */
+  .concept3-headline-text {
+    white-space: normal;
+    font-size: clamp(42px, 9.5vw, 80px);
+    line-height: 1.02;
   }
 
-  .hero-image {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    object-position: center 22% !important;
+  .concept3-stage {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    min-height: auto;
+    padding: 28px 0 20px;
+  }
+
+  .concept3-runway-portal {
+    grid-column: 1 / -1;
+    order: -1;
+    width: 100%;
+    max-width: 520px;
+    height: 390px;
+    margin: 0 auto 10px;
+    transform: none !important;
+  }
+
+  .concept3-polaroid-card {
+    width: 100%;
+    margin: 0 !important;
+  }
+
+  .concept3-polaroid-card.polaroid-left-outer,
+  .concept3-polaroid-card.polaroid-right-inner {
+    transform: rotate(-2.5deg) !important;
+  }
+
+  .concept3-polaroid-card.polaroid-left-inner,
+  .concept3-polaroid-card.polaroid-right-outer {
+    transform: rotate(2.5deg) !important;
+  }
+
+  .concept3-division-dock {
+    border-radius: 22px;
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .concept3-dock-pill {
+    flex: 1 1 calc(50% - 8px);
+    padding: 10px 16px;
+    font-size: 11.5px;
   }
 }
 
