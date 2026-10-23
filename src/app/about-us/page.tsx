@@ -170,15 +170,15 @@ export default function AboutUsPage() {
         });
       });
 
-      // 2. Service Two Section Early & Smooth Scroll-In Reveal
+      // 2. Creative Editorial Divisions Matrix Smooth Scroll-In Reveal
       gsap.fromTo(
         ".service-title-grid > div",
         { y: 28, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.7,
-          stagger: 0.06,
+          duration: 0.72,
+          stagger: 0.08,
           ease: "power3.out",
           scrollTrigger: {
             trigger: ".service-two-section",
@@ -188,22 +188,47 @@ export default function AboutUsPage() {
         }
       );
 
-      gsap.fromTo(
-        ".service-info-main-block",
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.7,
-          stagger: 0.05,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".service-two-grid.one",
-            start: "top 95%",
-            toggleActions: "play none none none",
-          },
-        }
+      const divisionCards = gsap.utils.toArray<HTMLElement>(
+        ".creative-division-card"
       );
+      divisionCards.forEach((card, i) => {
+        gsap.fromTo(
+          card,
+          { y: 38, opacity: 0, scale: 0.97 },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.75,
+            delay: (i % 3) * 0.06,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 95%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+
+        const lookbookFrame = card.querySelector(".division-card-lookbook");
+        if (lookbookFrame) {
+          gsap.fromTo(
+            lookbookFrame,
+            { clipPath: "inset(12% 6% 12% 6%)" },
+            {
+              clipPath: "inset(0% 0% 0% 0%)",
+              duration: 0.85,
+              delay: (i % 3) * 0.06,
+              ease: "expo.out",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 95%",
+                toggleActions: "play none none none",
+              },
+            }
+          );
+        }
+      });
 
       // 3. Team Pills Section Early & Smooth Scroll-In Reveal
       gsap.fromTo(
@@ -378,16 +403,26 @@ export default function AboutUsPage() {
         </div>
       </section>
 
-      {/* SERVICE TWO 2x3 BORDERED GRID SECTION */}
+      {/* CREATIVE 3x2 EDITORIAL MODEL DIVISIONS MATRIX SECTION */}
       <section className="section service-two-section">
         <div className="w-layout-blockcontainer container w-container">
           <div className="service-two-main-block">
             <div className="w-layout-grid service-title-grid">
               <div className="section-title-main-block">
                 <div className="section-title-inner-block title-left">
-                  <div className="section-subtitle">fearless minds build</div>
+                  <div className="society-eyebrow-row" style={{ marginBottom: "8px" }}>
+                    <span
+                      className="society-eyebrow-pill"
+                      style={{ backgroundColor: "#a7d8de" }}
+                    >
+                      REPRESENTATION &amp; CASTING DIVISIONS (DEMO)
+                    </span>
+                    <span className="society-eyebrow-code">
+                      HOVER ANY DIVISION TO PREVIEW CAMPAIGN REEL
+                    </span>
+                  </div>
                   <h2 className="section-title">
-                    talent reshapes the screen
+                    divisions that shape fashion
                   </h2>
                 </div>
               </div>
@@ -396,118 +431,115 @@ export default function AboutUsPage() {
                 className="secrvice-subtext-right-block"
               >
                 <div className="section-title-subtext-inner-block two">
-                  <h3 className="section-subtext">service</h3>
+                  <h3 className="section-subtext">divisions</h3>
                 </div>
               </div>
             </div>
 
-            {/* Row 1 */}
-            <div className="w-layout-grid service-two-grid one">
-              {sixServices.slice(0, 3).map((service, i) => {
+            {/* Creative 3x2 Interactive Division Lookbook Grid */}
+            <div className="creative-division-grid">
+              {sixServices.map((service, i) => {
                 const isHovered = hoveredServiceIdx === i;
-                const cellClass =
-                  i === 0 ? "" : i === 1 ? "two" : "last";
+                const primaryStat = service.stats[0];
                 return (
-                  <div
+                  <article
                     key={service.id}
                     onMouseEnter={() => setHoveredServiceIdx(i)}
                     onMouseLeave={() => setHoveredServiceIdx(null)}
-                    className={`service-info-main-block ${cellClass}`}
+                    className={`creative-division-card ${
+                      isHovered ? "is-hovered" : ""
+                    }`}
+                    style={
+                      {
+                        "--div-accent": service.color,
+                      } as React.CSSProperties
+                    }
                   >
                     <Link
                       href={`/service/${service.slug}`}
-                      className="service-info-link-block w-inline-block"
+                      className="creative-division-link"
                     >
-                      <div
-                        className="service-name-block"
-                        style={{ position: "relative", zIndex: 2 }}
-                      >
-                        <h2
-                          className="service-name"
-                          style={{
-                            transform: isHovered
-                              ? "translate3d(0, 40px, 0)"
-                              : "translate3d(0, 0px, 0)",
-                            transition:
-                              "transform 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955)",
-                          }}
-                        >
-                          {service.shortTitle}
-                        </h2>
+                      {/* Full-Bleed Hover Curtain Backdrop */}
+                      <div className="division-card-backdrop" aria-hidden="true">
+                        <img
+                          src={service.altImage}
+                          loading="lazy"
+                          alt=""
+                          className="division-card-backdrop-img"
+                        />
+                        <div className="division-card-backdrop-scrim" />
                       </div>
-                      <img
-                        src={service.altImage}
-                        loading="lazy"
-                        alt={service.title}
-                        className="service-image"
-                        style={{
-                          height: isHovered ? "100%" : "0%",
-                          opacity: isHovered ? 1 : 0,
-                          transform: isHovered
-                            ? "scale3d(1.1, 1.1, 1)"
-                            : "scale3d(1, 1, 1)",
-                          transition:
-                            "height 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955), opacity 0.5s ease, transform 0.5s ease",
-                        }}
-                      />
-                    </Link>
-                  </div>
-                );
-              })}
-            </div>
 
-            {/* Row 2 */}
-            <div className="w-layout-grid service-two-grid two">
-              {sixServices.slice(3, 6).map((service, idx) => {
-                const i = idx + 3;
-                const isHovered = hoveredServiceIdx === i;
-                const cellClass =
-                  idx === 0 ? "" : idx === 1 ? "two" : "last";
-                return (
-                  <div
-                    key={service.id}
-                    onMouseEnter={() => setHoveredServiceIdx(i)}
-                    onMouseLeave={() => setHoveredServiceIdx(null)}
-                    className={`service-info-main-block ${cellClass}`}
-                  >
-                    <Link
-                      href={`/service/${service.slug}`}
-                      className="service-info-link-block w-inline-block"
-                    >
-                      <div
-                        className="service-name-block"
-                        style={{ position: "relative", zIndex: 2 }}
-                      >
-                        <h2
-                          className="service-name"
-                          style={{
-                            transform: isHovered
-                              ? "translate3d(0, 40px, 0)"
-                              : "translate3d(0, 0px, 0)",
-                            transition:
-                              "transform 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955)",
-                          }}
+                      {/* Top Metadata Header Bar */}
+                      <div className="division-card-top">
+                        <span
+                          className="division-card-index-pill"
+                          style={{ backgroundColor: service.color }}
                         >
-                          {service.shortTitle}
-                        </h2>
+                          DIVISION 0{i + 1} · DEMO
+                        </span>
+                        {primaryStat && (
+                          <span className="division-card-stat-pill">
+                            <strong>{primaryStat.value}</strong>{" "}
+                            {primaryStat.label.replace(" (Demo)", "")}
+                          </span>
+                        )}
                       </div>
-                      <img
-                        src={service.altImage}
-                        loading="lazy"
-                        alt={service.title}
-                        className="service-image"
-                        style={{
-                          height: isHovered ? "100%" : "0%",
-                          opacity: isHovered ? 1 : 0,
-                          transform: isHovered
-                            ? "scale3d(1.1, 1.1, 1)"
-                            : "scale3d(1, 1, 1)",
-                          transition:
-                            "height 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955), opacity 0.5s ease, transform 0.5s ease",
-                        }}
-                      />
+
+                      {/* Center Framed Editorial Model Lookbook Window */}
+                      <div className="division-card-lookbook">
+                        <img
+                          src={service.image}
+                          loading="lazy"
+                          alt={service.title}
+                          className="division-card-lookbook-img primary"
+                        />
+                        <img
+                          src={service.altImage}
+                          loading="lazy"
+                          alt={`${service.title} Campaign`}
+                          className="division-card-lookbook-img secondary"
+                        />
+                        <span
+                          className="division-card-lookbook-tag"
+                          style={{ backgroundColor: service.color }}
+                        >
+                          LOOKBOOK 0{i + 1} (DEMO)
+                        </span>
+                      </div>
+
+                      {/* Bottom Typography, Deliverables & Magnetic Arrow */}
+                      <div className="division-card-bottom">
+                        <div className="division-card-title-row">
+                          <h3 className="division-card-title">
+                            {service.shortTitle}
+                          </h3>
+                          <span
+                            className="division-card-arrow"
+                            style={{
+                              backgroundColor: isHovered
+                                ? service.color
+                                : "#ffffff",
+                            }}
+                          >
+                            ↗
+                          </span>
+                        </div>
+
+                        <p className="division-card-desc">
+                          {service.shortDesc}
+                        </p>
+
+                        <div className="division-card-tags">
+                          {service.deliverables.slice(0, 2).map((item, dIdx) => (
+                            <span key={dIdx} className="division-card-tag-chip">
+                              {item}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
                     </Link>
-                  </div>
+                  </article>
                 );
               })}
             </div>

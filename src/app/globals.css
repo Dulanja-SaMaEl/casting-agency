@@ -892,6 +892,284 @@ select:focus-visible {
   transform: translate3d(0, -2px, 0);
 }
 
+/* ==========================================================================
+   CREATIVE 3x2 EDITORIAL MODEL DIVISIONS MATRIX (/about-us)
+   ========================================================================== */
+.service-title-grid,
+.team-title-grid {
+  display: flex !important;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.creative-division-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.creative-division-card {
+  position: relative;
+  border: 1px solid var(--dark);
+  border-radius: var(--_typography---border-radius);
+  background-color: var(--white);
+  overflow: hidden;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s ease;
+}
+
+.creative-division-card:hover {
+  transform: translate3d(0, -10px, 0);
+  box-shadow: 0 14px 0 0 var(--div-accent, #a7d8de), 0 14px 0 1px var(--dark);
+}
+
+.creative-division-link {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 490px;
+  padding: 20px;
+  text-decoration: none;
+  color: var(--dark);
+  z-index: 2;
+}
+
+/* Full-Bleed Hover Curtain Backdrop */
+.division-card-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  clip-path: inset(100% 0% 0% 0%);
+  transition: clip-path 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.creative-division-card:hover .division-card-backdrop {
+  clip-path: inset(0% 0% 0% 0%);
+}
+
+.division-card-backdrop-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transform: scale3d(1.12, 1.12, 1);
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.creative-division-card:hover .division-card-backdrop-img {
+  transform: scale3d(1, 1, 1);
+}
+
+.division-card-backdrop-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.45) 0%,
+    rgba(0, 0, 0, 0.35) 42%,
+    rgba(0, 0, 0, 0.88) 100%
+  );
+}
+
+/* Top Metadata Header Bar */
+.division-card-top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.division-card-index-pill {
+  padding: 5px 12px;
+  border: 1px solid var(--dark);
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--dark);
+}
+
+.division-card-stat-pill {
+  padding: 4px 10px;
+  background-color: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--dark);
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--dark);
+}
+
+/* Framed Lookbook Portrait Window */
+.division-card-lookbook {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 215px;
+  border: 1px solid var(--dark);
+  border-radius: var(--_typography---border-radius);
+  overflow: hidden;
+  background-color: #f3f2ee;
+  box-shadow: 6px 6px 0 0 var(--div-accent, #a7d8de), 6px 6px 0 1px var(--dark);
+  margin-bottom: 22px;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.creative-division-card:hover .division-card-lookbook {
+  transform: translate3d(0, -4px, 0) scale3d(0.98, 0.98, 1);
+  box-shadow: 8px 8px 0 0 var(--div-accent, #a7d8de), 8px 8px 0 1px var(--white);
+}
+
+.division-card-lookbook-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.division-card-lookbook-img.primary {
+  opacity: 1;
+  transform: scale3d(1, 1, 1);
+}
+
+.division-card-lookbook-img.secondary {
+  opacity: 0;
+  transform: scale3d(1.1, 1.1, 1);
+}
+
+.creative-division-card:hover .division-card-lookbook-img.primary {
+  opacity: 0;
+  transform: scale3d(1.06, 1.06, 1);
+}
+
+.creative-division-card:hover .division-card-lookbook-img.secondary {
+  opacity: 1;
+  transform: scale3d(1.02, 1.02, 1);
+}
+
+.division-card-lookbook-tag {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  z-index: 3;
+  padding: 3px 9px;
+  border: 1px solid var(--dark);
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dark);
+}
+
+/* Bottom Typography & Deliverables */
+.division-card-bottom {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.creative-division-card:hover .division-card-bottom {
+  transform: translate3d(0, -4px, 0);
+}
+
+.division-card-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.division-card-title {
+  font-family: var(--_typography---title-font);
+  font-size: 38px;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--dark);
+  transition: color 0.35s ease;
+}
+
+.creative-division-card:hover .division-card-title {
+  color: var(--white);
+}
+
+.division-card-arrow {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--dark);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--dark);
+  flex-shrink: 0;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.35s ease;
+}
+
+.creative-division-card:hover .division-card-arrow {
+  transform: rotate(45deg);
+}
+
+.division-card-desc {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #444444;
+  margin: 0;
+  transition: color 0.35s ease;
+}
+
+.creative-division-card:hover .division-card-desc {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.division-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.14);
+  transition: border-color 0.35s ease;
+}
+
+.creative-division-card:hover .division-card-tags {
+  border-top-color: rgba(255, 255, 255, 0.28);
+}
+
+.division-card-tag-chip {
+  padding: 4px 10px;
+  background-color: #faf9f6;
+  border: 1px solid var(--dark);
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--dark);
+}
+
 /* Desktop-only visibility rules (keeps sticky scroll 100% untouched) */
 @media screen and (min-width: 992px) {
   .dropdown-menu-button.w-nav-button,
@@ -1033,19 +1311,10 @@ select:focus-visible {
     text-align: left;
   }
 
-  /* About Us 2x3 Services Grid: Ensure all 6 services stay visible & show subtle image texture */
-  .service-info-main-block.last {
-    display: block !important;
-  }
-
-  .service-info-main-block .service-image {
-    height: 100% !important;
-    opacity: 0.16 !important;
-    transform: scale3d(1, 1, 1) !important;
-  }
-
-  .service-info-main-block .service-name {
-    transform: none !important;
+  /* About Us Creative 3x2 Divisions Grid on Tablet */
+  .creative-division-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
   }
 
   /* About Us Team Pills: Show circular director portrait inside each pill on tablet/mobile */
@@ -1203,16 +1472,10 @@ select:focus-visible {
     grid-row-gap: 24px !important;
   }
 
-  /* About Us 2x3 Service Grid collapses cleanly to 1 column on phones */
-  .service-two-grid.one,
-  .service-two-grid.two {
-    display: flex !important;
-    flex-direction: column !important;
-  }
-
-  .service-info-main-block {
-    border-right: none !important;
-    border-bottom: 1px solid var(--dark) !important;
+  /* About Us Creative Divisions Grid collapses cleanly to 1 column on phones */
+  .creative-division-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 
   /* Team Grid collapses to 1 column on phones */
