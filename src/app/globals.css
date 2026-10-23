@@ -1170,12 +1170,156 @@ select:focus-visible {
   color: var(--dark);
 }
 
-/* Desktop-only visibility rules (keeps sticky scroll 100% untouched) */
+/* Global Image & Media Container Proportions (Prevents Tall Model Portrait Overflow) */
+.sidebar-image {
+  width: 100% !important;
+  height: 210px !important;
+  object-fit: cover !important;
+  object-position: center 20% !important;
+  display: block;
+}
+
+.team-image-inner {
+  width: 100% !important;
+  height: clamp(300px, 38vw, 460px) !important;
+  object-fit: cover !important;
+  object-position: center 18% !important;
+  border-radius: var(--_typography---border-radius);
+  display: block;
+}
+
+.team-image {
+  width: 220px !important;
+  height: 270px !important;
+  object-fit: cover !important;
+  object-position: center 18% !important;
+  border-radius: 6px;
+}
+
+.about-hero-image {
+  aspect-ratio: 4 / 5;
+  object-fit: cover !important;
+  object-position: center 20% !important;
+  border-radius: var(--_typography---border-radius);
+}
+
+.portfolio-inner-info-image,
+.service-image-inner,
+.blog-image,
+.blog-inner-image {
+  object-fit: cover !important;
+  object-position: center 20% !important;
+}
+
+/* Desktop & Laptop Viewport Responsiveness (>= 992px) */
 @media screen and (min-width: 992px) {
   .dropdown-menu-button.w-nav-button,
   .mobile-nav-drawer-overlay,
   .team-mobile-avatar {
     display: none !important;
+  }
+
+  /* Fluid Hero Typography & Video Windows across 13"–27" screens */
+  .hero-title {
+    font-size: clamp(92px, 13.2vw, 210px) !important;
+    line-height: 1.04 !important;
+  }
+
+  .hero-centar-block {
+    flex: 1 1 0% !important;
+    min-width: 180px;
+    height: clamp(115px, 12.2vw, 195px) !important;
+    border-radius: var(--_typography---border-radius);
+  }
+
+  .hero-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center 22% !important;
+    border-radius: var(--_typography---border-radius);
+    display: block;
+  }
+
+  /* Horizontal Scroll Projects: Always fit comfortably inside 100vh laptop screens */
+  .projects-horizontal-bg-block,
+  .projects-horizontal-bg-image {
+    width: 100vw !important;
+    height: 100vh !important;
+    object-fit: cover !important;
+    object-position: center 22% !important;
+  }
+
+  .projects-card-block {
+    width: clamp(380px, 33vw, 510px) !important;
+    max-height: 84vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    border-radius: var(--_typography---border-radius);
+    overflow: hidden !important;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+  }
+
+  .projects-card-block.two,
+  .projects-card-block.three {
+    margin-left: clamp(140px, 18vw, 320px) !important;
+  }
+
+  .projects-card-block.four {
+    margin-left: clamp(180px, 24vw, 440px) !important;
+  }
+
+  .projects-side-card-link {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+  }
+
+  .projects-right-image-block {
+    width: 100% !important;
+    height: clamp(210px, 43vh, 370px) !important;
+    overflow: hidden !important;
+    flex-shrink: 0;
+  }
+
+  .projects-right-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center 18% !important;
+    display: block;
+  }
+
+  .projects-side-info-block {
+    height: auto !important;
+    min-height: clamp(150px, 23vh, 220px) !important;
+    padding: clamp(18px, 2.4vh, 26px) 24px !important;
+    justify-content: space-between !important;
+    gap: 14px;
+  }
+
+  .horizontal-projects-titles {
+    width: 100% !important;
+    font-size: clamp(32px, 3.3vw, 48px) !important;
+    line-height: 1.08 !important;
+    margin: 0 !important;
+  }
+
+  .projects-text-grid {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 8px 14px !important;
+  }
+
+  .projects-text-line {
+    height: 14px !important;
+  }
+
+  /* Testimonial Sticky Container: Fit comfortably on 768px–900px laptop heights */
+  .testimonial-stciky-block {
+    padding-top: clamp(64px, 10vh, 140px) !important;
+    padding-bottom: clamp(64px, 10vh, 140px) !important;
   }
 }
 
@@ -1340,14 +1484,68 @@ select:focus-visible {
     padding: 14px 20px !important;
   }
 
-  /* Projects vertical stack spacing on tablet/mobile */
+  /* Projects vertical stack spacing & responsive card proportions on tablet/mobile */
   .projects-info-inner-block {
     gap: 36px !important;
   }
 
   .projects-card-block {
+    width: 100% !important;
+    margin-left: 0 !important;
     border-radius: 8px;
     overflow: hidden !important;
+  }
+
+  .projects-right-image-block {
+    width: 100% !important;
+    height: clamp(240px, 48vw, 360px) !important;
+    overflow: hidden !important;
+  }
+
+  .projects-right-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center 18% !important;
+    display: block;
+  }
+
+  .projects-side-info-block {
+    height: auto !important;
+    padding: 24px !important;
+    gap: 16px;
+  }
+
+  .horizontal-projects-titles {
+    width: 100% !important;
+    font-size: clamp(28px, 6.5vw, 42px) !important;
+    line-height: 1.12 !important;
+    margin: 0 !important;
+  }
+
+  .projects-text-grid {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 8px 14px !important;
+  }
+
+  .projects-text-line {
+    height: 14px !important;
+  }
+
+  /* Hero Video/Image Window on Tablet (<= 991px) */
+  .hero-centar-block {
+    flex: 1 1 0% !important;
+    height: clamp(84px, 12vw, 120px) !important;
+    border-radius: 6px;
+  }
+
+  .hero-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center 22% !important;
   }
 }
 
@@ -1366,10 +1564,16 @@ select:focus-visible {
     line-height: 1.05 !important;
   }
 
-  .hero-image {
-    height: clamp(56px, 15vw, 96px) !important;
+  .hero-centar-block {
+    height: clamp(56px, 15vw, 90px) !important;
     border-radius: 6px;
-    object-fit: cover;
+  }
+
+  .hero-image {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 6px;
+    object-fit: cover !important;
   }
 
   .editorial-frame-tag {

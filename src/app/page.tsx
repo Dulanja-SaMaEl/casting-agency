@@ -746,12 +746,6 @@ export default function HomePage() {
                     playsInline
                     poster={ASSETS.heroImage1}
                     className="hero-image"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      display: "block",
-                    }}
                   >
                     <source src={ASSETS.heroVideo1} type="video/mp4" />
                   </video>
@@ -786,12 +780,6 @@ export default function HomePage() {
                     playsInline
                     poster={ASSETS.heroImage2}
                     className="hero-image"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      display: "block",
-                    }}
                   >
                     <source src={ASSETS.heroVideo2} type="video/mp4" />
                   </video>
