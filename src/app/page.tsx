@@ -178,6 +178,10 @@ const FRACTAL_HERO_FRAMES = [
   },
 ] as const;
 
+// Quick toggle to show/hide the floating model photo constellation in the hero banner
+// (Hidden for now as requested; ready to be swapped with future visuals/canvases/interactive elements)
+const SHOW_HERO_PHOTOS = false;
+
 export default function HomePage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const innerMaskingRef = useRef<HTMLDivElement>(null);
@@ -194,7 +198,7 @@ export default function HomePage() {
 
   // 60fps Kitpro Fractal Mouse Parallax + Dynamic Optical Depth-of-Field Blur (a-18 / a-52)
   const handleHeroMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    if (!innerMaskingRef.current) return;
+    if (!SHOW_HERO_PHOTOS || !innerMaskingRef.current) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const normX = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to +0.5
     const normY = (e.clientY - rect.top) / rect.height - 0.5; // -0.5 to +0.5
@@ -218,6 +222,7 @@ export default function HomePage() {
 
   const handleHeroMouseLeave = () => {
     setHoveredHeroPolaroid(null);
+    if (!SHOW_HERO_PHOTOS) return;
     if (innerMaskingRef.current) {
       gsap.to(innerMaskingRef.current, {
         x: 0,
@@ -338,53 +343,55 @@ export default function HomePage() {
       );
 
       // D. 8 Radial Floating Model Frames Burst Outward from Center (Desktop vs Tablet/Mobile)
-      mm.add("(min-width: 992px)", () => {
-        FRACTAL_HERO_FRAMES.forEach((frame) => {
-          gsap.fromTo(
-            `.wrapper-main-hero.${frame.slot}`,
-            { opacity: 0, x: "0vw", y: "0vw", scale: 0 },
-            {
-              opacity: 1,
-              x: frame.desktopX,
-              y: frame.desktopY,
-              scale: 1,
-              duration: 1.05,
-              delay: frame.delay,
-              ease: "expo.out",
-            }
-          );
+      if (SHOW_HERO_PHOTOS) {
+        mm.add("(min-width: 992px)", () => {
+          FRACTAL_HERO_FRAMES.forEach((frame) => {
+            gsap.fromTo(
+              `.wrapper-main-hero.${frame.slot}`,
+              { opacity: 0, x: "0vw", y: "0vw", scale: 0 },
+              {
+                opacity: 1,
+                x: frame.desktopX,
+                y: frame.desktopY,
+                scale: 1,
+                duration: 1.05,
+                delay: frame.delay,
+                ease: "expo.out",
+              }
+            );
+          });
         });
-      });
 
-      mm.add("(max-width: 991px)", () => {
-        FRACTAL_HERO_FRAMES.forEach((frame) => {
-          gsap.fromTo(
-            `.wrapper-main-hero.${frame.slot}`,
-            { opacity: 0, x: "0vw", y: "0vw", scale: 0 },
-            {
-              opacity: 1,
-              x: frame.mobileX,
-              y: frame.mobileY,
-              scale: 1,
-              duration: 1,
-              delay: frame.delay,
-              ease: "expo.out",
-            }
-          );
+        mm.add("(max-width: 991px)", () => {
+          FRACTAL_HERO_FRAMES.forEach((frame) => {
+            gsap.fromTo(
+              `.wrapper-main-hero.${frame.slot}`,
+              { opacity: 0, x: "0vw", y: "0vw", scale: 0 },
+              {
+                opacity: 1,
+                x: frame.mobileX,
+                y: frame.mobileY,
+                scale: 1,
+                duration: 1,
+                delay: frame.delay,
+                ease: "expo.out",
+              }
+            );
+          });
         });
-      });
 
-      // E. Continuous Weightless Yoyo Float on Frame Inner Media (t-17bd54a9)
-      gsap.to(".fractal-frame-float-inner", {
-        y: -5,
-        duration: 1.7,
-        repeat: -1,
-        yoyo: true,
-        stagger: {
-          each: 0.2,
-        },
-        ease: "sine.inOut",
-      });
+        // E. Continuous Weightless Yoyo Float on Frame Inner Media (t-17bd54a9)
+        gsap.to(".fractal-frame-float-inner", {
+          y: -5,
+          duration: 1.7,
+          repeat: -1,
+          yoyo: true,
+          stagger: {
+            each: 0.2,
+          },
+          ease: "sine.inOut",
+        });
+      }
 
       // 2. The Society Model Board (Demo Roster) Early & Buttery Scroll-In
       gsap.fromTo(
@@ -958,47 +965,49 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* 8 Radial Frameless Floating Model Portraits (.wrapper-masking-hero) */}
+          {/* Architectural Framing Lines (.outer-lline-hero) & Optional Radial Frames */}
           <div className="wrapper-masking-hero">
             <div className="outer-lline-hero" aria-hidden="true">
               <div className="line-hero left" />
               <div className="line-hero right" />
             </div>
 
-            <div className="outer-masking-hero">
-              <div ref={innerMaskingRef} className="inner-masking-hero">
-                {FRACTAL_HERO_FRAMES.map((frame) => {
-                  const model =
-                    TALENT_BOARD[frame.modelIndex] || TALENT_BOARD[0];
-                  const isHovered = hoveredHeroPolaroid?.id === model.id;
+            {SHOW_HERO_PHOTOS && (
+              <div className="outer-masking-hero">
+                <div ref={innerMaskingRef} className="inner-masking-hero">
+                  {FRACTAL_HERO_FRAMES.map((frame) => {
+                    const model =
+                      TALENT_BOARD[frame.modelIndex] || TALENT_BOARD[0];
+                    const isHovered = hoveredHeroPolaroid?.id === model.id;
 
-                  return (
-                    <div
-                      key={frame.slot}
-                      onMouseEnter={() => setHoveredHeroPolaroid(model)}
-                      onMouseLeave={() => setHoveredHeroPolaroid(null)}
-                      onClick={() => setSelectedModel(model)}
-                      className={`wrapper-main-hero ${frame.slot} ${
-                        frame.depthLayer ? "is-depth-layer" : ""
-                      } ${isHovered ? "is-hovered" : ""}`}
-                    >
-                      <div className="fractal-frame-media fractal-frame-float-inner">
-                        <img
-                          src={model.primaryImage}
-                          alt={model.name}
-                          className="image-hero primary"
-                        />
-                        <img
-                          src={model.secondaryImage}
-                          alt={`${model.name} Lookbook`}
-                          className="image-hero secondary"
-                        />
+                    return (
+                      <div
+                        key={frame.slot}
+                        onMouseEnter={() => setHoveredHeroPolaroid(model)}
+                        onMouseLeave={() => setHoveredHeroPolaroid(null)}
+                        onClick={() => setSelectedModel(model)}
+                        className={`wrapper-main-hero ${frame.slot} ${
+                          frame.depthLayer ? "is-depth-layer" : ""
+                        } ${isHovered ? "is-hovered" : ""}`}
+                      >
+                        <div className="fractal-frame-media fractal-frame-float-inner">
+                          <img
+                            src={model.primaryImage}
+                            alt={model.name}
+                            className="image-hero primary"
+                          />
+                          <img
+                            src={model.secondaryImage}
+                            alt={`${model.name} Lookbook`}
+                            className="image-hero secondary"
+                          />
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </section>
