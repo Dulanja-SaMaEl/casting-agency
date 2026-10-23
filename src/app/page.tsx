@@ -96,7 +96,7 @@ const FRACTAL_HERO_FRAMES = [
     mobileX: "31vw",
     mobileY: "11vw",
     delay: 0.36,
-    hasVideo: true,
+    hasVideo: false,
     depthLayer: false,
   },
   {
@@ -151,7 +151,7 @@ const FRACTAL_HERO_FRAMES = [
     mobileX: "15vw",
     mobileY: "-19vw",
     delay: 0.62,
-    hasVideo: true,
+    hasVideo: false,
     depthLayer: false,
   },
   {
@@ -900,7 +900,7 @@ export default function HomePage() {
         className="section hero fractal-hero-section"
       >
         <div className="wrapper-hero">
-          {/* Ambient Monochrome Fluid/Smoke Video Background (Layer 0) */}
+          {/* Ambient Monochrome Fluid/Smoke Video Background (Layer 0 - The Society Management) */}
           <div className="fractal-hero-ambient-video-layer" aria-hidden="true">
             <video
               autoPlay
@@ -911,7 +911,7 @@ export default function HomePage() {
               className="fractal-hero-ambient-video"
             >
               <source
-                src="https://raw.githubusercontent.com/thundercoding07/Smoke-Effect-on-Your-Name-CSS-Animation/master/smoke.mp4"
+                src={ASSETS.videoMp4}
                 type="video/mp4"
               />
             </video>
@@ -966,18 +966,6 @@ export default function HomePage() {
                       } ${isHovered ? "is-hovered" : ""}`}
                     >
                       <div className="fractal-frame-media fractal-frame-float-inner">
-                        {frame.hasVideo ? (
-                          <video
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            poster={model.primaryImage}
-                            className="fractal-frame-video"
-                          >
-                            <source src={ASSETS.videoMp4} type="video/mp4" />
-                          </video>
-                        ) : null}
                         <img
                           src={model.primaryImage}
                           alt={model.name}

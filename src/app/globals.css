@@ -638,8 +638,8 @@ select:focus-visible {
   height: auto;
   transform: translate(-50%, -50%) scale(1.08);
   object-fit: cover;
-  opacity: 0.36;
-  filter: grayscale(100%) contrast(125%) brightness(0.85);
+  opacity: 0.42;
+  filter: contrast(120%) brightness(0.95);
   mix-blend-mode: screen;
   will-change: transform, opacity;
 }
@@ -651,9 +651,9 @@ select:focus-visible {
   height: 100%;
   background: radial-gradient(
     ellipse at 50% 50%,
-    rgba(0, 0, 0, 0.15) 0%,
-    rgba(0, 0, 0, 0.65) 65%,
-    #000000 95%
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.55) 60%,
+    #000000 92%
   );
   pointer-events: none;
 }
