@@ -10,7 +10,10 @@ interface NavbarProps {
 }
 
 const DROPDOWN_LINKS = [
+  { href: "/model-bank", label: "Model Bank & Talent" },
+  { href: "/castings", label: "Casting Calls" },
   { href: "/model-registration", label: "Model Registration" },
+  { href: "/consultations", label: "Book Consultation" },
   { href: "/service", label: "service" },
   { href: "/team", label: "team" },
   { href: "/blog", label: "blog" },
@@ -20,7 +23,10 @@ const DROPDOWN_LINKS = [
 
 const MOBILE_NAV_LINKS = [
   { href: "/", label: "Home" },
+  { href: "/model-bank", label: "★ Model Bank (Roster)" },
+  { href: "/castings", label: "★ Casting Calls (Live)" },
   { href: "/model-registration", label: "★ Model Registration" },
+  { href: "/consultations", label: "Consultation Desk" },
   { href: "/about-us", label: "About Us" },
   { href: "/service", label: "Services" },
   { href: "/portfolio", label: "Portfolio" },
@@ -412,6 +418,72 @@ export default function Navbar({ variant = "dark" }: NavbarProps) {
                   );
                 })}
               </nav>
+            </div>
+
+            {/* MODEL BANK */}
+            <div
+              className="navbar-menu-link-block"
+              onMouseEnter={() => setHoveredNav("model-bank")}
+              onMouseLeave={() => setHoveredNav(null)}
+            >
+              <div className="navbar-menu-inner-link-block">
+                <div
+                  className={`navbar-hover-line-block ${
+                    isDark ? "nav-style-2-link-line" : ""
+                  }`}
+                  style={{
+                    width: hoveredNav === "model-bank" ? "20px" : "0px",
+                    height: "1px",
+                    transition: "width 0.3s ease",
+                  }}
+                />
+                <Link
+                  href="/model-bank"
+                  aria-current={
+                    pathname.startsWith("/model-bank") ? "page" : undefined
+                  }
+                  className={`navbar-menu-link ${
+                    isDark ? "nav-style-2-link" : ""
+                  } w-nav-link ${
+                    pathname.startsWith("/model-bank") ? "w--current" : ""
+                  }`}
+                >
+                  model bank
+                </Link>
+              </div>
+            </div>
+
+            {/* CASTINGS */}
+            <div
+              className="navbar-menu-link-block"
+              onMouseEnter={() => setHoveredNav("castings")}
+              onMouseLeave={() => setHoveredNav(null)}
+            >
+              <div className="navbar-menu-inner-link-block">
+                <div
+                  className={`navbar-hover-line-block ${
+                    isDark ? "nav-style-2-link-line" : ""
+                  }`}
+                  style={{
+                    width: hoveredNav === "castings" ? "20px" : "0px",
+                    height: "1px",
+                    transition: "width 0.3s ease",
+                  }}
+                />
+                <Link
+                  href="/castings"
+                  aria-current={
+                    pathname.startsWith("/castings") ? "page" : undefined
+                  }
+                  className={`navbar-menu-link ${
+                    isDark ? "nav-style-2-link" : ""
+                  } w-nav-link ${
+                    pathname.startsWith("/castings") ? "w--current" : ""
+                  }`}
+                >
+                  castings
+                </Link>
+              </div>
             </div>
 
             {/* PORTFOLIO */}

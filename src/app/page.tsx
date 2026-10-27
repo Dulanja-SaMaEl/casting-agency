@@ -1668,13 +1668,20 @@ export default function HomePage() {
                   Submit your 3 mandatory photos (Face close-up, mid shot, full body). Free membership allows viewing public briefs; registered members get instant WhatsApp casting alerts, included studio shoots, and direct applications.
                 </p>
               </div>
-              <div>
+              <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
                 <Link
                   href="/model-registration"
                   className="society-division-tab is-active"
-                  style={{ display: "inline-block", textDecoration: "none", padding: "12px 24px" }}
+                  style={{ display: "inline-block", textDecoration: "none", padding: "12px 20px" }}
                 >
                   Start Model Registration ↗
+                </Link>
+                <Link
+                  href="/castings"
+                  className="society-division-tab"
+                  style={{ display: "inline-block", textDecoration: "none", padding: "12px 20px" }}
+                >
+                  View Live Castings ↗
                 </Link>
               </div>
             </div>
@@ -1692,13 +1699,20 @@ export default function HomePage() {
                   Access our curated model bank filtered by skin tone, age, height, look, and language. Post dedicated casting calls with admin verification, secure payments, and instant WhatsApp talent dispatch.
                 </p>
               </div>
-              <div>
+              <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
                 <Link
-                  href="/contact-us"
-                  className="society-division-tab"
-                  style={{ display: "inline-block", textDecoration: "none", padding: "12px 24px" }}
+                  href="/model-bank"
+                  className="society-division-tab is-active"
+                  style={{ display: "inline-block", textDecoration: "none", padding: "12px 20px" }}
                 >
-                  Inquire for Casting Project ↗
+                  Explore Model Bank ↗
+                </Link>
+                <Link
+                  href="/castings"
+                  className="society-division-tab"
+                  style={{ display: "inline-block", textDecoration: "none", padding: "12px 20px" }}
+                >
+                  Post Casting Call +
                 </Link>
               </div>
             </div>
