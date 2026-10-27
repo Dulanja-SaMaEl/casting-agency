@@ -10,11 +10,11 @@ interface NavbarProps {
 }
 
 const DROPDOWN_LINKS = [
-  { href: "/model-bank", label: "Model Bank & Talent" },
-  { href: "/castings", label: "Casting Calls" },
-  { href: "/model-registration", label: "Model Registration" },
-  { href: "/talent-agreement", label: "Online 3-Yr Agreement" },
-  { href: "/consultations", label: "Book Consultation / Meetings" },
+  { href: "/model-bank", label: "model bank" },
+  { href: "/castings", label: "casting calls" },
+  { href: "/model-registration", label: "model registration" },
+  { href: "/talent-agreement", label: "representation agreement" },
+  { href: "/consultations", label: "appointments & desk" },
   { href: "/service", label: "service" },
   { href: "/team", label: "team" },
   { href: "/blog", label: "blog" },
@@ -24,11 +24,11 @@ const DROPDOWN_LINKS = [
 
 const MOBILE_NAV_LINKS = [
   { href: "/", label: "Home" },
-  { href: "/model-bank", label: "★ Model Bank (Roster)" },
-  { href: "/castings", label: "★ Casting Calls (Live)" },
-  { href: "/model-registration", label: "★ Model Registration" },
-  { href: "/talent-agreement", label: "★ Online 3-Yr Agreement" },
-  { href: "/consultations", label: "Director & Talent Meetings" },
+  { href: "/model-bank", label: "Model Bank" },
+  { href: "/castings", label: "Casting Calls" },
+  { href: "/model-registration", label: "Model Registration" },
+  { href: "/talent-agreement", label: "Talent Agreement (3-Year)" },
+  { href: "/consultations", label: "Appointments & Meetings" },
   { href: "/about-us", label: "About Us" },
   { href: "/service", label: "Services" },
   { href: "/portfolio", label: "Portfolio" },

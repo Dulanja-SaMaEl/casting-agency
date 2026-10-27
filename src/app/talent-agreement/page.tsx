@@ -353,10 +353,10 @@ export default function TalentAgreementPage() {
                 <button
                   type="button"
                   onClick={() => alert("Executed 3-Year Agreement copy (.pdf) generated & downloaded!")}
-                  className="society-division-tab active"
+                  className="society-division-tab is-active"
                   style={{ padding: "12px 24px", fontSize: "12px", letterSpacing: "0.1em", cursor: "pointer" }}
                 >
-                  Download Signed Agreement (.PDF) 📥
+                  Download Signed Agreement (.PDF) ↗
                 </button>
                 <Link
                   href="/model-registration"

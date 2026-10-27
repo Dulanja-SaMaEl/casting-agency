@@ -201,16 +201,16 @@ export default function CastingsPage() {
                   style={{
                     padding: "5px 12px",
                     fontSize: "11px",
-                    borderRadius: "3px",
+                    borderRadius: "2px",
                     border: "none",
-                    backgroundColor: memberRole === "registered" ? "#10b981" : "transparent",
+                    backgroundColor: memberRole === "registered" ? "#ffffff" : "transparent",
                     color: memberRole === "registered" ? "#000000" : "#888888",
                     fontWeight: memberRole === "registered" ? 700 : 400,
                     cursor: "pointer",
                     transition: "all 0.2s ease",
                   }}
                 >
-                  ★ Registered Member (Direct Apply)
+                  Registered Member (Direct Apply)
                 </button>
                 <button
                   type="button"
@@ -218,7 +218,7 @@ export default function CastingsPage() {
                   style={{
                     padding: "5px 12px",
                     fontSize: "11px",
-                    borderRadius: "3px",
+                    borderRadius: "2px",
                     border: "none",
                     backgroundColor: memberRole === "free" ? "#ffffff" : "transparent",
                     color: memberRole === "free" ? "#000000" : "#888888",
@@ -324,15 +324,29 @@ export default function CastingsPage() {
               <span
                 style={{
                   position: "absolute",
-                  left: "10px",
+                  left: "12px",
                   top: "50%",
                   transform: "translateY(-50%)",
-                  color: "#666666",
-                  fontSize: "13px",
+                  color: "#777777",
+                  display: "flex",
+                  alignItems: "center",
                   pointerEvents: "none",
                 }}
               >
-                🔍
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
               </span>
             </div>
           </div>
@@ -565,7 +579,19 @@ export default function CastingsPage() {
                       padding: 0,
                     }}
                   >
-                    <span>💬</span>
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                    </svg>
                     <span>Preview Model WhatsApp Broadcast Alert ↗</span>
                   </button>
 
@@ -584,7 +610,7 @@ export default function CastingsPage() {
                           letterSpacing: "0.1em",
                           textTransform: "uppercase",
                           border: "none",
-                          borderRadius: "3px",
+                          borderRadius: "2px",
                           cursor: "pointer",
                           display: "inline-flex",
                           alignItems: "center",
@@ -605,11 +631,28 @@ export default function CastingsPage() {
                           textTransform: "uppercase",
                           textDecoration: "none",
                           border: "1px solid rgba(255, 255, 255, 0.2)",
-                          borderRadius: "3px",
+                          borderRadius: "2px",
                           color: "#aaaaaa",
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "6px",
                         }}
                       >
-                        🔒 Register as Model to Direct Apply
+                        <svg
+                          width="12"
+                          height="12"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          aria-hidden="true"
+                        >
+                          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                        </svg>
+                        <span>Register as Model to Direct Apply</span>
                       </Link>
                     )}
                   </div>
@@ -1083,7 +1126,7 @@ export default function CastingsPage() {
                 <div
                   style={{
                     padding: "12px 16px",
-                    borderRadius: "4px",
+                    borderRadius: "2px",
                     backgroundColor: "rgba(255, 255, 255, 0.03)",
                     border: "1px solid rgba(255, 255, 255, 0.1)",
                     fontSize: "12px",
@@ -1091,7 +1134,7 @@ export default function CastingsPage() {
                     marginBottom: "20px",
                   }}
                 >
-                  ℹ <strong>Admin Verification Policy:</strong> Casting calls require agency payment clearance and admin verification before publication. Upon approval, an automated WhatsApp alert is dispatched immediately to all matching registered models.
+                  <strong style={{ color: "#ffffff" }}>Admin Verification Policy:</strong> Casting calls require agency payment clearance and admin verification before publication. Upon approval, an automated WhatsApp alert is dispatched immediately to all matching registered models.
                 </div>
 
                 <button
@@ -1221,8 +1264,8 @@ export default function CastingsPage() {
                   boxShadow: "0 1px 2px rgba(0,0,0,0.3)",
                 }}
               >
-                <div style={{ fontWeight: 700, color: "#25d366", marginBottom: "4px", fontSize: "11px", letterSpacing: "0.1em" }}>
-                  ★ NEW PRIORITY CASTING MATCH
+                <div style={{ fontWeight: 700, color: "#25d366", marginBottom: "4px", fontSize: "11px", letterSpacing: "0.14em", textTransform: "uppercase" }}>
+                  NEW CASTING SPECIFICATION MATCH
                 </div>
                 <div>
                   Hello! A new verified casting matching your measurements and portfolio look has just been

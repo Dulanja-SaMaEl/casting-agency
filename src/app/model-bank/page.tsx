@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useRef } from "react";
+import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -73,7 +73,6 @@ export default function ModelBankPage() {
   // Filtered talent
   const filteredTalent = useMemo(() => {
     return MODEL_BANK_TALENT.filter((talent) => {
-      // Search
       if (searchTerm.trim() !== "") {
         const q = searchTerm.toLowerCase();
         const matchesName = talent.name.toLowerCase().includes(q);
@@ -85,32 +84,26 @@ export default function ModelBankPage() {
         }
       }
 
-      // Skin Tone
       if (selectedSkinTone !== "all" && talent.skinTone !== selectedSkinTone) {
         return false;
       }
 
-      // Division / Aesthetic
       if (selectedDivision !== "all" && talent.lookAesthetic !== selectedDivision) {
         return false;
       }
 
-      // Gender
       if (selectedGender !== "all" && talent.gender !== selectedGender) {
         return false;
       }
 
-      // Age Bracket
       if (selectedAgeBracket !== "all" && talent.ageBracket !== selectedAgeBracket) {
         return false;
       }
 
-      // Language
       if (selectedLanguage !== "all" && !talent.languages.includes(selectedLanguage)) {
         return false;
       }
 
-      // Height
       if (talent.stats.heightCm < minHeightCm) {
         return false;
       }
@@ -158,7 +151,7 @@ export default function ModelBankPage() {
   }, [shortlist]);
 
   return (
-    <div style={{ backgroundColor: "#060606", color: "#f3f3f3", minHeight: "100vh" }}>
+    <div style={{ backgroundColor: "#050505", color: "#f0f0f0", minHeight: "100vh" }}>
       <Navbar variant="dark" />
 
       {/* HEADER HERO */}
@@ -189,7 +182,7 @@ export default function ModelBankPage() {
                   gap: "8px",
                   padding: "5px 12px",
                   borderRadius: "2px",
-                  backgroundColor: "rgba(255, 255, 255, 0.05)",
+                  backgroundColor: "rgba(255, 255, 255, 0.04)",
                   border: "1px solid rgba(255, 255, 255, 0.12)",
                   fontSize: "11px",
                   letterSpacing: "0.2em",
@@ -200,8 +193,8 @@ export default function ModelBankPage() {
               >
                 <span
                   style={{
-                    width: "6px",
-                    height: "6px",
+                    width: "5px",
+                    height: "5px",
                     borderRadius: "50%",
                     backgroundColor: "#10b981",
                     display: "inline-block",
@@ -250,7 +243,7 @@ export default function ModelBankPage() {
               <div
                 style={{
                   padding: "12px 18px",
-                  borderRadius: "4px",
+                  borderRadius: "3px",
                   backgroundColor: "rgba(255, 255, 255, 0.03)",
                   border: "1px solid rgba(255, 255, 255, 0.1)",
                   fontSize: "13px",
@@ -260,7 +253,20 @@ export default function ModelBankPage() {
                   gap: "12px",
                 }}
               >
-                <span style={{ fontSize: "16px" }}>🔒</span>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#ffffff"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                </svg>
                 <div>
                   <div style={{ color: "#ffffff", fontWeight: 600 }}>Director &amp; Agency Privilege</div>
                   <div style={{ fontSize: "12px", color: "#777777" }}>
@@ -280,21 +286,21 @@ export default function ModelBankPage() {
                     textTransform: "uppercase",
                     textDecoration: "none",
                     border: "1px solid rgba(255, 255, 255, 0.2)",
-                    borderRadius: "3px",
+                    borderRadius: "2px",
                   }}
                 >
                   Direct Agency Booking ↗
                 </Link>
                 <Link
                   href="/model-registration"
-                  className="society-division-tab active"
+                  className="society-division-tab is-active"
                   style={{
                     padding: "9px 18px",
                     fontSize: "12px",
                     letterSpacing: "0.1em",
                     textTransform: "uppercase",
                     textDecoration: "none",
-                    borderRadius: "3px",
+                    borderRadius: "2px",
                   }}
                 >
                   Join Roster as Talent +
@@ -311,7 +317,7 @@ export default function ModelBankPage() {
           position: "sticky",
           top: "0px",
           zIndex: 90,
-          backgroundColor: "rgba(10, 10, 10, 0.94)",
+          backgroundColor: "rgba(8, 8, 8, 0.96)",
           backdropFilter: "blur(16px)",
           WebkitBackdropFilter: "blur(16px)",
           borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
@@ -337,10 +343,10 @@ export default function ModelBankPage() {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 style={{
                   width: "100%",
-                  padding: "10px 14px 10px 34px",
-                  backgroundColor: "rgba(255, 255, 255, 0.05)",
-                  border: "1px solid rgba(255, 255, 255, 0.15)",
-                  borderRadius: "3px",
+                  padding: "10px 14px 10px 36px",
+                  backgroundColor: "rgba(255, 255, 255, 0.04)",
+                  border: "1px solid rgba(255, 255, 255, 0.14)",
+                  borderRadius: "2px",
                   color: "#ffffff",
                   fontSize: "13px",
                   outline: "none",
@@ -352,12 +358,26 @@ export default function ModelBankPage() {
                   left: "12px",
                   top: "50%",
                   transform: "translateY(-50%)",
-                  color: "#666666",
-                  fontSize: "14px",
+                  color: "#777777",
+                  display: "flex",
+                  alignItems: "center",
                   pointerEvents: "none",
                 }}
               >
-                🔍
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
               </span>
             </div>
 
@@ -369,9 +389,9 @@ export default function ModelBankPage() {
                 style={{
                   width: "100%",
                   padding: "10px 14px",
-                  backgroundColor: "#111111",
-                  border: "1px solid rgba(255, 255, 255, 0.15)",
-                  borderRadius: "3px",
+                  backgroundColor: "#0d0d0d",
+                  border: "1px solid rgba(255, 255, 255, 0.14)",
+                  borderRadius: "2px",
                   color: "#ffffff",
                   fontSize: "13px",
                   outline: "none",
@@ -394,9 +414,9 @@ export default function ModelBankPage() {
                 style={{
                   width: "100%",
                   padding: "10px 14px",
-                  backgroundColor: "#111111",
-                  border: "1px solid rgba(255, 255, 255, 0.15)",
-                  borderRadius: "3px",
+                  backgroundColor: "#0d0d0d",
+                  border: "1px solid rgba(255, 255, 255, 0.14)",
+                  borderRadius: "2px",
                   color: "#ffffff",
                   fontSize: "13px",
                   outline: "none",
@@ -419,9 +439,9 @@ export default function ModelBankPage() {
                 style={{
                   width: "100%",
                   padding: "10px 14px",
-                  backgroundColor: "#111111",
-                  border: "1px solid rgba(255, 255, 255, 0.15)",
-                  borderRadius: "3px",
+                  backgroundColor: "#0d0d0d",
+                  border: "1px solid rgba(255, 255, 255, 0.14)",
+                  borderRadius: "2px",
                   color: "#ffffff",
                   fontSize: "13px",
                   outline: "none",
@@ -444,9 +464,9 @@ export default function ModelBankPage() {
                 style={{
                   width: "100%",
                   padding: "10px 14px",
-                  backgroundColor: "#111111",
-                  border: "1px solid rgba(255, 255, 255, 0.15)",
-                  borderRadius: "3px",
+                  backgroundColor: "#0d0d0d",
+                  border: "1px solid rgba(255, 255, 255, 0.14)",
+                  borderRadius: "2px",
                   color: "#ffffff",
                   fontSize: "13px",
                   outline: "none",
@@ -478,7 +498,7 @@ export default function ModelBankPage() {
           >
             {/* Skin Tone Swatches */}
             <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
-              <span style={{ fontSize: "12px", color: "#777777", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+              <span style={{ fontSize: "11px", color: "#777777", letterSpacing: "0.1em", textTransform: "uppercase" }}>
                 Skin Tone:
               </span>
               <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
@@ -493,12 +513,12 @@ export default function ModelBankPage() {
                         display: "inline-flex",
                         alignItems: "center",
                         gap: "6px",
-                        padding: "5px 10px",
-                        borderRadius: "3px",
-                        backgroundColor: isActive ? "rgba(255, 255, 255, 0.15)" : "rgba(255, 255, 255, 0.04)",
+                        padding: "4px 10px",
+                        borderRadius: "2px",
+                        backgroundColor: isActive ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0.03)",
                         border: isActive ? "1px solid #ffffff" : "1px solid rgba(255, 255, 255, 0.1)",
                         color: isActive ? "#ffffff" : "#a0a0a0",
-                        fontSize: "12px",
+                        fontSize: "11px",
                         cursor: "pointer",
                         transition: "all 0.2s ease",
                       }}
@@ -506,12 +526,12 @@ export default function ModelBankPage() {
                       {st.id !== "all" && (
                         <span
                           style={{
-                            width: "12px",
-                            height: "12px",
+                            width: "10px",
+                            height: "10px",
                             borderRadius: "50%",
                             backgroundColor: st.color,
                             display: "inline-block",
-                            border: "1px solid rgba(0,0,0,0.3)",
+                            border: "1px solid rgba(255,255,255,0.2)",
                           }}
                         />
                       )}
@@ -579,11 +599,11 @@ export default function ModelBankPage() {
               borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
             }}
           >
-            <div style={{ fontSize: "14px", color: "#8c8c8c" }}>
+            <div style={{ fontSize: "13px", color: "#8c8c8c" }}>
               Showing <strong style={{ color: "#ffffff" }}>{filteredTalent.length}</strong> verified models in VISAGE roster
             </div>
-            <div style={{ fontSize: "12px", color: "#666666", display: "flex", alignItems: "center", gap: "6px" }}>
-              <span style={{ width: "6px", height: "6px", borderRadius: "50%", backgroundColor: "#10b981" }} />
+            <div style={{ fontSize: "11px", color: "#666666", display: "flex", alignItems: "center", gap: "6px" }}>
+              <span style={{ width: "5px", height: "5px", borderRadius: "50%", backgroundColor: "#10b981" }} />
               All profiles verified within 30-day look cycle
             </div>
           </div>
@@ -594,10 +614,9 @@ export default function ModelBankPage() {
                 textAlign: "center",
                 padding: "80px 20px",
                 border: "1px dashed rgba(255, 255, 255, 0.15)",
-                borderRadius: "6px",
+                borderRadius: "4px",
               }}
             >
-              <div style={{ fontSize: "36px", marginBottom: "12px" }}>🔍</div>
               <h3 style={{ fontSize: "20px", color: "#ffffff", margin: "0 0 8px" }}>No Models Found</h3>
               <p style={{ color: "#777777", fontSize: "14px", maxWidth: "420px", margin: "0 auto 20px" }}>
                 We couldn&apos;t find talent matching that specific combination of criteria. Try loosening your skin tone, age, or height parameters.
@@ -605,7 +624,7 @@ export default function ModelBankPage() {
               <button
                 type="button"
                 onClick={resetFilters}
-                className="society-division-tab active"
+                className="society-division-tab is-active"
                 style={{ padding: "8px 20px", fontSize: "12px", cursor: "pointer" }}
               >
                 Clear All Filters
@@ -628,13 +647,12 @@ export default function ModelBankPage() {
                     className="company-work-card"
                     style={{
                       position: "relative",
-                      backgroundColor: "#0d0d0d",
-                      borderRadius: "4px",
+                      backgroundColor: "#0a0a0a",
+                      borderRadius: "2px",
                       overflow: "hidden",
-                      border: isShortlisted ? "1px solid #10b981" : "1px solid rgba(255, 255, 255, 0.1)",
+                      border: isShortlisted ? "1px solid #ffffff" : "1px solid rgba(255, 255, 255, 0.1)",
                       display: "flex",
                       flexDirection: "column",
-                      transition: "transform 0.3s ease, border-color 0.3s ease",
                       cursor: "pointer",
                     }}
                     onClick={() => {
@@ -649,7 +667,7 @@ export default function ModelBankPage() {
                         aspectRatio: "3/4",
                         width: "100%",
                         overflow: "hidden",
-                        backgroundColor: "#161616",
+                        backgroundColor: "#141414",
                       }}
                     >
                       <img
@@ -671,10 +689,9 @@ export default function ModelBankPage() {
                           position: "absolute",
                           top: "12px",
                           left: "12px",
-                          padding: "4px 8px",
+                          padding: "3px 8px",
                           borderRadius: "2px",
-                          backgroundColor: "rgba(0, 0, 0, 0.75)",
-                          backdropFilter: "blur(6px)",
+                          backgroundColor: "rgba(0, 0, 0, 0.8)",
                           border: "1px solid rgba(255, 255, 255, 0.15)",
                           fontSize: "10px",
                           letterSpacing: "0.14em",
@@ -691,10 +708,9 @@ export default function ModelBankPage() {
                           position: "absolute",
                           top: "12px",
                           right: "12px",
-                          padding: "4px 8px",
+                          padding: "3px 8px",
                           borderRadius: "2px",
-                          backgroundColor: "rgba(16, 185, 129, 0.15)",
-                          backdropFilter: "blur(6px)",
+                          backgroundColor: "rgba(16, 185, 129, 0.12)",
                           border: "1px solid rgba(16, 185, 129, 0.35)",
                           fontSize: "10px",
                           letterSpacing: "0.1em",
@@ -705,7 +721,7 @@ export default function ModelBankPage() {
                           gap: "4px",
                         }}
                       >
-                        <span style={{ width: "5px", height: "5px", borderRadius: "50%", backgroundColor: "#34d399" }} />
+                        <span style={{ width: "4px", height: "4px", borderRadius: "50%", backgroundColor: "#34d399" }} />
                         Look Verified
                       </div>
 
@@ -721,14 +737,13 @@ export default function ModelBankPage() {
                           width: "36px",
                           height: "36px",
                           borderRadius: "50%",
-                          backgroundColor: isShortlisted ? "#10b981" : "rgba(0, 0, 0, 0.75)",
-                          backdropFilter: "blur(6px)",
-                          border: isShortlisted ? "1px solid #10b981" : "1px solid rgba(255, 255, 255, 0.25)",
-                          color: "#ffffff",
+                          backgroundColor: isShortlisted ? "#ffffff" : "rgba(0, 0, 0, 0.8)",
+                          border: isShortlisted ? "1px solid #ffffff" : "1px solid rgba(255, 255, 255, 0.25)",
+                          color: isShortlisted ? "#000000" : "#ffffff",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
-                          fontSize: "14px",
+                          fontSize: "16px",
                           cursor: "pointer",
                           transition: "all 0.2s ease",
                         }}
@@ -769,9 +784,9 @@ export default function ModelBankPage() {
                             gridTemplateColumns: "repeat(3, 1fr)",
                             gap: "8px",
                             padding: "10px",
-                            borderRadius: "3px",
-                            backgroundColor: "rgba(255, 255, 255, 0.03)",
-                            border: "1px solid rgba(255, 255, 255, 0.05)",
+                            borderRadius: "2px",
+                            backgroundColor: "rgba(255, 255, 255, 0.02)",
+                            border: "1px solid rgba(255, 255, 255, 0.06)",
                             fontSize: "11px",
                             marginBottom: "14px",
                           }}
@@ -799,7 +814,7 @@ export default function ModelBankPage() {
                                 fontSize: "10px",
                                 padding: "2px 7px",
                                 borderRadius: "2px",
-                                backgroundColor: "rgba(255, 255, 255, 0.05)",
+                                backgroundColor: "rgba(255, 255, 255, 0.04)",
                                 color: "#aaaaaa",
                               }}
                             >
@@ -849,9 +864,9 @@ export default function ModelBankPage() {
             bottom: "24px",
             right: "24px",
             zIndex: 999,
-            backgroundColor: "#111111",
+            backgroundColor: "#0d0d0d",
             border: "1px solid rgba(255, 255, 255, 0.2)",
-            borderRadius: "6px",
+            borderRadius: "4px",
             padding: "16px 20px",
             boxShadow: "0 20px 40px rgba(0,0,0,0.8)",
             display: "flex",
@@ -880,7 +895,7 @@ export default function ModelBankPage() {
               letterSpacing: "0.08em",
               textTransform: "uppercase",
               border: "none",
-              borderRadius: "3px",
+              borderRadius: "2px",
               cursor: "pointer",
             }}
           >
@@ -898,7 +913,7 @@ export default function ModelBankPage() {
             left: 0,
             width: "100%",
             height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.85)",
+            backgroundColor: "rgba(0, 0, 0, 0.88)",
             backdropFilter: "blur(12px)",
             zIndex: 1000,
             display: "flex",
@@ -910,9 +925,9 @@ export default function ModelBankPage() {
         >
           <div
             style={{
-              backgroundColor: "#0d0d0d",
+              backgroundColor: "#0a0a0a",
               border: "1px solid rgba(255, 255, 255, 0.15)",
-              borderRadius: "6px",
+              borderRadius: "4px",
               maxWidth: "600px",
               width: "100%",
               maxHeight: "85vh",
@@ -936,7 +951,7 @@ export default function ModelBankPage() {
               <button
                 type="button"
                 onClick={() => setShortlistOpen(false)}
-                style={{ background: "transparent", border: "none", color: "#888888", fontSize: "20px", cursor: "pointer" }}
+                style={{ background: "transparent", border: "none", color: "#888888", fontSize: "18px", cursor: "pointer" }}
               >
                 ✕
               </button>
@@ -947,12 +962,12 @@ export default function ModelBankPage() {
                 style={{
                   padding: "32px 20px",
                   textAlign: "center",
-                  backgroundColor: "rgba(16, 185, 129, 0.1)",
-                  border: "1px solid rgba(16, 185, 129, 0.3)",
-                  borderRadius: "4px",
+                  backgroundColor: "rgba(16, 185, 129, 0.08)",
+                  border: "1px solid rgba(16, 185, 129, 0.25)",
+                  borderRadius: "2px",
                 }}
               >
-                <div style={{ fontSize: "36px", color: "#10b981", marginBottom: "12px" }}>✓</div>
+                <div style={{ fontSize: "28px", color: "#10b981", marginBottom: "12px" }}>✓</div>
                 <h3 style={{ color: "#ffffff", fontSize: "18px", margin: "0 0 8px" }}>
                   Option Request Transmitted
                 </h3>
@@ -971,9 +986,9 @@ export default function ModelBankPage() {
                         alignItems: "center",
                         gap: "14px",
                         padding: "10px 14px",
-                        backgroundColor: "rgba(255, 255, 255, 0.03)",
+                        backgroundColor: "rgba(255, 255, 255, 0.02)",
                         border: "1px solid rgba(255, 255, 255, 0.08)",
-                        borderRadius: "3px",
+                        borderRadius: "2px",
                       }}
                     >
                       <img
@@ -1018,7 +1033,7 @@ export default function ModelBankPage() {
                       letterSpacing: "0.1em",
                       textTransform: "uppercase",
                       border: "none",
-                      borderRadius: "3px",
+                      borderRadius: "2px",
                       cursor: "pointer",
                     }}
                   >
@@ -1032,7 +1047,7 @@ export default function ModelBankPage() {
                       backgroundColor: "transparent",
                       color: "#888888",
                       border: "1px solid rgba(255, 255, 255, 0.15)",
-                      borderRadius: "3px",
+                      borderRadius: "2px",
                       fontSize: "13px",
                       cursor: "pointer",
                     }}
@@ -1055,7 +1070,7 @@ export default function ModelBankPage() {
             left: 0,
             width: "100%",
             height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.92)",
+            backgroundColor: "rgba(0, 0, 0, 0.94)",
             backdropFilter: "blur(18px)",
             zIndex: 1000,
             display: "flex",
@@ -1067,9 +1082,9 @@ export default function ModelBankPage() {
         >
           <div
             style={{
-              backgroundColor: "#0c0c0c",
+              backgroundColor: "#080808",
               border: "1px solid rgba(255, 255, 255, 0.15)",
-              borderRadius: "6px",
+              borderRadius: "4px",
               maxWidth: "960px",
               width: "100%",
               maxHeight: "90vh",
@@ -1091,7 +1106,7 @@ export default function ModelBankPage() {
                 background: "transparent",
                 border: "none",
                 color: "#a0a0a0",
-                fontSize: "24px",
+                fontSize: "20px",
                 cursor: "pointer",
               }}
             >
@@ -1141,9 +1156,9 @@ export default function ModelBankPage() {
               <div
                 style={{
                   padding: "6px 12px",
-                  backgroundColor: "rgba(16, 185, 129, 0.12)",
-                  border: "1px solid rgba(16, 185, 129, 0.3)",
-                  borderRadius: "3px",
+                  backgroundColor: "rgba(16, 185, 129, 0.1)",
+                  border: "1px solid rgba(16, 185, 129, 0.25)",
+                  borderRadius: "2px",
                   fontSize: "11px",
                   color: "#34d399",
                   letterSpacing: "0.08em",
@@ -1163,35 +1178,35 @@ export default function ModelBankPage() {
               <button
                 type="button"
                 onClick={() => setActivePhotoTab("closeUp")}
-                className={`society-division-tab ${activePhotoTab === "closeUp" ? "active" : ""}`}
+                className={`society-division-tab ${activePhotoTab === "closeUp" ? "is-active" : ""}`}
                 style={{ padding: "6px 14px", fontSize: "11px", cursor: "pointer" }}
               >
-                1. Face Close-Up (Digital)
+                1. Face Close-Up
               </button>
               <button
                 type="button"
                 onClick={() => setActivePhotoTab("midShot")}
-                className={`society-division-tab ${activePhotoTab === "midShot" ? "active" : ""}`}
+                className={`society-division-tab ${activePhotoTab === "midShot" ? "is-active" : ""}`}
                 style={{ padding: "6px 14px", fontSize: "11px", cursor: "pointer" }}
               >
-                2. Mid Shot (Waist Up)
+                2. Mid Shot
               </button>
               <button
                 type="button"
                 onClick={() => setActivePhotoTab("fullBody")}
-                className={`society-division-tab ${activePhotoTab === "fullBody" ? "active" : ""}`}
+                className={`society-division-tab ${activePhotoTab === "fullBody" ? "is-active" : ""}`}
                 style={{ padding: "6px 14px", fontSize: "11px", cursor: "pointer" }}
               >
-                3. Full Body (Silhouette)
+                3. Full Body
               </button>
               {activeCompCard.videoReel && (
                 <button
                   type="button"
                   onClick={() => setActivePhotoTab("video")}
-                  className={`society-division-tab ${activePhotoTab === "video" ? "active" : ""}`}
+                  className={`society-division-tab ${activePhotoTab === "video" ? "is-active" : ""}`}
                   style={{ padding: "6px 14px", fontSize: "11px", cursor: "pointer" }}
                 >
-                  ▶ Walking Video Reel
+                  Walking Video Reel
                 </button>
               )}
             </div>
@@ -1211,7 +1226,7 @@ export default function ModelBankPage() {
                   aspectRatio: "3/4",
                   width: "100%",
                   backgroundColor: "#000000",
-                  borderRadius: "4px",
+                  borderRadius: "2px",
                   overflow: "hidden",
                   border: "1px solid rgba(255, 255, 255, 0.1)",
                   position: "relative",
@@ -1247,7 +1262,7 @@ export default function ModelBankPage() {
                 <div>
                   <h4
                     style={{
-                      fontSize: "12px",
+                      fontSize: "11px",
                       letterSpacing: "0.15em",
                       textTransform: "uppercase",
                       color: "#777777",
@@ -1261,9 +1276,9 @@ export default function ModelBankPage() {
                       display: "grid",
                       gridTemplateColumns: "1fr 1fr",
                       gap: "10px",
-                      backgroundColor: "rgba(255, 255, 255, 0.03)",
+                      backgroundColor: "rgba(255, 255, 255, 0.02)",
                       padding: "14px",
-                      borderRadius: "4px",
+                      borderRadius: "2px",
                       border: "1px solid rgba(255, 255, 255, 0.08)",
                       fontSize: "12px",
                     }}
@@ -1308,7 +1323,7 @@ export default function ModelBankPage() {
                 <div>
                   <h4
                     style={{
-                      fontSize: "12px",
+                      fontSize: "11px",
                       letterSpacing: "0.15em",
                       textTransform: "uppercase",
                       color: "#777777",
@@ -1319,9 +1334,9 @@ export default function ModelBankPage() {
                   </h4>
                   <div
                     style={{
-                      backgroundColor: "rgba(255, 255, 255, 0.03)",
+                      backgroundColor: "rgba(255, 255, 255, 0.02)",
                       padding: "12px 14px",
-                      borderRadius: "4px",
+                      borderRadius: "2px",
                       border: "1px solid rgba(255, 255, 255, 0.08)",
                       fontSize: "12px",
                       display: "flex",
@@ -1343,7 +1358,7 @@ export default function ModelBankPage() {
                 <div>
                   <h4
                     style={{
-                      fontSize: "12px",
+                      fontSize: "11px",
                       letterSpacing: "0.15em",
                       textTransform: "uppercase",
                       color: "#777777",
@@ -1358,10 +1373,10 @@ export default function ModelBankPage() {
                         key={lang}
                         style={{
                           padding: "4px 10px",
-                          borderRadius: "3px",
-                          backgroundColor: "rgba(255, 255, 255, 0.06)",
-                          border: "1px solid rgba(255, 255, 255, 0.12)",
-                          fontSize: "12px",
+                          borderRadius: "2px",
+                          backgroundColor: "rgba(255, 255, 255, 0.04)",
+                          border: "1px solid rgba(255, 255, 255, 0.1)",
+                          fontSize: "11px",
                           color: "#ffffff",
                         }}
                       >
@@ -1386,7 +1401,7 @@ export default function ModelBankPage() {
                       letterSpacing: "0.1em",
                       textTransform: "uppercase",
                       border: "none",
-                      borderRadius: "3px",
+                      borderRadius: "2px",
                       cursor: "pointer",
                     }}
                   >
@@ -1404,7 +1419,7 @@ export default function ModelBankPage() {
                       textTransform: "uppercase",
                       textDecoration: "none",
                       border: "1px solid rgba(255, 255, 255, 0.2)",
-                      borderRadius: "3px",
+                      borderRadius: "2px",
                       display: "inline-flex",
                       alignItems: "center",
                     }}

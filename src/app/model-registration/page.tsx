@@ -632,7 +632,12 @@ export default function ModelRegistrationPage() {
                         </>
                       ) : (
                         <div className="photo-slot-placeholder">
-                          <div className="photo-slot-icon">👤</div>
+                          <div className="photo-slot-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                              <circle cx="12" cy="8" r="5" />
+                              <path d="M20 21a8 8 0 0 0-16 0" />
+                            </svg>
+                          </div>
                           <div className="photo-slot-instruction">Face Close-Up</div>
                           <div className="photo-slot-hint">Direct eye contact, neutral face</div>
                           <div className="photo-slot-cta">+ Upload Image</div>
@@ -684,7 +689,11 @@ export default function ModelRegistrationPage() {
                         </>
                       ) : (
                         <div className="photo-slot-placeholder">
-                          <div className="photo-slot-icon">👕</div>
+                          <div className="photo-slot-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                              <path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z" />
+                            </svg>
+                          </div>
                           <div className="photo-slot-instruction">Mid Shot</div>
                           <div className="photo-slot-hint">Waist to top of head, natural posture</div>
                           <div className="photo-slot-cta">+ Upload Image</div>
@@ -736,7 +745,14 @@ export default function ModelRegistrationPage() {
                         </>
                       ) : (
                         <div className="photo-slot-placeholder">
-                          <div className="photo-slot-icon">🧍</div>
+                          <div className="photo-slot-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                              <circle cx="12" cy="4" r="2" />
+                              <path d="M12 7v7" />
+                              <path d="M9 10l3-3 3 3" />
+                              <path d="M9 21v-7h6v7" />
+                            </svg>
+                          </div>
                           <div className="photo-slot-instruction">Full Body</div>
                           <div className="photo-slot-hint">Head to toe, upright posture</div>
                           <div className="photo-slot-cta">+ Upload Image</div>

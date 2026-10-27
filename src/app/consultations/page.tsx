@@ -208,7 +208,7 @@ export default function ConsultationsPage() {
                     letterSpacing: "0.08em",
                     textTransform: "uppercase",
                     border: "none",
-                    borderRadius: "3px",
+                    borderRadius: "2px",
                     backgroundColor: portalMode === "director" ? "#ffffff" : "transparent",
                     color: portalMode === "director" ? "#000000" : "#aaaaaa",
                     fontWeight: portalMode === "director" ? 800 : 500,
@@ -216,7 +216,7 @@ export default function ConsultationsPage() {
                     transition: "all 0.2s ease",
                   }}
                 >
-                  🎬 For Directors &amp; Film Companies
+                  For Directors &amp; Film Companies
                 </button>
                 <button
                   type="button"
@@ -227,7 +227,7 @@ export default function ConsultationsPage() {
                     letterSpacing: "0.08em",
                     textTransform: "uppercase",
                     border: "none",
-                    borderRadius: "3px",
+                    borderRadius: "2px",
                     backgroundColor: portalMode === "talent" ? "#ffffff" : "transparent",
                     color: portalMode === "talent" ? "#000000" : "#aaaaaa",
                     fontWeight: portalMode === "talent" ? 800 : 500,
@@ -235,7 +235,7 @@ export default function ConsultationsPage() {
                     transition: "all 0.2s ease",
                   }}
                 >
-                  ★ For Talent &amp; Models
+                  For Talent &amp; Models
                 </button>
               </div>
 
@@ -368,10 +368,10 @@ export default function ConsultationsPage() {
                 <button
                   type="button"
                   onClick={() => alert("Production calendar invite (.ics) downloaded to your device!")}
-                  className="society-division-tab active"
+                  className="society-division-tab is-active"
                   style={{ padding: "10px 22px", fontSize: "12px", letterSpacing: "0.1em", cursor: "pointer" }}
                 >
-                  Download Calendar Invitation (.ics) 📅
+                  Download Calendar Invitation (.ics) ↗
                 </button>
                 <button
                   type="button"
@@ -611,18 +611,18 @@ export default function ConsultationsPage() {
                     <button
                       type="button"
                       onClick={() => setMeetingFormat("Studio")}
-                      className={`society-division-tab ${meetingFormat === "Studio" ? "active" : ""}`}
+                      className={`society-division-tab ${meetingFormat === "Studio" ? "is-active" : ""}`}
                       style={{ flex: 1, padding: "8px", fontSize: "11px", cursor: "pointer", textAlign: "center" }}
                     >
-                      🏢 SoHo Studio In-Person
+                      SoHo Studio In-Person
                     </button>
                     <button
                       type="button"
                       onClick={() => setMeetingFormat("Video")}
-                      className={`society-division-tab ${meetingFormat === "Video" ? "active" : ""}`}
+                      className={`society-division-tab ${meetingFormat === "Video" ? "is-active" : ""}`}
                       style={{ flex: 1, padding: "8px", fontSize: "11px", cursor: "pointer", textAlign: "center" }}
                     >
-                      📹 Encrypted Video Call
+                      Encrypted Video Call
                     </button>
                   </div>
 
