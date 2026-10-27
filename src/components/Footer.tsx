@@ -122,11 +122,14 @@ export default function Footer() {
                   <Link href="/model-registration" className="footer-page-link" style={{ color: "#ffffff", fontWeight: 600 }}>
                     model registration ↗
                   </Link>
-                  <Link href="/talent-agreement" className="footer-page-link" style={{ color: "#10b981" }}>
+                  <Link href="/talent-agreement" className="footer-page-link" style={{ color: "#ffffff" }}>
                     3-yr agreement
                   </Link>
-                  <Link href="/consultations" className="footer-page-link">
+                  <Link href="/consultations" className="footer-page-link" style={{ color: "#ffffff" }}>
                     appointments
+                  </Link>
+                  <Link href="/admin" className="footer-page-link" style={{ color: "#ffffff", fontWeight: 700 }}>
+                    admin console ↗
                   </Link>
                   <Link href="/about-us" className="footer-page-link">
                     about

@@ -33,9 +33,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Enforce pure white headings across all pages in the dark obsidian theme */
+/* Enforce pure white headings and high-contrast typography across all pages in the dark obsidian theme */
 h1, h2, h3, h4, h5, h6 {
   color: #ffffff !important;
+}
+
+p {
+  color: #cccccc;
+}
+
+strong, b {
+  color: #ffffff;
 }
 
 /* Ensure crisp focus-visible states for WCAG AA keyboard accessibility */

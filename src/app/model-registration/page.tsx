@@ -332,7 +332,7 @@ export default function ModelRegistrationPage() {
                 style={{
                   fontSize: "13px",
                   letterSpacing: "0.16em",
-                  color: "#888888",
+                  color: "#cccccc",
                   textTransform: "uppercase",
                   marginBottom: "8px",
                 }}
@@ -552,15 +552,15 @@ export default function ModelRegistrationPage() {
                     Membership Structure &amp; Casting Access
                   </div>
                 </div>
-                <div style={{ fontSize: "14px", lineHeight: 1.7, color: "#aaaaaa" }}>
-                  <p style={{ margin: "0 0 8px 0" }}>
-                    • <strong>Free Membership:</strong> View public casting call briefs only.
+                <div style={{ fontSize: "14px", lineHeight: 1.7, color: "#cccccc" }}>
+                  <p style={{ margin: "0 0 8px 0", color: "#cccccc" }}>
+                    • <strong style={{ color: "#ffffff" }}>Free Membership:</strong> View public casting call briefs only.
                   </p>
-                  <p style={{ margin: "0 0 8px 0" }}>
-                    • <strong>Registered Model Membership:</strong> Apply directly to all casting briefs, receive portfolio studio shoots &amp; introduction video from the membership fee, and receive instant <strong>WhatsApp alerts</strong> with 1-click apply links.
+                  <p style={{ margin: "0 0 8px 0", color: "#cccccc" }}>
+                    • <strong style={{ color: "#ffffff" }}>Registered Model Membership:</strong> Apply directly to all casting briefs, receive portfolio studio shoots &amp; introduction video from the membership fee, and receive instant <strong style={{ color: "#ffffff" }}>WhatsApp alerts</strong> with 1-click apply links.
                   </p>
-                  <p style={{ margin: "0" }}>
-                    • <strong>3-Year Exclusive Agreement:</strong> To join the active board, models sign our binding online agreement ensuring all promo, TVC, film, and teledramas route exclusively through VISAGE. <Link href="/talent-agreement" style={{ color: "#ffffff", textDecoration: "underline", textUnderlineOffset: "4px", marginLeft: "4px" }}>Sign 3-Year Agreement Online ↗</Link>
+                  <p style={{ margin: "0", color: "#cccccc" }}>
+                    • <strong style={{ color: "#ffffff" }}>3-Year Exclusive Agreement:</strong> To join the active board, models sign our binding online agreement ensuring all promo, TVC, film, and teledramas route exclusively through VISAGE. <Link href="/talent-agreement" style={{ color: "#ffffff", fontWeight: 600, textDecoration: "underline", textUnderlineOffset: "4px", marginLeft: "4px" }}>Sign 3-Year Agreement Online ↗</Link>
                   </p>
                 </div>
               </div>
@@ -586,7 +586,7 @@ export default function ModelRegistrationPage() {
                     * All 3 Photos Mandatory
                   </span>
                 </div>
-                <p style={{ fontSize: "14px", color: "#888888", marginBottom: "24px" }}>
+                <p style={{ fontSize: "14px", color: "#cccccc", marginBottom: "24px" }}>
                   Upload raw, candid digitals taken in natural daylight. No sunglasses, hats, heavy makeup, or social media beauty filters.
                 </p>
 
@@ -788,7 +788,7 @@ export default function ModelRegistrationPage() {
                 >
                   2. Personal &amp; Diversity Demographics
                 </h2>
-                <p style={{ fontSize: "14px", color: "#888888", marginBottom: "28px" }}>
+                <p style={{ fontSize: "14px", color: "#cccccc", marginBottom: "28px" }}>
                   VISAGE actively represents talent across all ages, backgrounds, languages, and identities.
                 </p>
 
@@ -1003,7 +1003,7 @@ export default function ModelRegistrationPage() {
                 >
                   3. Physical Specs &amp; Appearance Details
                 </h2>
-                <p style={{ fontSize: "14px", color: "#888888", marginBottom: "28px" }}>
+                <p style={{ fontSize: "14px", color: "#cccccc", marginBottom: "28px" }}>
                   These specs populate the Director Model Bank search engine for precision casting calls.
                 </p>
 
