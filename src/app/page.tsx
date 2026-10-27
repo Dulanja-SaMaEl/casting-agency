@@ -1475,6 +1475,238 @@ export default function HomePage() {
       </section>
 
       {/* =====================================================================
+          COMPANY ADVERTISING & CASTING COMMISSIONS (WORKS DONE WITH COMPANIES)
+         ===================================================================== */}
+      <section id="company-works" className="company-works-section">
+        <div className="w-layout-blockcontainer container w-container">
+          {/* Section Header */}
+          <div className="section-title-main-block" style={{ marginBottom: "20px" }}>
+            <div className="section-title-inner-block">
+              <div className="section-subtitle">
+                commercial advertising &amp; brand commissions · selected works
+              </div>
+              <h2 className="section-title">
+                casting campaigns for global companies
+              </h2>
+            </div>
+          </div>
+
+          <p
+            style={{
+              fontSize: "16px",
+              lineHeight: 1.6,
+              color: "#888888",
+              maxWidth: "680px",
+              marginBottom: "32px",
+            }}
+          >
+            From high-fashion magazine covers to worldwide commercial advertising buyouts, explore recent casting assignments produced in collaboration with international fashion houses and creative agencies.
+          </p>
+
+          {/* Client Brand Logo Marquee / Ticker */}
+          <div className="company-brand-ticker" aria-label="Brand Partners & Clients">
+            {["PRADA", "GIVENCHY", "GAP", "VOGUE", "SAINT LAURENT", "MAISON SOLARIS", "DAZED", "HARPER'S BAZAAR"].map(
+              (brand) => (
+                <span key={brand} className="company-brand-pill">
+                  {brand}
+                </span>
+              )
+            )}
+          </div>
+
+          {/* 4 Featured Company Casting Works Grid */}
+          <div className="company-works-grid">
+            {/* WORK 1: GAP GLOBAL DENIM */}
+            <article className="company-work-card">
+              <div className="company-work-media-mask">
+                <img
+                  src="https://booker-media.elitemodelmanagement.com/Library/12381/20260428_-7eAuAT5wneC3C.jpg"
+                  loading="lazy"
+                  alt="GAP Global Denim Commercial Campaign"
+                  className="company-work-img"
+                />
+              </div>
+              <div className="company-work-body">
+                <div>
+                  <div className="company-work-kicker-row">
+                    <span className="company-work-client-tag">GAP Worldwide · New York</span>
+                    <span className="company-work-cat-tag">Commercial Advertising</span>
+                  </div>
+                  <h3 className="company-work-title">
+                    GAP Autumn/Winter Global Denim Campaign
+                  </h3>
+                  <p className="company-work-deliverables">
+                    Principal street and agency casting across NYC and London. Cast 4 fresh faces representing all ages and diverse backgrounds for multi-channel TVC, digital billboards, and global in-store displays.
+                  </p>
+                </div>
+                <div className="company-work-footer-row">
+                  <div>
+                    Talent Cast: <span className="company-work-talent-tag">Alton Mason &amp; New Faces</span>
+                  </div>
+                  <Link href="/portfolio/maison-solaris-aw25" className="society-card-arrow" aria-label="View GAP Campaign">
+                    ↗
+                  </Link>
+                </div>
+              </div>
+            </article>
+
+            {/* WORK 2: VOGUE ITALIA COVER */}
+            <article className="company-work-card">
+              <div className="company-work-media-mask">
+                <img
+                  src="https://booker-media.elitemodelmanagement.com/Library/1/20250307_YouO3fnJH90cWw.jpg"
+                  loading="lazy"
+                  alt="Vogue Italia Editorial Cover Story"
+                  className="company-work-img"
+                />
+              </div>
+              <div className="company-work-body">
+                <div>
+                  <div className="company-work-kicker-row">
+                    <span className="company-work-client-tag">Condé Nast · Milan &amp; Paris</span>
+                    <span className="company-work-cat-tag">Editorial Cover Story</span>
+                  </div>
+                  <h3 className="company-work-title">
+                    Vogue Italia — Velvet Nocturne
+                  </h3>
+                  <p className="company-work-deliverables">
+                    Lead supermodel booking and on-set movement direction for a 16-page gatefold editorial spread and 35mm cinema motion piece directed by studio team.
+                  </p>
+                </div>
+                <div className="company-work-footer-row">
+                  <div>
+                    Talent Cast: <span className="company-work-talent-tag">Adriana Lima (VISAGE Women)</span>
+                  </div>
+                  <Link href="/portfolio/velvet-nocturne" className="society-card-arrow" aria-label="View Vogue Campaign">
+                    ↗
+                  </Link>
+                </div>
+              </div>
+            </article>
+
+            {/* WORK 3: MAISON SOLARIS CATWALK */}
+            <article className="company-work-card">
+              <div className="company-work-media-mask">
+                <img
+                  src="https://booker-media.elitemodelmanagement.com/Library/12381/20260905_gOcBTP9tqMcHPU.jpg"
+                  loading="lazy"
+                  alt="Maison Solaris AW25 Runway Show"
+                  className="company-work-img"
+                />
+              </div>
+              <div className="company-work-body">
+                <div>
+                  <div className="company-work-kicker-row">
+                    <span className="company-work-client-tag">Maison Solaris · Paris Fashion Week</span>
+                    <span className="company-work-cat-tag">Runway Show Production</span>
+                  </div>
+                  <h3 className="company-work-title">
+                    Maison Solaris AW25 Couture Catwalk
+                  </h3>
+                  <p className="company-work-deliverables">
+                    Complete runway casting of 60 international models, wardrobe fitting logistics, and show choreography at Palais de Tokyo, opened by VISAGE Men talent.
+                  </p>
+                </div>
+                <div className="company-work-footer-row">
+                  <div>
+                    Talent Cast: <span className="company-work-talent-tag">60 Models Cast (Full Board)</span>
+                  </div>
+                  <Link href="/portfolio/maison-solaris-aw25" className="society-card-arrow" aria-label="View Solaris Runway">
+                    ↗
+                  </Link>
+                </div>
+              </div>
+            </article>
+
+            {/* WORK 4: ATELIER HOMME TAILORING */}
+            <article className="company-work-card">
+              <div className="company-work-media-mask">
+                <img
+                  src="https://booker-media.elitemodelmanagement.com/Library/3148/20260204_1iSlf7Z50wKUE3.jpg"
+                  loading="lazy"
+                  alt="Atelier Homme Menswear Tailoring Campaign"
+                  className="company-work-img"
+                />
+              </div>
+              <div className="company-work-body">
+                <div>
+                  <div className="company-work-kicker-row">
+                    <span className="company-work-client-tag">Atelier Homme · Paris &amp; Zurich</span>
+                    <span className="company-work-cat-tag">Luxury Menswear Advertising</span>
+                  </div>
+                  <h3 className="company-work-title">
+                    Atelier Tailoring AW25 Campaign
+                  </h3>
+                  <p className="company-work-deliverables">
+                    Casting lead male faces with high-fashion tailoring proportions for outdoor 16mm cinema footage, digital lookbook, and international billboard buyouts.
+                  </p>
+                </div>
+                <div className="company-work-footer-row">
+                  <div>
+                    Talent Cast: <span className="company-work-talent-tag">Alexandre Cunha &amp; Archie Cranch</span>
+                  </div>
+                  <Link href="/portfolio/kinetix-gt-launch" className="society-card-arrow" aria-label="View Atelier Campaign">
+                    ↗
+                  </Link>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          {/* DUAL ACTION BANNER: MODEL REGISTRATION VS DIRECTOR POSTING */}
+          <div className="company-action-banner">
+            {/* For Models */}
+            <div className="company-action-card">
+              <div>
+                <div style={{ fontSize: "12px", letterSpacing: "0.14em", textTransform: "uppercase", color: "#888888", marginBottom: "8px" }}>
+                  For Aspiring &amp; Professional Models
+                </div>
+                <h3 style={{ fontFamily: "var(--_typography---title-font)", fontSize: "32px", letterSpacing: "0.04em", textTransform: "uppercase", color: "#ffffff", marginBottom: "12px" }}>
+                  Join The VISAGE Roster
+                </h3>
+                <p style={{ fontSize: "14px", lineHeight: 1.6, color: "#999999", margin: "0 0 20px 0" }}>
+                  Submit your 3 mandatory photos (Face close-up, mid shot, full body). Free membership allows viewing public briefs; registered members get instant WhatsApp casting alerts, included studio shoots, and direct applications.
+                </p>
+              </div>
+              <div>
+                <Link
+                  href="/model-registration"
+                  className="society-division-tab is-active"
+                  style={{ display: "inline-block", textDecoration: "none", padding: "12px 24px" }}
+                >
+                  Start Model Registration ↗
+                </Link>
+              </div>
+            </div>
+
+            {/* For Directors & Companies */}
+            <div className="company-action-card">
+              <div>
+                <div style={{ fontSize: "12px", letterSpacing: "0.14em", textTransform: "uppercase", color: "#888888", marginBottom: "8px" }}>
+                  For Casting Directors &amp; Brands
+                </div>
+                <h3 style={{ fontFamily: "var(--_typography---title-font)", fontSize: "32px", letterSpacing: "0.04em", textTransform: "uppercase", color: "#ffffff", marginBottom: "12px" }}>
+                  Cast With VISAGE
+                </h3>
+                <p style={{ fontSize: "14px", lineHeight: 1.6, color: "#999999", margin: "0 0 20px 0" }}>
+                  Access our curated model bank filtered by skin tone, age, height, look, and language. Post dedicated casting calls with admin verification, secure payments, and instant WhatsApp talent dispatch.
+                </p>
+              </div>
+              <div>
+                <Link
+                  href="/contact-us"
+                  className="society-division-tab"
+                  style={{ display: "inline-block", textDecoration: "none", padding: "12px 24px" }}
+                >
+                  Inquire for Casting Project ↗
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
           ABOUT SECTION & SLOT-MACHINE COUNTERS
          ===================================================================== */}
       <section className="section about-section">

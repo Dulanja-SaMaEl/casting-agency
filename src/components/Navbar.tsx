@@ -10,6 +10,7 @@ interface NavbarProps {
 }
 
 const DROPDOWN_LINKS = [
+  { href: "/model-registration", label: "Model Registration" },
   { href: "/service", label: "service" },
   { href: "/team", label: "team" },
   { href: "/blog", label: "blog" },
@@ -19,6 +20,7 @@ const DROPDOWN_LINKS = [
 
 const MOBILE_NAV_LINKS = [
   { href: "/", label: "Home" },
+  { href: "/model-registration", label: "★ Model Registration" },
   { href: "/about-us", label: "About Us" },
   { href: "/service", label: "Services" },
   { href: "/portfolio", label: "Portfolio" },
@@ -477,16 +479,37 @@ export default function Navbar({ variant = "dark" }: NavbarProps) {
             </div>
           </nav>
 
-          {/* Right Action Controls (6-Dot Trigger + Mobile Menu Button) */}
+          {/* Right Action Controls (Model Reg CTA + 6-Dot Trigger + Mobile Menu Button) */}
           <div
             className="navbar-right-controls"
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "12px",
+              gap: "14px",
               justifySelf: "end",
             }}
           >
+            {/* Quick Model Registration Direct CTA */}
+            <Link
+              href="/model-registration"
+              className="society-division-tab"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "6px",
+                padding: "8px 16px",
+                fontSize: "12px",
+                letterSpacing: "0.1em",
+                textDecoration: "none",
+                borderRadius: "3px",
+                border: "1px solid rgba(255, 255, 255, 0.28)",
+                whiteSpace: "nowrap",
+              }}
+            >
+              <span>Join as Model</span>
+              <span style={{ opacity: 0.7 }}>↗</span>
+            </Link>
+
             {/* 6-Dot Morphing Sidebar Trigger Button */}
             <button
               type="button"

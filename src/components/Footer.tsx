@@ -113,6 +113,9 @@ export default function Footer() {
               </div>
               <div className="footer-page-link-block">
                 <div className="footer-page-link-inner-block">
+                  <Link href="/model-registration" className="footer-page-link" style={{ color: "#ffffff", fontWeight: 600 }}>
+                    model registration ↗
+                  </Link>
                   <Link href="/about-us" className="footer-page-link">
                     about
                   </Link>
