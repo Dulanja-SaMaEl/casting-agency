@@ -460,12 +460,29 @@ export default function ModelRegistrationPage() {
                     <strong>Studio Photoshoot &amp; Intro Reel:</strong> Your onboarding membership package includes your initial in-studio digitals and video introduction shoot.
                   </li>
                   <li>
+                    <strong>3-Year Exclusive Contract:</strong> Review and sign your online representation agreement to ensure all TVC, film, and promo bookings route through VISAGE.
+                  </li>
+                  <li>
                     <strong>Monthly Look Rule:</strong> Remember to submit updated current-look photos every 30 days to avoid your profile being marked <em>On Hold</em>.
                   </li>
                 </ul>
               </div>
 
               <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
+                <Link
+                  href="/talent-agreement"
+                  className="society-division-tab is-active"
+                  style={{ padding: "12px 28px", textDecoration: "none" }}
+                >
+                  Sign 3-Year Agreement Online ↗
+                </Link>
+                <Link
+                  href="/castings"
+                  className="society-division-tab"
+                  style={{ padding: "12px 28px", textDecoration: "none" }}
+                >
+                  Browse Casting Calls
+                </Link>
                 <Link
                   href="/"
                   className="society-division-tab"
@@ -536,6 +553,9 @@ export default function ModelRegistrationPage() {
                   </p>
                   <p style={{ margin: "0 0 8px 0" }}>
                     • <strong>Registered Model Membership:</strong> Apply directly to all casting briefs, receive portfolio studio shoots &amp; introduction video from the membership fee, and receive instant <strong>WhatsApp alerts</strong> with 1-click apply links.
+                  </p>
+                  <p style={{ margin: "0" }}>
+                    • <strong>3-Year Exclusive Agreement:</strong> To join the active board, models sign our binding online agreement ensuring all promo, TVC, film, and teledramas route exclusively through VISAGE. <Link href="/talent-agreement" style={{ color: "#10b981", textDecoration: "underline", marginLeft: "4px" }}>Sign 3-Year Agreement Online ↗</Link>
                   </p>
                 </div>
               </div>

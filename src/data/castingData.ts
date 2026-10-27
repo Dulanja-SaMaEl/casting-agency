@@ -697,6 +697,45 @@ export const CONSULTATION_SERVICES: ConsultationService[] = [
   },
 ];
 
+export const DIRECTOR_MEETING_SERVICES: ConsultationService[] = [
+  {
+    id: "dir-film-teledrama",
+    title: "Film & Teledrama Casting Conference",
+    duration: "60 Minutes",
+    format: "Studio In-Person",
+    description: "Principal screen lead & ensemble cast breakdown with VISAGE executive casting directors. Includes script breakdown, character lookbook matching, and tape evaluations.",
+    badge: "Film Productions",
+    idealFor: "Feature film directors, teledrama production companies, and showrunners.",
+  },
+  {
+    id: "dir-commercial-tvc",
+    title: "Commercial & TVC Brand Campaign Meeting",
+    duration: "45 Minutes",
+    format: "Encrypted Video Call",
+    description: "Scouting and option holds for global advertising campaigns, TVC spots, digital promos, and multi-market billboard brand takeovers.",
+    badge: "Advertising Agencies",
+    idealFor: "Creative agency producers, commercial directors, and brand marketing leads.",
+  },
+  {
+    id: "dir-option-holds",
+    title: "Talent Option Holds & Exclusivity Negotiations",
+    duration: "30 Minutes",
+    format: "Hybrid",
+    description: "Lock down runway exclusives, first-option dates, buyouts, and multi-year ambassador agreements across our roster.",
+    badge: "Priority Holds",
+    idealFor: "Producers with confirmed shoot dates seeking immediate availability lock.",
+  },
+  {
+    id: "dir-general-inquiry",
+    title: "General Production Inquiries & Co-Casting Desk",
+    duration: "30 Minutes",
+    format: "Encrypted Video Call",
+    description: "Consultation on casting rates, international work permits, location production staffing, and customized casting calls.",
+    badge: "Inquiries",
+    idealFor: "International production houses planning shoots in the US, Europe, or Asia.",
+  },
+];
+
 export const CONSULTATION_AGENTS: ConsultationAgent[] = [
   {
     id: "agt-01",
@@ -731,3 +770,57 @@ export const CONSULTATION_AGENTS: ConsultationAgent[] = [
     availability: "Wed, Thu, Sat (12:00 – 18:00)",
   },
 ];
+
+export const MODEL_AGREEMENT_DATA = {
+  contractTitle: "VISAGE Exclusive Talent Representation & Agency Management Agreement",
+  version: "2026.4 - Official Online Execution Copy",
+  durationYears: 3,
+  summary:
+    "Official 3-Year exclusive representation contract binding the talent exclusively to VISAGE Casting & Management. All photoshoots, brand endorsements, commercial TVCs, digital campaigns, films, and teledramas must strictly route through the agency.",
+  clauses: [
+    {
+      id: "term-exclusivity",
+      title: "1. Term & 3-Year Agency Exclusivity",
+      content:
+        "The Talent hereby engages VISAGE ('Casting & Co') as their sole, exclusive manager and casting representative worldwide for a binding period of three (3) full calendar years from the date of online digital execution. During this 3-year term, the Talent expressly agrees that they cannot work on, accept, negotiate, or perform any brand promotions, commercial appearances, modeling jobs, or influencer ambassadorships sourced from or organized by third-party companies, outside managers, or direct clients. The Talent agrees to stick to VISAGE at all times to maximize casting opportunities, international placement, and professional agency branding.",
+      bulletPoints: [
+        "Binding 3-year exclusive representation worldwide.",
+        "Zero unauthorized direct brand deals or outside management.",
+        "Agency prioritizes exclusive talent for international fashion weeks, covers, and global commercial campaigns.",
+      ],
+    },
+    {
+      id: "production-routing",
+      title: "2. Production Routing & Universal Representation Scope",
+      content:
+        "All product endorsements, photo shoots, promotional engagements, digital campaigns, TVCs (television commercials), feature film roles, teledramas, music videos, or any other sort of visual or physical production that the Talent is involved in MUST route exclusively through and be approved by VISAGE. No third-party production house, director, photographer, or client may contract the Talent directly without prior written confirmation and commission routing from the VISAGE booking department.",
+      bulletPoints: [
+        "Covers: All Product Shoots, Photos, Digital Promos, TVCs, Feature Films, and Teledramas.",
+        "Direct bookings or on-set private agreements are strictly prohibited.",
+        "Guarantees standard union-compliant payment terms, safety riders, and buyout limits for talent.",
+      ],
+    },
+    {
+      id: "breach-penalty",
+      title: "3. Breach of Exclusivity, Immediate Termination & Liquidated Damages",
+      content:
+        "If the Talent goes beyond or violates this agreement—including accepting unauthorized outside work, circumvention of agency commission, direct client deals, or unapproved promotions—the Talent's agency representation shall be terminated immediately for cause. Furthermore, in the event of such a breach, an immediate fine and liquidated service reimbursement fee will be legally assessed and collected from the Talent. This fine shall be calculated based on the complete cumulative expenses incurred by the agency on behalf of the Talent, including but not limited to: high-end portfolio photoshoots, studio rental, hair/makeup artists, video reel production, comp-card graphic creation, digital profile hosting, and agency marketing overhead.",
+      bulletPoints: [
+        "Immediate termination of representation and cancellation of casting opportunities upon breach.",
+        "Compulsory fine and recoupment for all agency photoshoots and production costs.",
+        "Full calculation of profile maintenance and marketing investments assessed for collection.",
+      ],
+    },
+    {
+      id: "recertification-rule",
+      title: "4. Monthly Look Recertification & Auto-Hold Protocol",
+      content:
+        "The Talent acknowledges the mandatory 30-day look verification policy. Every thirty (30) days, the Talent must submit new candid digital photos reflecting their exact current appearance (Face close-up, mid shot, full body) and disclose any physical modifications (haircut, hair color shifts, tattoos, piercings, or measurement changes). Failure to submit monthly digitals results in automatic 'Profile On Hold' status, rendering the talent temporarily ineligible for active casting submissions until recertified.",
+      bulletPoints: [
+        "Monthly updated candid digitals required within 30 days.",
+        "Immediate notification required for new hair color, piercings, or tattoos.",
+        "Automated profile hold prevents submission to casting calls until photos are renewed.",
+      ],
+    },
+  ],
+};
