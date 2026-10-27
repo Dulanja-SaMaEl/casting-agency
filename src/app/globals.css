@@ -33,6 +33,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Enforce pure white headings across all pages in the dark obsidian theme */
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff !important;
+}
+
 /* Ensure crisp focus-visible states for WCAG AA keyboard accessibility */
 a:focus-visible,
 button:focus-visible,
@@ -2484,10 +2489,22 @@ select:focus-visible {
 }
 
 .lang-pill.is-selected {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
   border-color: #ffffff;
   font-weight: 600;
+}
+
+/* Ensure footer social images match the dark monochrome palette */
+.footer-social-image {
+  filter: brightness(0) invert(1) !important;
+  opacity: 0.75;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.footer-social-link:hover .footer-social-image {
+  opacity: 1;
+  transform: translateY(-2px);
 }
 
 /* =====================================================================

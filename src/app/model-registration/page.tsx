@@ -256,6 +256,7 @@ export default function ModelRegistrationPage() {
                 fontWeight: 700,
                 textTransform: "uppercase",
                 letterSpacing: "0.02em",
+                color: "#ffffff",
                 marginBottom: "22px",
               }}
             >
@@ -534,7 +535,11 @@ export default function ModelRegistrationPage() {
                     marginBottom: "10px",
                   }}
                 >
-                  <span style={{ fontSize: "18px" }}>ℹ</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="16" x2="12" y2="12" />
+                    <line x1="12" y1="8" x2="12.01" y2="8" />
+                  </svg>
                   <div
                     style={{
                       fontFamily: "var(--_typography---title-font)",
@@ -555,7 +560,7 @@ export default function ModelRegistrationPage() {
                     • <strong>Registered Model Membership:</strong> Apply directly to all casting briefs, receive portfolio studio shoots &amp; introduction video from the membership fee, and receive instant <strong>WhatsApp alerts</strong> with 1-click apply links.
                   </p>
                   <p style={{ margin: "0" }}>
-                    • <strong>3-Year Exclusive Agreement:</strong> To join the active board, models sign our binding online agreement ensuring all promo, TVC, film, and teledramas route exclusively through VISAGE. <Link href="/talent-agreement" style={{ color: "#10b981", textDecoration: "underline", marginLeft: "4px" }}>Sign 3-Year Agreement Online ↗</Link>
+                    • <strong>3-Year Exclusive Agreement:</strong> To join the active board, models sign our binding online agreement ensuring all promo, TVC, film, and teledramas route exclusively through VISAGE. <Link href="/talent-agreement" style={{ color: "#ffffff", textDecoration: "underline", textUnderlineOffset: "4px", marginLeft: "4px" }}>Sign 3-Year Agreement Online ↗</Link>
                   </p>
                 </div>
               </div>
@@ -571,6 +576,7 @@ export default function ModelRegistrationPage() {
                       fontSize: "30px",
                       letterSpacing: "0.06em",
                       textTransform: "uppercase",
+                      color: "#ffffff",
                       margin: 0,
                     }}
                   >
@@ -776,6 +782,7 @@ export default function ModelRegistrationPage() {
                     fontSize: "30px",
                     letterSpacing: "0.06em",
                     textTransform: "uppercase",
+                    color: "#ffffff",
                     marginBottom: "8px",
                   }}
                 >
@@ -990,6 +997,7 @@ export default function ModelRegistrationPage() {
                     fontSize: "30px",
                     letterSpacing: "0.06em",
                     textTransform: "uppercase",
+                    color: "#ffffff",
                     marginBottom: "8px",
                   }}
                 >
@@ -1214,14 +1222,17 @@ export default function ModelRegistrationPage() {
               <div
                 style={{
                   marginBottom: "40px",
-                  border: "1px solid rgba(245, 163, 163, 0.4)",
-                  backgroundColor: "rgba(245, 163, 163, 0.04)",
+                  border: "1px solid rgba(255, 255, 255, 0.18)",
+                  backgroundColor: "rgba(255, 255, 255, 0.02)",
                   borderRadius: "4px",
                   padding: "24px",
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
-                  <span style={{ color: "#f5a3a3", fontSize: "20px" }}>⚠️</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
                   <div
                     style={{
                       fontFamily: "var(--_typography---title-font)",
@@ -1235,7 +1246,7 @@ export default function ModelRegistrationPage() {
                   </div>
                 </div>
 
-                <p style={{ fontSize: "14px", lineHeight: 1.7, color: "#dddddd", margin: "0 0 16px 0" }}>
+                <p style={{ fontSize: "14px", lineHeight: 1.7, color: "#cccccc", margin: "0 0 16px 0" }}>
                   To maintain absolute accuracy for casting directors, <strong>every month new photos reflecting your current look must be submitted</strong>. If new digitals are not provided within 30 days, your profile will automatically be placed <strong>ON HOLD</strong> and locked from submitting to new casting opportunities until refreshed. Any physical alterations (haircut, new hair color, piercings, or tattoos) must be reported immediately.
                 </p>
 
